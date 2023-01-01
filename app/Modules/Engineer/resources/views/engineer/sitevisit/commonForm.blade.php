@@ -100,7 +100,7 @@
         <label>
             Owner Name <span class="text-danger">*</span>
         </label>
-        <input type="text" name="owner_name" placeholder="Owner Name" class="form-control" id="">
+        <input type="text" name="owner_name" value="{{ $sitevisit->owner_name ?? old('owner_name')   }}" placeholder="Owner Name" class="form-control" id="">
     </div>
     <div class="form-group col-md-3">
         <label>
@@ -212,7 +212,7 @@
         <label>
             Ward Number
         </label>
-        <input type="text" name="ward_number"  value="{{ $sitevisit->ward_number ?? old('ward_number')   }}" id="ward_number" value="" placeholder="Ward Number"
+        <input type="text" name="ward_number"  value="{{ $sitevisit->ward_no ?? old('ward_number')   }}" id="ward_number" value="" placeholder="Ward Number"
             class="form-control" autocomplete="off">
     </div>
 </div>
