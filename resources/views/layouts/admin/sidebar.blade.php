@@ -58,7 +58,7 @@
 
 
 
-            {{-- <li class="menu">
+            <li class="menu">
                 <a href="#client"
                     {{ strpos(Route::currentRouteName(), 'client') === 0 ? 'data-active=true' : '' }}
                     data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -92,7 +92,7 @@
                     </li>
 
                 </ul>
-            </li> --}}
+            </li>
 
             {{-- <li class="menu" style="border-top:solid 1px silver">
                 <a href="{{ route('backend.cms.branch.index') }}" 

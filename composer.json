@@ -36,8 +36,8 @@
             "Auth\\": "app/Modules/Auth",
             "Engineer\\": "app/Modules/Engineer",
             "Receptionist\\": "app/Modules/Receptionist",
-            "CMS\\": "app/Modules/CMS"
-
+            "CMS\\": "app/Modules/CMS",
+            "Client\\": "app/Modules/Client"
         },
         "files": [
             "app/Helpers/path.php",

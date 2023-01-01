@@ -44,6 +44,36 @@ function () {
         Route::get('delete/{id}', 'ReceptionistProposalController@destroy')->name('delete');
     });
 
+    Route::group([
+        'prefix' => 'client',
+        'as' => 'client.'
+    ], function(){
+     
+        Route::get('/','ReceptionistClientController@index')->name('index');
+
+        Route::get('/create','ReceptionistClientController@create')->name('create');
+
+        Route::post('/store', 'ReceptionistClientController@store')->name('store');
+
+        Route::post('/update/{id}', 'ReceptionistClientController@update')->name('update');
+
+        Route::get('/destroy/{id}', 'ReceptionistClientController@destroy')->name('destroy');
+
+        Route::get('/edit/{id}', 'ReceptionistClientController@edit')->name('edit');
+
+        Route::get('/show/{id}', 'ReceptionistClientController@show')->name('show');
+
+        Route::get('/get-user-data', 'ReceptionistClientController@getClientData')->name('getClientData');
+
+        // Route::get('/trashed', 'ClientController@trashedIndex')->name('trashedIndex');
+
+        // Route::get('/{id}/trashedDelete', 'ClientController@trashedDestroy')->name('trashedDestroy');
+
+        // Route::get('/{id}/trashedRecover', 'ClientController@trashedRecover')->name('trashedRecover');
+
+        Route::post('/changeClientStatus/{id}', 'ClientController@changeClientStatus')->name('changeClientStatus');
+    });
+
 
 
 

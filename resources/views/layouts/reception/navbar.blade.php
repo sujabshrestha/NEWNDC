@@ -3,12 +3,12 @@
 
         <ul class="navbar-item theme-brand flex-row  text-center">
             <li class="nav-item theme-logo">
-                <a href="{{ route('backend.auth.dashboard')}}">
+                <a href="{{ route('receptionist.auth.receptionDashboard')}}">
                     <img src="{{ asset('backendFiles/assets/img/90x90.jpg')}}" class="navbar-logo" alt="logo">
                 </a>
             </li>
             <li class="nav-item theme-text">
-                <a href="{{ route('backend.auth.dashboard')}}" class="nav-link"> {{ returnSiteSetting('title') ?? 'NDC'}} </a>
+                <a href="{{ route('receptionist.auth.receptionDashboard')}}" class="nav-link"> {{ returnSiteSetting('title') ?? 'NDC'}} </a>
             </li>
         </ul>
 

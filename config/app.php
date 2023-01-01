@@ -182,8 +182,8 @@ return [
         Auth\Providers\AuthServiceProvider::class,
         Engineer\Providers\EngineerServiceProvider::class,
         Receptionist\Providers\ReceptionistServiceProvider::class,
-        CMS\Providers\CMSServiceProvider::class
-
+        CMS\Providers\CMSServiceProvider::class,
+        Client\Providers\ClientServiceProvider::class
     ],
 
     /*

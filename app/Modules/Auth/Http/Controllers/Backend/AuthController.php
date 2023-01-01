@@ -64,7 +64,7 @@ class AuthController extends Controller
                         return redirect()->route('engineer.auth.engineerDashboard');
                     }elseif($user->hasRole('receptionist')){
                         Toastr::success('Successfully Logged In.');
-                        return redirect()->route('receiption.auth.receptionDashboard');
+                        return redirect()->route('receptionist.auth.receptionDashboard');
                     }else{
                         Auth::logout();
                         Toastr::error('You Do Not Have Permission To Login');

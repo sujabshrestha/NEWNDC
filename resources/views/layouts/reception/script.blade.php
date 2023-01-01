@@ -24,7 +24,16 @@
 
 <script src="{{ asset('backendfiles/assets/js/loader.js') }}"></script>
 
+{{-- Sweet Alerts --}}
+<script src="{{ asset('backendfiles/plugins/sweetalerts/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('backendfiles/plugins/sweetalerts/custom-sweetalert.js') }}"></script>
+<script src="{{ asset('backendfiles/plugins/sweetalerts/promise-polyfill.js') }}"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+
+
+{{-- SUMMER NOTE --}}
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 {!! Toastr::message() !!}
 <script>
