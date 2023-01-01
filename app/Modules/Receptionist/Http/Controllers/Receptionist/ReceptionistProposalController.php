@@ -5,7 +5,12 @@ namespace Receptionist\Http\Controllers\Receptionist;
 use App\GlobalServices\ResponseService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use CMS\Models\Bank;
+use CMS\Models\Branch;
 use Files\Repositories\FileInterface;
+use Receptionist\Models\Proposal;
+use User\Models\User;
+use Yajra\DataTables\Facades\DataTables;
 
 class ReceptionistProposalController extends Controller
 {
