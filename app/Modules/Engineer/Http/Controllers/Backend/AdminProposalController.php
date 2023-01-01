@@ -1,20 +1,21 @@
 <?php
 
-namespace Receptionist\Http\Controllers\Receptionist;
+namespace Engineer\Http\Controllers\Backend;
 
 use App\GlobalServices\ResponseService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
+use Client\Models\Client;
 use CMS\Models\Bank;
 use CMS\Models\Branch;
 use Files\Repositories\FileInterface;
-use Receptionist\Models\Client;
+use Illuminate\Support\Facades\Auth;
 use Receptionist\Models\Proposal;
 use User\Models\User;
 use Yajra\DataTables\Facades\DataTables;
 
-class ReceptionistProposalController extends Controller
+class AdminProposalController extends Controller
 {
     protected $file, $response;
     public function __construct(FileInterface $file, ResponseService $response)
@@ -22,14 +23,12 @@ class ReceptionistProposalController extends Controller
         $this->file = $file;
         $this->response = $response;
     }
-
-    public function index(Request $request)
-    {
-        // dd('asdkh');
-        // try {
+   
+    public function index(Request $request){
+       // try {
         if ($request->ajax()) {
-            $datas = Proposal::with(['bank', 'branch', 'client'])->get();
-            foreach ($datas as $data) {
+            $datas = Proposal::where('site_engineer', auth()->user()->id)->with(['bank','branch', 'siteVisit'])->get();
+            foreach($datas as $data){
                 $data->branch = $data->branch->title;
                 $data->bank = $data->bank->name;
                 $data->client = $data->client_id;
@@ -39,9 +38,9 @@ class ReceptionistProposalController extends Controller
                 ->addIndexColumn()
 
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="javascript:void(0)" data-url="' . route('receptionist.proposal.edit', $row->id) . '" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
-                                <a href="javascript:void(0)" id="" data-url="' . route('receptionist.proposal.delete', $row->id) . '" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
-                                ';
+                    $actionBtn = '<a href="'. route('siteengineer.sitevisit.create', [$row->id, $row->siteVisit->id]) .'" data-url="#" data-id=' . $row->id . ' class="btn btn-info btn-sm" title="Add details"><i class="far fa-edit"></i></a>
+                            <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
+                            ';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -49,11 +48,11 @@ class ReceptionistProposalController extends Controller
         }
 
         $banks = Bank::all();
-        return view('Receptionist::receptionist.proposal.index', compact('banks'));
-        // } catch (\Exception $e) {
-        //     Toastr::error($e->getMessage());
-        //     return redirect()->back();
-        // }
+        return view('Engineer::admin.proposal.index', compact('banks'));
+    // } catch (\Exception $e) {
+    //     Toastr::error($e->getMessage());
+    //     return redirect()->back();
+    // }
     }
 
     public function create(){
