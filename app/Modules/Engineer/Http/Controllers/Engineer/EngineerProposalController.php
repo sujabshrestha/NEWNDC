@@ -18,6 +18,7 @@ class EngineerProposalController extends Controller
      */
     public function index(Request $request)
     {
+        // dd('askdjhk');
        // try {
         if ($request->ajax()) {
             $datas = Proposal::where('site_engineer', auth()->user()->id)->with(['bank','branch'])->get();

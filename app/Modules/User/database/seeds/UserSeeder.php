@@ -19,32 +19,36 @@ class UserSeeder extends Seeder
         $users= [
             [
                 'name' => 'admin',
-                'email' => 'admin@test.com',
+                'email' => 'admin@gmail.com',
                 'phone_no' => '9856698555',
-                'password' => bcrypt('123456789'),
+                'password' => bcrypt('testing1234'),
                 'status' => 'Active',
                 'email_verified_at' => Carbon::now(),
             ],
-            [
-                'name' => 'ankit',
-                'email' => 'ankit@test.com',
-                'phone_no' => '9898989858',
-                'password' => bcrypt('123456789'),
-                'status' => 'Active',
-                'email_verified_at' => Carbon::now(),
-            ],
-            [
-                'name' => 'sarad',
-                'email' => 'sarad@test.com',
-                'phone_no' => '9898989874' ,
-                'password' => bcrypt('123456789'),
-                'status' => 'Active',
-                'email_verified_at' => Carbon::now(),
-            ],
+    
+            
         ];
         foreach($users as $item){
             $user = User::create($item);
             $user->assignRole('admin');
         }
+
+        $user2= [
+            [
+                'name' => 'engineer',
+                'email' => 'engineer@gmail.com',
+                'phone_no' => '9856685555',
+                'password' => bcrypt('testing1234'),
+                'status' => 'Active',
+                'email_verified_at' => Carbon::now(),
+            ],
+    
+            
+        ];
+        foreach($user2 as $item){
+            $user = User::create($item);
+            $user->assignRole('engineer');
+        }
+
     }
 }
