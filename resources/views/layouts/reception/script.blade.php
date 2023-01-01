@@ -173,6 +173,7 @@
                 toastr.success(data.message);
                 $('#globalModal').modal('hide');
                 $('#global-table').DataTable().ajax.reload();
+                $.unblockUI();
             },
             error: function(err) {
                 if (err.status == 422) {

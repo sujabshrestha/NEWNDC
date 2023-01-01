@@ -3,34 +3,8 @@
 @section('title', 'NDC | Dashboard')
 
 @section('content')
-    <!--  BEGIN CONTENT AREA  -->
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-18 col-sm-12">
-                <div class="widget-content widget-content-area br-6">
-                    <div class="col-12">
-                        <h5 style="display: inline;">Proposal Table</h5>
-                    </div>
-                    <div class="table-responsive mb-4 mt-4">
-                        <table id="global-table" class="table table-hover" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>S.no.</th>
-                                    <th>Bank</th>
-                                    <th>Branch</th>
-                                    <th>Banker Name</th>
-                                    <th>Client</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+    <h1>Welcome to site engineer dashboard</h1>
 
-        </div>
-    <!--  END CONTENT AREA  -->
 @endsection
 
 @push('scripts')

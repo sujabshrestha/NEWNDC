@@ -17,6 +17,26 @@ Route::group(
         ], function () {
             Route::get('all','EngineerProposalController@index')->name('index');
         });
+
+
+        Route::group([
+            'prefix' => 'sitevisit',
+            'as' => 'sitevisit.'
+        ], function () {
+            Route::get('/','SiteVisitController@index')->name('index');
+
+            Route::get('/create/{id}','SiteVisitController@create')->name('create');
+
+            Route::post('/submit','SiteVisitController@submit')->name('submit');
+
+            Route::get('/edit/{id}','SiteVisitController@edit')->name('edit');
+
+            Route::post('/update/{id}','SiteVisitController@update')->name('update');
+
+            Route::get('/delete/{id}','SiteVisitController@delete')->name('delete');
+        });
+
+
     }
     
 

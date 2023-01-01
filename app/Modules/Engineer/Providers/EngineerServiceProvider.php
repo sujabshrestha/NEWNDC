@@ -34,7 +34,6 @@ class EngineerServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(loadRoutes('admin.php', $moduleName));
         $this->loadRoutesFrom(loadRoutes('engineer.php', $moduleName));
         $this->loadRoutesFrom(loadRoutes('receiptionist.php', $moduleName));
-        $this->loadRoutesFrom(loadRoutes('api.php', $moduleName));
         $this->loadMigrationsFrom(loadMigrations($moduleName));
         $this->loadViewsFrom(loadViews($moduleName), $moduleName);
 

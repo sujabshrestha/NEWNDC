@@ -35,7 +35,8 @@
             "SiteSetting\\": "app/Modules/SiteSetting",
             "Auth\\": "app/Modules/Auth",
             "Engineer\\": "app/Modules/Engineer",
-            "Receptionist\\": "app/Modules/Receptionist"
+            "Receptionist\\": "app/Modules/Receptionist",
+            "CMS\\": "app/Modules/CMS"
 
         },
         "files": [

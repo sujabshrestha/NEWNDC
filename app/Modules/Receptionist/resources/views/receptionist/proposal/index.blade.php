@@ -1,4 +1,4 @@
-@extends('layouts.engineer.master')
+@extends('layouts.reception.master')
 
 @section('title', 'NDC | Proposal')
 
@@ -15,8 +15,8 @@
                         <h5 style="display: inline;">Proposal Table</h5>
                         {{-- <a href="{{ route('backend.user.trashedIndex') }}" class="btn btn-danger float-right "><i
                                     class="fa fa-trash"></i> Trash </a> --}}
-                                    {{-- <button class="btn btn-success float-right " id="create" data-url="{{ route('backend.cms.proposal.create') }}">Create <i
-                                        class="fa fa-plus"></i></button> --}}
+                                    <button class="btn btn-success float-right " id="create" data-url="{{ route('receptionist.proposal.create') }}">Create <i
+                                        class="fa fa-plus"></i></button>
                     </div>
                     <div class="table-responsive mb-4 mt-4">
                         <table id="global-table" class="table table-hover" style="width:100%">
@@ -50,7 +50,7 @@
         $('#global-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('proposal.index') }}",
+            ajax: "{{ route('receptionist.proposal.index') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
@@ -77,7 +77,7 @@
                 {
                     data: 'client',
                     render: function(data, type, row) {
-                        return '<p class="text-capitalize">' +row.client+ '</p>';
+                        return '<p class="text-capitalize">' +row.client.client_name + '</p>';
                     }
                 },
                 {

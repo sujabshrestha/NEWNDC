@@ -5,6 +5,7 @@ namespace Engineer\Http\Controllers\Engineer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use CMS\Models\Bank;
+use Illuminate\Support\Facades\Auth;
 use Receptionist\Models\Proposal;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -20,7 +21,7 @@ class EngineerProposalController extends Controller
         // dd('askdjhk');
        // try {
         if ($request->ajax()) {
-            $datas = Proposal::with(['bank','branch'])->get();
+            $datas = Proposal::where('site_engineer', auth()->user()->id)->with(['bank','branch'])->get();
             foreach($datas as $data){
                 $data->branch = $data->branch->title;
                 $data->bank = $data->bank->name;
@@ -31,7 +32,7 @@ class EngineerProposalController extends Controller
                 ->addIndexColumn()
 
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="javascript:void(0)" data-url="' . route('backend.cms.proposal.edit', $row->id) . '" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
+                    $actionBtn = '<a href="'. route('engineer.sitevisit.create', $row->id) .'" data-url="#" data-id=' . $row->id . ' class="btn btn-info btn-sm" title="Add details"><i class="far fa-edit"></i></a>
                             <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
                             ';
                     return $actionBtn;
@@ -41,7 +42,7 @@ class EngineerProposalController extends Controller
         }
 
         $banks = Bank::all();
-        return view('CMS::backend.proposal.index', compact('banks'));
+        return view('Engineer::engineer.proposal.index', compact('banks'));
     // } catch (\Exception $e) {
     //     Toastr::error($e->getMessage());
     //     return redirect()->back();

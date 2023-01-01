@@ -42,6 +42,7 @@ Route::group([
 
     Route::post('user/recoverpassword/{email}', 'AuthController@recoverPassword')->name('recoverPassword');
 
+    Route::get('/logout', 'AuthController@logout')->name('logout');
 
     Route::group([
         'prefix' => 'admin',
@@ -49,7 +50,7 @@ Route::group([
     ], function () {
         Route::get('dashboard', 'AuthController@dashboard')->name('dashboard');
 
-        Route::get('/logout', 'AuthController@logout')->name('logout');
+
 
         Route::post('/change-password-submit', 'AuthController@changeUserPasswordSubmit')->name('changePasswordSubmit');
 

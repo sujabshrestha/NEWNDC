@@ -63,7 +63,7 @@
     <div class="form-row col-md-6">
         <div class="form-group col-md-12">
             <label for="client_id">Client Name</label>
-            <input type="text" name="client_name" placeholder="Client Name" class="form-control">
+            <input type="text" name="client_name" value="{{ $proposal->client->client_name ?? "" }}" placeholder="Client Name" class="form-control">
             @if ($errors->has('client_name'))
             <small class="text-danger">{{ $errors->first('client_name') }}</small>
             @endif
@@ -72,7 +72,7 @@
     <div class="form-row col-md-6">
         <div class="form-group col-md-12">
             <label for="client_id">Client Phone</label>
-            <input type="text" name="client_phone" placeholder="Client Phone" class="form-control">
+            <input type="text" name="client_phone" value="{{ $proposal->client->contact_no ?? "" }}" placeholder="Client Phone" class="form-control">
             @if ($errors->has('client_phone'))
             <small class="text-danger">{{ $errors->first('client_phone') }}</small>
             @endif
@@ -82,7 +82,7 @@
         <div class="form-group">
             <label for="property_location">Property Location</label>
             <input type="text" required class="form-control" id="property_location" name="property_location"
-                value="{{ $proposal->property_location ?? old('property_location') }}" placeholder="Enter Property Location" required>
+                value="{{ $proposal->client->address ?? old('property_location') }}" placeholder="Enter Property Location" required>
                 @error('property_location')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -94,7 +94,9 @@
             <select name="site_engineer" class="form-control text-capitalize" id="">
                 @if (isset($siteengineers))
                 @foreach ($siteengineers as $siteengineer)
-                <option value="{{ $siteengineer->id }}">{{ $siteengineer->name }}</option>
+                <option value="{{ $siteengineer->id }}" @if (isset($proposal) && $proposal->site_engineer == $siteengineer->id)
+                    selected
+                @endif>{{ $siteengineer->name }}</option>
                 @endforeach
                 @endif
             </select>
