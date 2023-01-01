@@ -18,6 +18,7 @@
                                     <button class="btn btn-success float-right " id="create" data-url="{{ route('backend.proposal.create') }}">Create <i
                                         class="fa fa-plus"></i></button>
                     </div>
+                    
                     <div class="table-responsive mb-4 mt-4">
                         <table id="global-table" class="table table-hover" style="width:100%">
                             <thead>

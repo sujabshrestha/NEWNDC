@@ -31,27 +31,55 @@ class AdminSiteVisitController extends Controller
 
     public function index(Request $request)
     {
-        // try{
-
+        
         if ($request->ajax()) {
-            $datas =SiteVisit::query();
+            $datas =SiteVisit::with('branch','bank','client');
 
-            // foreach ($datas as $data) {
-            //     $data->branch = $data->bank->name;
-            // }
+            // dd($request->all());
+            
             return DataTables::of($datas)
                 ->addIndexColumn()
-
+                ->editColumn('branch',function($row){
+                    return $row->branch->title ?? 'N/A';
+                })
+                ->editColumn('bank_name',function($row){
+                    return $row->bank->name;
+                })
+                ->editColumn('client_name',function($row){
+                    return $row->client->client_name;
+                })
+                ->editColumn('valuation_status',function($row){
+                    $main = '<select name="valuation_status" class="form-control valuationStatus" data-id='.$row->id.'>';
+                    $preSelected = '<option value="Pre-Valuation" selected>Pre-Valuation</option> <option value="Final-Valuation">Final-Valuation</option> <option value="Cancel-Valuation">Cancel-Valuation</option></select>';
+                    $finalSelected = '<option value="Pre-Valuation">Pre-Valuation</option>  <option value="Final-Valuation" selected>Final-Valuation</option> <option value="Cancel-Valuation">Cancel-Valuation</option></select>';
+                    $cancelSelected = '<option value="Pre-Valuation">Pre-Valuation</option> <option value="Final-Valuation">Final-Valuation</option><option value="Cancel-Valuation" selected>Cancel-Valuation</option></select>';
+            
+                    if($row->valuation_status == "Pre-Valuation"){
+                        return $main.$preSelected;
+                    }elseif($row->valuation_status == "Final-Valuation"){
+                        return $main.$finalSelected;
+                    }elseif($row->valuation_status == "Cancel-Valuation"){
+                        return $main.$cancelSelected;
+                    }   
+                })
+                ->filter(function ($instance) use ($request) {
+                    if($request->filterValuation && $request->filterValuation != null && !empty($request->filterValuation)){
+                        $instance->where('valuation_status', $request->filterValuation);
+                    }
+                })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<a href="javascript:void(0)" data-url="#" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
                                 <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
                                 ';
                     return $actionBtn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action','valuation_status'])
                 ->make(true);
         }
-        return view('Engineer::admin.sitevisit.index');
+            $finalvaluationCount = SiteVisit::finalValuation()->count();
+            $prevaluationCount = SiteVisit::preValuation()->count();
+            $cancelvaluationCount = SiteVisit::cancelValuation()->count();
+        return view('Engineer::admin.sitevisit.index',compact('prevaluationCount','finalvaluationCount','cancelvaluationCount'));
         // }catch(\Exception $e){
         //     Toastr::error($e->getMessage());
         //     return redirect()->back();
@@ -223,6 +251,16 @@ class AdminSiteVisitController extends Controller
         } catch (\Exception $e) {
             Toastr::error($e->getMessage());
             return redirect()->back();
+        }
+    }
+
+    public function changeValuationStatus(Request $request,$id){
+        // dd($request->all());
+        $siteVisit= SiteVisit::where('id',$id)->first();
+        if($siteVisit){
+            $siteVisit->valuation_status = $request->valuation_status;
+            $siteVisit->update();
+            return $this->response->responseSuccessMsg('Successfully Updated',200);
         }
     }
 }

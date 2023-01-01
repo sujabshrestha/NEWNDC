@@ -18,6 +18,26 @@
                                     {{-- <a class="btn btn-success float-right" href="{{ route('backend.sitevisit.create') }}">Create <i
                                         class="fa fa-plus"></i></a> --}}
                     </div>
+                    <hr>
+                    <div class="row col-md-12">
+                        <div class="d-flex ml-4">
+                            <button class="btn btn-primary ml-2 finalValuation filterValuation" >Final Valuation <span class="badge badge-light">{{$finalvaluationCount}}</span></button>
+                            <button class="btn btn-secondary ml-2 preValuation filterValuation" >Pre-Valuation <span class="badge badge-light">{{$prevaluationCount}}</span></button>
+                            <button class="btn btn-danger ml-2 cancelValuation filterValuation">Canceled Valuation<span class="badge badge-light">{{$cancelvaluationCount}}</button>
+                            <button class="btn btn-info ml-2 latestValuation filterValuation">Latest Valuation </span></button>
+
+
+                        {{-- </div>
+                        <div class="col-md-2">
+                            
+
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-2">
+                         </div> --}}
+                       
+                    </div>
                     <div class="table-responsive mb-4 mt-4">
                         <table id="global-table" class="table table-hover" style="width:100%">
                             <thead>
@@ -27,6 +47,7 @@
                                     <th>Branch</th>
                                     <th>Banker Name</th>
                                     <th>Client</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -47,10 +68,35 @@
 
 @push('scripts')
     <script>
+        var data = null;
+        // if(($('.filterValuation').data('value') != null)){
+        //     data = $(this).data('value');
+        // }
+        
+        $('.finalValuation').click(function(){
+            $(this).attr('data-value',"Final-Valuation");
+            $('.preValuation').removeAttr('data-value','');
+            $('.cancelValuation').removeAttr('data-value','');
+            $('.latestValuation').removeAttr('data-value','');
+            $('.filterValuation').each(function(index, value) {
+                if(($(this).data('value') != null)){
+                    data = $(this).data('value');
+                }
+            });
+            $('#global-table').DataTable().draw(true);
+           
+        });
+            
         $('#global-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('backend.sitevisit.index') }}",
+            ajax:{
+                url: "{{ route('backend.sitevisit.index') }}",
+                data: function (d) {
+                    d.filterValuation = data;
+                }
+            } ,
+           
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
@@ -58,27 +104,34 @@
                     searchable: false
                 },
                 {
-                    data: 'bank',
+                    data: 'bank_name',
                     render: function(data, type, row) {
-                        return '<p class="text-capitalize">' + row.bank.name + '</p>';
+                        return '<p class="text-capitalize">' + row.bank_name + '</p>';
                     }
-                }, {
+                },
+                 {
                     data: 'branch',
                     render: function(data, type, row) {
-                        return '<p class="text-capitalize">' +row.branch.title + '</p>';
+                        return '<p class="text-capitalize">' + row.branch + '</p>';
                     }
                 },
                 {
                     data: 'banker_name',
                     render: function(data, type, row) {
-                        return '<p class="text-capitalize">' +row.banker_name+ '</p>';
+                        return '<p class="text-capitalize">' +row.bm_name+ '</p>';
                     }
                 },
                 {
-                    data: 'client',
+                    data: 'client_name',
                     render: function(data, type, row) {
-                        return '<p class="text-capitalize">' +row.client+ '</p>';
+                        return '<p class="text-capitalize">' +row.client_name+ '</p>';
                     }
+                },
+                {
+                    data: 'valuation_status',
+                    name: 'valuation_status',
+                    orderable: true,
+                    searchable: true
                 },
                 {
                     data: 'action',
@@ -87,6 +140,74 @@
                     searchable: true
                 },
             ]
+        });
+       
+        $('.preValuation').click(function(){
+            $('.finalValuation').removeAttr('data-value','');
+            $('.cancelValuation').removeAttr('data-value','');
+            $('.latestValuation').removeAttr('data-value','');
+            $(this).attr('data-value',"Pre-Valuation");
+           
+            $('.filterValuation').each(function(index, value) {
+                data = null;
+                if(($(this).data('value') != null)){
+                    data = $(this).data('value');
+                    alert(data)
+                }
+            });
+            $('#global-table').DataTable().draw(true);
+          
+        });
+        $('.cancelValuation').click(function(){
+            $(this).attr('data-value',"Cancel-Valuation");
+            $('.preValuation').removeAttr('data-value','');
+            $('.finalValuation').removeAttr('data-value','');
+            $('.latestValuation').removeAttr('data-value','');
+            $('.filterValuation').each(function(index, value) {
+                if(($(this).data('value') != null)){
+                    data = $(this).data('value');
+                }
+            });
+            $('#global-table').DataTable().draw(true);
+           
+        });
+        $('.latestValuation').click(function(){
+            $('.preValuation').removeAttr('data-value','');
+            $('.cancelValuation').removeAttr('data-value','');
+            $('.finalValuation').removeAttr('data-value','');
+            $(this).attr('data-value',"latest-Valuation");
+            $('.filterValuation').each(function(index, value) {
+                if(($(this).data('value') != null)){
+                    data = $(this).data('value');
+                }
+            }); 
+            $('#global-table').DataTable().draw(true);
+           
+        });
+    </script>
+
+    <script>
+        $(document).on('change', '.valuationStatus', function() {
+        event.preventDefault();
+        var id = $(this).attr('data-id');
+        var editUrl = "{{ route('backend.sitevisit.changeValuationStatus', ':id') }}";
+        myUrl = editUrl.replace(':id', id);
+        var status = $(this).val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+            $.ajax({
+                type: 'POST',
+                url: myUrl,
+                data:{ 'valuation_status':status} ,
+                success: function(data) {
+                    console.log(data);
+                    toastr.success(data.message);
+                    $('#global-table').DataTable().ajax.reload();
+                },
+            });
         });
     </script>
 @endpush

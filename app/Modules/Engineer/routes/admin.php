@@ -44,6 +44,9 @@ function () {
         Route::post('/update/{id}','AdminSiteVisitController@update')->name('update');
 
         Route::get('/delete/{id}','AdminSiteVisitController@delete')->name('delete');
+
+        Route::post('/changeValuationStatus/{id}','AdminSiteVisitController@changeValuationStatus')->name('changeValuationStatus');
+
     });
 
 
