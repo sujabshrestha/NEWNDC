@@ -13,9 +13,9 @@
         </div>
         <div class="modal-body">
             <div class="col-xl-12 col-md-12 col-sm-12">
-                <form action="{{ route('backend.cms.branch.update',$branch->id) }}"
+                <form action="{{ route('receptionist.branch.update',$branch->id) }}"
                     id="update-form">
-                    @include('CMS::backend.branch.commonform')
+                    @include('Receptionist::receptionist.branch.commonform')
                 </form>
             </div>
         </div>

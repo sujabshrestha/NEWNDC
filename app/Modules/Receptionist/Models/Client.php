@@ -1,6 +1,6 @@
 <?php
 
-namespace Client\Models;
+namespace Receptionist\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -1,30 +1,32 @@
-@extends('layouts.admin.master')
+@extends('layouts.reception.master')
 
-@section('title', 'NDC | Branch')
+@section('title', 'NDC | Proposal')
 
-@section('breadcrumb', 'Branch')
+@section('breadcrumb', 'Proposal')
 
 @section('content')
     <!--  BEGIN CONTENT AREA  -->
 
     <div class="layout-px-spacing">
         <div class="row layout-top-spacing">
-            <div class="col-xl-8 col-lg-18 col-sm-12  layout-spacing">
+            <div class="col-xl-12 col-lg-18 col-sm-12  layout-spacing">
                 <div class="widget-content widget-content-area br-6">
                     <div class="col-12">
-                        <h5 style="display: inline;">Branch Table</h5>
+                        <h5 style="display: inline;">Proposal Table</h5>
                         {{-- <a href="{{ route('backend.user.trashedIndex') }}" class="btn btn-danger float-right "><i
                                     class="fa fa-trash"></i> Trash </a> --}}
-
+                                    <button class="btn btn-success float-right " id="create" data-url="{{ route('receptionist.proposal.create') }}">Create <i
+                                        class="fa fa-plus"></i></button>
                     </div>
                     <div class="table-responsive mb-4 mt-4">
                         <table id="global-table" class="table table-hover" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>S.no.</th>
-                                    <th>Name</th>
                                     <th>Bank</th>
-                                    <th>location</th>
+                                    <th>Branch</th>
+                                    <th>Banker Name</th>
+                                    <th>Client</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -35,20 +37,6 @@
                 </div>
             </div>
 
-            <div class="col-xl-4 col-lg-4 layout-spacing">
-                <div class="widget">
-                    <div class="widget-header row mb-2">
-                        <div class="col-md-12">
-                            <h2>Create Branch</h2>
-                        </div>
-
-                    </div>
-                    <form action="{{ route('backend.cms.branch.store') }}" id="submit-form">
-                        @csrf
-                        @include('CMS::backend.branch.commonform')
-                    </form>
-                </div>
-            </div>
         </div>
 
 
@@ -62,7 +50,7 @@
         $('#global-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('backend.cms.branch.index') }}",
+            ajax: "{{ route('receptionist.proposal.index') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
@@ -70,20 +58,26 @@
                     searchable: false
                 },
                 {
-                    data: 'title',
+                    data: 'bank',
                     render: function(data, type, row) {
-                        return '<p class="text-capitalize">' + row.title + '</p>';
+                        return '<p class="text-capitalize">' + row.bank.name + '</p>';
                     }
                 }, {
                     data: 'branch',
                     render: function(data, type, row) {
-                        return '<p class="text-capitalize">' +row.branch+ '</p>';
+                        return '<p class="text-capitalize">' +row.branch.title + '</p>';
                     }
                 },
                 {
-                    data: 'location',
+                    data: 'banker_name',
                     render: function(data, type, row) {
-                        return '<p class="text-capitalize">' +row.location+ '</p>';
+                        return '<p class="text-capitalize">' +row.banker_name+ '</p>';
+                    }
+                },
+                {
+                    data: 'client',
+                    render: function(data, type, row) {
+                        return '<p class="text-capitalize">' +row.client.client_name + '</p>';
                     }
                 },
                 {

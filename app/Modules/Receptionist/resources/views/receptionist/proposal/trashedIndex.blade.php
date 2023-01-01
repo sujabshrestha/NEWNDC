@@ -1,4 +1,4 @@
-@extends('layouts.admin.master')
+@extends('layouts.reception.master')
 
 @section('title','NDC | User - Trash Index')
 

@@ -5,9 +5,11 @@ namespace Receptionist\Http\Controllers\Receptionist;
 use App\GlobalServices\ResponseService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 use CMS\Models\Bank;
 use CMS\Models\Branch;
 use Files\Repositories\FileInterface;
+use Receptionist\Models\Client;
 use Receptionist\Models\Proposal;
 use User\Models\User;
 use Yajra\DataTables\Facades\DataTables;
@@ -26,7 +28,7 @@ class ReceptionistProposalController extends Controller
         // dd('asdkh');
         // try {
             if ($request->ajax()) {
-                $datas = Proposal::with(['bank','branch'])->get();
+                $datas = Proposal::with(['bank','branch', 'client'])->get();
                 foreach($datas as $data){
                     $data->branch = $data->branch->title;
                     $data->bank = $data->bank->name;
@@ -37,8 +39,8 @@ class ReceptionistProposalController extends Controller
                     ->addIndexColumn()
 
                     ->addColumn('action', function ($row) {
-                        $actionBtn = '<a href="javascript:void(0)" data-url="' . route('backend.cms.proposal.edit', $row->id) . '" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
-                                <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
+                        $actionBtn = '<a href="javascript:void(0)" data-url="' . route('receptionist.proposal.edit', $row->id) . '" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
+                                <a href="javascript:void(0)" id="" data-url="' . route('receptionist.proposal.delete', $row->id) . '" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
                                 ';
                         return $actionBtn;
                     })
@@ -47,7 +49,7 @@ class ReceptionistProposalController extends Controller
             }
 
             $banks = Bank::all();
-            return view('CMS::backend.proposal.index', compact('banks'));
+            return view('Receptionist::receptionist.proposal.index', compact('banks'));
         // } catch (\Exception $e) {
         //     Toastr::error($e->getMessage());
         //     return redirect()->back();
@@ -61,7 +63,7 @@ class ReceptionistProposalController extends Controller
             $branches = Branch::all();
             $siteengineers = User::role('engineer')->get();
             $data = [
-                'view' => view('CMS::backend.proposal.create', compact('branches', 'banks', 'siteengineers'))->render()
+                'view' => view('Receptionist::receptionist.proposal.create', compact('branches', 'banks', 'siteengineers'))->render()
             ];
             return $this->response->responseSuccess($data, "Success", 200);
         } catch (\Exception $e) {
@@ -77,12 +79,14 @@ class ReceptionistProposalController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        // try {
+            // dd($request->all());
             if ($request->ajax()) {
                 $client = new Client();
+                $client->reg_no = rand(0, 9999);
                 $client->client_name = $request->client_name;
-                $client->client_phone = $request->client_phone;
-                $client->property_location = $request->property_location;
+                $client->contact_no = $request->client_phone;
+                $client->address = $request->property_location;
                 if($client->save()){
                     $proposal = new Proposal();
                     $proposal->branch_id = $request->branch_id;
@@ -102,10 +106,10 @@ class ReceptionistProposalController extends Controller
                 }
                 return $this->response->responseError("Something went wrong while storing client");
             }
-        } catch (\Exception $e) {
-            Toastr::error($e->getMessage());
-            return redirect()->back();
-        }
+        // } catch (\Exception $e) {
+        //     Toastr::error($e->getMessage());
+        //     return redirect()->back();
+        // }
     }
 
     /**
@@ -118,7 +122,7 @@ class ReceptionistProposalController extends Controller
     {
         try {
         } catch (\Exception $e) {
-            Toastr::error($e->getMessage());
+            Toastr  ::error($e->getMessage());
             return redirect()->back();
         }
     }
@@ -132,12 +136,13 @@ class ReceptionistProposalController extends Controller
     public function edit($id)
     {
         try {
-            $proposal = proposal::where('id', $id)->first();
+            $proposal = proposal::with('client')->where('id', $id)->first();
             $banks = Bank::all();
             $branches = Branch::all();
+            $siteengineers = User::role('engineer')->get();
             if ($proposal) {
                 $data = [
-                    'view' => view('CMS::backend.proposal.edit', compact('proposal', 'banks', 'branches'))->render()
+                    'view' => view('Receptionist::receptionist.proposal.edit', compact('proposal', 'banks', 'branches', 'siteengineers'))->render()
                 ];
 
                 return $this->response->responseSuccess($data, "Success", 200);

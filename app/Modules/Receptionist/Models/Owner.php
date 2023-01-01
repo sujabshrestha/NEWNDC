@@ -1,6 +1,6 @@
 <?php
 
-namespace Client\Models;
+namespace Receptionist\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -38,5 +38,5 @@ class Owner extends Model
     public function client(){
         return $this->belongsTo(Client::class,'client_id');
     }
-    
+
 }
