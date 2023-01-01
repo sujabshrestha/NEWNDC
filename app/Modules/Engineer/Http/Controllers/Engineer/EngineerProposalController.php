@@ -4,6 +4,9 @@ namespace Engineer\Http\Controllers\Engineer;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use CMS\Models\Bank;
+use Receptionist\Models\Proposal;
+use Yajra\DataTables\Facades\DataTables;
 
 class EngineerProposalController extends Controller
 {
@@ -14,6 +17,7 @@ class EngineerProposalController extends Controller
      */
     public function index(Request $request)
     {
+        // dd('askdjhk');
        // try {
         if ($request->ajax()) {
             $datas = Proposal::with(['bank','branch'])->get();

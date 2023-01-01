@@ -19,7 +19,7 @@ class CreateSitevisitDocumentsTable extends Migration
             $table->unsignedBigInteger('site_visit_id')->nullable();
             $table->unsignedBigInteger('file_id')->nullable();
             $table->foreign('site_visit_id')->references('id')->on('site_visits')->onDelete('cascade');
-            $table->foreign('file_id')->references('id')->on('upload_files')->onDelete('set null');
+            $table->foreign('file_id')->references('id')->on('upload_files');
             $table->timestamps();
         });
     }

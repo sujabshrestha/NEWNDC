@@ -3,18 +3,9 @@
     <nav id="sidebar">
         <div class="shadow-bottom"></div>
         <ul class="list-unstyled menu-categories" id="accordionExample">
-            @php
-            if(Auth::user()->hasRole('admin')){
-                $dashboardUrl = "backend.auth.dashboard";
-            }elseif(Auth::user()->hasRole('engineer')){
-                $dashboardUrl = "engineer.auth.engineerDashboard";
-            }else{
-                $dashboardUrl = "receiption.auth.receptionDashboard";
-            }
-            @endphp
             <li class="menu">
-                <a href="{{ route($dashboardUrl) }}"
-                    {{ strpos(Route::currentRouteName(), $dashboardUrl) === 0 ? 'data-active=true' : '' }}
+                <a href="{{ route('engineer.auth.engineerDashboard') }}"
+                    {{ strpos(Route::currentRouteName(), 'engineer.auth.engineerDashboard') === 0 ? 'data-active=true' : '' }}
                     class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"

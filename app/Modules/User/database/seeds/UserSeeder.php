@@ -50,21 +50,5 @@ class UserSeeder extends Seeder
             $user->assignRole('engineer');
         }
 
-        $user2= [
-            [
-                'name' => 'editor',
-                'email' => 'editor@gmail.com',
-                'phone_no' => '9856425555',
-                'password' => bcrypt('testing1234'),
-                'status' => 'Active',
-                'email_verified_at' => Carbon::now(),
-            ],
-    
-            
-        ];
-        foreach($user2 as $item){
-            $user = User::create($item);
-            $user->assignRole('receiptionist');
-        }
     }
 }
