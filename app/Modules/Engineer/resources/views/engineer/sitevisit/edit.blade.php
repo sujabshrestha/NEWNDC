@@ -1,4 +1,4 @@
-@extends('layouts.admin.master')
+@extends('layouts.engineer.master')
 
 @section('title', 'NDC | Site Visit Edit ')
 
@@ -6,7 +6,7 @@
 
 @section('content')
     <!--  BEGIN CONTENT AREA  -->
- 
+
     <div class="row layout-top-spacing">
         <div class="col-xl-12 col-lg-12 col-sm-12">
             <div class="widget-content widget-content-area br-4">
@@ -18,7 +18,7 @@
                 <hr>
                 <div class="col-xl-12 col-md-12 col-sm-12">
                 <form >
-                    @include('CMS::backend.design.commonform')
+                    @include('Engineer::engineer.sitevisit.commonForm')
                 </form>
             </div>
         </div>

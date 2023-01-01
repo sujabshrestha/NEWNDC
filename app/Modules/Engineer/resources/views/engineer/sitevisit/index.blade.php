@@ -1,4 +1,4 @@
-@extends('layouts.admin.master')
+@extends('layouts.engineer.master')
 
 @section('title', 'NDC | Site Visit ')
 
@@ -50,7 +50,7 @@
         $('#global-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('backend.cms.proposal.index') }}",
+            ajax: "{{ route('engineer.sitevisit.index') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',

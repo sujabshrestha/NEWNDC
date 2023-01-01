@@ -1,6 +1,6 @@
 <?php
 
-namespace SiteVisit\Http\Controllers\Backend;
+namespace Engineer\Http\Controllers\Engineer;
 
 use App\GlobalServices\ResponseService;
 use Illuminate\Http\Request;
@@ -9,6 +9,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use CMS\Models\Bank;
 use CMS\Models\Branch;
 use Files\Repositories\FileInterface;
+use Receptionist\Models\Client;
 use SiteVisit\Models\SiteVisit;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -26,7 +27,7 @@ class SiteVisitController extends Controller
         $this->response = $response;
     }
 
-    public function index(Request $request)
+    public function index(Request $request, $id)
     {
         // try{
 
@@ -40,7 +41,7 @@ class SiteVisitController extends Controller
                     ->addIndexColumn()
 
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="javascript:void(0)" data-url="'.route('backend.cms.branch.edit', $row->id).'" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
+                    $actionBtn = '<a href="javascript:void(0)" data-url="#" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
                                 <a href="javascript:void(0)" id="" data-id='.$row->id.' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
                                 ';
                     return $actionBtn;
@@ -48,7 +49,7 @@ class SiteVisitController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
             }
-            return view('SiteVisit::backend.index');
+            return view('Engineer::engineer.sitevisit.index', compact('id'));
         // }catch(\Exception $e){
         //     Toastr::error($e->getMessage());
         //     return redirect()->back();
@@ -56,10 +57,13 @@ class SiteVisitController extends Controller
     }
 
 
-    public function create()
+    public function create($id)
     {
         try{
-            return view('SiteVisit::backend.create');
+            $banks = Bank::all();
+            $branches = Branch::all();
+            $clients = Client::all();
+            return view('Engineer::engineer.sitevisit.create', compact('banks', 'branches', 'clients'));
         }catch(\Exception $e){
             Toastr::error($e->getMessage());
             return redirect()->back();
@@ -72,7 +76,7 @@ class SiteVisitController extends Controller
         try{
 
             $sitevisit = new SiteVisit();
-            $sitevisit->registration_id = rand(0,9999);
+            $sitevisit->registration_id = $request->reg_no ?? rand(0,9999);
             $sitevisit->bank_id = $request->bank_id;
             $sitevisit->branch_id = $request->branch_id;
             $sitevisit->client_id = $request->client_id;
@@ -92,7 +96,7 @@ class SiteVisitController extends Controller
             $sitevisit->remarks = $request->remarks;
             $sitevisit->proposal_id = $request->proposal_id;
             if($sitevisit->save()){
-                
+
             }
 
 

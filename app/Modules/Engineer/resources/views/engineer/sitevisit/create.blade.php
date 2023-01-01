@@ -1,4 +1,4 @@
-@extends('layouts.admin.master')
+@extends('layouts.engineer.master')
 
 @section('title', 'NDC | Add ')
 
@@ -12,12 +12,12 @@
             <div class="widget-content widget-content-area br-4">
                 <div class="col-12">
                     <h5 style="display: inline;">Add </h5>
-                    <a class="btn btn-secondary float-right " href="{{ route('backend.sitevisit.index')}}">Previous Page</a>
+                    <a class="btn btn-secondary float-right " href="{{ url()->previous() }}">Previous Page</a>
                 </div>
                 <hr>
                 <div class="col-xl-12 col-md-12 col-sm-12">
                 <form >
-                    @include('SiteVisit::backend.commonForm')
+                    @include('Engineer::engineer.sitevisit.commonForm')
                 </form>
             </div>
 

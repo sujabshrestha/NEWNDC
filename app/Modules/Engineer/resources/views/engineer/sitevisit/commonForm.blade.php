@@ -6,11 +6,11 @@
         </label>
     </div>
 
-    {{-- <div class="form-group col-md-3 pr-0">
+    <div class="form-group col-md-3 pr-0">
         <label for="reg_no">Registration Id</label>
         <input type="text" name="reg_no" id="reg_no" required="" value=""
-            class="form-control" readonly="" tabindex="-1" autocomplete="off">
-    </div> --}}
+            class="form-control" tabindex="-1" autocomplete="off">
+    </div>
     <div class="form-group col-md-3">
         <label for="valuationType">Valuation Type <span class="text-danger">*</span></label>
         <select class="form-control selectbox" name="valuation_type" id="valuationType" required=""
