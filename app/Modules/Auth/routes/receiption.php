@@ -10,11 +10,11 @@ Route::group([
 
 ], function () {
 
-    Route::group([
-        'middleware' => 'editorMiddleware'
-    ], function () {
+    // Route::group([
+    //     'middleware' => 'editorMiddleware'
+    // ], function () {
         Route::get('reception/dashboard', 'AuthController@receptionDashboard')->name('receptionDashboard');
 
         Route::get('reception/getProposalData','AuthController@receptionProposalData')->name('getProposalData');
-    });
+    // });
 });
