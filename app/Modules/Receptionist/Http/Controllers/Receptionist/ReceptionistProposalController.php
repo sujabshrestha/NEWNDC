@@ -27,29 +27,29 @@ class ReceptionistProposalController extends Controller
     {
         // dd('asdkh');
         // try {
-            if ($request->ajax()) {
-                $datas = Proposal::with(['bank','branch', 'client'])->get();
-                foreach($datas as $data){
-                    $data->branch = $data->branch->title;
-                    $data->bank = $data->bank->name;
-                    $data->client = $data->client_id;
-                }
-
-                return DataTables::of($datas)
-                    ->addIndexColumn()
-
-                    ->addColumn('action', function ($row) {
-                        $actionBtn = '<a href="javascript:void(0)" data-url="' . route('receptionist.proposal.edit', $row->id) . '" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
-                                <a href="javascript:void(0)" id="" data-url="' . route('receptionist.proposal.delete', $row->id) . '" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
-                                ';
-                        return $actionBtn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+        if ($request->ajax()) {
+            $datas = Proposal::with(['bank', 'branch', 'client'])->get();
+            foreach ($datas as $data) {
+                $data->branch = $data->branch->title;
+                $data->bank = $data->bank->name;
+                $data->client = $data->client_id;
             }
 
-            $banks = Bank::all();
-            return view('Receptionist::receptionist.proposal.index', compact('banks'));
+            return DataTables::of($datas)
+                ->addIndexColumn()
+
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="javascript:void(0)" data-url="' . route('receptionist.proposal.edit', $row->id) . '" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
+                                <a href="javascript:void(0)" id="" data-url="' . route('receptionist.proposal.delete', $row->id) . '" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
+                                ';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        $banks = Bank::all();
+        return view('Receptionist::receptionist.proposal.index', compact('banks'));
         // } catch (\Exception $e) {
         //     Toastr::error($e->getMessage());
         //     return redirect()->back();
@@ -80,32 +80,31 @@ class ReceptionistProposalController extends Controller
     public function store(Request $request)
     {
         // try {
-            // dd($request->all());
-            if ($request->ajax()) {
-                $client = new Client();
-                $client->reg_no = rand(0, 9999);
-                $client->client_name = $request->client_name;
-                $client->contact_no = $request->client_phone;
-                $client->address = $request->property_location;
-                if($client->save()){
-                    $proposal = new Proposal();
-                    $proposal->branch_id = $request->branch_id;
-                    $proposal->bank_id = $request->bank_id;
-                    $proposal->banker_name = $request->banker_name;
-                    $proposal->banker_contact = $request->phone_no;
-                    $proposal->client_id = $client->id;
-                    $proposal->site_engineer = $request->site_engineer;
-                    $proposal->status = "Pending";
-                    $proposal->remarks = $request->remarks;
-                    if($proposal->save()){
+        // dd($request->all());
+        if ($request->ajax()) {
+            $client = new Client();
+            $client->reg_no = rand(0, 9999);
+            $client->client_name = $request->client_name;
+            $client->contact_no = $request->client_phone;
+            $client->address = $request->property_location;
+            if ($client->save()) {
+                $proposal = new Proposal();
+                $proposal->branch_id = $request->branch_id;
+                $proposal->bank_id = $request->bank_id;
+                $proposal->banker_name = $request->banker_name;
+                $proposal->banker_contact = $request->phone_no;
+                $proposal->client_id = $client->id;
+                $proposal->site_engineer = $request->site_engineer;
+                $proposal->status = "Pending";
+                $proposal->remarks = $request->remarks;
+                if ($proposal->save()) {
 
-                        return $this->response->responseSuccessMsg("Successfully Stored", 200);
-                    }
-                    return $this->response->responseError("Something went wrong while storing proposal");
-
+                    return $this->response->responseSuccessMsg("Successfully Stored", 200);
                 }
-                return $this->response->responseError("Something went wrong while storing client");
+                return $this->response->responseError("Something went wrong while storing proposal");
             }
+            return $this->response->responseError("Something went wrong while storing client");
+        }
         // } catch (\Exception $e) {
         //     Toastr::error($e->getMessage());
         //     return redirect()->back();
@@ -122,7 +121,7 @@ class ReceptionistProposalController extends Controller
     {
         try {
         } catch (\Exception $e) {
-            Toastr  ::error($e->getMessage());
+            Toastr::error($e->getMessage());
             return redirect()->back();
         }
     }
@@ -171,12 +170,16 @@ class ReceptionistProposalController extends Controller
                 $proposal->bank_id = $request->bank_id;
                 $proposal->banker_name = $request->banker_name;
                 $proposal->banker_contact = $request->phone_no;
-                $proposal->client_id = $request->client_id;
-                $proposal->property_location = $request->property_location;
-                $proposal->site_visited_by = $request->site_visited_by;
+                $proposal->site_engineer = $request->site_engineer;
                 $proposal->status = $request->status;
                 $proposal->remarks = $request->remarks;
-                $proposal->save();
+                if ($proposal->update()) {
+                    $client = Client::where('id', $proposal->client_id)->first();
+                    $client->client_name = $request->client_name;
+                    $client->contact_no = $request->client_phone;
+                    $client->address = $request->property_location;
+                    $client->update();
+                }
 
                 return $this->response->responseSuccessMsg("Successfully Updated", 200);
             }
@@ -200,7 +203,8 @@ class ReceptionistProposalController extends Controller
         }
     }
 
-    public function design(){
+    public function design()
+    {
         return view('CMS::backend.design.create');
     }
 }
