@@ -13,21 +13,21 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ getOrginalUrl(returnSiteSetting('favicon')) }}" />
 
-    @include('layouts.receiption.style')
+    @include('layouts.reception.style')
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
 </head>
 <body>
     <!-- BEGIN LOADER -->
-    @include('layouts.receiption.loader')
+    @include('layouts.reception.loader')
     <!--  END LOADER -->
 
     <!--  BEGIN NAVBAR  -->
-    @include('layouts.receiption.navbar')
+    @include('layouts.reception.navbar')
     <!--  END NAVBAR  -->
 
     <!--  BEGIN NAVBAR  -->
-    @include('layouts.receiption.subheader')
+    @include('layouts.reception.subheader')
     <!--  END NAVBAR  -->
 
     <!--  BEGIN MAIN CONTAINER  -->
@@ -37,7 +37,7 @@
         <div class="search-overlay"></div>
 
         <!--  BEGIN SIDEBAR  -->
-        @include('layouts.receiption.sidebar')
+        @include('layouts.reception.sidebar')
         <!--  END SIDEBAR  -->
 
         <!--  BEGIN CONTENT AREA  -->
@@ -45,7 +45,7 @@
             <div class="layout-px-spacing">
 
                 @yield('content')
-        
+
             </div>
             {{-- @include('layouts.receiption.footer') --}}
         </div>
@@ -55,7 +55,7 @@
     <!-- END MAIN CONTAINER -->
 
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    @include('layouts.receiption.script')
+    @include('layouts.reception.script')
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 
 </body>

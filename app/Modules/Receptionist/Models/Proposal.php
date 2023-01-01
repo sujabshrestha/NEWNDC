@@ -1,7 +1,9 @@
 <?php
 
-namespace CMS\Models;
+namespace Receptionist\Models;
 
+use CMS\Models\Bank;
+use CMS\Models\Branch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
