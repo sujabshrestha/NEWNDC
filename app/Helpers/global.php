@@ -120,6 +120,15 @@ function getOrginalUrl($id)
     return null;
 }
 
+function getFileTitle($id)
+{
+    $file = UploadFile::where('id', $id)->first();
+    if ($file) {
+        return $file->title;
+    }
+    return null;
+}
+
 function original_url($file)
 {
     $supportExtension = array('jpg', 'png', 'gif', 'webp');
