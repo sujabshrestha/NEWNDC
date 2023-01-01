@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(
     [
-        'prefix' => config('engineerRoute.prefix.baengineerckend'),
+        'prefix' => config('engineerRoute.prefix.engineer'),
         'namespace' => config('engineerRoute.namespace.engineer'),
         'as' => config('engineerRoute.as.engineer'),
         'middleware' => ['web']
@@ -15,7 +15,7 @@ Route::group(
             'prefix' => 'proposal',
             'as' => 'proposal.'
         ], function () {
-            Route::get('all','EngineerProposalController@index')->name('index');
+            Route::get('all', 'EngineerProposalController@index');
         });
 
 
@@ -25,9 +25,9 @@ Route::group(
         ], function () {
             Route::get('/','SiteVisitController@index')->name('index');
 
-            Route::get('/create/{id}','SiteVisitController@create')->name('create');
+            Route::get('/create/{proposalid}/{id?}','SiteVisitController@create')->name('create');
 
-            Route::post('/submit','SiteVisitController@store')->name('submit');
+            Route::post('/submit/{id?}','SiteVisitController@store')->name('submit');
 
             Route::get('/edit/{id}','SiteVisitController@edit')->name('edit');
 
@@ -38,7 +38,4 @@ Route::group(
 
 
     }
-    
-
-   
 );

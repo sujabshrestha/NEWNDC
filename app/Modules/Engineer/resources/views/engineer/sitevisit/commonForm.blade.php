@@ -8,7 +8,7 @@
 
     <div class="form-group col-md-3 pr-0">
         <label for="reg_no">Registration Id</label>
-        <input type="text" name="reg_no" id="reg_no" required="" value=""
+        <input type="number" name="reg_no" value="{{ $sitevisit->registration_id  ?? old('reg_no') }}" id="reg_no" required="" value=""
             class="form-control" tabindex="-1" autocomplete="off">
     </div>
     <div class="form-group col-md-3">
@@ -16,9 +16,15 @@
         <select class="form-control selectbox" name="valuation_type" id="valuationType" required=""
             valuationtype="" autofocus="">
             <option disabled selected>Select Valuation Type</option>
-            <option value="Land">Land Only</option>
-            <option value="Land_Building">Land &amp; Building</option>
-            <option value="Apartment">Appartment</option>
+            <option @if (isset($sitevisit) && $sitevisit->valuation_type == "Land")
+                selected
+            @endif value="Land">Land Only</option>
+            <option @if (isset($sitevisit) && $sitevisit->valuation_type == "Land_Building")
+                selected
+            @endif value="Land_Building">Land &amp; Building</option>
+            <option  @if (isset($sitevisit) && $sitevisit->valuation_type == "Apartment")
+                selected
+            @endif value="Apartment">Appartment</option>
         </select>
     </div>
 
@@ -29,7 +35,9 @@
             @if(isset($banks))
             @foreach ($banks as $bank)
 
-            <option value="{{ $bank->id }}">{{ $bank->name }}</option>
+            <option  @if (isset($sitevisit) && $sitevisit->bank_id == $bank->id)
+                selected
+            @endif value="{{ $bank->id }}">{{ $bank->name }}</option>
             @endforeach
             @endif
 
@@ -38,31 +46,35 @@
     </div>
     <div class="form-group col-md-3">
         <label for="branchId">Branch <span class="text-danger">*</span></label>
-        <select class="form-control selectbox" name="branchId" id="branchId" required="">
+        <select class="form-control selectbox" name="branch_id" id="branchId" required="">
             <option disabled selected> Select Branch </option>
 
             @if(isset($branches))
             @foreach ($branches as $branch)
 
-            <option value="{{ $branch->id }}">{{ $branch->title }}</option>
+            <option  @if (isset($sitevisit) && $sitevisit->branch_id == $branch->id)
+                selected
+            @endif  value="{{ $branch->id }}">{{ $branch->title }}</option>
             @endforeach
             @endif
         </select>
     </div>
     <div class="form-group col-md-2">
         <label for="file_no">File No <span class="text-danger">*</span> </label>
-        <input type="text" name="file_no" id="file_no" value="{{ old('file_no') }}" required=""
+        <input type="text" name="file_no" id="file_no" value="{{ $sitevisit->file_no ??  old('file_no') }}" required=""
             placeholder="File No" class="form-control" autocomplete="off">
     </div>
     <div class="form-group col-md-3">
         <label for="siteEngineerId">Site Engineer <span class="text-danger">*</span></label>
         <select class="form-control selectbox"  name="site_engineer" id="TxtSiteEngineerId" required="">
             <option disabled selected> Select Site Engineer </option>
-            @if (isset($users))
-            @foreach ($users as $user)
+            @if (isset($siteengineers))
+            @foreach ($siteengineers as $user)
 
 
-            <option value="{{ $user->id }}">{{ $user->name }}</option>
+            <option  @if (isset($sitevisit) && $sitevisit->site_engineer_id == $user->id)
+                selected
+            @endif value="{{ $user->id }}">{{ $user->name }}</option>
             @endforeach
             @endif
 
