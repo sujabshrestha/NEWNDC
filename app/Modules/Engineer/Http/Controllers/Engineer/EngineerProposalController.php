@@ -18,10 +18,9 @@ class EngineerProposalController extends Controller
      */
     public function index(Request $request)
     {
-        // dd('askdjhk');
        // try {
         if ($request->ajax()) {
-            $datas = Proposal::where('site_engineer', auth()->user()->id)->with(['bank','branch'])->get();
+            $datas = Proposal::where('site_engineer', auth()->user()->id)->with(['bank','branch', 'siteVisit'])->get();
             foreach($datas as $data){
                 $data->branch = $data->branch->title;
                 $data->bank = $data->bank->name;
@@ -32,7 +31,7 @@ class EngineerProposalController extends Controller
                 ->addIndexColumn()
 
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="'. route('engineer.sitevisit.create', $row->id) .'" data-url="#" data-id=' . $row->id . ' class="btn btn-info btn-sm" title="Add details"><i class="far fa-edit"></i></a>
+                    $actionBtn = '<a href="'. route('siteengineer.sitevisit.create', [$row->id, $row->siteVisit->id]) .'" data-url="#" data-id=' . $row->id . ' class="btn btn-info btn-sm" title="Add details"><i class="far fa-edit"></i></a>
                             <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
                             ';
                     return $actionBtn;

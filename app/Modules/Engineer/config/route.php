@@ -2,14 +2,13 @@
 return [
     'prefix' => [
         'backend' => 'backend',
-        'engineer' => 'engineer',
+        'engineer' => 'siteengineer',
     ],
     'namespace' => [
         // 'backend' => 'Engineer\Http\Controllers\Backend',
         'engineer' => 'Engineer\Http\Controllers\Engineer',
     ],
     'as' => [
-        'engineer' => 'engineer.',
-        'backend' => 'backend.user.',
+        'engineer' => 'siteengineer.',
     ]
 ];

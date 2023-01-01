@@ -4,6 +4,7 @@ namespace Receptionist\Models;
 
 use CMS\Models\Bank;
 use CMS\Models\Branch;
+use Engineer\Models\SiteVisit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,6 +36,11 @@ class Proposal extends Model
     public function branch()
     {
         return $this->belongsTo(Branch::class, 'branch_id');
+    }
+
+
+    public function siteVisit(){
+        return $this->hasOne(SiteVisit::class, 'proposal_id');
     }
 
 
