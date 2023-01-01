@@ -16,9 +16,9 @@
         <select class="form-control selectbox" name="valuation_type" id="valuationType" required=""
             valuationtype="" autofocus="">
             <option disabled selected>Select Valuation Type</option>
-            <option value="Land Only">Land Only</option>
-            <option value="Land &amp; Building">Land &amp; Building</option>
-            <option value="Land Only">Appartment</option>
+            <option value="Land">Land Only</option>
+            <option value="Land_Building">Land &amp; Building</option>
+            <option value="Apartment">Appartment</option>
         </select>
     </div>
 
@@ -29,7 +29,7 @@
             @if(isset($banks))
             @foreach ($banks as $bank)
 
-            <option value="{{ $bank->id }}">{{ $bank->title }}</option>
+            <option value="{{ $bank->id }}">{{ $bank->name }}</option>
             @endforeach
             @endif
 
@@ -40,6 +40,13 @@
         <label for="branchId">Branch <span class="text-danger">*</span></label>
         <select class="form-control selectbox" name="branchId" id="branchId" required="">
             <option disabled selected> Select Branch </option>
+
+            @if(isset($branches))
+            @foreach ($branches as $branch)
+
+            <option value="{{ $branch->id }}">{{ $branch->title }}</option>
+            @endforeach
+            @endif
         </select>
     </div>
     <div class="form-group col-md-2">
@@ -64,7 +71,14 @@
     <div class="form-group col-md-4">
         <label>  Client <span class="text-danger">*</span></label>
         <select name="client_id" class="form-control" id="">
-            <option value=""></option>
+
+            @if (isset($clients))
+            @foreach ($clients as $client)
+
+
+            <option value="{{ $client->id }}">{{ $client->client_name }}</option>
+            @endforeach
+            @endif
         </select>
     </div>
 
@@ -110,7 +124,12 @@
             Type of road
         </label>
         <select name="type_of_road" class="form-control" id="">
-            <option value=""></option>
+            <option value="Earthern">Earthern</option>
+            <option value="RCC">RCC</option>
+            <option value="Gravel">Gravel</option>
+            <option value="Goreto">Goreto</option>
+            <option value="Dead_End">Dead End</option>
+            <option value="Throughout">Throughout</option>
         </select>
     </div>
 
@@ -119,7 +138,12 @@
             Type of land
         </label>
         <select name="type_of_land" class="form-control" id="">
-            <option value=""></option>
+            <option value="Planning">Planning</option>
+            <option value="Flat">Flat</option>
+            <option value="Khet">Khet</option>
+            <option value="Slightly_Slope">Slightly Slope</option>
+            <option value="Low_Land">Low Land </option>
+
         </select>
     </div>
     <div class="form-group col-md-3">
@@ -127,7 +151,10 @@
             Category Of property
         </label>
         <select name="category_of_property" class="form-control" id="">
-            <option value=""></option>
+            <option value="Residential">Residential</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Commercial_Residential">Commercial_Residential</option>
+            <option value="Other">Other</option>
         </select>
     </div>
     <div class="form-group col-md-3">

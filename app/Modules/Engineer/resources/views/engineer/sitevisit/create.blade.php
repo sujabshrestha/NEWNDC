@@ -16,7 +16,9 @@
                 </div>
                 <hr>
                 <div class="col-xl-12 col-md-12 col-sm-12">
-                <form >
+                <form method="POST" enctype="multipart/form-data" action="{{ route('engineer.sitevisit.submit') }}">
+                    @csrf
+                    <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
                     @include('Engineer::engineer.sitevisit.commonForm')
                 </form>
             </div>

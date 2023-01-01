@@ -27,7 +27,7 @@ Route::group(
 
             Route::get('/create/{id}','SiteVisitController@create')->name('create');
 
-            Route::post('/submit','SiteVisitController@submit')->name('submit');
+            Route::post('/submit','SiteVisitController@store')->name('submit');
 
             Route::get('/edit/{id}','SiteVisitController@edit')->name('edit');
 
