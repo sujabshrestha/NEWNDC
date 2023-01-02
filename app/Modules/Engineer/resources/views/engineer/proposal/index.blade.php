@@ -50,7 +50,7 @@
         $('#global-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('proposal.index') }}",
+            ajax: "{{ route('siteengineer.proposal.index') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',

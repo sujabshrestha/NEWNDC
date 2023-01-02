@@ -11,12 +11,12 @@ Route::group(
     ],
     function () {
 
-        Route::group([
-            'prefix' => 'proposal',
-            'as' => 'proposal.'
-        ], function () {
-            Route::get('all', 'EngineerProposalController@index');
-        });
+        // Route::group([
+        //     'prefix' => 'proposal',
+        //     'as' => 'proposal.'
+        // ], function () {
+            Route::get('all', 'EngineerProposalController@index')->name('proposal.index');
+        // });
 
 
         Route::group([
