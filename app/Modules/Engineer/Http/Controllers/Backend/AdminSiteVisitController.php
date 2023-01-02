@@ -33,7 +33,7 @@ class AdminSiteVisitController extends Controller
     {
         
         if ($request->ajax()) {
-            $datas =SiteVisit::with('branch','bank','client');
+            $datas =SiteVisit::with('branch','bank','client')->latest();
 
             // dd($request->all());
             
@@ -64,7 +64,11 @@ class AdminSiteVisitController extends Controller
                 })
                 ->filter(function ($instance) use ($request) {
                     if($request->filterValuation && $request->filterValuation != null && !empty($request->filterValuation)){
-                        $instance->where('valuation_status', $request->filterValuation);
+                        if($request->filterValuation == "latest-Valuation"){
+                            $instance->latest();
+                        }else{
+                            $instance->where('valuation_status', $request->filterValuation);
+                        }
                     }
                 })
                 ->addColumn('action', function ($row) {
@@ -260,7 +264,15 @@ class AdminSiteVisitController extends Controller
         if($siteVisit){
             $siteVisit->valuation_status = $request->valuation_status;
             $siteVisit->update();
-            return $this->response->responseSuccessMsg('Successfully Updated',200);
+            $finalvaluationCount = SiteVisit::finalValuation()->count();
+            $prevaluationCount = SiteVisit::preValuation()->count();
+            $cancelvaluationCount = SiteVisit::cancelValuation()->count();
+            $data = [ 
+                    'final' => $finalvaluationCount,
+                    'pre' => $prevaluationCount,
+                    'cancel' => $cancelvaluationCount
+                ];
+            return $this->response->responseSuccess($data,'Successfully Updated',200);
         }
     }
 }

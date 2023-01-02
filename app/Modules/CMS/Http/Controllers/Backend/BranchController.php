@@ -14,4 +14,11 @@ use Yajra\DataTables\Facades\DataTables;
 class BranchController extends Controller
 {
     
+    public function valuationForm(){
+        return view('CMS::backend.design.valuation');
+    }
+
+    public function buildingValuationForm(){
+        return view('CMS::backend.design.buildingvaluation');
+    }
 }

@@ -10,7 +10,9 @@ Route::group([
 
 ], function () {
 
-   
+    Route::get('/valuation-design','BranchController@valuationForm')->name('valuationForm');
+    Route::get('/building-valuation-design','BranchController@buildingValuationForm')->name('buildingValuationForm  ');
+
 
 
 });

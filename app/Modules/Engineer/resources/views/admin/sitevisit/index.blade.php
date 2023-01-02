@@ -73,19 +73,7 @@
         //     data = $(this).data('value');
         // }
         
-        $('.finalValuation').click(function(){
-            $(this).attr('data-value',"Final-Valuation");
-            $('.preValuation').removeAttr('data-value','');
-            $('.cancelValuation').removeAttr('data-value','');
-            $('.latestValuation').removeAttr('data-value','');
-            $('.filterValuation').each(function(index, value) {
-                if(($(this).data('value') != null)){
-                    data = $(this).data('value');
-                }
-            });
-            $('#global-table').DataTable().draw(true);
-           
-        });
+       
             
         $('#global-table').DataTable({
             processing: true,
@@ -105,12 +93,14 @@
                 },
                 {
                     data: 'bank_name',
+                    orderable: false,
                     render: function(data, type, row) {
                         return '<p class="text-capitalize">' + row.bank_name + '</p>';
                     }
                 },
                  {
                     data: 'branch',
+                    orderable: false,
                     render: function(data, type, row) {
                         return '<p class="text-capitalize">' + row.branch + '</p>';
                     }
@@ -123,6 +113,7 @@
                 },
                 {
                     data: 'client_name',
+                    orderable: false,
                     render: function(data, type, row) {
                         return '<p class="text-capitalize">' +row.client_name+ '</p>';
                     }
@@ -141,18 +132,29 @@
                 },
             ]
         });
-       
-        $('.preValuation').click(function(){
+        $(document).on('click','.finalValuation',function(e){
+            e.preventDefault();
+            $('.preValuation').removeAttr('data-value','');
+            $('.cancelValuation').removeAttr('data-value','');
+            $('.latestValuation').removeAttr('data-value','');
+            $('.filterValuation').each(function(index, value) {
+                if(($(this).data('value') != null)){
+                    data = "Final-Valuation";
+                }
+            });
+            $('#global-table').DataTable().draw(true);
+        })
+
+        $(document).on('click','.preValuation',function(e){
+            e.preventDefault();
             $('.finalValuation').removeAttr('data-value','');
             $('.cancelValuation').removeAttr('data-value','');
             $('.latestValuation').removeAttr('data-value','');
             $(this).attr('data-value',"Pre-Valuation");
-           
+            data="Pre-Valuation";
             $('.filterValuation').each(function(index, value) {
-                data = null;
                 if(($(this).data('value') != null)){
-                    data = $(this).data('value');
-                    alert(data)
+                    data="Pre-Valuation";
                 }
             });
             $('#global-table').DataTable().draw(true);
@@ -165,7 +167,7 @@
             $('.latestValuation').removeAttr('data-value','');
             $('.filterValuation').each(function(index, value) {
                 if(($(this).data('value') != null)){
-                    data = $(this).data('value');
+                    data="Cancel-Valuation";
                 }
             });
             $('#global-table').DataTable().draw(true);
@@ -178,7 +180,7 @@
             $(this).attr('data-value',"latest-Valuation");
             $('.filterValuation').each(function(index, value) {
                 if(($(this).data('value') != null)){
-                    data = $(this).data('value');
+                    data="latest-Valuation";
                 }
             }); 
             $('#global-table').DataTable().draw(true);
@@ -204,7 +206,11 @@
                 data:{ 'valuation_status':status} ,
                 success: function(data) {
                     console.log(data);
+                    $('.finalValuation span').text(data.data.final);
+                    $('.preValuation span').text(data.data.pre);
+                    $('.cancelValuation span').text(data.data.cancel);
                     toastr.success(data.message);
+                    
                     $('#global-table').DataTable().ajax.reload();
                 },
             });
