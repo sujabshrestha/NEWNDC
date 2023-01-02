@@ -31,7 +31,7 @@ class EngineerProposalController extends Controller
                 ->addIndexColumn()
 
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="'. route('siteengineer.sitevisit.create', [$row->id, $row->siteVisit->id]) .'" data-url="#" data-id=' . $row->id . ' class="btn btn-info btn-sm" title="Add details"><i class="far fa-edit"></i></a>
+                    $actionBtn = '<a href="'. route('siteengineer.sitevisit.create', [$row->id, $row->siteVisit->id ?? null]) .'" data-url="#" data-id=' . $row->id . ' class="btn btn-info btn-sm" title="Add details"><i class="far fa-edit"></i></a>
                             <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
                             ';
                     return $actionBtn;
