@@ -86,7 +86,7 @@
             </div>
         </div>
         <div class="form-image">
-            <div class="l-image">
+            <div class="l-image" style="background-image: url('{{ getOrginalUrl(returnSiteSetting('logo')) ?? "" }}')">
             </div>
         </div>
     </div>

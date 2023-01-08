@@ -48,6 +48,10 @@ class CreateSiteVisitsTable extends Migration
             $table->foreign('proposal_id')->references('id')->on('proposals')->onDelete('set null');
             $table->foreign('site_engineer_id')->references('id')->on('users')->onDelete('set null');
 
+
+            $table->unsignedBigInteger('valuation_assignment_no')->nullable();
+            $table->date('preparation_date')->nullable();
+            $table->date('ownership_date')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

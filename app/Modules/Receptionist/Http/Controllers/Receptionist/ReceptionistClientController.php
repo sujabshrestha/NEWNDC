@@ -49,7 +49,7 @@ class ReceptionistClientController extends Controller
 
     public function store(Request $request ){
         try {
-            dd($request->all());
+            // dd($request->all());
             $client = $this->client->store($request);
             if($client == true) {
                 Toastr::success('Successfully Created.');
@@ -91,7 +91,7 @@ class ReceptionistClientController extends Controller
             if ($user == true) {
                 Toastr::success('Successfully Updated.');
                 return redirect()->route('receptionist.client.index');
-            }  
+            }
             Toastr::error("Something Went Wrong");
             return redirect()->back();
         // } catch (Exception $e) {
@@ -149,11 +149,11 @@ class ReceptionistClientController extends Controller
     public function getClientData(Request $request){
         try {
             if ($request->ajax()) {
-                $data = Client::select('*')->with('owner');
+                $data = Client::with('owner')->get();
                 return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('owner_name',function($data){
-                    return $data->owner->owner_name;
+                    return $data->owner->owner_name ?? "";
                 })
                 ->editColumn('status',function($row){
                     $main = '<select name="status" class="form-control clientStatus" data-id='.$row->id.'>';
@@ -162,15 +162,15 @@ class ReceptionistClientController extends Controller
                                         <option  value="Inactive">Inactive</option>';
                     $inactiveSelected = '<option  value="Inactive">Active</option>
                                         <option  value="Inactive" selected>Inactive</option>';
-             
+
                     if($row->status == "Active"){
                         return $main.$activeSelected.$mainlast;
                     }else{
                         return $main.$inactiveSelected.$mainlast;
-                    }   
-                              
+                    }
+
                 })
-                
+
 
                 ->addColumn('action', function ($row) {
                     $actionBtn = '
@@ -188,7 +188,7 @@ class ReceptionistClientController extends Controller
                     </div>';
                     return $actionBtn;
                 })
-                ->rawColumns(['action','status'])
+                ->rawColumns(['action','status', 'owner_name'])
                 ->make(true);
             }
         } catch (Exception $e) {

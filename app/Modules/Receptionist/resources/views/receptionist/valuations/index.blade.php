@@ -1,8 +1,8 @@
 @extends('layouts.admin.master')
 
-@section('title', 'NDC | Site Visit ')
+@section('title', 'NDC | Valuation')
 
-@section('breadcrumb', 'Site Visit ')
+@section('breadcrumb', 'Valuation ')
 
 @section('content')
     <!--  BEGIN CONTENT AREA  -->
@@ -12,7 +12,7 @@
             <div class="col-xl-12 col-lg-18 col-sm-12  layout-spacing">
                 <div class="widget-content widget-content-area br-6">
                     <div class="col-12">
-                        <h5 style="display: inline;">Site Visit Table</h5>
+                        <h5 style="display: inline;">Valuation Table</h5>
                         {{-- <a href="{{ route('backend.user.trashedIndex') }}" class="btn btn-danger float-right "><i
                                     class="fa fa-trash"></i> Trash </a> --}}
                                     {{-- <a class="btn btn-success float-right" href="{{ route('backend.sitevisit.create') }}">Create <i
@@ -79,7 +79,7 @@
             processing: true,
             serverSide: true,
             ajax:{
-                url: "{{ route('backend.admin.sitevisit.index') }}",
+                url: "{{ route('receptionist.valuation.index') }}",
                 data: function (d) {
                     d.filterValuation = data;
                 }

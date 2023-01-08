@@ -7,6 +7,7 @@
 @section('content')
     <!--  BEGIN CONTENT AREA  -->
 
+
     <div class="layout-px-spacing">
         <div class="row layout-top-spacing">
             <div class="col-xl-12 col-lg-18 col-sm-12  layout-spacing">
@@ -15,10 +16,10 @@
                         <h5 style="display: inline;">Proposal Table</h5>
                         {{-- <a href="{{ route('backend.user.trashedIndex') }}" class="btn btn-danger float-right "><i
                                     class="fa fa-trash"></i> Trash </a> --}}
-                                    <button class="btn btn-success float-right " id="create" data-url="{{ route('backend.proposal.create') }}">Create <i
+                                    <button class="btn btn-success float-right " id="create" data-url="{{ route('admin.proposal.create') }}">Create <i
                                         class="fa fa-plus"></i></button>
                     </div>
-                    
+
                     <div class="table-responsive mb-4 mt-4">
                         <table id="global-table" class="table table-hover" style="width:100%">
                             <thead>
@@ -51,7 +52,7 @@
         $('#global-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('backend.proposal.index') }}",
+            ajax: "{{ route('admin.proposal.getProposalData') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
@@ -78,7 +79,8 @@
                 {
                     data: 'client',
                     render: function(data, type, row) {
-                        return '<p class="text-capitalize">' +row.client+ '</p>';
+
+                        return '<p class="text-capitalize">' +row.client.client_name+ '</p>';
                     }
                 },
                 {

@@ -8,9 +8,10 @@ use Brian2694\Toastr\Facades\Toastr;
 use Client\Models\Client;
 use CMS\Models\Bank;
 use CMS\Models\Branch;
-use CMS\Models\Proposal;
+
 use Files\Repositories\FileInterface;
 use Illuminate\Http\Request;
+use Receptionist\Models\Proposal;
 use User\Models\User;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -27,6 +28,7 @@ class ProposalController extends Controller
     {
         // dd('asdkh');
         // try {
+
             if ($request->ajax()) {
                 $datas = Proposal::with(['bank','branch'])->get();
                 foreach($datas as $data){

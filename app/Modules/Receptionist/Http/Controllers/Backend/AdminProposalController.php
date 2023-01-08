@@ -1,6 +1,6 @@
 <?php
 
-namespace Engineer\Http\Controllers\Backend;
+namespace Receptionist\Http\Controllers\Backend;
 
 use App\GlobalServices\ResponseService;
 use Illuminate\Http\Request;
@@ -23,22 +23,36 @@ class AdminProposalController extends Controller
         $this->file = $file;
         $this->response = $response;
     }
-   
-    public function index(Request $request){
-       // try {
+
+    public function index(Request $request)
+    {
+        try {
+            $banks = Bank::all();
+            return view('Receptionist::backend.proposal.index', compact('banks'));
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+    public function getProposalData(Request $request)
+    {
         if ($request->ajax()) {
-            $datas = Proposal::where('site_engineer', auth()->user()->id)->with(['bank','branch', 'siteVisit'])->get();
-            foreach($datas as $data){
+            $datas = Proposal::with(['bank', 'branch', 'siteVisit', 'client'])->get();
+
+            foreach ($datas as $data) {
                 $data->branch = $data->branch->title;
                 $data->bank = $data->bank->name;
-                $data->client = $data->client_id;
+
             }
 
             return DataTables::of($datas)
                 ->addIndexColumn()
 
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="'. route('siteengineer.sitevisit.create', [$row->id, $row->siteVisit->id]) .'" data-url="#" data-id=' . $row->id . ' class="btn btn-info btn-sm" title="Add details"><i class="far fa-edit"></i></a>
+                    $actionBtn = '
+                    <a href="" data-url="' . route('admin.proposal.edit', $row->id) . '" data-id=' . $row->id . ' class="btn btn-info btn-sm edit" title="Add details"><i class="far fa-edit"></i></a>
+
                             <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
                             ';
                     return $actionBtn;
@@ -47,21 +61,18 @@ class AdminProposalController extends Controller
                 ->make(true);
         }
 
-        $banks = Bank::all();
-        return view('Engineer::admin.proposal.index', compact('banks'));
-    // } catch (\Exception $e) {
-    //     Toastr::error($e->getMessage());
-    //     return redirect()->back();
-    // }
+        // <a href="" data-url="#" data-id=' . $row->id . ' class="btn btn-info btn-sm" title="Add details"><i class="fa-solid fa-plus"></i></a>
     }
 
-    public function create(){
+
+    public function create()
+    {
         try {
             $banks = Bank::all();
             $branches = Branch::all();
             $siteengineers = User::role('engineer')->get();
             $data = [
-                'view' => view('Receptionist::receptionist.proposal.create', compact('branches', 'banks', 'siteengineers'))->render()
+                'view' => view('Receptionist::backend.proposal.create', compact('branches', 'banks', 'siteengineers'))->render()
             ];
             return $this->response->responseSuccess($data, "Success", 200);
         } catch (\Exception $e) {
@@ -70,7 +81,8 @@ class AdminProposalController extends Controller
     }
 
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         // try {
         // dd($request->all());
         if ($request->ajax()) {
@@ -104,7 +116,8 @@ class AdminProposalController extends Controller
     }
 
 
-    public function show(proposal $proposal){
+    public function show(proposal $proposal)
+    {
         try {
         } catch (\Exception $e) {
             Toastr::error($e->getMessage());
@@ -112,7 +125,8 @@ class AdminProposalController extends Controller
         }
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         try {
             $proposal = proposal::with('client')->where('id', $id)->first();
             $banks = Bank::all();
@@ -120,7 +134,7 @@ class AdminProposalController extends Controller
             $siteengineers = User::role('engineer')->get();
             if ($proposal) {
                 $data = [
-                    'view' => view('Receptionist::receptionist.proposal.edit', compact('proposal', 'banks', 'branches', 'siteengineers'))->render()
+                    'view' => view('Receptionist::backend.proposal.edit', compact('proposal', 'banks', 'branches', 'siteengineers'))->render()
                 ];
 
                 return $this->response->responseSuccess($data, "Success", 200);
@@ -133,7 +147,8 @@ class AdminProposalController extends Controller
     }
 
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         try {
             if ($request->ajax()) {
 
@@ -160,7 +175,8 @@ class AdminProposalController extends Controller
         }
     }
 
-    public function destroy(proposal $proposal){
+    public function destroy(proposal $proposal)
+    {
         try {
         } catch (\Exception $e) {
             Toastr::error($e->getMessage());

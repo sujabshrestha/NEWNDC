@@ -7,6 +7,7 @@ use CMS\Models\Bank;
 use CMS\Models\Branch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Receptionist\Models\Proposal;
 
 class SiteVisit extends Model
 {
@@ -23,7 +24,7 @@ class SiteVisit extends Model
     public function scopeCancelValuation($query){
         $query->where('valuation_status','Cancel-Valuation');
     }
-   
+
 
     public function documents(){
         return $this->hasMany(SitevisitDocument::class, 'site_visit_id');
@@ -48,4 +49,9 @@ class SiteVisit extends Model
     {
         return $this->belongsTo(Client::class, 'client_id');
     }
+
+    public function proposal(){
+        return $this->belongsTo(Proposal::class, 'proposal_id');
+    }
+
 }

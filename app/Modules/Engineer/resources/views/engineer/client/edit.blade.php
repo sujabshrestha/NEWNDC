@@ -1,4 +1,4 @@
-@extends('layouts.reception.master')
+@extends('layouts.admin.master')
 
 @section('title', 'NDC | Edit Clients')
 
@@ -11,14 +11,14 @@
                 <div class="widget-content widget-content-area br-6">
                     <div class="col-12">
                         <h5 style="display: inline;">Edit Client</h5>
-                        <a class="btn btn-secondary float-right " href="{{ route('receptionist.client.index')}}">Previous Page</a>
+                        <a class="btn btn-secondary float-right " href="{{ route('client.index')}}">Previous Page</a>
                     </div>
                     <hr>
                     <div class="col-xl-12 col-md-12 col-sm-12">
-                        <form action="{{ route('receptionist.client.update',$client->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('client.update',$client->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             {{-- <input type="hidden" class="form-control" id="updateid" value="{{ $client->id }}"> --}}
-                            @include('Receptionist::client.commonForm')
+                            @include('Client::backend.client.commonForm')
                             <div class="row">
                                 <div class="col-12">
                                  <button type="submit" class="btn btn-primary float-right mt-2">Submit</a>
@@ -28,7 +28,7 @@
                             </div>
                         </form>
                     </div>
-
+                    
                 </div>
             </div>
         </div>
@@ -98,6 +98,6 @@
         $("[name='owner_share_holders']").attr('readonly', false).val("");
     }
  </script>
-
+     
  @endpush
 

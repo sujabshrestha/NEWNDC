@@ -13,9 +13,9 @@
         </div>
         <div class="modal-body">
             <div class="col-xl-12 col-md-12 col-sm-12">
-                <form action="{{ route('backend.proposal.update',$proposal->id) }}"
+                <form action="{{ route('admin.proposal.update',$proposal->id) }}"
                     id="update-form">
-                    @include('Engineer::admin.proposal.commonform')
+                    @include('Receptionist::backend.proposal.commonform')
                 </form>
             </div>
         </div>

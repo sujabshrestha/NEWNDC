@@ -83,7 +83,7 @@ class SiteVisitController extends Controller
         // dd($request->all(), $id);
         if (!is_null($id)) {
             $sitevisit = SiteVisit::where('id', $id)->with(['documents', 'legaldocuments'])->first();
-            $sitevisit->registration_id = $request->reg_no ?? rand(0, 9999);
+            $sitevisit->registration_id =$request->reg_no;
             $sitevisit->proposal_id = $request->proposal_id;
             $sitevisit->site_engineer_id = auth()->user()->id;
             $sitevisit->owner_name = $request->owner_name;
@@ -125,11 +125,11 @@ class SiteVisitController extends Controller
                 }
 
                 Toastr::success("Successfully Stored");
-                return redirect()->route('proposal.index');
+                return redirect()->route('siteengineer.proposal.index');
             }
         }else{
             $sitevisit = new SiteVisit();
-            $sitevisit->registration_id = $request->reg_no ?? rand(0, 9999);
+            $sitevisit->registration_id = 'NDC-'.rand(0, 9999);
             $sitevisit->proposal_id = $request->proposal_id;
             $sitevisit->site_engineer_id = auth()->user()->id;
             $sitevisit->bank_id = $request->bank_id;
@@ -171,7 +171,7 @@ class SiteVisitController extends Controller
                 }
 
                 Toastr::success("Successfully Stored");
-                return redirect()->route('proposal.index');
+                return redirect()->route('siteengineer.proposal.index');
             }
         }
 

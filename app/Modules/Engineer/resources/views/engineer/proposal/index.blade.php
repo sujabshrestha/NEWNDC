@@ -77,10 +77,11 @@
                 {
                     data: 'client',
                     render: function(data, type, row) {
-                        return '<p class="text-capitalize">' +row.client+ '</p>';
+                        return '<p class="text-capitalize">' +row.client.client_name+ '</p>';
                     }
                 },
                 {
+                    width:"15%",
                     data: 'action',
                     name: 'action',
                     orderable: true,

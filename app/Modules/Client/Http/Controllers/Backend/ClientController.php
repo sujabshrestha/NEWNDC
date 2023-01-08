@@ -28,6 +28,7 @@ class ClientController extends Controller
      */
     public function index(){
         try{
+
             return view('Client::backend.client.index');
 
         }catch(Exception $e){
@@ -90,7 +91,7 @@ class ClientController extends Controller
             if ($user == true) {
                 Toastr::success('Successfully Updated.');
                 return redirect()->route('client.index');
-            }  
+            }
             Toastr::error("Something Went Wrong");
             return redirect()->back();
         // } catch (Exception $e) {
@@ -148,11 +149,11 @@ class ClientController extends Controller
     public function getClientData(Request $request){
         try {
             if ($request->ajax()) {
-                $data = Client::select('*')->with('owner');
+                $data = Client::with('owner')->get();
                 return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('owner_name',function($data){
-                    return $data->owner->owner_name;
+                    return $data->owner->owner_name ?? "";
                 })
                 ->editColumn('status',function($row){
                     $main = '<select name="status" class="form-control clientStatus" data-id='.$row->id.'>';
@@ -161,15 +162,15 @@ class ClientController extends Controller
                                         <option  value="Inactive">Inactive</option>';
                     $inactiveSelected = '<option  value="Inactive">Active</option>
                                         <option  value="Inactive" selected>Inactive</option>';
-             
+
                     if($row->status == "Active"){
                         return $main.$activeSelected.$mainlast;
                     }else{
                         return $main.$inactiveSelected.$mainlast;
-                    }   
-                              
+                    }
+
                 })
-                
+
 
                 ->addColumn('action', function ($row) {
                     $actionBtn = '

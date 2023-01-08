@@ -8,9 +8,10 @@ use Brian2694\Toastr\Facades\Toastr;
 use Client\Models\Client;
 use CMS\Models\Bank;
 use CMS\Models\Branch;
-use CMS\Models\Proposal;
+
 use Files\Repositories\FileInterface;
 use Illuminate\Http\Request;
+use Receptionist\Models\Proposal;
 use User\Models\User;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -24,7 +25,7 @@ class ProposalController extends Controller
     }
 
     public function index(Request $request)
-    {   
+    {
         // dd('asdkh');
         // try {
             if ($request->ajax()) {
@@ -37,7 +38,7 @@ class ProposalController extends Controller
 
                 return DataTables::of($datas)
                     ->addIndexColumn()
-                    
+
                     ->addColumn('action', function ($row) {
                         $actionBtn = '<a href="javascript:void(0)" data-url="' . route('backend.cms.proposal.edit', $row->id) . '" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
                                 <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>

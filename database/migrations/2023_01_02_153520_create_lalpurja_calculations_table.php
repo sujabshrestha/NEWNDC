@@ -1,0 +1,45 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateLalpurjaCalculationsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('lalpurja_calculations', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('site_visit_id');
+            $table->unsignedBigInteger('sheet_no');
+            $table->unsignedBigInteger('kita_no');
+            $table->unsignedBigInteger('ropani_as_lalpurja')->nullable();
+            $table->unsignedBigInteger('anna_as_lalpurja')->nullable();
+            $table->unsignedBigInteger('paisa_as_lalpurja')->nullable();
+            $table->unsignedBigInteger('dam_as_lalpurja')->nullable();
+            $table->unsignedBigInteger('sqm_as_lalpurja')->nullable();
+            $table->unsignedBigInteger('area_in_anna_as_lalpurja')->nullable();
+            $table->unsignedBigInteger('sqf_as_lalpurja')->nullable();
+            $table->unsignedBigInteger('rapd_as_lalpurja')->nullable();
+
+
+            $table->foreign('site_visit_id')->references('id')->on('site_visits')->onDelete('cascade');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('lalpurja_calculations');
+    }
+}

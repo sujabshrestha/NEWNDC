@@ -11,22 +11,7 @@ Route::group(
 ],
 function () {
 
-    Route::group([
-        'prefix' => 'proposal',
-        'as' => 'proposal.'
-    ], function () {
-        Route::get('/', 'AdminProposalController@index')->name('indexproposal');
-
-        Route::get('/create','AdminProposalController@create')->name('create');
-
-        Route::post('/submit','AdminProposalController@store')->name('submit');
-
-        Route::get('/edit/{id}','AdminProposalController@edit')->name('edit');
-
-        Route::post('/update/{id}','AdminProposalController@update')->name('update');
-
-        Route::get('/delete/{id}','AdminProposalController@delete')->name('delete');
-    });
+ 
 
 
     Route::group([

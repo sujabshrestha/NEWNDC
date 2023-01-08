@@ -48,7 +48,7 @@ function () {
         'prefix' => 'client',
         'as' => 'client.'
     ], function(){
-     
+
         Route::get('/','ReceptionistClientController@index')->name('index');
 
         Route::get('/create','ReceptionistClientController@create')->name('create');
@@ -72,6 +72,25 @@ function () {
         // Route::get('/{id}/trashedRecover', 'ClientController@trashedRecover')->name('trashedRecover');
 
         Route::post('/changeClientStatus/{id}', 'ClientController@changeClientStatus')->name('changeClientStatus');
+    });
+
+
+    Route::group([
+        'prefix' => 'valuation',
+        'as' => 'valuation.'
+    ], function(){
+        Route::get('index', 'ReceptionistValuationController@valuations')->name('index');
+
+        Route::get('/edit/{id}','ReceptionistValuationController@edit')->name('edit');
+
+        Route::post('/update/{id}','ReceptionistValuationController@update')->name('update');
+
+        Route::get('/delete/{id}','ReceptionistValuationController@delete')->name('delete');
+
+        Route::get('/lalpurja-submit/{id}','ReceptionistValuationController@lalpurjaSubmit')->name('lalpurjaSubmit');
+
+
+
     });
 
 

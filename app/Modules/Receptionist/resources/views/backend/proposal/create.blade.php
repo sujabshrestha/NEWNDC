@@ -13,8 +13,8 @@
         </div>
         <div class="modal-body">
             <div class="col-xl-12 col-md-12 col-sm-12">
-                <form action="{{ route('backend.proposal.submit') }}" id="submit-form">
-                    @include('Engineer::admin.proposal.commonform')
+                <form action="{{ route('admin.proposal.submit') }}" id="submit-form">
+                    @include('Receptionist::backend.proposal.commonform')
 
                 </form>
             </div>
