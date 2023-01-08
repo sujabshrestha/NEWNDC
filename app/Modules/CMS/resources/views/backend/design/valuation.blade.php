@@ -37,15 +37,14 @@
                             <div class="form-group">
                                 <label>Valuation Id</label>
                                 <input type="text" name="valuation_id" id="valuation_id" required=""
-                                    value="NDC-" class="form-control" readonly="readonly" tabindex="-1"
-                                    autocomplete="off">
+                                    value="NDC-" class="form-control" readonly="readonly">
                                 </div>
                             </div>
                             <div class="form-group col-md-3"  style="padding-left:6px;padding-right:6px;">
                                 <label>Valuation Type <span class="required">*</span></label>
                                 <select class="form-control selectbox" name="valuation_type" id="valuation_type"
                                     required="">
-                                    <option value="" selected="selected">Select Valuation Type</option>
+                                    <option disabled selected="selected">Select Valuation Type</option>
                                     <option value="Land Only">Land Only</option>
                                     <option value="Land &amp; Building">Land &amp; Building</option>
                                     <option value="Appartment">Appartment</option>
@@ -54,7 +53,7 @@
                             <div class="form-group col-md-3"  style="padding-left:6px;padding-right:6px;">
                                 <label>Bank <span class="required">*</span></label>
                                 <select class="form-control selectbox" name="bank_id" id="bank_id" required="">
-                                    <option value="" selected="selected">Select Bank</option>
+                                    <option disabled selected="selected">Select Bank</option>
                                     <option value="22">BANK OF KATHMANDU LTD.</option>
                                     <option value="20">CENTRAL FINANCE LTD.</option>
                                     <option value="26">CITIZEN INVESTMENT TRUST</option>
@@ -65,7 +64,7 @@
                                 <label>Branch <span class="required">*</span></label>
                                 <select class="form-control selectbox" name="branch_id" id="branch_id" required=""
                                     branchid="">
-                                    <option value="" selected="selected">Select Branch</option>
+                                    <option disabled selected="selected">Select Branch</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3"  style="padding-left:6px;padding-right:6px;">
@@ -73,7 +72,7 @@
                                 <select class="form-control" data-live-search="true"
                                     data-size="15" name="client_id" id="client_id" required=""
                                     tabindex="-98">
-                                    <option value="" selected="selected">Select Client</option>                                       
+                                    <option disabled selected="selected">Select Client</option>                                       
                                     <option value="179" data-subtext="9841322575"> Mr. Bhuvan Lamichhane</option>
                                     <option value="229" data-subtext="9851172283"> Mr. Kiran Shrestha</option>
                                     <option value="140" data-subtext="9851061130"> Mr. Laxman Thokar</option>
@@ -86,7 +85,7 @@
                                 <label>Site Engineer <span class="required">*</span></label>
                                 <select class="form-control selectbox" name="site_engineer_id" id="site_engineer_id"
                                     required="">
-                                    <option value="" selected="selected">Select Site Engineer</option>
+                                    <option disabled selected="selected">Select Site Engineer</option>
                                     <option value="1">admin</option>
                                     <option value="15">Ajay Sah</option>
                                     <option value="19">Er. Ajit Jha ( NEC N0 :-25705 "A'Civil ) </option>
@@ -95,14 +94,14 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-3"  style="padding-left:6px;padding-right:6px;">
-                                <label>Valuation Assignment No</label>
+                                <label>Valuation Assignment No<span class="text-danger"> *</span></label>
                                 <input type="text" name="valuation_assignment_on" id="valuation_assignment_on"
-                                    class="form-control" autocomplete="off" required="">
+                                 value="{{ old('valuation_assignment_on') }}"   class="form-control" required="">
                             </div>
                             <div class="form-group col-md-3"  style="padding-left:6px;padding-right:6px;">
                                 <label>Prepration Date (BS) <span class="required">*</span></label>
                                 <input type="text" name="prepration_date" id="prepration_date" required=""
-                                    class="form-control" autocomplete="off">
+                                value="{{ old('prepration_date') }}"   class="form-control">
                             </div>
                             <input type="hidden" name="ownershipComesFrom" id="ownershipComesFrom">
                             <div class="form-group col-md-9"  style="padding-left:6px;padding-right:6px;">
@@ -140,7 +139,7 @@
                             <div class="form-group col-md-3"  style="padding-left:6px;padding-right:6px;">
                                 <label>Date (BS) (Ownership) <span class="required">*</span></label>
                                 <input type="text" name="date_ownership" id="date_ownership" required=""
-                                    class="form-control" autocomplete="off">
+                                    class="form-control">
                             </div>
                         </div>
                         <div class="row">
@@ -169,45 +168,45 @@
                                 <label>Ropani</label>
                                 <input type="text" name="ropani_as_lalpurja" id="ropani_as_lalpurja"
                                     placeholder="Ropani" class="form-control" readonly="readonly"
-                                    tabindex="-1">
+                                    >
                             </div>
                             <div class="form-group col-md-2"  style="padding-left:6px;padding-right:6px;" >
                                 <label>Anna</label>
                                 <input type="text" name="anna_as_lalpurja" id="anna_as_lalpurja"
-                                    placeholder="Anna" class="form-control" autocomplete="off" readonly="readonly"
-                                    tabindex="-1">
+                                    placeholder="Anna" class="form-control" readonly="readonly"
+                                    >
                             </div>
                             <div class="form-group col-md-2"  style="padding-left:6px;padding-right:6px;" >
                                 <label>Paisa</label>
                                 <input type="text" name="paisa_as_lalpurja" id="paisa_as_lalpurja"
-                                    placeholder="Paisa" class="form-control" autocomplete="off" readonly="readonly"
-                                    tabindex="-1">
+                                    placeholder="Paisa" class="form-control" readonly="readonly"
+                                    >
                             </div>
                             <div class="form-group col-md-2"  style="padding-left:6px;padding-right:6px;" >
                                 <label>Dam</label>
                                 <input type="text" name="dam_as_lalpurja" id="dam_as_lalpurja"
-                                    placeholder="Dam" class="form-control" autocomplete="off" readonly="readonly"
-                                    tabindex="-1">
+                                    placeholder="Dam" class="form-control" readonly="readonly"
+                                    >
                             </div>
                             <div class="form-group col-md-2"  style="padding-left:6px;padding-right:6px;" >
                                 <label>Area in Sq.M</label>
                                 <input type="text" name="sqm_as_lalpurja" id="sqm_as_lalpurja"
-                                    placeholder="Area Sq.M" class="form-control" autocomplete="off">
+                                    placeholder="Area Sq.M" class="form-control">
                             </div>
                             <div class="form-group col-md-2"  style="padding-left:6px;padding-right:6px;" >
                                 <label>Area in (R-A-P-D)</label>
                                 <input type="text" name="rapd_as_lalpurja" id="rapd_as_lalpurja"
-                                    readonly="readonly" tabindex="-1" class="form-control">
+                                    readonly="readonly"  class="form-control">
                             </div>
                             <div class="form-group col-md-2"  style="padding-left:6px;padding-right:6px;" >
                                 <label>Area in Sq.F</label>
                                 <input type="text" name="sqf_as_lalpurja" id="sqf_as_lalpurja"
-                                    readonly="readonly" tabindex="-1" class="form-control">
+                                    readonly="readonly"  class="form-control">
                             </div>
                             <div class="form-group col-md-2"  style="padding-left:6px;padding-right:6px;" >
                                 <label>Area in Anna</label>
                                 <input type="text" name="area_in_anna_as_lalpurja" id="area_in_anna_as_lalpurja"
-                                    readonly="readonly" tabindex="-1" class="form-control">
+                                    readonly="readonly"  class="form-control">
                             </div>
                             <div class="form-group col-md-2"  style="padding-left:6px;padding-right:6px;">
                                 <label style="width: 100%;">&nbsp;</label>
@@ -272,7 +271,7 @@
                             <div class="form-group col-md-2" style="max-width:150px;padding-left:6px;padding-right:6px;">
                                 <label>Area Symbol</label>
                                 <select class="form-control selectbox" name="areaSymbol" id="areaSymbol">
-                                    <option value="" selected="selected">Select Area Symbol</option>
+                                    <option disabled selected="selected">Select Area Symbol</option>
                                     <option value="Triangle 1">Triangle 1</option>
                                     <option value="Triangle 2">Triangle 2</option>
                                     <option value="Triangle 3">Triangle 3</option>
@@ -321,37 +320,37 @@
                             <div class="form-group col-md-1"  style="padding-left:6px;padding-right:6px;">
                                 <label>Side A</label>
                                 <input type="text" name="sideA" id="sideA" placeholder="Side A"
-                                    class="form-control" autocomplete="off">
+                                    class="form-control">
                             </div>
                             <div class="form-group col-md-1"  style="padding-left:6px;padding-right:6px;">
                                 <label>Side B</label>
                                 <input type="text" name="sideB" id="sideB" placeholder="Side B"
-                                    class="form-control" autocomplete="off">
+                                    class="form-control">
                             </div>
                             <div class="form-group col-md-1"  style="padding-left:6px;padding-right:6px;">
                                 <label>Side C</label>
                                 <input type="text" name="sideC" id="sideC" placeholder="Side C"
-                                    class="form-control" autocomplete="off">
+                                    class="form-control">
                             </div>
                             <div class="form-group col-md-2"  style="max-width:150px;padding-left:6px;padding-right:6px;">
                                 <label>S = (a+b+c)/2</label>
                                 <input type="text" name="sideS" id="sideS" readonly="readonly"
-                                    tabindex="-1" class="form-control">
+                                     class="form-control">
                             </div>
                             <div class="form-group col-md-2"  style="max-width:150px;padding-left:6px;padding-right:6px;">
                                 <label>Area in Sq.F</label>
                                 <input type="text" name="sqFAPMeasurement" id="sqFAPMeasurement"
-                                    readonly="readonly" tabindex="-1" class="form-control">
+                                    readonly="readonly"  class="form-control">
                             </div>
                             <div class="form-group col-md-2"  style="max-width:150px;padding-left:6px;padding-right:6px;">
                                 <label>Area in Sq.M</label>
                                 <input type="text" name="sqMAPMeasurement" id="sqMAPMeasurement"
-                                    readonly="readonly" tabindex="-1" class="form-control">
+                                    readonly="readonly"  class="form-control">
                             </div>
                             <div class="form-group col-md-2"  style="padding-left:6px;padding-right:6px;">
                                 <label>Area in Anna</label>
                                 <input type="text" name="areaInAnnaAPMeasurement"
-                                    id="areaInAnnaAPMeasurement" readonly="readonly" tabindex="-1"
+                                    id="areaInAnnaAPMeasurement" readonly="readonly" 
                                     class="form-control">
                             </div>
                             <div class="form-group col-md-1" style="flex: 5%;max-width: 5%; padding-left: 0px;">
@@ -449,86 +448,101 @@
                             <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
                                 <label>Road (Sq.F)</label>
                                 <input type="text" name="deductionOfRoadSqF" id="deductionOfRoadSqF"
-                                    required="" class="form-control" autocomplete="off" value="0">
+                                    required="" class="form-control" value="{{ old('deductionOfRoadSqF') ?? 0}}">
                                 <input type="hidden" name="afterDeductionOfRoadAreaInAnna"
                                     id="afterDeductionOfRoadAreaInAnna" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                   >
                                 <input type="hidden" name="afterDeductionOfRoadAreaInRPAD"
                                     id="afterDeductionOfRoadAreaInRPAD" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                   >
                             </div>
                             <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
                                 <label>Land Development (%)</label>
                                 <input type="text" name="landDevelopmentPercent" id="landDevelopmentPercent"
-                                    required="" class="form-control" autocomplete="off" value="0">
+                                    required="" class="form-control" value="{{ old('landDevelopmentPercent') ?? 0}}">
                                 <input type="hidden" name="landDevelopmentSqF" id="landDevelopmentSqF"
-                                    required="" class="form-control" autocomplete="off">
+                                    required="" class="form-control">
                                 <input type="hidden" name="afterLandDevelopmentAreaInAnna"
                                     id="afterLandDevelopmentAreaInAnna" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                   >
                                 <input type="hidden" name="afterLandDevelopmentAreaInRPAD"
                                     id="afterLandDevelopmentAreaInRPAD" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                   >
                             </div>
                             <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
                                 <label>High Tension (Sq.F)</label>
                                 <input type="text" name="deductionForHighTensionSqF"
                                     id="deductionForHighTensionSqF" required="" class="form-control"
-                                    autocomplete="off" value="0">
+                                    value="{{ old('deductionForHighTensionSqF') ?? 0}}">
+                                    @error('deductionForHighTensionSqF')
+                                        <span class="text-danger">{{ $message}}</span>
+                                    @enderror
                                 <input type="hidden" name="afterHighTensionAreaInAnna"
                                     id="afterHighTensionAreaInAnna" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                   >
                                 <input type="hidden" name="afterHighTensionAreaInRPAD"
                                     id="afterHighTensionAreaInRPAD" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                   >
                             </div>
                             <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
                                 <label>Low Land (Sq.F)</label>
                                 <input type="text" name="deductionForLowLandSqF" id="deductionForLowLandSqF"
-                                    required="" class="form-control" autocomplete="off" value="0">
+                                    required="" class="form-control" value="{{ old('deductionForLowLandSqF') ?? 0}}">
+                                    @error('deductionForLowLandSqF')
+                                        <span class="text-danger">{{ $message}}</span>
+                                    @enderror
                                 <input type="hidden" name="afterLowLandAreaInAnna" id="afterLowLandAreaInAnna"
-                                    readonly="readonly" class="form-control" autocomplete="off">
+                                    readonly="readonly" class="form-control">
                                 <input type="hidden" name="afterLowLandAreaInRPAD" id="afterLowLandAreaInRPAD"
-                                    readonly="readonly" class="form-control" autocomplete="off">
+                                    readonly="readonly" class="form-control">
                             </div>
                             <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
                                 <label>River (Sq.F)</label>
                                 <input type="text" name="deductionForRiverSqF" id="deductionForRiverSqF"
-                                    required="" class="form-control" autocomplete="off" value="0">
+                                    required="" class="form-control" value="{{ old('deductionForRiverSqF') ?? 0}}">
+                                    @error('deductionForRiverSqF')
+                                        <span class="text-danger">{{ $message}}</span>
+                                    @enderror
                                 <input type="hidden" name="afterRiverAreaInAnna" id="afterRiverAreaInAnna"
-                                    readonly="readonly" class="form-control" autocomplete="off">
+                                    readonly="readonly" class="form-control">
                                 <input type="hidden" name="afterRiverAreaInRPAD" id="afterRiverAreaInRPAD"
-                                    readonly="readonly" class="form-control" autocomplete="off">
+                                    readonly="readonly" class="form-control">
                             </div>
                             <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
                                 <label>Boundry Correction %</label>
                                 <input type="text" name="deductionForBoundryCorrection"
                                     id="deductionForBoundryCorrection" required="" class="form-control"
-                                    autocomplete="off" value="0">
+                                    value="{{ old('deductionForBoundryCorrection') ?? 0}}">
+                                    @error('deductionForBoundryCorrection')
+                                        <span class="text-danger">{{ $message}}</span>
+                                    @enderror
                                 <input type="hidden" name="deductionForBoundryCorrectionSqF"
                                     id="deductionForBoundryCorrectionSqF" required="" class="form-control"
-                                    autocomplete="off">
+                                   >
                                 <input type="hidden" name="afterBoundryCorrectionAreaInAnna"
                                     id="afterBoundryCorrectionAreaInAnna" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                   >
                                 <input type="hidden" name="afterBoundryCorrectionAreaInRPAD"
                                     id="afterBoundryCorrectionAreaInRPAD" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                   >
                             </div>
                             <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
                                 <label style="padding-right:0px; font-size:12px;">Irregular Shape/Sloppy %</label>
                                 <input type="text" name="deductionForIrregularShapeSloppyLand"
                                     id="deductionForIrregularShapeSloppyLand" required="" class="form-control"
-                                    autocomplete="off" value="0">
+                                    value="{{ old('deductionForIrregularShapeSloppyLand') ?? 0}}">
+                                    @error('deductionForIrregularShapeSloppyLand')
+                                        <span class="text-danger">{{ $message}}</span>
+                                    @enderror
                                 <input type="hidden" name="afterIrregularShapeSloppyLandSqF"
                                     id="afterIrregularShapeSloppyLandSqF" required="" class="form-control"
-                                    autocomplete="off">
+                                   >
                                 <input type="hidden" name="afterIrregularShapeSloppyLandAreaInAnna"
                                     id="afterIrregularShapeSloppyLandAreaInAnna" readonly="readonly"
-                                    class="form-control" autocomplete="off">
+                                    class="form-control">
                                 <input type="hidden" name="afterIrregularShapeSloppyLandAreaInRPAD"
                                     id="afterIrregularShapeSloppyLandAreaInRPAD" readonly="readonly"
-                                    class="form-control" autocomplete="off">
+                                    class="form-control">
                             </div>
                             <div class="clearfix" style="width: 100%;"></div>
 
@@ -540,22 +554,22 @@
                             <div class="form-group col-md-2">
                                 <label>Area in (Sq.M)</label>
                                 <input type="text" name="sqMAPConsideration" id="sqMAPConsideration"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                  value="{{ old('sqMAPConsideration')}}"  required="" class="form-control" readonly="readonly" >
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Area in (R-A-P-D)</label>
                                 <input type="text" name="rAPDAPConsideration" id="rAPDAPConsideration"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                value="{{ old('rAPDAPConsideration')}}"   required="" class="form-control" readonly="readonly" >
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Area in (Sq.F)</label>
                                 <input type="text" name="sqFAPConsideration" id="sqFAPConsideration"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                value="{{ old('sqFAPConsideration')}}"   required="" class="form-control" readonly="readonly" >
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Area in (Anna)</label>
                                 <input type="text" name="annaAPConsideration" id="annaAPConsideration"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                value="{{ old('annaAPConsideration')}}"    required="" class="form-control" readonly="readonly" >
                             </div>
 
                             <div class="form-group col-md-12 mb-2">
@@ -578,40 +592,38 @@
                             <div class="form-group col-md-2" style="flex: 13%;max-width: 13%;">
                                 <label>Area (Per Sq Ft)</label>
                                 <input type="text" name="perSqFAPGovRate" id="perSqFAPGovRate"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                value="{{ old('perSqFAPGovRate')}}"  required="" class="form-control" readonly="readonly" >
                             </div>
                             <div class="form-group col-md-2" style="flex: 13%;max-width: 13%;">
                                 <label>Gov.Page <span class="required">*</span></label>
                                 <input type="text" name="govPage" id="govPage" required=""
-                                    placeholder="Gov.Page" class="form-control" autocomplete="off">
+                                value="{{ old('govPage')}}"     placeholder="Gov.Page" class="form-control">
                             </div>
                             <div class="form-group col-md-1" style="flex: 12%;max-width: 12%;">
                                 <label>Rate/Anna <span class="required">*</span></label>
                                 <input type="text" name="perAnnaAPGovRate" id="perAnnaAPGovRate"
-                                    required="" placeholder="Rate/Anna" class="form-control" autocomplete="off">
+                                value="{{ old('perAnnaAPGovRate')}}"   required="" placeholder="Rate/Anna" class="form-control">
                             </div>
                             <div class="form-group col-md-1" style="flex: 14%;max-width: 14%;">
                                 <label>Rate/Ropani</label>
                                 <input type="text" name="perRopaniAPGovRate" id="perRopaniAPGovRate"
-                                    required="" readonly="readonly" tabindex="-1" class="form-control"
-                                    autocomplete="off">
+                                value="{{ old('perRopaniAPGovRate')}}"   required="" readonly="readonly"  class="form-control">
                             </div>
                             <div class="form-group col-md-1"></div>
                             <div class="form-group col-md-2" style="flex: 13%;max-width: 13%;">
                                 <label>Area (Per Sq Ft)</label>
                                 <input type="text" name="perSqFAPMarketRate" id="perSqFAPMarketRate"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                value="{{ old('perSqFAPMarketRate')}}"   required="" class="form-control" readonly="readonly" >
                             </div>
                             <div class="form-group col-md-1" style="flex: 12%;max-width: 12%;">
                                 <label>Rate/Anna <span class="required">*</span></label>
                                 <input type="text" name="perAnnaAPMarketRate" id="perAnnaAPMarketRate"
-                                    required="" placeholder="Rate/Anna" class="form-control" autocomplete="off">
+                                value="{{ old('perAnnaAPMarketRate')}}"   required="" placeholder="Rate/Anna" class="form-control">
                             </div>
                             <div class="form-group col-md-1" style="flex: 14%;max-width: 14%;">
                                 <label>Rate/Ropani</label>
                                 <input type="text" name="perRopaniAPMarketRate" id="perRopaniAPMarketRate"
-                                    required="" readonly="readonly" tabindex="-1" class="form-control"
-                                    autocomplete="off">
+                                value="{{ old('perRopaniAPMarketRate')}}"  required="" readonly="readonly"  class="form-control">
                             </div>
 
                             <div class="form-group col-md-6 mb-2">
@@ -629,34 +641,33 @@
                             <div class="form-group col-md-2" style="flex: 13%;max-width: 13%;">
                                 <label>Area (Per Sq Ft)</label>
                                 <input type="text" name="perSqFAPFairRate" id="perSqFAPFairRate"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                value="{{ old('perSqFAPFairRate')}}"  required="" class="form-control" readonly="readonly" >
                             </div>
                             <div class="form-group col-md-1" style="flex: 12%;max-width: 12%;">
                                 <label>Rate/Anna</label>
                                 <input type="text" name="perAnnaAPFairRate" id="perAnnaAPFairRate"
-                                    required="" readonly="readonly" tabindex="-1" class="form-control">
+                                value="{{ old('perAnnaAPFairRate')}}"  required="" readonly="readonly"  class="form-control">
                             </div>
                             <div class="form-group col-md-1" style="flex: 14%;max-width: 14%;">
                                 <label>Rate/Ropani</label>
                                 <input type="text" name="perRopaniAPFairRate" id="perRopaniAPFairRate"
-                                    required="" readonly="readonly" tabindex="-1" class="form-control">
+                                value="{{ old('perRopaniAPFairRate')}}"  required="" readonly="readonly"  class="form-control">
                             </div>
                             <div class="form-group col-md-2" style="flex: 21.5%;max-width: 21.5%;"></div>
                             <div class="form-group col-md-2" style="flex: 13%;max-width: 13%;">
                                 <label>Area (Per Sq Ft)</label>
                                 <input type="text" name="perSqFAPDistressRate" id="perSqFAPDistressRate"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                value="{{ old('perSqFAPDistressRate')}}"  required="" class="form-control" readonly="readonly" >
                             </div>
                             <div class="form-group col-md-1" style="flex: 12%;max-width: 12%;">
                                 <label>Rate/Anna</label>
                                 <input type="text" name="perAnnaAPDistressRate" id="perAnnaAPDistressRate"
-                                    required="" readonly="readonly" tabindex="-1" class="form-control">
+                                value="{{ old('perAnnaAPDistressRate')}}"  required="" readonly="readonly"  class="form-control">
                             </div>
                             <div class="form-group col-md-1" style="flex: 14%;max-width: 14%;">
                                 <label>Rate/Ropani</label>
-                                <input type="text" name="perRopaniAPDistressRate"
-                                    id="perRopaniAPDistressRate" required="" readonly="readonly"
-                                    tabindex="-1" class="form-control">
+                                <input type="text" name="perRopaniAPDistressRate"  id="perRopaniAPDistressRate" required="" readonly="readonly"
+                                value="{{ old('perRopaniAPDistressRate')}}"   class="form-control">
                             </div>
 
                             <div class="form-group col-md-12 mb-2">
@@ -667,34 +678,34 @@
                             <div class="form-group col-md-2">
                                 <label>Government Value of Land</label>
                                 <input type="text" name="governmentValueOfLand" id="governmentValueOfLand"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                value="{{ old('governmentValueOfLand')}}"  required="" class="form-control" readonly="readonly" >
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Commercial Value of Land</label>
                                 <input type="text" name="commercialValueOfLand" id="commercialValueOfLand"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                value="{{ old('commercialValueOfLand')}}" required="" class="form-control" readonly="readonly" >
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Fair Market Value of Land</label>
                                 <input type="text" name="fairMarketValueOfLand" id="fairMarketValueOfLand"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                value="{{ old('fairMarketValueOfLand')}}"  required="" class="form-control" readonly="readonly" >
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Distress Value of Land</label>
                                 <input type="text" name="distressValueOfLand" id="distressValueOfLand"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                value="{{ old('distressValueOfLand')}}"  required="" class="form-control" readonly="readonly" >
                             </div>
                             <div class="form-group col-md-2">
-                                <label>Fair Mkrt Val Land &amp; Blding</label>
+                                <label>Fair Market Value Land &amp; Building</label>
                                 <input type="text" name="fairMarketValueOfLandAndBuimding"
-                                    id="fairMarketValueOfLandAndBuimding" class="form-control" readonly="readonly"
-                                    tabindex="-1">
+                                value="{{ old('fairMarketValueOfLandAndBuimding')}}"  id="fairMarketValueOfLandAndBuimding" class="form-control" readonly="readonly"
+                                    >
                             </div>
                             <div class="form-group col-md-2">
-                                <label>Distrs Mkrt Val Land&amp;Blding</label>
+                                <label>Distrs Market Value Land &amp; Building</label>
                                 <input type="text" name="totalDistressValueOfLandAndBuimding"
-                                    id="totalDistressValueOfLandAndBuimding" class="form-control"
-                                    readonly="readonly" tabindex="-1">
+                                value="{{ old('totalDistressValueOfLandAndBuimding')}}"  id="totalDistressValueOfLandAndBuimding" class="form-control"
+                                    readonly="readonly" >
                             </div>
 
                             <div id="BuildingArea" class="col-md-12">
@@ -708,7 +719,7 @@
                                         style="flex: 14%;max-width: 14%; padding-right:0px;">
                                         <label>Floor</label>
                                         <select class="form-control selectbox" name="floor" id="floor">
-                                            <option value="" selected="selected">--Select Floor--</option>
+                                            <option disabled selected="selected">--Select Floor--</option>
                                             <option value="Semi Basement">Semi Basement</option>
                                             <option value="Basement">Basement</option>
                                             <option value="Ground Floor">Ground Floor</option>
@@ -726,50 +737,50 @@
                                         style="flex: 10%;max-width: 10%; padding-right:0px;">
                                         <label>Area (Per Sq Ft)</label>
                                         <input type="text" name="floorAreaInSqF" id="floorAreaInSqF"
-                                            placeholder="Area (Per Sq Ft)" class="form-control" autocomplete="off">
+                                          placeholder="Area (Per Sq Ft)" class="form-control">
                                     </div>
                                     <div class="form-group col-md-1" style="flex: 8%;max-width: 8%; padding-right:0px;">
                                         <label>Rate</label>
                                         <input type="text" name="floorRate" id="floorRate"
-                                            placeholder="Rate" class="form-control" autocomplete="off">
+                                          placeholder="Rate" class="form-control">
                                     </div>
                                     <div class="form-group col-md-1"
                                         style="flex: 10%;max-width: 10%; padding-right:0px;">
                                         <label>Amount</label>
                                         <input type="text" name="floorAmount" id="floorAmount"
-                                            readonly="readonly" tabindex="-1" class="form-control">
+                                         readonly="readonly"  class="form-control">
                                     </div>
                                     <div class="form-group col-md-2"
                                         style="flex: 10%;max-width: 10%; padding-right:0px;">
                                         <label>Floor Age</label>
                                         <input type="text" name="floorAge" id="floorAge"
-                                            placeholder="Building Age" class="form-control" autocomplete="off">
+                                         placeholder="Building Age" class="form-control">
                                     </div>
                                     <div class="form-group col-md-2"
                                         style="flex: 10%;max-width: 10%; padding-right:0px;">
                                         <label>Depriciation %</label>
                                         <input type="text" name="floorDepriciationPercentage"
-                                            id="floorDepriciationPercentage" placeholder="Depriciation %"
-                                            class="form-control" autocomplete="off">
+                                         id="floorDepriciationPercentage" placeholder="Depriciation %"
+                                            class="form-control">
                                     </div>
                                     <div class="form-group col-md-2"
                                         style="flex: 13%;max-width: 13%; padding-right:0px;">
                                         <label>Sanitary Pulumbing%</label>
                                         <input type="text" name="sanitaryPulumbingPercentage"
-                                            id="sanitaryPulumbingPercentage" placeholder="" class="form-control"
-                                            autocomplete="off">
+                                         id="sanitaryPulumbingPercentage" placeholder="" class="form-control"
+                                           >
                                     </div>
                                     <div class="form-group col-md-2" style="flex: 10%;max-width: 10%;">
                                         <label>Electric Work%</label>
                                         <input type="text" name="electricityWorkPercentage"
-                                            id="electricityWorkPercentage" placeholder="" class="form-control"
-                                            autocomplete="off">
+                                         id="electricityWorkPercentage" placeholder="" class="form-control"
+                                           >
                                     </div>
                                     <div class="form-group col-md-1"
                                         style="flex: 8%;max-width: 8%; padding-left:0px; padding-right:0px;">
                                         <label>Total Amount</label>
                                         <input type="text" name="floorNetAmount" id="floorNetAmount"
-                                            readonly="readonly" tabindex="-1" class="form-control">
+                                         readonly="readonly"  class="form-control">
                                     </div>
                                     <div class="form-group col-md-1" style="flex: 5%;max-width: 5%; padding-right:0px;">
                                         <label style="width: 100%;">&nbsp;</label>
@@ -872,25 +883,23 @@
                                         <label>Construction Estimate Value <span class="required">*</span></label>
                                         <input type="text" name="constructionEstimateValue"
                                             id="constructionEstimateValue" placeholder="Construction Estimate Value"
-                                            class="form-control" autocomplete="off" required="" value="0">
+                                            class="form-control" required="" value="{{ old('constructionEstimateValue') ?? 0}}">
                                     </div>
-                                    <input type="hidden" name="constructionDistressValue"
-                                        id="constructionDistressValue" tabindex="-1" readonly="readonly"
-                                        class="form-control" autocomplete="off">
+                                    <input type="hidden" name="constructionDistressValue" 
+                                        id="constructionDistressValue"  readonly="readonly"
+                                        class="form-control">
                                     <input type="hidden" name="totalDistressValueOfBuilding"
-                                        id="totalDistressValueOfBuilding" tabindex="-1" readonly="readonly"
-                                        class="form-control" autocomplete="off">
+                                        id="totalDistressValueOfBuilding"  readonly="readonly"
+                                        class="form-control">
                                     <div class="form-group col-md-3">
                                         <label>Construction Approval Date (BS)</label>
-                                        <input type="text" name="buildingConstructionApprovalDate"
-                                            id="buildingConstructionApprovalDate" class="form-control"
-                                            autocomplete="off">
+                                        <input type="text" name="buildingConstructionApprovalDate"  value="{{ old('buildingConstructionApprovalDate')}}"
+                                            id="buildingConstructionApprovalDate" class="form-control" >
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label>Year Construction Complite(BCC)</label>
-                                        <input type="text" name="yearOfConstructionComplite"
-                                            id="yearOfConstructionComplite" class="form-control"
-                                            autocomplete="off">
+                                        <input type="text" name="yearOfConstructionComplite" value="{{ old('yearOfConstructionComplite')}}"
+                                            id="yearOfConstructionComplite" class="form-control">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label> 
@@ -900,7 +909,7 @@
                                             </label>
                                         <input type="text" name="totalAreaAsPerConstruction"
                                             id="totalAreaAsPerConstruction" required="" class="form-control"
-                                            autocomplete="off" value="0">
+                                            value="{{ old('totalAreaAsPerConstruction') ?? 0}}">
                                     </div>
                                 </div>
                             </div>
@@ -919,27 +928,27 @@
                             <div class="form-group col-md-2">
                                 <label>Kita No</label>
                                 <input type="text" name="boundariesKitaNo" id="boundariesKitaNo"
-                                    placeholder="Kita No" class="form-control" autocomplete="off">
+                                    placeholder="Kita No" class="form-control">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>East</label>
                                 <input type="text" name="eastAPBoundaries" id="eastAPBoundaries"
-                                    placeholder="East" class="form-control" autocomplete="off">
+                                    placeholder="East" class="form-control">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>West</label>
                                 <input type="text" name="westAPBoundaries" id="westAPBoundaries"
-                                    placeholder="West" class="form-control" autocomplete="off">
+                                    placeholder="West" class="form-control">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>North</label>
                                 <input type="text" name="northAPBoundaries" id="northAPBoundaries"
-                                    placeholder="North" class="form-control" autocomplete="off">
+                                    placeholder="North" class="form-control">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>South</label>
                                 <input type="text" name="southAPBoundaries" id="southAPBoundaries"
-                                    placeholder="South" class="form-control" autocomplete="off">
+                                    placeholder="South" class="form-control">
                             </div>
                             <div class="form-group col-md-2 pl-0">
                                 <label style="width: 100%;">&nbsp;</label>
@@ -992,32 +1001,27 @@
                             <div class="form-group col-md-2">
                                 <label>Kita No</label>
                                 <input type="text" name="aPSiteVisitBoundariesKitaNo"
-                                    id="aPSiteVisitBoundariesKitaNo" placeholder="Kita No" class="form-control"
-                                    autocomplete="off">
+                                    id="aPSiteVisitBoundariesKitaNo" placeholder="Kita No" class="form-control">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>East</label>
                                 <input type="text" name="eastAPSiteVisitBoundaries"
-                                    id="eastAPSiteVisitBoundaries" placeholder="East" class="form-control"
-                                    autocomplete="off">
+                                    id="eastAPSiteVisitBoundaries" placeholder="East" class="form-control">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>West</label>
                                 <input type="text" name="westAPSiteVisitBoundaries"
-                                    id="westAPSiteVisitBoundaries" placeholder="West" class="form-control"
-                                    autocomplete="off">
+                                    id="westAPSiteVisitBoundaries" placeholder="West" class="form-control">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>North</label>
                                 <input type="text" name="northAPSiteVisitBoundaries"
-                                    id="northAPSiteVisitBoundaries" placeholder="North" class="form-control"
-                                    autocomplete="off">
+                                    id="northAPSiteVisitBoundaries" placeholder="North" class="form-control">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>South</label>
                                 <input type="text" name="southAPSiteVisitBoundaries"
-                                    id="southAPSiteVisitBoundaries" placeholder="South" class="form-control"
-                                    autocomplete="off">
+                                    id="southAPSiteVisitBoundaries" placeholder="South" class="form-control">
                             </div>
                             <div class="form-group col-md-2 pl-0">
                                 <label style="width:100%">&nbsp;</label>
@@ -1068,7 +1072,7 @@
                                         data-original-title="Ex:- 500 M From Shankhamul Chok and 1000M From Baneshwor Chok"></i>
                                     Location &amp; Access of The Land<span class="required">*</span></label>
                                 <input type="text" name="locationOfAccessLand" id="locationOfAccessLand"
-                                    required="" placeholder="" class="form-control" autocomplete="off">
+                                   value="{{old('locationOfAccessLand')}}" required="" placeholder="" class="form-control">
                             </div>
                             <div class="form-group col-md-2" style="padding:0px 6px 0px 6px">
                                 <label>
@@ -1076,12 +1080,12 @@
                                         title="" data-original-title="Ex:- Kathmandu"></i>
                                     District <span class="required">*</span></label>
                                 <input type="text" name="locationDistrict" id="locationDistrict"
-                                    required="" class="form-control" autocomplete="off">
+                                value="{{old('locationDistrict')}}" required="" class="form-control">
                             </div>
                             <div class="form-group col-md-2" style="padding:0px 6px 0px 6px">
                                 <label>V.D.C/Municipality</label>
                                     <select class="form-control" name="vdcType" id="vdcType">
-                                        <option value="Rural Municipality" selected="selected">Rural Municipality
+                                        <option value="Rural Municipality" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Rural Municipality
                                         </option>
                                         <option value="Municipality">Municipality</option>
                                         <option value="Sub Metropolitan City">Sub Metropolitan City</option>
@@ -1097,7 +1101,7 @@
                                     Address of Land/Property(Property Location)<span
                                         class="required">*</span></label>
                                 <input type="text" name="addressOfLand" id="addressOfLand" required=""
-                                    class="form-control" autocomplete="off">
+                                value="{{old('locationOfAccessLand')}}" class="form-control">
                             </div>
                             <div class="form-group col-md-12 mb-2">
                                 <label style="color: #202ed6;margin-bottom: 0px; text-transform: uppercase;">
@@ -1110,8 +1114,7 @@
                                         title="" data-original-title="Ex:- 12 Feet"></i>
                                     Road Size <span class="required">*</span></label>
                                 <input type="text" name="accessibilityWithRoadSize"
-                                    id="accessibilityWithRoadSize" required="" class="form-control"
-                                    autocomplete="off">
+                                value="{{old('accessibilityWithRoadSize')}}" id="accessibilityWithRoadSize" required="" class="form-control">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>
@@ -1119,7 +1122,7 @@
                                         title="" data-original-title="Ex:- Not Seen near Site"></i>
                                     River <span class="required">*</span></label>
                                 <input type="text" name="accessibilityWithRiver" id="accessibilityWithRiver"
-                                    required="" class="form-control" autocomplete="off">
+                                value="{{old('accessibilityWithRiver')}}" required="" class="form-control">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>
@@ -1127,60 +1130,59 @@
                                         title="" data-original-title="Ex:- Not Seen near Site"></i>
                                     High Tension Line <span class="required">*</span></label>
                                 <input type="text" name="accessibilityWithHighTension"
-                                    id="accessibilityWithHighTension" required="" class="form-control"
-                                    autocomplete="off">
+                                value="{{old('accessibilityWithHighTension')}}" id="accessibilityWithHighTension" required="" class="form-control">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Type of Region</label>
                                 <select class="form-control selectbox" name="typeOfRegion" id="typeOfRegion">
-                                    <option value="Residential" selected="selected">Residential</option>
-                                    <option value="Commercial">Commercial</option>
-                                    <option value="Agricultural">Agricultural</option>
-                                    <option value="Others (Pls Specify)">Others</option>
+                                    <option value="Residential" {{ old('typeOfRegion') == "Residential" ?'selected' : ''}}>Residential</option>
+                                    <option value="Commercial" {{ old('typeOfRegion') == "Commercial" ?'selected' : ''}}>Commercial</option>
+                                    <option value="Agricultural" {{ old('typeOfRegion') == "Agricultural" ?'selected' : ''}}>Agricultural</option>
+                                    <option value="Others (Pls Specify) " {{ old('typeOfRegion') == "Others (Pls Specify)" ?'selected' : ''}}>Others</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Motorable Access</label>
                                 <select class="form-control selectbox" name="motorableAccess"
                                     id="motorableAccess">
-                                    <option value="Yes" selected="selected">Yes</option>
-                                    <option value="No">No</option>
+                                    <option value="Yes"  {{ old('motorableAccess') == "Yes" ?'selected' : ''}}>Yes</option>
+                                    <option value="No"  {{ old('motorableAccess') == "No" ?'selected' : ''}}>No</option>
                                 </select>
                             </div>
                            
                            
                             <div class="form-group col-md-2">
                                 <label>Property Usage</label>
-                                <select class="form-control selectbox" name="propertyUsage" id="propertyUsage">
-                                    <option value="Residential" selected="selected">Residential</option>
-                                    <option value="Commercial">Commercial</option>
-                                    <option value="Residential &amp; Commercial">Residential &amp; Commercial</option>
-                                    <option value="Others">Others</option>
+                                <select class="form-control selectbox" name="buildingShape" id="propertyUsage">
+                                    <option value="Residential" {{ old('buildingShape') == "Residential" ?'selected' : ''}} >Residential</option>
+                                    <option value="Commercial" {{ old('buildingShape') == "Commercial" ?'selected' : ''}}>Commercial</option>
+                                    <option value="Residential &amp; Commercial" {{ old('buildingShape') == "Residential &amp; Commercial" ?'selected' : ''}}>Residential &amp; Commercial</option>
+                                    <option value="Others" {{ old('buildingShape') == "Others" ?'selected' : ''}}>Others</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Type of Access</label>
                                 <select class="form-control selectbox" name="typeOfAccess" id="typeOfAccess">
-                                    <option value="Earthen" selected="selected">Earthen</option>
-                                    <option value="Gravel">Gravel</option>
-                                    <option value="Black Topped">Black Topped</option>
-                                    <option value="RCC">RCC</option>
-                                    <option value="Block Paved">Block Paved</option>
-                                    <option value="Goreto Road">Goreto Road</option>
-                                    <option value="Khet (No Road)">Khet (No Road)</option>
+                                    <option value="Earthen" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Earthen</option>
+                                    <option value="Gravel" {{ old('typeOfAccess') == "Gravel" ?'selected' : ''}} >Gravel</option>
+                                    <option value="Black Topped" {{ old('typeOfAccess') == "Black Topped" ?'selected' : ''}} >Black Topped</option>
+                                    <option value="RCC" {{ old('typeOfAccess') == "RCC" ?'selected' : ''}} >RCC</option>
+                                    <option value="Block Paved" {{ old('typeOfAccess') == "Block Paved" ?'selected' : ''}} >Block Paved</option>
+                                    <option value="Goreto Road" {{ old('typeOfAccess') == "Goreto Road" ?'selected' : ''}} >Goreto Road</option>
+                                    <option value="Khet (No Road)" {{ old('typeOfAccess') == "Khet (No Road)" ?'selected' : ''}} >Khet (No Road)</option>
                                 </select>
                             </div>
                           
                             
                             <input type="hidden" name="holdType" id="holdType" class="form-control"
-                                value="Free Hold" autocomplete="off">
+                                value="Free Hold">
                             <div class="form-group col-md-2">
                                 <label>
                                     <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
                                         title="" data-original-title="Ex:- Rectangular"></i>
                                     Shape</label>
                                 <input type="text" name="buildingShape" id="buildingShape"
-                                    class="form-control" autocomplete="off" required="">
+                                value="{{old('buildingShape')}}" class="form-control" required="">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>
@@ -1188,7 +1190,7 @@
                                         title="" data-original-title="Ex:- East"></i>
                                     Facing</label>
                                 <input type="text" name="buildingFacing" id="buildingFacing"
-                                    class="form-control" autocomplete="off" required="">
+                                value="{{old('buildingFacing')}}" class="form-control" required="">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>
@@ -1196,7 +1198,7 @@
                                         title="" data-original-title="Ex:- 8 M"></i>
                                     Frontage</label>
                                 <input type="text" name="buildingFrontage" id="buildingFrontage"
-                                    class="form-control" autocomplete="off" required="">
+                                value="{{old('buildingFrontage')}}" class="form-control" required="">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Level with Road
@@ -1204,22 +1206,22 @@
                                         title="" data-original-title="Ex:- Same Level"></i>
                                 </label>
                                 <input type="text" name="levelWithRoad" id="levelWithRoad"
-                                    class="form-control" autocomplete="off" required="">
+                                value="{{old('levelWithRoad')}}" class="form-control" required="">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Property for the Bank</label>
                                 <select class="form-control selectbox" name="propertyForTheBank"
                                     id="propertyForTheBank">
-                                    <option value="Recommended" selected="selected">Recommended</option>
-                                    <option value="Not Recommended">Not Recommended</option>
+                                    <option value="Recommended" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Recommended</option>
+                                    <option value="Not Recommended" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Not Recommended</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>River / Stream near property</label>
                                 <select class="form-control selectbox" name="riverStreamNearProperty"
                                     id="riverStreamNearProperty">
-                                    <option value="No" selected="selected">No</option>
-                                    <option value="Yes">Yes</option>
+                                    <option value="No" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>No</option>
+                                    <option value="Yes" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Yes</option>
                                 </select>
                             </div>
                            
@@ -1227,18 +1229,18 @@
                                 <label>Heritage Sites Near property</label>
                                 <select class="form-control selectbox" name="heritageSitesNearProperty"
                                     id="heritageSitesNearProperty">
-                                    <option value="Yes" selected="selected">Yes</option>
-                                    <option value="No">No</option>
+                                    <option value="Yes" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Yes</option>
+                                    <option value="No" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>No</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Property Ownership Type</label>
                                 <select class="form-control selectbox" name="propertyOwnershipType"
                                     id="propertyOwnershipType">
-                                    <option value="Single" selected="selected">Single</option>
-                                    <option value="Joint">Joint</option>
-                                    <option value="Company">Company</option>
-                                    <option value="Individual (Joint Name)">Individual (Joint Name)</option>
+                                    <option value="Single" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Single</option>
+                                    <option value="Joint" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Joint</option>
+                                    <option value="Company" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Company</option>
+                                    <option value="Individual (Joint Name)" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Individual (Joint Name)</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
@@ -1247,7 +1249,7 @@
                                         title="" data-original-title="Ex:- 7 M"></i>
                                     Narrowest Part of Land</label>
                                 <input type="text" name="narrowestPartOfLand" id="narrowestPartOfLand"
-                                    class="form-control" autocomplete="off" required="">
+                                value="{{old('narrowestPartOfLand')}}" class="form-control" required="">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>
@@ -1255,7 +1257,7 @@
                                         title="" data-original-title="Ex:- 12 Feet"></i>
                                     Access in the Blue Print</label>
                                 <input type="text" name="accessInTheBluePrint" id="accessInTheBluePrint"
-                                    class="form-control" autocomplete="off" required="">
+                                value="{{old('accessInTheBluePrint')}}" class="form-control" required="">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Right of Way
@@ -1263,37 +1265,37 @@
                                         title="" data-original-title="Ex:- 13 Feet"></i>
                                 </label>
                                 <input type="text" name="rightOfWay" id="rightOfWay" class="form-control"
-                                    autocomplete="off" required="">
+                                value="{{old('rightOfWay')}}"  required="">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Frame Structure</label>
                                 <select class="form-control selectbox" name="frameStructure"
                                     id="frameStructure">
-                                    <option value="Frame Structure" selected="selected">Frame Structure</option>
-                                    <option value="Load Bearing">Load Bearing</option>
+                                    <option value="Frame Structure" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Frame Structure</option>
+                                    <option value="Load Bearing" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Load Bearing</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Any Collateral Fall</label>
                                 <select class="form-control selectbox" name="anyCollateralFall"
                                     id="anyCollateralFall">
-                                    <option value="No" selected="selected">No</option>
+                                    <option value="No" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>No</option>
                                     <option value="Yes">Yes</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Comments</label>
                                 <input type="text" name="coments" id="coments" class="form-control"
-                                    autocomplete="off" required="">
+                                value="{{old('coments')}}" required="">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Valuation For</label>
                                 <select class="form-control selectbox" name="valuationFor" id="valuationFor">
-                                    <option value="Vacant Land" selected="selected">Vacant Land</option>
-                                    <option value="Land &amp; Building">Land &amp; Building</option>
-                                    <option value="Readymade House">Readymade House</option>
-                                    <option value="Apartments/Duplex">Apartments/Duplex</option>
-                                    <option value="Construction/Extension/Renovation">Construction/Extension/Renovation
+                                    <option value="Vacant Land" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Vacant Land</option>
+                                    <option value="Land &amp; Building" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Land &amp; Building</option>
+                                    <option value="Readymade House" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Readymade House</option>
+                                    <option value="Apartments/Duplex" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Apartments/Duplex</option>
+                                    <option value="Construction/Extension/Renovation" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Construction/Extension/Renovation
                                     </option>
                                 </select>
                             </div>
@@ -1301,8 +1303,8 @@
                                 <label>Coloring And Painting</label>
                                 <select class="form-control selectbox" name="coloringAndPainting"
                                     id="coloringAndPainting">
-                                    <option value="Painted" selected="selected">Painted</option>
-                                    <option value="Not Painted">Not Painted</option>
+                                    <option value="Painted" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Painted</option>
+                                    <option value="Not Painted" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Not Painted</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
@@ -1311,24 +1313,24 @@
                                         title="" data-original-title="Ex:- has Been Well Finished."></i>
                                     Flooring Finishing</label>
                                 <input type="text" name="flooringFinishing" id="flooringFinishing"
-                                    class="form-control" autocomplete="off" required="">
+                                value="{{old('flooringFinishing')}}" class="form-control" required="">
                             </div>
                             <div class="form-group col-md-2">
                                 <label><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
                                         title="" data-original-title="Ex:- has Been Well Finished."></i> Inner
                                     Wall Ceiling</label>
                                 <input type="text" name="innerWallCeiling" id="innerWallCeiling"
-                                    class="form-control" autocomplete="off" required="">
+                                value="{{old('innerWallCeiling')}}" class="form-control" required="">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Type Of Land</label>
                                 <select class="form-control selectbox" name="topography" id="topography">
-                                    <option value="Planning" selected="selected">Planning</option>
-                                    <option value="Khet">Khet</option>
-                                    <option value="Flat">Flat</option>
-                                    <option value="Slightly Slope">Slightly Slope</option>
-                                    <option value="Low Land">Low Land</option>
-                                    <option value="Irregural Shape">Irregural Shape</option>
+                                    <option value="Planning" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Planning</option>
+                                    <option value="Khet" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Khet</option>
+                                    <option value="Flat" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Flat</option>
+                                    <option value="Slightly Slope" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Slightly Slope</option>
+                                    <option value="Low Land" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Low Land</option>
+                                    <option value="Irregural Shape" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Irregural Shape</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
@@ -1336,39 +1338,39 @@
                                         title="" data-original-title="Ex:- Bounded by Brick Wall."></i>
                                     Boundary</label>
                                 <input type="text" name="boundary" id="boundary" class="form-control"
-                                    autocomplete="off" required="">
+                                value="{{old('boundary')}}" required="">
                             </div>
                             <div class="form-group col-md-2">
                                 <label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
                                         title="" data-original-title="Ex:- 2 And Half"></i> No Of Floor
                                     (Storie)</label>
                                 <input type="text" name="noOfFloorStorie" id="noOfFloorStorie"
-                                    class="form-control" autocomplete="off">
+                                value="{{old('noOfFloorStorie')}}" class="form-control">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Compound Wall</label>
                                 <select class="form-control selectbox" name="compoundWall" id="compoundWall">
-                                    <option value="Constructed" selected="selected">Constructed</option>
-                                    <option value="Not Constructed">Not Constructed</option>
+                                    <option value="Constructed" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Constructed</option>
+                                    <option value="Not Constructed" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Not Constructed</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Internal Remarks</label>
                                 <input type="text" name="internalRemarks" id="internalRemarks"
-                                    class="form-control" autocomplete="off">
+                                value="{{old('internalRemarks')}}" class="form-control">
                             </div>
                             <input type="hidden" name="isAvailabilityTelephone" id="isAvailabilityTelephone"
-                                required="" class="form-control" autocomplete="off" value="Yes">
+                                required="" class="form-control" value="Yes">
                             <input type="hidden" name="isAvailabilityInternet" id="isAvailabilityInternet"
-                                required="" class="form-control" autocomplete="off" value="Yes">
+                                required="" class="form-control" value="Yes">
                             <input type="hidden" name="isAvailabilitySewerage" id="isAvailabilitySewerage"
-                                required="" class="form-control" autocomplete="off" value="Yes">
+                                required="" class="form-control" value="Yes">
                             <input type="hidden" name="isAvailabilityElectricity"
                                 id="isAvailabilityElectricity" required="" class="form-control"
-                                autocomplete="off" value="Yes">
+                                value="Yes">
                             <input type="hidden" name="isAvailabilityWaterSupply"
                                 id="isAvailabilityWaterSupply" required="" class="form-control"
-                                autocomplete="off" value="Yes">
+                                value="Yes">
                             <div class="form-group col-md-12 mb-2">
                                 <label style="color: #dc1de9;margin-bottom: 0px;">
                                     <h6><b>5 UPLOAD DOCUMENT</b></h6>
