@@ -83,12 +83,8 @@
                 $('#global-table').DataTable().ajax.reload();
                 $('#summernote-editor').summernote('code', '');
                 $('#submit-form').trigger("reset");
-                $('#createModal').modal('hide');
-                $('.custom-file-container__custom-file__custom-file-control').text('Choose file...')
-                    .append(
-                        '<span class="custom-file-container__custom-file__custom-file-control__button"> Browse </span>'
-                    );
-                $('.custom-file-container__image-preview').css("background-image", "none");
+                $('#globalModal').modal('hide');
+
 
                 currentevent.attr('disabled', false);
 
@@ -184,7 +180,9 @@
                     });
                 }
             },
-            complete: function() {}
+            complete: function() {
+                $.unblockUI();
+            }
         });
     });
 

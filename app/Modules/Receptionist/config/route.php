@@ -1,7 +1,7 @@
 <?php
 return [
     'prefix' => [
-        'backend' => 'backend/user',
+        'backend' => 'admin',
         'engineer' => 'engineer',
         'receptionist' => 'receptionist',
         'api' => 'api/user',
@@ -13,7 +13,7 @@ return [
         'api' => 'Receptionist\Http\Controllers\Api',
     ],
     'as' => [
-        'backend' => 'backend.user.',
+        'backend' => 'admin.',
         'engineer' => 'engineer.',
         'receptionist' => 'receptionist.',
     ]

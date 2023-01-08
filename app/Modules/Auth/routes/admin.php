@@ -73,6 +73,6 @@ Route::group([
     ], function () {
         Route::get('reception/dashboard', 'AuthController@receptionDashboard')->name('receptionDashboard');
 
-        Route::get('reception/getProposalData','AuthController@receptionProposalData')->name('getProposalData');
+        // Route::get('reception/getProposalData','AuthController@receptionProposalData')->name('getProposalData');
     });
 });

@@ -31,12 +31,12 @@ class AdminSiteVisitController extends Controller
 
     public function index(Request $request)
     {
-        
+
         if ($request->ajax()) {
-            $datas =SiteVisit::with('branch','bank','client')->latest();
+            $datas =SiteVisit::with(['branch','bank','client', 'proposal'])->latest();
 
             // dd($request->all());
-            
+
             return DataTables::of($datas)
                 ->addIndexColumn()
                 ->editColumn('branch',function($row){
@@ -53,14 +53,14 @@ class AdminSiteVisitController extends Controller
                     $preSelected = '<option value="Pre-Valuation" selected>Pre-Valuation</option> <option value="Final-Valuation">Final-Valuation</option> <option value="Cancel-Valuation">Cancel-Valuation</option></select>';
                     $finalSelected = '<option value="Pre-Valuation">Pre-Valuation</option>  <option value="Final-Valuation" selected>Final-Valuation</option> <option value="Cancel-Valuation">Cancel-Valuation</option></select>';
                     $cancelSelected = '<option value="Pre-Valuation">Pre-Valuation</option> <option value="Final-Valuation">Final-Valuation</option><option value="Cancel-Valuation" selected>Cancel-Valuation</option></select>';
-            
+
                     if($row->valuation_status == "Pre-Valuation"){
                         return $main.$preSelected;
                     }elseif($row->valuation_status == "Final-Valuation"){
                         return $main.$finalSelected;
                     }elseif($row->valuation_status == "Cancel-Valuation"){
                         return $main.$cancelSelected;
-                    }   
+                    }
                 })
                 ->filter(function ($instance) use ($request) {
                     if($request->filterValuation && $request->filterValuation != null && !empty($request->filterValuation)){
@@ -72,7 +72,7 @@ class AdminSiteVisitController extends Controller
                     }
                 })
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="javascript:void(0)" data-url="#" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
+                    $actionBtn = '<a href="'. route('backend.admin.sitevisit.edit', $row->id) .'" data-url="#" data-id=' . $row->id . ' class="btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
                                 <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
                                 ';
                     return $actionBtn;
@@ -92,7 +92,7 @@ class AdminSiteVisitController extends Controller
 
 
     public function create($proposalid, $id = null)
-    {   
+    {
         try {
 
             $banks = Bank::all();
@@ -231,8 +231,14 @@ class AdminSiteVisitController extends Controller
     public function edit($id)
     {
         try {
+            $banks = Bank::all();
+            $branches = Branch::all();
+            $clients = Client::all();
+            $sitevisit = SiteVisit::where('id', $id)->first();
+            $proposal = Proposal::where('id',$sitevisit->proposal_id)->first();
+            $siteengineers = User::role('engineer')->get();
             // dd("hdkjshakjdsa");
-            return view('SiteVisit::backend.edit');
+            return view('Engineer::admin.sitevisit.edit', compact('banks','branches','clients', 'sitevisit', 'proposal', 'siteengineers'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage());
             return redirect()->back();
@@ -267,7 +273,7 @@ class AdminSiteVisitController extends Controller
             $finalvaluationCount = SiteVisit::finalValuation()->count();
             $prevaluationCount = SiteVisit::preValuation()->count();
             $cancelvaluationCount = SiteVisit::cancelValuation()->count();
-            $data = [ 
+            $data = [
                     'final' => $finalvaluationCount,
                     'pre' => $prevaluationCount,
                     'cancel' => $cancelvaluationCount

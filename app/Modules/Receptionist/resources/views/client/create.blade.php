@@ -6,7 +6,7 @@
 
 @section('content')
     <!--  BEGIN CONTENT AREA  -->
- 
+
     <div class="row layout-top-spacing">
         <div class="col-xl-12 col-lg-12 col-sm-12">
             <div class="widget-content widget-content-area br-4">
@@ -95,5 +95,5 @@
 
 
 </script>
-    
+
 @endpush

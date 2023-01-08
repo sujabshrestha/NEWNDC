@@ -39,7 +39,7 @@ class ClientRepository implements ClientInterface
         $client->pan_no = $request->pan_no;
         $client->pan_date_of_issue = $request->pan_date_of_issue;
         $client->pan_place_of_issue = $request->pan_place_of_issue;
-        $client->share_holders = $request->share_holders;       
+        $client->share_holders = $request->share_holders;
         if($client->save() == true){
             $owner = new Owner();
             $owner->client_id = $client->id;
@@ -60,12 +60,12 @@ class ClientRepository implements ClientInterface
             $owner->pan_no = $request->owner_pan_no;
             $owner->pan_date_of_issue = $request->owner_pan_date_of_issue;
             $owner->pan_place_of_issue = $request->owner_pan_place_of_issue;
-            $owner->share_holders = $request->owner_share_holders;  
+            $owner->share_holders = $request->owner_share_holders;
             $owner->relation = $request->relation;
             $owner->proposed_owner_name = $request->proposed_owner_name;
             if($owner->save() == true){
                 return true;
-            } 
+            }
         }
         throw new Exception("Error While Creating Client!!!");
     }
@@ -90,38 +90,71 @@ class ClientRepository implements ClientInterface
         $client->pan_no = $request->pan_no;
         $client->pan_date_of_issue = $request->pan_date_of_issue;
         $client->pan_place_of_issue = $request->pan_place_of_issue;
-        $client->share_holders = $request->share_holders;    
+        $client->share_holders = $request->share_holders;
         if($client->update() == true){
             $owner = Owner::where('client_id',$client->id)->first();
+
+            if(!is_null($owner)){
+                $owner->owner_name = $request->owner_name;
+                $owner->mohi_name = $request->mohi_name;
+                $owner->father_name = $request->owner_father_name;
+                $owner->grand_father_name = $request->owner_grand_father_name;
+                $owner->husband_name = $request->owner_husband_name;
+                $owner->father_in_law_name = $request->owner_father_in_law_name;
+                $owner->spouse_name = $request->owner_spouse_name;
+                $owner->address = $request->owner_address;
+                $owner->district = $request->owner_district;
+                $owner->citizenship_no = $request->owner_citizenship_no;
+                $owner->date_of_issue = $request->owner_date_of_issue;
+                $owner->place_of_issue = $request->owner_place_of_issue;
+                $owner->contact_no = $request->owner_contact_no;
+                $owner->reg_no = $request->owner_reg_no;
+                $owner->pan_no = $request->owner_pan_no;
+                $owner->pan_date_of_issue = $request->owner_pan_date_of_issue;
+                $owner->pan_place_of_issue = $request->owner_pan_place_of_issue;
+                $owner->share_holders = $request->owner_share_holders;
+                $owner->relation = $request->relation;
+                $owner->proposed_owner_name = $request->proposed_owner_name;
+
+                if($owner->update() == true){
+                    return true;
+                }
+            }else{
+                $owner = new Owner();
+                $owner->owner_name = $request->owner_name;
+                $owner->client_id = $client->id;
+                $owner->mohi_name = $request->mohi_name;
+                $owner->father_name = $request->owner_father_name;
+                $owner->grand_father_name = $request->owner_grand_father_name;
+                $owner->husband_name = $request->owner_husband_name;
+                $owner->father_in_law_name = $request->owner_father_in_law_name;
+                $owner->spouse_name = $request->owner_spouse_name;
+                $owner->address = $request->owner_address;
+                $owner->district = $request->owner_district;
+                $owner->citizenship_no = $request->owner_citizenship_no;
+                $owner->date_of_issue = $request->owner_date_of_issue;
+                $owner->place_of_issue = $request->owner_place_of_issue;
+                $owner->contact_no = $request->owner_contact_no;
+                $owner->reg_no = $request->owner_reg_no;
+                $owner->pan_no = $request->owner_pan_no;
+                $owner->pan_date_of_issue = $request->owner_pan_date_of_issue;
+                $owner->pan_place_of_issue = $request->owner_pan_place_of_issue;
+                $owner->share_holders = $request->owner_share_holders;
+                $owner->relation = $request->relation;
+                $owner->proposed_owner_name = $request->proposed_owner_name;
+
+                if($owner->save() == true){
+                    return true;
+                }
+            }
             // $owner->client_id = $client->id;
-            $owner->owner_name = $request->owner_name;
-            $owner->mohi_name = $request->mohi_name;
-            $owner->father_name = $request->owner_father_name;
-            $owner->grand_father_name = $request->owner_grand_father_name;
-            $owner->husband_name = $request->owner_husband_name;
-            $owner->father_in_law_name = $request->owner_father_in_law_name;
-            $owner->spouse_name = $request->owner_spouse_name;
-            $owner->address = $request->owner_address;
-            $owner->district = $request->owner_district;
-            $owner->citizenship_no = $request->owner_citizenship_no;
-            $owner->date_of_issue = $request->owner_date_of_issue;
-            $owner->place_of_issue = $request->owner_place_of_issue;
-            $owner->contact_no = $request->owner_contact_no;
-            $owner->reg_no = $request->owner_reg_no;
-            $owner->pan_no = $request->owner_pan_no;
-            $owner->pan_date_of_issue = $request->owner_pan_date_of_issue;
-            $owner->pan_place_of_issue = $request->owner_pan_place_of_issue;
-            $owner->share_holders = $request->owner_share_holders;  
-            $owner->relation = $request->relation;
-            $owner->proposed_owner_name = $request->proposed_owner_name;
-            if($owner->update() == true){
-                return true;
-            } 
+
+
         }
         throw new Exception("Unable To Update Client!!!");
     }
 
-   
+
 
     public function trashedDestroy($id){
         $user = Client::withTrashed()->where('id', $id)->first();

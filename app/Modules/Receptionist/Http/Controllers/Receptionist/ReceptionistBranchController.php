@@ -170,9 +170,19 @@ class ReceptionistBranchController extends Controller
      * @param  \App\Branch  $branch
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Branch $branch)
+    public function destroy(Branch $branch, $id)
     {
         try{
+
+            $branch = Branch::where('id', $id)->with('bank')->first();
+            if($branch){
+                if(!is_null($branch->bank)){
+                    $branch->delte();
+                }
+                return $this->response->responseError("Can't delete branch. Branch is associated with the bank");
+
+            }
+            return $this->response->responseError("Something went wrong");
 
         }catch(\Exception $e){
             Toastr::error($e->getMessage());

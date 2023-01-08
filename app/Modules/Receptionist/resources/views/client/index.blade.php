@@ -7,12 +7,12 @@
 @push('styles')
 <link href="{{ asset('backendfiles/assets/css/apps/todolist.css')}}" rel="stylesheet" type="text/css" />
 
-    
+
 @endpush
 
 @section('content')
     <!--  BEGIN CONTENT AREA  -->
-       
+
             <div class="row layout-top-spacing">
                 <div class="col-xl-12 col-lg-12 col-sm-12">
                     <div class="widget-content widget-content-area br-6">
@@ -52,7 +52,7 @@
 
             </div> --}}
 
-     
+
 
     <!--  END CONTENT AREA  -->
 @endsection
@@ -74,7 +74,7 @@
                     orderable: false,
                     searchable: false
                 },
-                {   
+                {
                     width:'20%',
                     data: 'client_name',
                     render: function(data, type, row) {
@@ -95,20 +95,21 @@
                     data: 'citizenship_no',
                     render: function(data, type, row) {
                         return row.citizenship_no;
-                            
+
                     }
                 },
                 {
                     width:'15%',
-                    
+
                     data: 'owner_name',
                     render: function(data, type, row) {
+
                         return row.owner_name;
-                            
+
                     }
                 },
                 {
-                    width:'10%',
+                    width:'15%',
                     data: 'status',
                     name: 'status',
                     class:'text-center',
