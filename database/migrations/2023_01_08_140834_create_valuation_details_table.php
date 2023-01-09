@@ -27,7 +27,7 @@ class CreateValuationDetailsTable extends Migration
             $table->string('frontage')->nullable();
             $table->string('level_with_road')->nullable();
             $table->enum('property_fot_the_bank',['Recommended','Not-Recommended'])->nullable();
-            $table->enum('rive_near_by',['Yes','No'])->nullable();
+            $table->enum('river_near_by',['Yes','No'])->nullable();
             $table->enum('heritage_sites_near_by',['Yes','No'])->nullable();
             $table->enum('property_ownership_type',['Single','Joint','Company','Individual'])->nullable();
             $table->string('narrowest_part_of_land')->nullable();
@@ -37,7 +37,7 @@ class CreateValuationDetailsTable extends Migration
             $table->enum('frame_structure',['Frame-Structure','Load-Bearing'])->nullable();
             $table->enum('any_collateral_fall',['Yes','No'])->nullable();
             $table->enum('valuation_for',['Vacant-Land','Land&Building','Readymade-House','Apartments/Duplex','Construction/Extension/Renovation'])->nullable();
-            $table->enum('rive_near_by',['Painted','Not-Painted'])->nullable();
+            $table->enum('coloring',['Painted','Not-Painted'])->nullable();
             $table->string('florring_finishing')->nullable();
             $table->string('inner_wall_ceiling')->nullable();
             $table->string('boundary')->nullable();
@@ -50,9 +50,6 @@ class CreateValuationDetailsTable extends Migration
             $table->string('district')->nullable();
             $table->enum('vdc_municipality',['Rural-Municipality','Municipality','Sub-Metropolitan-City','Metropolitan-City'])->nullable();
             $table->string('address_of_land')->nullable();
-
-
-
             $table->timestamps();
         });
     }

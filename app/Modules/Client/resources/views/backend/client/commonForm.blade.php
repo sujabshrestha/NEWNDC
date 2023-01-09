@@ -163,7 +163,7 @@
         <div class="form-group">
             <label for="share_holders">Share Holders</label>
             <input type="text" class="form-control" id="share_holders" placeholder="Contact No..." name="share_holders"
-                value="{{ $client->share_holders ?? old('share_holders') ?? ''}}">
+                value="{{ $client->share_holders ?? old('share_holders') ?? '' }}">
         </div>
     </div>
 </div> 
@@ -172,7 +172,7 @@
     <div class="col-md-3">
     <div class="form-group">
         <h5>Owner Details</h5>
-        <input type="checkbox" class="sameClient" {{ (isset($client)) && $client->citizenship_no == $client->owner->citizenship_no ? 'checked' : ""  }}>
+        <input type="checkbox" class="sameClient" {{ (isset($client))  && $client->citizenship_no != null && $client->citizenship_no == $client->owner->citizenship_no ? 'checked' : ""  }}>
         <span class="text-danger pl-2">Owner And Client Are Same</span>
      </div>
     </div>

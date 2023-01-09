@@ -9,6 +9,8 @@ class PermanetBoundariesAsPerSiteVisit extends Model
 {
     use HasFactory;
 
+    protected $table = 'boundaries_as_per_sitevisits';
+
     protected $fillable =[
         'kita_no',
         'east',

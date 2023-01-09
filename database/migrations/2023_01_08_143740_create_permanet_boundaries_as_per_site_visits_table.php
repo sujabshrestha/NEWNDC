@@ -13,7 +13,7 @@ class CreatePermanetBoundariesAsPerSiteVisitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permanet_boundaries_as_per_site_visits', function (Blueprint $table) {
+        Schema::create('boundaries_as_per_sitevisits', function (Blueprint $table) {
             $table->id();
             $table->string('kita_no')->nullable();
             $table->string('east')->nullable();
