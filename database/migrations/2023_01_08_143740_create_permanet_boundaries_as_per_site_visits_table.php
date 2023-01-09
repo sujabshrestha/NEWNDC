@@ -13,7 +13,7 @@ class CreatePermanetBoundariesAsPerSiteVisitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('boundaries_as_per_sitevisits', function (Blueprint $table) {
+        Schema::create('permanet_boundaries_as_per_site_visits', function (Blueprint $table) {
             $table->id();
             $table->string('kita_no')->nullable();
             $table->string('east')->nullable();
@@ -21,8 +21,8 @@ class CreatePermanetBoundariesAsPerSiteVisitsTable extends Migration
             $table->string('north')->nullable();
             $table->string('south')->nullable();
             // May Need To Change To Valuation Table Instead of Valuation Details Table
-            $table->unsignedBigInteger('valuation_details_id');
-            $table->foreign('valuation_details_id')->references('id')->on('valuation_details');
+            $table->unsignedBigInteger('sitevisit_id');
+            $table->foreign('sitevisit_id')->references('id')->on('site_visits');
             $table->timestamps();
         });
     }
