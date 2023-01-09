@@ -8,7 +8,7 @@
 
     <div class="form-group col-md-3 pr-0">
         <label for="reg_no">Registration Id</label>
-        <input type="number" name="reg_no" value="{{ $sitevisit->registration_id  ?? old('reg_no') }}" id="reg_no" required="" value=""
+        <input type="text" name="reg_no" readonly value="{{ $sitevisit->registration_id  ?? old('reg_no') }}" id="reg_no" required=""
             class="form-control" tabindex="-1" autocomplete="off">
     </div>
     <div class="form-group col-md-3">
@@ -30,13 +30,13 @@
 
     <div class="form-group col-md-3">
         <label for="bankId">Bank <span class="text-danger">*</span></label>
-        <select class="form-control selectbox" name="bank_id" id="bankId" required="">
+        <select class="form-control selectbox" readonly name="bank_id" id="bankId" required="">
             <option disabled selected> Select Bank </option>
             @if(isset($banks))
             @foreach ($banks as $bank)
 
-            <option  @if (isset($sitevisit) && $sitevisit->bank_id == $bank->id)
-                selected
+            <option  @if ((isset($sitevisit) && $sitevisit->bank_id == $bank->id) || ( isset($proposal) && $proposal->bank_id == $bank->id))
+                selected readonly
             @endif value="{{ $bank->id }}">{{ $bank->name }}</option>
             @endforeach
             @endif
@@ -46,14 +46,14 @@
     </div>
     <div class="form-group col-md-3">
         <label for="branchId">Branch <span class="text-danger">*</span></label>
-        <select class="form-control selectbox" name="branch_id" id="branchId" required="">
+        <select class="form-control selectbox" readonly name="branch_id" id="branchId" required="">
             <option disabled selected> Select Branch </option>
 
             @if(isset($branches))
             @foreach ($branches as $branch)
 
-            <option  @if (isset($sitevisit) && $sitevisit->branch_id == $branch->id)
-                selected
+            <option  @if (isset($sitevisit) && $sitevisit->branch_id == $branch->id || ( isset($proposal) && $proposal->branch_id == $branch->id))
+                selected readonly
             @endif  value="{{ $branch->id }}">{{ $branch->title }}</option>
             @endforeach
             @endif
@@ -61,20 +61,20 @@
     </div>
     <div class="form-group col-md-2">
         <label for="file_no">File No <span class="text-danger">*</span> </label>
-        <input type="text" name="file_no" id="file_no" value="{{ $sitevisit->file_no ??  old('file_no') }}" required=""
+        <input type="number" name="file_no" id="file_no" value="{{ $sitevisit->file_no ??  old('file_no') }}" required=""
             placeholder="File No" class="form-control" autocomplete="off">
     </div>
     <div class="form-group col-md-3">
         <label for="siteEngineerId">Site Engineer <span class="text-danger">*</span></label>
-        <select class="form-control selectbox"  name="site_engineer" id="TxtSiteEngineerId" required="">
+        <select class="form-control selectbox" readonly  name="site_engineer" id="TxtSiteEngineerId" required="">
             <option disabled selected> Select Site Engineer </option>
             @if (isset($siteengineers))
             @foreach ($siteengineers as $user)
 
 
-            <option  @if (isset($sitevisit) && $sitevisit->site_engineer_id == $user->id)
+            <option  @if ((isset($sitevisit) && $sitevisit->site_engineer_id == $user->id) || ( isset($proposal) && $proposal->site_engineer == $user->id))
                 selected
-            @endif value="{{ $user->id }}">{{ $user->name }}</option>
+            @endif  value="{{ $user->id }}">{{ $user->name }}</option>
             @endforeach
             @endif
 
@@ -82,15 +82,15 @@
     </div>
     <div class="form-group col-md-4">
         <label>  Client <span class="text-danger">*</span></label>
-        <select name="client_id" class="form-control" id="">
+        <select name="client_id" readonly class="form-control" id="">
 
             @if (isset($clients))
             @foreach ($clients as $client)
 
 
-            <option  @if (isset($sitevisit) && $sitevisit->client_id == $client->id)
+            <option  @if ((isset($sitevisit) && $sitevisit->client_id == $client->id) || ( isset($proposal) && $proposal->client_id == $client->id))
                 selected
-            @endif value="{{ $client->id }}">{{ $client->client_name }}</option>
+            @endif  value="{{ $client->id }}">{{ $client->client_name }}</option>
             @endforeach
             @endif
         </select>

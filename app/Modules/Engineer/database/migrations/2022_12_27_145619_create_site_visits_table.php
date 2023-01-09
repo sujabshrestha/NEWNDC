@@ -15,7 +15,7 @@ class CreateSiteVisitsTable extends Migration
     {
         Schema::create('site_visits', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('registration_id')->unique();
+            $table->string('registration_id')->unique();
             $table->unsignedBigInteger('bank_id')->nullable();
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->foreign('bank_id')->references('id')->on('banks')->onDelete('set null');
@@ -23,6 +23,7 @@ class CreateSiteVisitsTable extends Migration
             $table->unsignedBigInteger('client_id')->nullable();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('set null');
             $table->string('market_rate')->nullable();
+            $table->string('owner_name')->nullable();
 
             $table->string('bm_name')->nullable();
             $table->string('bm_contact')->nullable();
@@ -33,7 +34,7 @@ class CreateSiteVisitsTable extends Migration
             $table->string('road_size')->nullable();
             $table->unsignedBigInteger('ward_no')->nullable();
             $table->string('compound_wall')->nullable();
-            $table->enum('valuation_type', ['Land', 'land_Building', 'Apartment']);
+            $table->enum('valuation_type', ['Land', 'Land_Building', 'Apartment']);
             $table->enum('type_of_road', ['Earthern', 'RCC', 'Gravel', 'Goreto','Dead_End', 'Throughtout']);
             $table->enum('type_of_land', ['Planning','Flat','Khet','Slightly_Slope','Low_Land']);
             $table->enum('category_of_property', ['Residential','Commercial','Commercial_Residential','Other']);

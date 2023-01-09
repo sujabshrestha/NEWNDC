@@ -21,8 +21,8 @@ class CreatePermanetBoundariesAsPerGovtsTable extends Migration
             $table->string('north')->nullable();
             $table->string('south')->nullable();
             // May Need To Change To Valuation Table Instead of Valuation Details Table
-            $table->unsignedBigInteger('valuation_details_id');
-            $table->foreign('valuation_details_id')->references('id')->on('valuation_details');
+            $table->unsignedBigInteger('sitevisit_id');
+            $table->foreign('sitevisit_id')->references('id')->on('site_visits');
             $table->timestamps();
         });
     }

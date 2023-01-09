@@ -89,6 +89,12 @@ function () {
 
         Route::get('/lalpurja-submit/{id}','ReceptionistValuationController@lalpurjaSubmit')->name('lalpurjaSubmit');
 
+        Route::get('/landbased-submit/{id}','ReceptionistValuationController@landBasedSubmit')->name('landBasedSubmit');
+
+        Route::get('/gov-boundaries-submit/{id}','ReceptionistValuationController@govBoundarySubmit')->name('govBoundarySubmit');
+
+        Route::post('/valuation-final-submit/{id}','ReceptionistValuationController@valuationFinalSubmit')->name('valuationFinalSubmit');
+
 
 
     });

@@ -1,4 +1,4 @@
-@extends('layouts.admin.master')
+@extends('layouts.reception.master')
 
 @section('title', 'NDC | Valuation Long Form ')
 
@@ -23,13 +23,14 @@
                 </div>
                 <hr>
                 <div class="col-md-12">
-                    <form action="http://ndcnepal.com.np/ndc/valuation/savevaluation" method="post">
+                    <form action="{{ route('receptionist.valuation.valuationFinalSubmit', $sitevisit->id) }}"
+                        enctype="multipart/form-data" method="POST">
+                        @csrf
                         <div class="row">
-                            <div class="col-md-12 ">
-                                <div class="form-group>
-                                    <label style="color:
-                                    #dc1de9;margin-bottom: 0px;">
-                                    <h6><b>1 GENERAL DETAILS</b></h6>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label style="color:#dc1de9;margin-bottom: 0px;">
+                                        <h6><b>1 GENERAL DETAILS</b></h6>
                                     </label>
                                 </div>
                             </div>
@@ -37,13 +38,13 @@
 
                                 <div class="form-group">
                                     <label>Valuation Id</label>
-                                    <input type="text" name="valuation_id" id="valuation_id" required=""
-                                        value="NDC-" class="form-control" tabindex="-1" autocomplete="off">
+                                    <input type="text" name="valuation_id" id="valuation_id"  required="" readonly
+                                        value="{{ $sitevisit->registration_id }}" class="form-control" tabindex="-1" autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="valuationType">Valuation Type <span class="text-danger">*</span></label>
-                                <select class="form-control selectbox" name="valuation_type" id="valuationType"
+                                <select class="form-control selectbox" readonly name="valuation_type" id="valuationType"
                                     required="" valuationtype="" autofocus="">
                                     <option disabled selected>Select Valuation Type</option>
                                     <option @if (isset($sitevisit) && $sitevisit->valuation_type == 'Land') selected @endif value="Land">Land Only
@@ -56,7 +57,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="bankId">Bank <span class="text-danger">*</span></label>
-                                <select class="form-control selectbox" name="bank_id" id="bankId" required="">
+                                <select class="form-control selectbox" readonly name="bank_id" id="bankId" required="">
                                     <option disabled selected> Select Bank </option>
                                     @if (isset($banks))
                                         @foreach ($banks as $bank)
@@ -70,7 +71,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="branchId">Branch <span class="text-danger">*</span></label>
-                                <select class="form-control selectbox" name="branch_id" id="branchId" required="">
+                                <select class="form-control selectbox" readonly name="branch_id" id="branchId" required="">
                                     <option disabled selected> Select Branch </option>
                                     @if (isset($branches))
                                         @foreach ($branches as $branch)
@@ -83,7 +84,7 @@
 
                             <div class="form-group col-md-3">
                                 <label> Client <span class="text-danger">*</span></label>
-                                <select name="client_id" class="form-control" id="">
+                                <select name="client_id" readonly class="form-control" id="">
 
                                     @if (isset($clients))
                                         @foreach ($clients as $client)
@@ -97,7 +98,7 @@
 
                             <div class="form-group col-md-3">
                                 <label for="siteEngineerId">Site Engineer <span class="text-danger">*</span></label>
-                                <select class="form-control selectbox" name="site_engineer" id="TxtSiteEngineerId"
+                                <select class="form-control selectbox" readonly name="site_engineer" id="TxtSiteEngineerId"
                                     required="">
                                     <option disabled selected> Select Site Engineer </option>
                                     @if (isset($siteengineers))
@@ -116,12 +117,12 @@
                             </div>
                             <div class="form-group col-md-3" style="padding-left:6px;padding-right:6px;">
                                 <label>Prepration Date (BS) <span class="required">*</span></label>
-                                <input type="text" name="prepration_date" id="prepration_date" required=""
+                                <input type="date" name="prepration_date" id="prepration_date" required=""
                                     class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-3" style="padding-left:6px;padding-right:6px;">
                                 <label>Date (BS) (Ownership) <span class="required">*</span></label>
-                                <input type="text" name="date_ownership" id="date_ownership" required=""
+                                <input type="date" name="date_ownership" id="date_ownership" required=""
                                     class="form-control" autocomplete="off">
                             </div>
                             <div class="col-md-9"></div>
@@ -131,7 +132,8 @@
 
                                     @if (isset($patras))
                                         @foreach ($patras as $patra)
-                                            <input type="checkbox" class="form-check-input" name="patra[]">
+                                            <input type="checkbox" class="form-check-input" value="{{ $patra->id }}"
+                                                name="patra[]">
                                             <label class="form-check-label form-check-label mr-4"
                                                 for="ChkRajinama">{{ $patra->title }}</label>
                                         @endforeach
@@ -155,7 +157,7 @@
                                 </label>
                             </div>
 
-                            <form >
+                            <form>
                                 <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
                                     <label>Kita No</label>
                                     <input type="text" name="kita_no" id="kita_no" placeholder="Kita No"
@@ -211,57 +213,14 @@
                                 <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
                                     <label style="width: 100%;">&nbsp;</label>
                                     <button type="submit addAreaAPLalpurja"
-                                    data-url="{{ route('receptionist.valuation.lalpurjaSubmit', $sitevisit->id) }}"
+                                        data-url="{{ route('receptionist.valuation.lalpurjaSubmit', $sitevisit->id) }}"
                                         id="addAreaAPLalpurja" class="btn btn-info "
                                         style="padding: 2px 5px;">ADD</button>
                                 </div>
                             </form>
 
-                            <div class="form-group col-md-12">
-                                <table class="table table-bordered dataTable" id="TblAreaAsPerLalpurja"
-                                    style="width:100%;">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" width="30">Sno</th>
-                                            <th scope="col">Kita No</th>
-                                            <th scope="col">Sheet No</th>
-                                            <th scope="col">Ropani</th>
-                                            <th scope="col">Anna</th>
-                                            <th scope="col">Paisa</th>
-                                            <th scope="col">Dam</th>
-                                            <th scope="col">Area Sq.M</th>
-                                            <th scope="col">Area R-A-P-D</th>
-                                            <th scope="col">Area Sq.F</th>
-                                            <th scope="col">Area In Anna</th>
-                                            <th scope="col" width="50">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                    <tfoot class="thead-light">
-                                        <tr>
-                                            <th scope="col" colspan="3" style="text-align: right;">TOTAL AREA AS
-                                                PER LALPURJA</th>
-                                            <th scope="col"><label id="totalRopani"></label><input type="hidden"
-                                                    name="totalRopani" id="totalRopani" value="0"></th>
-                                            <th scope="col"><label id="totalAnna"></label><input type="hidden"
-                                                    name="totalAnna" id="totalAnna" value="0"></th>
-                                            <th scope="col"><label id="totalPaisa"></label><input type="hidden"
-                                                    name="totalPaisa" id="totalPaisa" value="0"></th>
-                                            <th scope="col"><label id="totalDam"></label><input type="hidden"
-                                                    name="totalDam" id="totalDam" value="0"></th>
-                                            <th scope="col"><label id="totalSqM"></label><input type="hidden"
-                                                    name="totalSqM" id="totalSqM" value="0"></th>
-                                            <th scope="col"><label id="totalRAPD"></label><input type="hidden"
-                                                    name="totalRAPD" id="totalRAPD" value="0"></th>
-                                            <th scope="col"><label id="totalSqF"></label><input type="hidden"
-                                                    name="totalSqF" id="totalSqF" value="0"></th>
-                                            <th scope="col"><label id="totalAreaInAnna"></label> <input type="hidden"
-                                                    name="totalAreaInAnna" id="totalAreaInAnna" value="0"></th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                            <div class="form-group col-md-12 appendLalpurja">
+                                @include('Receptionist::receptionist.valuations.appendLalpurjaData')
                             </div>
 
                             <div class="form-group col-md-12 mb-2">
@@ -355,88 +314,12 @@
                             </div>
                             <div class="form-group col-md-1" style="flex: 5%;max-width: 5%; padding-left: 0px;">
                                 <label style="width: 100%;">&nbsp;</label>
-                                <button type="button" class="btn btn-info" id="BtnAddAreaAPMeasurement"
-                                    style="padding: 2px 5px;">ADD</button>
+                                <button type="button" class="btn btn-info"
+                                    data-url="{{ route('receptionist.valuation.landBasedSubmit', $sitevisit->id) }}"
+                                    id="BtnAddAreaAPMeasurement" style="padding: 2px 5px;">ADD</button>
                             </div>
-                            <div class="form-group col-md-12">
-                                <table class="table table-bordered dataTable" id="TblAreaAsPerMeasurement"
-                                    style="width:100%">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" width="30">Sno</th>
-                                            <th scope="col">Area Symbol</th>
-                                            <th scope="col">Side A</th>
-                                            <th scope="col">Side B</th>
-                                            <th scope="col">Side C</th>
-                                            <th scope="col">S = (a+b+c)/2</th>
-                                            <th scope="col">Area Sq.F</th>
-                                            <th scope="col">Area Sq.M</th>
-                                            <th scope="col">Area In Anna</th>
-                                            <th scope="col">Area in (R-A-P-D)</th>
-                                            <th scope="col" width="50">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot class="thead-light">
-                                        <tr>
-                                            <th scope="col" colspan="2" style="text-align: right;">TOTAL AREA
-                                                BASED ON ACTUAL MEASUREMENT</th>
-                                            <th scope="col"><label id="LblTotalAreaSideA"></label><input
-                                                    type="hidden" name="totalAreaSideA" id="totalAreaSideA"
-                                                    value="0"></th>
-                                            <th scope="col"><label id="LblTotalAreaSideB"></label><input
-                                                    type="hidden" name="totalAreaSideB" id="totalAreaSideB"
-                                                    value="0"></th>
-                                            <th scope="col"><label id="LblTotalAreaSideC"></label><input
-                                                    type="hidden" name="totalAreaSideC" id="totalAreaSideC"
-                                                    value="0"></th>
-                                            <th scope="col"><label id="LblTotalAreaSideS"></label><input
-                                                    type="hidden" name="totalAreaSideS" id="totalAreaSideS"
-                                                    value="0"></th>
-                                            <th scope="col"><label id="LblTotalSqFAsPerCal"></label><input
-                                                    type="hidden" name="totalSqFAsPerCal" id="totalSqFAsPerCal"
-                                                    value="0"></th>
-                                            <th scope="col"><label id="LblTotalSqMAsPerCal"></label><input
-                                                    type="hidden" name="totalSqMAsPerCal" id="totalSqMAsPerCal"
-                                                    value="0"></th>
-                                            <th scope="col"><label id="LblTotalAreaInAnnaAPMeasurement"></label><input
-                                                    type="hidden" name="totalAreaInAnnaAPMeasurement"
-                                                    id="totalAreaInAnnaAPMeasurement" value="0"></th>
-                                            <th scope="col"><label
-                                                    id="LblTotalAreaInRPADAsPerMeasurement"></label><input type="hidden"
-                                                    name="totalAreaInRPADAsPerMeasurement"
-                                                    id="totalAreaInRPADAsPerMeasurement" value="0"></th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                            <div class="form-group col-md-12 appendLandBased">
+                                @include('Receptionist::receptionist.valuations.appendLandbasedData')
                             </div>
 
                             <div class="form-group col-md-12 mb-2">
@@ -690,7 +573,7 @@
                                     tabindex="-1">
                             </div>
 
-                            <div id="BuildingArea" class="col-md-12">
+                            {{-- <div id="BuildingArea" class="col-md-12">
                                 <div class="row">
                                     <div class="form-group col-md-12 mb-2">
                                         <label style="color: #dc1de9;margin-bottom: 0px;">
@@ -860,9 +743,8 @@
                                             id="constructionEstimateValue" placeholder="Construction Estimate Value"
                                             class="form-control" autocomplete="off" required="" value="0">
                                     </div>
-                                    <input type="hidden" name="constructionDistressValue"
-                                        id="constructionDistressValue" tabindex="-1" readonly="readonly"
-                                        class="form-control" autocomplete="off">
+                                    <input type="hidden" name="constructionDistressValue" id="constructionDistressValue"
+                                        tabindex="-1" readonly="readonly" class="form-control" autocomplete="off">
                                     <input type="hidden" name="totalDistressValueOfBuilding"
                                         id="totalDistressValueOfBuilding" tabindex="-1" readonly="readonly"
                                         class="form-control" autocomplete="off">
@@ -888,7 +770,7 @@
                                             autocomplete="off" value="0">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group col-md-12 mb-2">
                                 <label style="color: #dc1de9;margin-bottom: 0px;">
@@ -908,13 +790,13 @@
                             </div>
                             <div class="form-group col-md-2">
                                 <label>East</label>
-                                <input type="text" name="eastAPBoundaries" id="eastAPBoundaries"
-                                    placeholder="East" class="form-control" autocomplete="off">
+                                <input type="text" name="eastAPBoundaries" id="eastAPBoundaries" placeholder="East"
+                                    class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>West</label>
-                                <input type="text" name="westAPBoundaries" id="westAPBoundaries"
-                                    placeholder="West" class="form-control" autocomplete="off">
+                                <input type="text" name="westAPBoundaries" id="westAPBoundaries" placeholder="West"
+                                    class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>North</label>
@@ -928,44 +810,11 @@
                             </div>
                             <div class="form-group col-md-2 pl-0">
                                 <label style="width: 100%;">&nbsp;</label>
-                                <button type="button" class="btn btn-info" id="BtnAddBoundariesAsPerKitaNo"
+                                <button type="button" class="btn btn-info" data-url="{{ route('receptionist.valuation.govBoundarySubmit', $sitevisit->id) }}" id="BtnAddBoundariesAsPerKitaNo"
                                     style="padding: 2px 5px;">ADD</button>
                             </div>
-                            <div class="form-group col-md-12">
-                                <table class="table table-bordered dataTable" id="TblBoundariesAsPerKitaNo"
-                                    style="width:100%">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" width="30">Sno</th>
-                                            <th scope="col">Kita No</th>
-                                            <th scope="col">East</th>
-                                            <th scope="col">West</th>
-                                            <th scope="col">North</th>
-                                            <th scope="col">South</th>
-                                            <th scope="col" width="50">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="form-group col-md-12 appendGovBoundaries">
+                                @include('Receptionist::receptionist.valuations.appendgovBoundaryData')
                             </div>
                             <div class="form-group col-md-12 mb-2">
                                 <label style="margin-bottom: 0px;">
@@ -976,9 +825,8 @@
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Kita No</label>
-                                <input type="text" name="aPSiteVisitBoundariesKitaNo"
-                                    id="aPSiteVisitBoundariesKitaNo" placeholder="Kita No" class="form-control"
-                                    autocomplete="off">
+                                <input type="text" name="aPSiteVisitBoundariesKitaNo" id="aPSiteVisitBoundariesKitaNo"
+                                    placeholder="Kita No" class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>East</label>
@@ -992,15 +840,13 @@
                             </div>
                             <div class="form-group col-md-2">
                                 <label>North</label>
-                                <input type="text" name="northAPSiteVisitBoundaries"
-                                    id="northAPSiteVisitBoundaries" placeholder="North" class="form-control"
-                                    autocomplete="off">
+                                <input type="text" name="northAPSiteVisitBoundaries" id="northAPSiteVisitBoundaries"
+                                    placeholder="North" class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>South</label>
-                                <input type="text" name="southAPSiteVisitBoundaries"
-                                    id="southAPSiteVisitBoundaries" placeholder="South" class="form-control"
-                                    autocomplete="off">
+                                <input type="text" name="southAPSiteVisitBoundaries" id="southAPSiteVisitBoundaries"
+                                    placeholder="South" class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-2 pl-0">
                                 <label style="width:100%">&nbsp;</label>
@@ -1152,8 +998,8 @@
                             </div>
 
 
-                            <input type="hidden" name="holdType" id="holdType" class="form-control"
-                                value="Free Hold" autocomplete="off">
+                            <input type="hidden" name="holdType" id="holdType" class="form-control" value="Free Hold"
+                                autocomplete="off">
                             <div class="form-group col-md-2">
                                 <label>
                                     <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
@@ -1355,63 +1201,20 @@
                             <div class="form-group col-md-6">
                                 <label>Upload Picture &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
                                 <input type="file" name="UploadPicture" id="UploadPicture">
-                                <table class="table table-bordered dataTable" style="width:100%"
-                                    id="TblUploadPicture">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" width="20">Sno</th>
-                                            <th scope="col">File Name <a href="#" class="text-danger"
-                                                    data-toggle="modal" data-target="#ViewAllPictureModal"> View</a>
-                                            </th>
-                                            <th scope="col" width="30">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+
+                                @include('Receptionist::receptionist.valuations.appendDocument')
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label>Upload CAD Jpg Doc</label>
                                 <input type="file" name="UploadDocument" id="UploadDocument">
-                                <table class="table table-bordered dataTable" style="width:100%"
-                                    id="TblUploadDocument">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" width="20">Sno</th>
-                                            <th scope="col">File Name <a href="#" class="text-danger"
-                                                    data-toggle="modal" data-target="#ViewAllCADJpgModal"> View</a></th>
-                                            <th scope="col" width="30">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                @include('Receptionist::receptionist.valuations.appendLegalDocument')
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label>Upload Legal Scan Doc</label>
-                                <input type="file" name="UploadScanDocument" id="UploadScanDocument">
+                                <input type="file" name="UploadScanDocuments[]" multiple=""
+                                    id="UploadScanDocument">
                                 <table class="table table-bordered dataTable" style="width:100%"
                                     id="TblUploadScanDocument">
                                     <thead class="thead-light">
@@ -1439,7 +1242,8 @@
 
                             <div class="form-group col-md-6">
                                 <label>Upload Internal CAD Doc</label>
-                                <input type="file" name="UploadInternalDocument" id="UploadInternalDocument">
+                                <input type="file" name="UploadInternalDocuments[]" multiple=""
+                                    id="UploadInternalDocument">
                                 <table class="table table-bordered dataTable" style="width:100%"
                                     id="TblUploadInternalDocument">
                                     <thead class="thead-light">
@@ -1465,10 +1269,10 @@
                             </div>
 
                             <div class="form-group col-md-12">
-                                <button type="button" class="btn btn-info float-right btn-sm ml-3"
+                                <button type="submit" class="btn btn-info float-right btn-sm ml-3"
                                     id="BtnSaveValuation">Submit</button>
-                                <button type="button" class="btn btn-primary float-right btn-sm"
-                                    id="BtnSaveValuationAndStay">Submit &amp; Stay</button>
+                                {{-- <button type="button" class="btn btn-primary float-right btn-sm"
+                                    id="BtnSaveValuationAndStay">Submit &amp; Stay</button> --}}
                             </div>
                         </div>
                     </form>
@@ -1487,14 +1291,16 @@
             var sqm_as_lalpurja = currentthis.val();
             var ropani = (parseFloat(sqm_as_lalpurja) / 508.74);
             var aana = (parseFloat(sqm_as_lalpurja) / 31.79);
-            var paisa = (parseFloat(sqm_as_lalpurja) / 7.95);
+            var paisa = (parseFloat(sqm_as_lalpurja) / 85.56);
             var dam = (parseFloat(sqm_as_lalpurja) / 1.99);
-            var sqft = (parseFloat(sqm_as_lalpurja) * 10.7639);
-            console.log(aana);
+            var sqft = (parseFloat(sqm_as_lalpurja) / 10.7639);
+            console.log(ropani + "-" + aana + "-" + paisa + "-" + dam);
             $('#ropani_as_lalpurja').val(ropani);
             $('#anna_as_lalpurja').val(aana);
             $('#paisa_as_lalpurja').val(paisa);
             $('#dam_as_lalpurja').val(dam);
+            $('#rapd_as_lalpurja').val(parseInt(ropani) + "-" + parseInt(aana) + "-" + parseInt(paisa) + "-" +
+                parseInt(dam));
             // alert(sqm_as_lalpurja);
         });
     </script>
@@ -1513,52 +1319,210 @@
             var dam = $('#dam_as_lalpurja').val();
             var rapd = $('#rapd_as_lalpurja').val();
             var sqf = $('#sqf_as_lalpurja').val();
-            var sqm  = $('#sqm_as_lalpurja').val();
+            var sqm = $('#sqm_as_lalpurja').val();
             var area = $('#area_in_anna_as_lalpurja').val();
 
             var route = $(this).data('url');
 
-            $.ajax({
-                type: "GET",
-                url: route,
 
-                data: {
-                    kitano : kitano,
-                    sheetno : sheetno,
-                    ropani :ropani,
-                    aana:aana,
-                    paisa: paisa,
-                    dam : dam,
-                    rapd:rapd,
-                    sqf:sqf,
-                    sqm:sqm,
-                    area: area
-                },
-                beforeSend: function(data) {
-                    loader();
-                },
-                success: function(data) {
+            if (sqm == '' || kitano == '' || sheetno == '') {
+                toastr.error('[Kitano, Sheetno, Area in Sq.M] cannot be empty');
+            } else {
+                $.ajax({
+                    type: "GET",
+                    url: route,
 
-                    toastr.success(data.message);
+                    data: {
+                        kitano: kitano,
+                        sheetno: sheetno,
+                        ropani: ropani,
+                        aana: aana,
+                        paisa: paisa,
+                        dam: dam,
+                        rapd: rapd,
+                        sqf: sqf,
+                        sqm: sqm,
+                        area: area
+                    },
+                    beforeSend: function(data) {
+                        loader();
+                    },
+                    success: function(data) {
+                        $('.appendLalpurja').html(data.data.view);
+                        toastr.success(data.message);
+                        var kitano = $('#kita_no').val('');
+                        var sheetno = $('#sheet_no').val('');
+                        var ropani = $('#ropani_as_lalpurja').val('');
+                        var aana = $('#anna_as_lalpurja').val('');
+                        var paisa = $('#paisa_as_lalpurja').val('');
+                        var dam = $('#dam_as_lalpurja').val('');
+                        var rapd = $('#rapd_as_lalpurja').val('');
+                        var sqf = $('#sqf_as_lalpurja').val('');
+                        var sqm = $('#sqm_as_lalpurja').val('');
+                        var area = $('#area_in_anna_as_lalpurja').val('');
 
-                    currentevent.attr('disabled', false);
+                        currentevent.attr('disabled', false);
 
-                },
-                error: function(err) {
-                    if (err.status == 422) {
-                        $.each(err.responseJSON.errors, function(i, error) {
-                            var el = $(document).find('[name="' + i + '"]');
-                            el.after($('<span style="color: red;">' + error[0] + '</span>')
-                                .fadeOut(4000));
-                        });
+                    },
+                    error: function(err) {
+                        if (err.status == 422) {
+                            $.each(err.responseJSON.errors, function(i, error) {
+                                var el = $(document).find('[name="' + i + '"]');
+                                el.after($('<span style="color: red;">' + error[0] + '</span>')
+                                    .fadeOut(4000));
+                            });
+                        }
+
+                        currentevent.attr('disabled', false);
+                    },
+                    complete: function() {
+                        $.unblockUI();
                     }
+                });
+            }
 
-                    currentevent.attr('disabled', false);
-                },
-                complete: function() {
-                    $.unblockUI();
-                }
-            });
+
+
+
+        });
+
+
+        //actual measurement
+        $(document).on('click', '#BtnAddAreaAPMeasurement', function(e) {
+
+            e.preventDefault();
+            var currentevent = $(this);
+            var sideA = $('#sideA').val();
+            var areaSymbol = $('#areaSymbol').val();
+            var sideB = $('#sideB').val();
+            var sideC = $('#sideC').val();
+            var sideS = $('#sideS').val();
+            var sqFAPMeasurement = $('#sqFAPMeasurement').val();
+            var sqMAPMeasurement = $('#sqMAPMeasurement').val();
+            var areaInAnnaAPMeasurement = $('#areaInAnnaAPMeasurement').val();
+
+
+            var route = $(this).data('url');
+
+
+            if (areaSymbol == '' || sideB == '' || sideC == '' || sideA == '') {
+                toastr.error("[Side A, Side B, Side C, Area Symbol ] is required");
+            } else {
+                $.ajax({
+                    type: "GET",
+                    url: route,
+
+                    data: {
+                        sideA: sideA,
+                        areaSymbol: areaSymbol,
+                        sideB: sideB,
+                        sideC: sideC,
+                        sqFAPMeasurement: sqFAPMeasurement,
+                        sideS: sideS,
+                        sqMAPMeasurement: sqMAPMeasurement,
+                        areaInAnnaAPMeasurement: areaInAnnaAPMeasurement,
+
+                    },
+                    beforeSend: function(data) {
+                        loader();
+                    },
+                    success: function(data) {
+                        $('.appendLandBased').html(data.data.view);
+                        toastr.success(data.message);
+                        var sideA = $('#sideA').val('');
+                        var areaSymbol = $('#areaSymbol').val('');
+                        var sideB = $('#sideB').val('');
+                        var sideC = $('#sideC').val('');
+                        var sideS = $('#sideS').val('');
+                        var sqFAPMeasurement = $('#sqFAPMeasurement').val('');
+                        var sqMAPMeasurement = $('#sqMAPMeasurement').val('');
+                        var areaInAnnaAPMeasurement = $('#areaInAnnaAPMeasurement').val('');
+                        currentevent.attr('disabled', false);
+
+                    },
+                    error: function(err) {
+                        if (err.status == 422) {
+                            $.each(err.responseJSON.errors, function(i, error) {
+                                var el = $(document).find('[name="' + i + '"]');
+                                el.after($('<span style="color: red;">' + error[0] + '</span>')
+                                    .fadeOut(4000));
+                            });
+                        }
+
+                        currentevent.attr('disabled', false);
+                    },
+                    complete: function() {
+                        $.unblockUI();
+                    }
+                });
+            }
+
+
+
+        });
+
+
+        //goverment
+
+        $(document).on('click', '#BtnAddBoundariesAsPerKitaNo', function(e) {
+
+            e.preventDefault();
+            var currentevent = $(this);
+            var boundariesKitaNo = $('#boundariesKitaNo').val();
+            var eastAPBoundaries = $('#eastAPBoundaries').val();
+            var westAPBoundaries = $('#westAPBoundaries').val();
+            var northAPBoundaries = $('#northAPBoundaries').val();
+            var southAPBoundaries = $('#southAPBoundaries').val();
+
+            var route = $(this).data('url');
+
+
+            if (boundariesKitaNo == '' || eastAPBoundaries == '' || westAPBoundaries == '' || northAPBoundaries == '' || southAPBoundaries == '') {
+                toastr.error("[Kita No , east, west, north , 'south'] boundaries are required");
+            } else {
+                $.ajax({
+                    type: "GET",
+                    url: route,
+
+                    data: {
+                        boundariesKitaNo: boundariesKitaNo,
+                        eastAPBoundaries: eastAPBoundaries,
+                        westAPBoundaries: westAPBoundaries,
+                        northAPBoundaries: northAPBoundaries,
+                        southAPBoundaries: southAPBoundaries,
+                    },
+                    beforeSend: function(data) {
+                        loader();
+                    },
+                    success: function(data) {
+                        $('.appendGovBoundaries').html(data.data.view);
+                        toastr.success(data.message);
+                        $('#boundariesKitaNo').val('');
+                        $('#eastAPBoundaries').val('');
+                        $('#westAPBoundaries').val('');
+                        $('#northAPBoundaries').val('');
+                        $('#southAPBoundaries').val('');
+                        currentevent.attr('disabled', false);
+
+                    },
+                    error: function(err) {
+                        if (err.status == 422) {
+                            $.each(err.responseJSON.errors, function(i, error) {
+                                var el = $(document).find('[name="' + i + '"]');
+                                el.after($('<span style="color: red;">' + error[0] + '</span>')
+                                    .fadeOut(4000));
+                            });
+                        }
+
+                        currentevent.attr('disabled', false);
+                    },
+                    complete: function() {
+                        $.unblockUI();
+                    }
+                });
+            }
+
+
 
         });
     </script>
