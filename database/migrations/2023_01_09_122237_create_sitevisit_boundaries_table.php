@@ -13,7 +13,11 @@ class CreateSitevisitBoundariesTable extends Migration
      */
     public function up()
     {
+<<<<<<< HEAD:database/migrations/2023_01_09_122237_create_sitevisit_boundaries_table.php
         Schema::create('sitevisit_boundaries', function (Blueprint $table) {
+=======
+        Schema::create('permanet_boundaries_as_per_site_visits', function (Blueprint $table) {
+>>>>>>> 41767575ce9e372261318e0fdb682dd03f0700cf:database/migrations/2023_01_08_143740_create_permanet_boundaries_as_per_site_visits_table.php
             $table->id();
             $table->string('kita_no')->nullable();
             $table->string('east')->nullable();
