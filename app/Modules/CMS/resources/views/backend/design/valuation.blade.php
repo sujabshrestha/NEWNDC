@@ -937,6 +937,27 @@
 @endsection
 @push('scripts')
 
+<script>
+    //  BUILDING CALCULATIONS
+    // $(document).on('keyup','#floorAreaInSqF,#floorRate,#sanitaryPulumbingPercentage,#electricityWorkPercentage,#floorDepriciationPercentage',function(){
+    //     var floorArea = $('#floorAreaInSqF').val();
+    //     var floorRate = $('#floorRate').val();
+    //     var floorAmt = floorArea*floorRate;
+    //     $('#floorAmount').val(floorAmt);
+
+    //     var sanitary = $('#sanitaryPulumbingPercentage').val()/100;
+    //     var electric = $('#electricityWorkPercentage').val()/100;
+    //     var depriciation = $('#floorDepriciationPercentage').val()/100;
+
+    //     var sanitaryAmt = sanitary*floorAmt;
+    //     var electricAmt = electric*floorAmt;
+    //     var depriciationAmt = depriciation*floorAmt;
+    //     var floorNetAmount = sanitaryAmt+electricAmt+depriciationAmt+floorAmt;
+    //     $('#floorNetAmount').val(floorNetAmount);
+
+    // })
+</script>
+
     <script>
         $(document).on('keyup','#sqm_as_lalpurja',function(){
             var SqM = $(this).val()     
@@ -984,6 +1005,19 @@
         })
 
 
+       
+
+        $("#annaAPLalpurja").blur(function(){ if($(this).val()>16){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true ); return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
+        $("#paisaAPLalpurja").blur(function(){ if($(this).val()>4){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true );  return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
+        $("#damAPLalpurja").blur(function(){ if($(this).val()>4){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true ); return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
+
+        $("#constructionEstimateValue").blur(function(){
+        var _v3 = Number($('#bankId').attr("myfairmarketvalue"));
+        //var k =Number($(this).val());
+        $("#constructionDistressValue").val(Number((Number($(this).val())/100)*_v3).toFixed(2));
+        $("#totalDistressValueOfBuilding").val(Number(((Number($(this).val())+Number($("#fairMarketValueOfLand").val()))/100)*_v3).toFixed(2));
+        });
+
         $("#sideA,#sideB,#sideC").keyup(function() {
             var SideA = Number($("#sideA").val());
             var SideB = Number($("#sideB").val());
@@ -996,33 +1030,7 @@
             var SqFAPMeasurement = $('#sqFAPMeasurement').val();
             $('#areaInAnnaAPMeasurement').val(Number(SqFAPMeasurement/342.25).toFixed(2));
         });
-    </script>
 
-
-
-    <script>
-            //  BUILDING CALCULATIONS
-            $(document).on('keyup','#floorAreaInSqF,#floorRate,#sanitaryPulumbingPercentage,#electricityWorkPercentage,#floorDepriciationPercentage',function(){
-                var floorArea = $('#floorAreaInSqF').val();
-                var floorRate = $('#floorRate').val();
-                var floorAmt = floorArea*floorRate;
-                $('#floorAmount').val(floorAmt);
-
-                var sanitary = $('#sanitaryPulumbingPercentage').val()/100;
-                var electric = $('#electricityWorkPercentage').val()/100;
-                var depriciation = $('#floorDepriciationPercentage').val()/100;
-
-                var sanitaryAmt = sanitary*floorAmt;
-                var electricAmt = electric*floorAmt;
-                var depriciationAmt = depriciation*floorAmt;
-                var floorNetAmount = sanitaryAmt+electricAmt+depriciationAmt+floorAmt;
-                $('#floorNetAmount').val(floorNetAmount);
-
-            })
-    </script>
-
-
-    <script>
         //   Government Rate of Land
         $(document).on('keyup','#perAnnaAPGovRate',function(){
             var perAnnaAPGovRate = $('#perAnnaAPGovRate').val();
@@ -1046,6 +1054,51 @@
       CalculateConsiderationArea();
       CalculationAreaRate();
     });
+
+  
+
+    $("#perAnnaAPGovRate").change(function() {
+      $('#perSqFAPGovRate').val(Number(Number($(this).val()) / 342.25).toFixed(2));
+      $('#perRopaniAPGovRate').val(Number(Number($(this).val())*16).toFixed(2));
+      CalculationAreaRate();
+    });
+
+    $("#perAnnaAPMarketRate").change(function() {
+      $('#perSqFAPMarketRate').val(Number(Number($(this).val()) / 342.25).toFixed(2));
+      $('#perRopaniAPMarketRate').val(Number(Number($(this).val())*16).toFixed(2));
+      CalculationAreaRate();
+    });
+
+    function BindAreaAsPerCalculation(data){
+      var obj = $.parseJSON(data);
+      $('#TxtAreaSymbol').focus();
+      $("#TblAreaAsPerMeasurement > tbody").find("tr").remove();
+      var TotalSideA = 0,TotalSideB = 0,TotalSideC = 0,TotalSideS = 0,TotalSqFAPMeasurement = 0,TotalSqMAPMeasurement = 0,TotalAreaInAnnaAPMeasurement=0;
+      $.each(obj, function(i, item) {
+        TotalSideA = TotalSideA + Number(item.SideA);
+        TotalSideB = TotalSideB + Number(item.SideB);
+        TotalSideC = TotalSideC + Number(item.SideC);
+        TotalSideS = TotalSideS + Number(item.SideS);
+        TotalSqFAPMeasurement = TotalSqFAPMeasurement + Number(item.SqFAPMeasurement);
+        TotalSqMAPMeasurement = TotalSqMAPMeasurement + Number(item.SqMAPMeasurement);
+        TotalAreaInAnnaAPMeasurement = TotalAreaInAnnaAPMeasurement + Number(item.AreaInAnnaAPMeasurement);
+        var AreaInRPADAsPerMeasurement = SqFToRAPD(Number(item.SqFAPMeasurement).toFixed(2));
+        $('#TblAreaAsPerMeasurement > tbody').append('<tr><th scope="row">'+(i+1)+'</th><td>'+item.AreaSymbol+'</td><td>'+item.SideA+'</td><td>'+item.SideB+'</td><td>'+item.SideC+'</td><td>'+item.SideS+'</td><td>'+item.SqFAPMeasurement+'</td><td>'+item.SqMAPMeasurement+'</td><td>'+item.AreaInAnnaAPMeasurement+'</td><td>'+AreaInRPADAsPerMeasurement+'</td><td><a href="#" class="btn btn-link text-danger btn-sm btneditdelete BtnRemoveAreaAsPerCal" SNo="'+item.SNo+'" DataSource="'+item.datasource+'" tabindex="-1"><i class="far fa-trash-alt"></i> REMOVE</a></td></tr>');
+      });
+
+      $('#LblTotalAreaSideA').text(TotalSideA.toFixed(2)); $('#TxtTotalAreaSideA').val(TotalSideA.toFixed(2));
+      $('#LblTotalAreaSideB').text(TotalSideB.toFixed(2)); $('#TxtTotalAreaSideB').val(TotalSideB.toFixed(2));
+      $('#LblTotalAreaSideC').text(TotalSideC.toFixed(2)); $('#TxtTotalAreaSideC').val(TotalSideC.toFixed(2));
+      $('#LblTotalAreaSideS').text(TotalSideS.toFixed(2)); $('#TxtTotalAreaSideS').val(TotalSideS.toFixed(2));
+      $('#LblTotalSqFAsPerCal').text(Number(TotalSqFAPMeasurement).toFixed(2)); $('#TxtTotalSqFAsPerCal').val(TotalSqFAPMeasurement);
+      $('#LblTotalSqMAsPerCal').text(Number(TotalSqMAPMeasurement).toFixed(2)); $('#TxtTotalSqMAsPerCal').val(TotalSqMAPMeasurement.toFixed(2));
+      $('#LblTotalAreaInAnnaAPMeasurement').text(Number(TotalAreaInAnnaAPMeasurement).toFixed(2)); $('#TxtTotalAreaInAnnaAPMeasurement').val(TotalAreaInAnnaAPMeasurement.toFixed(2));
+      var TotalAreaInRPADAsPerMeasurement = SqFToRAPD(Number(TotalSqFAPMeasurement).toFixed(2));
+      $('#LblTotalAreaInRPADAsPerMeasurement').text(TotalAreaInRPADAsPerMeasurement); $('#TxtTotalAreaInRPADAsPerMeasurement').val(TotalAreaInRPADAsPerMeasurement);
+
+      CalculateConsiderationArea();
+      CalculationAreaRate();
+    }
 
     function CalculateConsiderationArea(){
       var _v1= Number($('#totalAreaInAnna').val());
@@ -1087,7 +1140,6 @@
         $('#afterIrregularShapeSloppyLandAreaInRPAD').val(SqFToRAPD(Number(x3).toFixed(2)));
       }
       else{
-        alert('asdkhkhk');
         var TotalSqF = Number($("#totalSqF").val());
         var _v1 =(TotalSqF/100)*LandDevelopmentPercent;
         var _v2 =(TotalSqF/100)*BoundryCorrectionPercent;
@@ -1129,17 +1181,21 @@
       $('#afterRiverAreaInRPAD').val(SqFToRAPD(Number(DeductionForRiverSqF).toFixed(2)));
     }
 
-    $("#perAnnaAPGovRate").change(function() {
-      $('#perSqFAPGovRate').val(Number(Number($(this).val()) / 342.25).toFixed(2));
-      $('#perRopaniAPGovRate').val(Number(Number($(this).val())*16).toFixed(2));
-      CalculationAreaRate();
-    });
-
-    $("#perAnnaAPMarketRate").change(function() {
-      $('#perSqFAPMarketRate').val(Number(Number($(this).val()) / 342.25).toFixed(2));
-      $('#perRopaniAPMarketRate').val(Number(Number($(this).val())*16).toFixed(2));
-      CalculationAreaRate();
-    });
+    function SqFToRAPD(SqF){
+      var TotalRopani = SqF/(16*342.25);
+      var OnlyRopani = TotalRopani.toString().split(".")[0];
+      var RemainingRopani = (TotalRopani-OnlyRopani);
+      var TotalAana = RemainingRopani*(16);
+      var OnlyAana = TotalAana.toString().split(".")[0];
+      var RemainingAana = (TotalAana-OnlyAana);
+      var RemainingAanaToSQF = RemainingAana*342.25;
+      var TotalPaisa = RemainingAanaToSQF/(85.6);
+      var OnlyPaisa = TotalPaisa.toString().split(".")[0];
+      var RemainingPaisa = (TotalPaisa-OnlyPaisa);
+      var RemainingPaisaToSQF = RemainingPaisa*85.6;
+      var OnlyDam = RemainingPaisaToSQF/(21.4);
+      return Number(OnlyRopani)+'-'+Number(OnlyAana)+'-'+Number(OnlyPaisa)+'-'+Number(OnlyDam).toFixed(2);
+    }
 
     function CalculationAreaRate(){
       var v1 = Number($('#perAnnaAPGovRate').val());
@@ -1180,6 +1236,77 @@
         $('#distressValueOfLand').val(Number(Number($('#perAnnaAPDistressRate').val()) * Number($('#totalAreaInAnna').val())).toFixed(2));
       }
     }
+
+    function ToTwoDecimalPlaces(input) {
+      var value =Number(input);
+      var splitValue = value.toString().split(".");
+      if (Number(splitValue[1]) > 0) {
+        return  value.toFixed(2);
+      }
+      else {
+        return  splitValue[0];
+      }
+    }
+
+    function convertFromTotalSqft(t, e) {
+      total_sqmt = .092903 * t, 
+      total_paisa = t / 85.56, 
+      total_dhur = t / 182.25, 
+      ropaniPart = Math.floor(total_paisa / 64), 
+      remainingPaisa = total_paisa - 64 * ropaniPart, 
+      aanaPart = Math.floor(remainingPaisa / 4), 
+      remainingPaisa -= 4 * aanaPart, 
+      paisaPart = Math.floor(remainingPaisa), 
+      remainingPaisa -= paisaPart, 
+      damPart = 4 * remainingPaisa, 
+      bighaPart = Math.floor(total_dhur / 400), 
+      remainingDhur = total_dhur - 400 * bighaPart, 
+      kathhaPart = Math.floor(remainingDhur / 20), 
+      remainingDhur -= 20 * kathhaPart, 
+      dhurPart = remainingDhur, 
+      "np" == e ? (ropaniText = " à¤°à¥‹à¤ªà¤¨à¥€ ", aanaText = " à¤†à¤¨à¤¾ ", paisaText = " à¤ªà¥ˆà¤¸à¤¾ ", damText = " à¤¦à¤¾à¤® ", bighaText = " à¤¬à¤¿à¤—à¤¾ ", kathhaText = " à¤•à¤ à¥à¤ à¤¾ ", dhurText = " à¤§à¥à¤° ", sqmtText = " à¤µà¤°à¥à¤— à¤®à¤¿à¤Ÿà¤° ", sqftText = " à¤µà¤°à¥à¤— à¤«à¤¿à¤Ÿ ") : (ropaniText = " Ropani ", aanaText = " Aana ", paisaText = " Paisa ", damText = " Dam ", bighaText = " Bigha ", kathhaText = " Kathha ", dhurText = " Dhur ", sqmtText = " Square Meter ", sqftText = " Square Feet "), 
+      ropaniResult = ropaniPart + ropaniText + aanaPart + aanaText + paisaPart + paisaText + damPart.toFixed(2) + damText, 
+      bighaResult = bighaPart + bighaText + kathhaPart + kathhaText + dhurPart.toFixed(2) + dhurText, 
+      squareFeetResult = t.toFixed(2) + sqftText, squareMeterResult = total_sqmt.toFixed(2) + sqmtText,
+      //  $("#ropaniResult").html(ropaniResult), 
+      //  $("#bighaResult").html(bighaResult), 
+      //  $("#squareFeetResult").html(squareFeetResult), 
+      //  $("#squareMeterResult").html(squareMeterResult)
+       damPart = damPart>1?damPart.toFixed(2):0;
+       return ropaniPart +'-'+ aanaPart +'-'+ paisaPart +'-'+ damPart;
+    }
+
+    function BindBuildingCalculation(data){
+      var obj = $.parseJSON(data);
+      $("#TblBuildingCalculation > tbody").find("tr").remove();
+      var TotalBuildingAreaSqF=0,TotalBuildingAmount = 0,TotalBuildingDepriciation = 0,TotalFloorNetAmount=0,TotalBuildingFairMarketValue = 0,TotalBuildingDistressValue=0;
+      $.each(obj, function(i, item) {
+        TotalBuildingAreaSqF = TotalBuildingAreaSqF + Number(item.FloorAreaInSqF);
+        TotalBuildingAmount = TotalBuildingAmount + Number(item.FloorAmount);
+        TotalFloorNetAmount = TotalFloorNetAmount + Number(item.FloorNetAmount);
+        TotalBuildingDepriciation = TotalBuildingDepriciation + Number(item.FloorDepriciationAmount);
+        TotalBuildingFairMarketValue = TotalBuildingFairMarketValue + Number(item.FloorFairMarketValue);
+        TotalBuildingDistressValue = TotalBuildingDistressValue + Number(item.DistressValue);
+        $('#TblBuildingCalculation > tbody').append('<tr><th scope="row">'+(i+1)+'</th><td>'+item.Floor+'</td><td>'+item.FloorAreaInSqF+'</td><td>'+item.FloorRate+'</td><td>'+item.FloorAmount+'</td><td>'+item.FloorAge+'</td><td>'+item.FloorDepriciationPercentage+'</td><td>'+item.SanitaryPulumbingPercentage+'</td><td>'+item.ElectricityWorkPercentage+'</td><td>'+item.FloorNetAmount+'</td><td>'+item.FloorDepriciationAmount+'</td><td>'+item.FloorFairMarketValue+'</td><td>'+item.DistressValue+'</td><td><a href="#" class="btn btn-link text-danger btn-sm btneditdelete BtnRemoveBuildingCalculation" SNo="'+item.SNo+'" DataSource="'+item.datasource+'" tabindex="-1"><i class="far fa-trash-alt"></i> REMOVE</a></td></tr>');
+      });
+
+
+      $('#totalBuildingAreaSqF').text(TotalBuildingAreaSqF.toFixed(2)); 
+      $('#totalBuildingAreaSqF').val(TotalBuildingAreaSqF.toFixed(2));
+      $('#totalBuildingAmount').text(TotalBuildingAmount.toFixed(2)); 
+      $('#totalBuildingAmount').val(TotalBuildingAmount.toFixed(2));
+      $('#totalNetBuildingAmount').text(TotalFloorNetAmount.toFixed(2)); 
+      $('#totalNetBuildingAmount').val(TotalFloorNetAmount.toFixed(2));
+      $('#totalBuildingDepriciation').text(TotalBuildingDepriciation.toFixed(2)); 
+      $('#totalBuildingDepriciation').val(TotalBuildingDepriciation.toFixed(2));
+      $('#totalBuildingFairMarketValue').text(TotalBuildingFairMarketValue.toFixed(2)); 
+      $('#totalBuildingFairMarketValue').val(TotalBuildingFairMarketValue.toFixed(2));
+      $('#totalBuildingDistressValue').text(TotalBuildingDistressValue.toFixed(2)); 
+      $('#totalBuildingDistressValue').val(TotalBuildingDistressValue.toFixed(2));
+    }
+
+
+
 
     </script>
 
