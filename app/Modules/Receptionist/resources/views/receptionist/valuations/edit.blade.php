@@ -57,13 +57,17 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="bankId">Bank <span class="text-danger">*</span></label>
-                                <select class="form-control selectbox" readonly name="bank_id" id="bankId" required="">
+                                <select class="form-control selectbox" readonly name="bank_id" id="bankId" required=""
+                                mycommercialvalue="{{ $sitevisit->bank->commercial_rate }}"  mygovernmentvalue="{{ $sitevisit->bank->governmant_rate }}" 
+                                myfairmarketvalue="{{ $sitevisit->bank->fair_market_rate }}" 
+                                myisfairmarketcalculationgovwise="{{ $sitevisit->bank->govt_fair_market_cal }}" myisfairmarketcalculationmarketwise="{{ $sitevisit->bank->commercial_fair_market_cal }}" 
+                                myisdistresscalculationgovwise="{{ $sitevisit->bank->govt_distress_cal }}" myisdistresscalculationfairmarketwise="{{ $sitevisit->bank->fair_market_distress_cal  }}">
                                     <option disabled selected> Select Bank </option>
                                     @if (isset($banks))
                                         @foreach ($banks as $bank)
-                                            <option @if (isset($sitevisit) && $sitevisit->bank_id == $bank->id) selected @endif
+                                            <option  @if (isset($sitevisit) && $sitevisit->bank_id == $bank->id) selected @endif
                                                 value="{{ $bank->id }}" mycommercialvalue="{{ $bank->commercial_rate }}" 
-                                                mygovernmentvalue="{{ $bank->government_rate }}" myfairmarketvalue="{{ $bank->fair_market_rate }}">{{ $bank->name }} </option>
+                                                mygovernmentvalue="{{ $bank->governmant_rate }}" myfairmarketvalue="{{ $bank->fair_market_rate }}">{{ $bank->name }} </option>
                                         @endforeach
                                     @endif
 
@@ -1645,7 +1649,7 @@
 
     function BindAreaAsPerCalculation(data){
       var obj = $.parseJSON(data);
-      $('#TxtAreaSymbol').focus();
+      $('#areaSymbol').focus();
       $("#TblAreaAsPerMeasurement > tbody").find("tr").remove();
       var TotalSideA = 0,TotalSideB = 0,TotalSideC = 0,TotalSideS = 0,TotalSqFAPMeasurement = 0,TotalSqMAPMeasurement = 0,TotalAreaInAnnaAPMeasurement=0;
       $.each(obj, function(i, item) {
@@ -1695,8 +1699,8 @@
         $('#sqFAPConsideration').val(Number(Val).toFixed(2));
 
         var TotalRAPD = SqFToRAPD(Val);
-        $('#TxtRAPDAPConsideration').val(TotalRAPD);
-        $('#TxtAnnaAPConsideration').val((Number(Val)/342.25).toFixed(2));
+        $('#rAPDAPConsideration').val(TotalRAPD);
+        $('#annaAPConsideration').val((Number(Val)/342.25).toFixed(2));
 
         var x1 =Number((TotalSqFAsPerCal/100)*LandDevelopmentPercent);
         $('#landDevelopmentSqF').val(Number(x1).toFixed(2));
