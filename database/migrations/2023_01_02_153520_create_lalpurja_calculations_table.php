@@ -25,7 +25,7 @@ class CreateLalpurjaCalculationsTable extends Migration
             $table->unsignedBigInteger('sqm_as_lalpurja')->nullable();
             $table->unsignedBigInteger('area_in_anna_as_lalpurja')->nullable();
             $table->unsignedBigInteger('sqf_as_lalpurja')->nullable();
-            $table->unsignedBigInteger('rapd_as_lalpurja')->nullable();
+            $table->string('rapd_as_lalpurja')->nullable();
 
 
             $table->foreign('site_visit_id')->references('id')->on('site_visits')->onDelete('cascade');

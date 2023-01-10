@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePermanetBoundariesAsPerSiteVisitsTable extends Migration
+class CreateSitevisitBoundariesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePermanetBoundariesAsPerSiteVisitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permanet_boundaries_as_per_site_visits', function (Blueprint $table) {
+        Schema::create('sitevisit_boundaries', function (Blueprint $table) {
             $table->id();
             $table->string('kita_no')->nullable();
             $table->string('east')->nullable();
@@ -34,6 +34,6 @@ class CreatePermanetBoundariesAsPerSiteVisitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permanet_boundaries_as_per_site_visits');
+        Schema::dropIfExists('sitevisit_boundaries');
     }
 }
