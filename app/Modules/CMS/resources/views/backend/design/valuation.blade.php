@@ -719,7 +719,7 @@
                                         style="flex: 14%;max-width: 14%; padding-right:0px;">
                                         <label>Floor</label>
                                         <select class="form-control selectbox" name="floor" id="floor">
-                                            <option disabled selected="selected">--Select Floor--</option>
+                                            <option disabled selected="selected">Select Floor</option>
                                             <option value="Semi Basement">Semi Basement</option>
                                             <option value="Basement">Basement</option>
                                             <option value="Ground Floor">Ground Floor</option>
@@ -735,7 +735,7 @@
                                     </div>
                                     <div class="form-group col-md-2"
                                         style="flex: 10%;max-width: 10%; padding-right:0px;">
-                                        <label>Area (Per Sq Ft)</label>
+                                        <label>Area/Sq. Ft.</label>
                                         <input type="text" name="floorAreaInSqF" id="floorAreaInSqF"
                                           placeholder="Area (Per Sq Ft)" class="form-control">
                                     </div>
@@ -787,7 +787,7 @@
                                         <button type="button" class="btn btn-info btn-sm"
                                             id="BtnAddBuildingCalculation" style="padding: 2px 5px;">ADD</button>
                                     </div>
-                                    <div class="form-group col-md-12">
+                                    {{-- <div class="form-group col-md-12">
                                         <table class="table table-bordered dataTable" id="TblBuildingCalculation"
                                             style="width:100%">
                                             <thead class="thead-light">
@@ -910,584 +910,14 @@
                                         <input type="text" name="totalAreaAsPerConstruction"
                                             id="totalAreaAsPerConstruction" required="" class="form-control"
                                             value="{{ old('totalAreaAsPerConstruction') ?? 0}}">
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-12 mb-2">
-                                <label style="color: #dc1de9;margin-bottom: 0px;">
-                                    <h6><b>4 TECHNICAL DETAIL</b></h6>
-                                </label>
-                            </div>
-                            <div class="form-group col-md-12 mb-2">
-                                <label style="margin-bottom: 0px;">
-                                    <b style="color: #202ed6;text-transform: uppercase;">(A) PERMANET OF THE
-                                        BOUNDARIES</b><span style="color: #575656;"><sub> As per government</sub> </span>
-                                </label>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Kita No</label>
-                                <input type="text" name="boundariesKitaNo" id="boundariesKitaNo"
-                                    placeholder="Kita No" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>East</label>
-                                <input type="text" name="eastAPBoundaries" id="eastAPBoundaries"
-                                    placeholder="East" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>West</label>
-                                <input type="text" name="westAPBoundaries" id="westAPBoundaries"
-                                    placeholder="West" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>North</label>
-                                <input type="text" name="northAPBoundaries" id="northAPBoundaries"
-                                    placeholder="North" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>South</label>
-                                <input type="text" name="southAPBoundaries" id="southAPBoundaries"
-                                    placeholder="South" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2 pl-0">
-                                <label style="width: 100%;">&nbsp;</label>
-                                <button type="button" class="btn btn-info" id="BtnAddBoundariesAsPerKitaNo"
-                                    style="padding: 2px 5px;">ADD</button>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <table class="table table-bordered dataTable" id="TblBoundariesAsPerKitaNo"
-                                    style="width:100%">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" width="30">Sno</th>
-                                            <th scope="col">Kita No</th>
-                                            <th scope="col">East</th>
-                                            <th scope="col">West</th>
-                                            <th scope="col">North</th>
-                                            <th scope="col">South</th>
-                                            <th scope="col" width="50">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="form-group col-md-12 mb-2">
-                                <label style="margin-bottom: 0px;">
-                                    <b style="color: #202ed6;text-transform: uppercase;">(B) PERMANET OF THE
-                                        BOUNDARIES</b><span style="color: #575656;"><sub> As per the site visit</sub>
-                                    </span>
-                                </label>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Kita No</label>
-                                <input type="text" name="aPSiteVisitBoundariesKitaNo"
-                                    id="aPSiteVisitBoundariesKitaNo" placeholder="Kita No" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>East</label>
-                                <input type="text" name="eastAPSiteVisitBoundaries"
-                                    id="eastAPSiteVisitBoundaries" placeholder="East" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>West</label>
-                                <input type="text" name="westAPSiteVisitBoundaries"
-                                    id="westAPSiteVisitBoundaries" placeholder="West" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>North</label>
-                                <input type="text" name="northAPSiteVisitBoundaries"
-                                    id="northAPSiteVisitBoundaries" placeholder="North" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>South</label>
-                                <input type="text" name="southAPSiteVisitBoundaries"
-                                    id="southAPSiteVisitBoundaries" placeholder="South" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2 pl-0">
-                                <label style="width:100%">&nbsp;</label>
-                                <button type="button" class="btn btn-info" id="BtnAddBoundariesAsPerSiteVisit"
-                                    style="padding: 2px 5px;">ADD</button>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <table class="table table-bordered dataTable" id="TblBoundariesAsPerSiteVisit"
-                                    style="width:100%">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" width="30">Sno</th>
-                                            <th scope="col">Kita No</th>
-                                            <th scope="col">East</th>
-                                            <th scope="col">West</th>
-                                            <th scope="col">North</th>
-                                            <th scope="col">South</th>
-                                            <th scope="col" width="50">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="form-group col-md-4" style="padding:0px 6px 0px 6px">
-                                <label>
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title=""
-                                        data-original-title="Ex:- 500 M From Shankhamul Chok and 1000M From Baneshwor Chok"></i>
-                                    Location &amp; Access of The Land<span class="required">*</span></label>
-                                <input type="text" name="locationOfAccessLand" id="locationOfAccessLand"
-                                   value="{{old('locationOfAccessLand')}}" required="" placeholder="" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2" style="padding:0px 6px 0px 6px">
-                                <label>
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- Kathmandu"></i>
-                                    District <span class="required">*</span></label>
-                                <input type="text" name="locationDistrict" id="locationDistrict"
-                                value="{{old('locationDistrict')}}" required="" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2" style="padding:0px 6px 0px 6px">
-                                <label>V.D.C/Municipality</label>
-                                    <select class="form-control" name="vdcType" id="vdcType">
-                                        <option value="Rural Municipality" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Rural Municipality
-                                        </option>
-                                        <option value="Municipality">Municipality</option>
-                                        <option value="Sub Metropolitan City">Sub Metropolitan City</option>
-                                        <option value="Mertopolitan City">Mertopolitan City</option>
-                                    </select>
-                                
-                            </div>
-                            <div class="form-group col-md-4" style="max-width: 450px; padding:0px 6px 0px 6px">
-                                <label>
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title=""
-                                        data-original-title="Ex:- Shankhamul -31 , Kathmandu - 31 Kathmandu Meropolitan City"></i>
-                                    Address of Land/Property(Property Location)<span
-                                        class="required">*</span></label>
-                                <input type="text" name="addressOfLand" id="addressOfLand" required=""
-                                value="{{old('locationOfAccessLand')}}" class="form-control">
-                            </div>
-                            <div class="form-group col-md-12 mb-2">
-                                <label style="color: #202ed6;margin-bottom: 0px; text-transform: uppercase;">
-                                    <b>(C) Accessibility with</b>
-                                </label>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- 12 Feet"></i>
-                                    Road Size <span class="required">*</span></label>
-                                <input type="text" name="accessibilityWithRoadSize"
-                                value="{{old('accessibilityWithRoadSize')}}" id="accessibilityWithRoadSize" required="" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- Not Seen near Site"></i>
-                                    River <span class="required">*</span></label>
-                                <input type="text" name="accessibilityWithRiver" id="accessibilityWithRiver"
-                                value="{{old('accessibilityWithRiver')}}" required="" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- Not Seen near Site"></i>
-                                    High Tension Line <span class="required">*</span></label>
-                                <input type="text" name="accessibilityWithHighTension"
-                                value="{{old('accessibilityWithHighTension')}}" id="accessibilityWithHighTension" required="" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Type of Region</label>
-                                <select class="form-control selectbox" name="typeOfRegion" id="typeOfRegion">
-                                    <option value="Residential" {{ old('typeOfRegion') == "Residential" ?'selected' : ''}}>Residential</option>
-                                    <option value="Commercial" {{ old('typeOfRegion') == "Commercial" ?'selected' : ''}}>Commercial</option>
-                                    <option value="Agricultural" {{ old('typeOfRegion') == "Agricultural" ?'selected' : ''}}>Agricultural</option>
-                                    <option value="Others (Pls Specify) " {{ old('typeOfRegion') == "Others (Pls Specify)" ?'selected' : ''}}>Others</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Motorable Access</label>
-                                <select class="form-control selectbox" name="motorableAccess"
-                                    id="motorableAccess">
-                                    <option value="Yes"  {{ old('motorableAccess') == "Yes" ?'selected' : ''}}>Yes</option>
-                                    <option value="No"  {{ old('motorableAccess') == "No" ?'selected' : ''}}>No</option>
-                                </select>
-                            </div>
-                           
-                           
-                            <div class="form-group col-md-2">
-                                <label>Property Usage</label>
-                                <select class="form-control selectbox" name="buildingShape" id="propertyUsage">
-                                    <option value="Residential" {{ old('buildingShape') == "Residential" ?'selected' : ''}} >Residential</option>
-                                    <option value="Commercial" {{ old('buildingShape') == "Commercial" ?'selected' : ''}}>Commercial</option>
-                                    <option value="Residential &amp; Commercial" {{ old('buildingShape') == "Residential &amp; Commercial" ?'selected' : ''}}>Residential &amp; Commercial</option>
-                                    <option value="Others" {{ old('buildingShape') == "Others" ?'selected' : ''}}>Others</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Type of Access</label>
-                                <select class="form-control selectbox" name="typeOfAccess" id="typeOfAccess">
-                                    <option value="Earthen" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Earthen</option>
-                                    <option value="Gravel" {{ old('typeOfAccess') == "Gravel" ?'selected' : ''}} >Gravel</option>
-                                    <option value="Black Topped" {{ old('typeOfAccess') == "Black Topped" ?'selected' : ''}} >Black Topped</option>
-                                    <option value="RCC" {{ old('typeOfAccess') == "RCC" ?'selected' : ''}} >RCC</option>
-                                    <option value="Block Paved" {{ old('typeOfAccess') == "Block Paved" ?'selected' : ''}} >Block Paved</option>
-                                    <option value="Goreto Road" {{ old('typeOfAccess') == "Goreto Road" ?'selected' : ''}} >Goreto Road</option>
-                                    <option value="Khet (No Road)" {{ old('typeOfAccess') == "Khet (No Road)" ?'selected' : ''}} >Khet (No Road)</option>
-                                </select>
-                            </div>
+           
                           
                             
-                            <input type="hidden" name="holdType" id="holdType" class="form-control"
-                                value="Free Hold">
-                            <div class="form-group col-md-2">
-                                <label>
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- Rectangular"></i>
-                                    Shape</label>
-                                <input type="text" name="buildingShape" id="buildingShape"
-                                value="{{old('buildingShape')}}" class="form-control" required="">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- East"></i>
-                                    Facing</label>
-                                <input type="text" name="buildingFacing" id="buildingFacing"
-                                value="{{old('buildingFacing')}}" class="form-control" required="">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- 8 M"></i>
-                                    Frontage</label>
-                                <input type="text" name="buildingFrontage" id="buildingFrontage"
-                                value="{{old('buildingFrontage')}}" class="form-control" required="">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Level with Road
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- Same Level"></i>
-                                </label>
-                                <input type="text" name="levelWithRoad" id="levelWithRoad"
-                                value="{{old('levelWithRoad')}}" class="form-control" required="">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Property for the Bank</label>
-                                <select class="form-control selectbox" name="propertyForTheBank"
-                                    id="propertyForTheBank">
-                                    <option value="Recommended" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Recommended</option>
-                                    <option value="Not Recommended" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Not Recommended</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>River / Stream near property</label>
-                                <select class="form-control selectbox" name="riverStreamNearProperty"
-                                    id="riverStreamNearProperty">
-                                    <option value="No" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>No</option>
-                                    <option value="Yes" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Yes</option>
-                                </select>
-                            </div>
-                           
-                            <div class="form-group col-md-2">
-                                <label>Heritage Sites Near property</label>
-                                <select class="form-control selectbox" name="heritageSitesNearProperty"
-                                    id="heritageSitesNearProperty">
-                                    <option value="Yes" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Yes</option>
-                                    <option value="No" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>No</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Property Ownership Type</label>
-                                <select class="form-control selectbox" name="propertyOwnershipType"
-                                    id="propertyOwnershipType">
-                                    <option value="Single" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Single</option>
-                                    <option value="Joint" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Joint</option>
-                                    <option value="Company" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Company</option>
-                                    <option value="Individual (Joint Name)" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Individual (Joint Name)</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- 7 M"></i>
-                                    Narrowest Part of Land</label>
-                                <input type="text" name="narrowestPartOfLand" id="narrowestPartOfLand"
-                                value="{{old('narrowestPartOfLand')}}" class="form-control" required="">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- 12 Feet"></i>
-                                    Access in the Blue Print</label>
-                                <input type="text" name="accessInTheBluePrint" id="accessInTheBluePrint"
-                                value="{{old('accessInTheBluePrint')}}" class="form-control" required="">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Right of Way
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- 13 Feet"></i>
-                                </label>
-                                <input type="text" name="rightOfWay" id="rightOfWay" class="form-control"
-                                value="{{old('rightOfWay')}}"  required="">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Frame Structure</label>
-                                <select class="form-control selectbox" name="frameStructure"
-                                    id="frameStructure">
-                                    <option value="Frame Structure" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Frame Structure</option>
-                                    <option value="Load Bearing" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Load Bearing</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Any Collateral Fall</label>
-                                <select class="form-control selectbox" name="anyCollateralFall"
-                                    id="anyCollateralFall">
-                                    <option value="No" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>No</option>
-                                    <option value="Yes">Yes</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Comments</label>
-                                <input type="text" name="coments" id="coments" class="form-control"
-                                value="{{old('coments')}}" required="">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Valuation For</label>
-                                <select class="form-control selectbox" name="valuationFor" id="valuationFor">
-                                    <option value="Vacant Land" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Vacant Land</option>
-                                    <option value="Land &amp; Building" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Land &amp; Building</option>
-                                    <option value="Readymade House" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Readymade House</option>
-                                    <option value="Apartments/Duplex" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Apartments/Duplex</option>
-                                    <option value="Construction/Extension/Renovation" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Construction/Extension/Renovation
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Coloring And Painting</label>
-                                <select class="form-control selectbox" name="coloringAndPainting"
-                                    id="coloringAndPainting">
-                                    <option value="Painted" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Painted</option>
-                                    <option value="Not Painted" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Not Painted</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- has Been Well Finished."></i>
-                                    Flooring Finishing</label>
-                                <input type="text" name="flooringFinishing" id="flooringFinishing"
-                                value="{{old('flooringFinishing')}}" class="form-control" required="">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- has Been Well Finished."></i> Inner
-                                    Wall Ceiling</label>
-                                <input type="text" name="innerWallCeiling" id="innerWallCeiling"
-                                value="{{old('innerWallCeiling')}}" class="form-control" required="">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Type Of Land</label>
-                                <select class="form-control selectbox" name="topography" id="topography">
-                                    <option value="Planning" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Planning</option>
-                                    <option value="Khet" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Khet</option>
-                                    <option value="Flat" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Flat</option>
-                                    <option value="Slightly Slope" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Slightly Slope</option>
-                                    <option value="Low Land" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Low Land</option>
-                                    <option value="Irregural Shape" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Irregural Shape</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- Bounded by Brick Wall."></i>
-                                    Boundary</label>
-                                <input type="text" name="boundary" id="boundary" class="form-control"
-                                value="{{old('boundary')}}" required="">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
-                                        title="" data-original-title="Ex:- 2 And Half"></i> No Of Floor
-                                    (Storie)</label>
-                                <input type="text" name="noOfFloorStorie" id="noOfFloorStorie"
-                                value="{{old('noOfFloorStorie')}}" class="form-control">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Compound Wall</label>
-                                <select class="form-control selectbox" name="compoundWall" id="compoundWall">
-                                    <option value="Constructed" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Constructed</option>
-                                    <option value="Not Constructed" {{ old('typeOfAccess') == "Earthen" ?'selected' : ''}}>Not Constructed</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label>Internal Remarks</label>
-                                <input type="text" name="internalRemarks" id="internalRemarks"
-                                value="{{old('internalRemarks')}}" class="form-control">
-                            </div>
-                            <input type="hidden" name="isAvailabilityTelephone" id="isAvailabilityTelephone"
-                                required="" class="form-control" value="Yes">
-                            <input type="hidden" name="isAvailabilityInternet" id="isAvailabilityInternet"
-                                required="" class="form-control" value="Yes">
-                            <input type="hidden" name="isAvailabilitySewerage" id="isAvailabilitySewerage"
-                                required="" class="form-control" value="Yes">
-                            <input type="hidden" name="isAvailabilityElectricity"
-                                id="isAvailabilityElectricity" required="" class="form-control"
-                                value="Yes">
-                            <input type="hidden" name="isAvailabilityWaterSupply"
-                                id="isAvailabilityWaterSupply" required="" class="form-control"
-                                value="Yes">
-                            <div class="form-group col-md-12 mb-2">
-                                <label style="color: #dc1de9;margin-bottom: 0px;">
-                                    <h6><b>5 UPLOAD DOCUMENT</b></h6>
-                                </label>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Upload Picture &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
-                                <input type="file" name="UploadPicture" id="UploadPicture">
-                                <table class="table table-bordered dataTable" style="width:100%"
-                                    id="TblUploadPicture">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" width="20">Sno</th>
-                                            <th scope="col">File Name <a href="#" class="text-danger"
-                                                    data-toggle="modal" data-target="#ViewAllPictureModal"> View</a>
-                                            </th>
-                                            <th scope="col" width="30">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Upload CAD Jpg Doc</label>
-                                <input type="file" name="UploadDocument" id="UploadDocument">
-                                <table class="table table-bordered dataTable" style="width:100%"
-                                    id="TblUploadDocument">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" width="20">Sno</th>
-                                            <th scope="col">File Name <a href="#" class="text-danger"
-                                                    data-toggle="modal" data-target="#ViewAllCADJpgModal"> View</a></th>
-                                            <th scope="col" width="30">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Upload Legal Scan Doc</label>
-                                <input type="file" name="UploadScanDocument" id="UploadScanDocument">
-                                <table class="table table-bordered dataTable" style="width:100%"
-                                    id="TblUploadScanDocument">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" width="20">Sno</th>
-                                            <th scope="col">File Name <a href="#" class="text-danger"
-                                                    data-toggle="modal" data-target="#ViewAllScanModal"> View</a></th>
-                                            <th scope="col" width="30">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Upload Internal CAD Doc</label>
-                                <input type="file" name="UploadInternalDocument" id="UploadInternalDocument">
-                                <table class="table table-bordered dataTable" style="width:100%"
-                                    id="TblUploadInternalDocument">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" width="20">Sno</th>
-                                            <th scope="col">File Name</th>
-                                            <th scope="col" width="30">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                   
 
                             <div class="form-group col-md-12">
                                 <button type="button" class="btn btn-info float-right btn-sm ml-3"
@@ -1506,10 +936,254 @@
 
 @endsection
 @push('scripts')
+
     <script>
-        $(documnet).on('click','.addAreaAPLalpurja',function(){
+        $(document).on('keyup','#sqm_as_lalpurja',function(){
+            var SqM = $(this).val()     
+            var SqF = $(this).val()*10.76;
+            //console.log('SqF :'+Number(SqF).toFixed(2));
+            $('#sqFAPLalpurja').val(($(this).val()*10.76).toFixed(2));
+            var TotalRopani = SqF/(16*342.25);
+            //console.log('TotalRopani :'+TotalRopani);
+            var OnlyRopani = TotalRopani.toString().split(".")[0];
+            //console.log('OnlyRopani :'+Number(OnlyRopani).toFixed(2));
+            var RemainingRopani = (TotalRopani-OnlyRopani);
+            //console.log('RemainingRopani :'+RemainingRopani);
+            var TotalAana = RemainingRopani*(16);
+            //console.log('TotalAana :'+TotalAana);
+            var OnlyAana = TotalAana.toString().split(".")[0];
+            //console.log('OnlyAana :'+Number(OnlyAana).toFixed(2));
+            var RemainingAana = (TotalAana-OnlyAana);
+            //console.log('RemainingAana :'+RemainingAana);
+            var RemainingAanaToSQF = RemainingAana*342.25;
+            //console.log('RemainingAanaToSQF :'+RemainingAanaToSQF);
+            var TotalPaisa = RemainingAanaToSQF/(85.6);
+            //console.log('TotalPaisa :'+TotalPaisa);
+            var OnlyPaisa = TotalPaisa.toString().split(".")[0];
+            //console.log('OnlyPaisa :'+Number(OnlyPaisa).toFixed(2));
+            var RemainingPaisa = (TotalPaisa-OnlyPaisa);
+            //console.log('RemainingPaisa :'+RemainingPaisa);
+
+            var RemainingPaisaToSQF = RemainingPaisa*85.6;
+            //console.log('RemainingPaisaToSQF :'+RemainingPaisaToSQF);
+            var OnlyDam = RemainingPaisaToSQF/(21.4);
+            //console.log('OnlyDam :'+Number(OnlyDam).toFixed(2));
+
+            //var AreaInAnna = Number(SqF.toFixed(2)/ 342.25).toFixed(2);
+            //console.log('AreaInAnna :'+Number(AreaInAnna).toFixed(2));
+
+            $('#ropani_as_lalpurja').val(OnlyRopani);
+            $('#anna_as_lalpurja').val(OnlyAana);
+            $('#paisa_as_lalpurja').val(OnlyPaisa);
+            $('#dam_as_lalpurja').val(Number(OnlyDam).toFixed(2));
+            $('#sqf_as_lalpurja').val(SqF.toFixed(2));
+            $('#rapd_as_lalpurja').val(Number(OnlyRopani)+'-'+Number(OnlyAana)+'-'+Number(OnlyPaisa)+'-'+Number(OnlyDam).toFixed(2));
+            $('#area_in_anna_as_lalpurja').val(Number(SqF/ 342.25).toFixed(2));
+
 
         })
+
+
+        $("#sideA,#sideB,#sideC").keyup(function() {
+            var SideA = Number($("#sideA").val());
+            var SideB = Number($("#sideB").val());
+            var SideC = Number($("#sideC").val());
+            var SideS = (SideA+SideB+SideC)/2;
+            $('#sideS').val(SideS.toFixed(2));
+            var _a = Number(SideS)*(Number(SideS)-Number(SideA))*(Number(SideS)-Number(SideB))*(Number(SideS)-Number(SideC));
+            $('#sqFAPMeasurement').val(Math.sqrt(Number(Math.abs(_a))).toFixed(2));
+            $('#sqMAPMeasurement').val((Number($('#sqFAPMeasurement').val())*0.092903).toFixed(2));
+            var SqFAPMeasurement = $('#sqFAPMeasurement').val();
+            $('#areaInAnnaAPMeasurement').val(Number(SqFAPMeasurement/342.25).toFixed(2));
+        });
     </script>
+
+
+
+    <script>
+            //  BUILDING CALCULATIONS
+            $(document).on('keyup','#floorAreaInSqF,#floorRate,#sanitaryPulumbingPercentage,#electricityWorkPercentage,#floorDepriciationPercentage',function(){
+                var floorArea = $('#floorAreaInSqF').val();
+                var floorRate = $('#floorRate').val();
+                var floorAmt = floorArea*floorRate;
+                $('#floorAmount').val(floorAmt);
+
+                var sanitary = $('#sanitaryPulumbingPercentage').val()/100;
+                var electric = $('#electricityWorkPercentage').val()/100;
+                var depriciation = $('#floorDepriciationPercentage').val()/100;
+
+                var sanitaryAmt = sanitary*floorAmt;
+                var electricAmt = electric*floorAmt;
+                var depriciationAmt = depriciation*floorAmt;
+                var floorNetAmount = sanitaryAmt+electricAmt+depriciationAmt+floorAmt;
+                $('#floorNetAmount').val(floorNetAmount);
+
+            })
+    </script>
+
+
+    <script>
+        //   Government Rate of Land
+        $(document).on('keyup','#perAnnaAPGovRate',function(){
+            var perAnnaAPGovRate = $('#perAnnaAPGovRate').val();
+            var perSqFAPGovRate = (perAnnaAPGovRate/342.25).toFixed(2);
+            var perRopaniAPGovRate = perAnnaAPGovRate*16;
+            $('#perSqFAPGovRate').val(perSqFAPGovRate);
+            $('#perRopaniAPGovRate').val(perRopaniAPGovRate);
+        })
+        // Market Rate of Land
+        $(document).on('keyup','#perAnnaAPMarketRate',function(){
+            var perAnnaAPMarketRate = $('#perAnnaAPMarketRate').val();
+            var perSqFAPMarketRate = (perAnnaAPMarketRate/342.25).toFixed(2);
+            var perRopaniAPMarketRate = perAnnaAPMarketRate*16;
+            $('#perSqFAPMarketRate').val(perSqFAPMarketRate);
+            $('#perRopaniAPMarketRate').val(perRopaniAPMarketRate);
+        })
+    </script>
+
+    <script>
+        $("#deductionOfRoadSqF,#landDevelopmentPercent,#deductionForHighTensionSqF,#deductionForLowLandSqF,#deductionForRiverSqF,#deductionForBoundryCorrection,#deductionForIrregularShapeSloppyLand").change(function() {
+      CalculateConsiderationArea();
+      CalculationAreaRate();
+    });
+
+    function CalculateConsiderationArea(){
+      var _v1= Number($('#totalAreaInAnna').val());
+      var _v2= Number($('#totalAreaInAnnaAPMeasurement').val());
+      var DeductionOfRoadSqF = Number($("#deductionOfRoadSqF").val());
+      var LandDevelopmentPercent = Number($("#landDevelopmentPercent").val());
+      var DeductionForHighTensionSqF = Number($("#deductionForHighTensionSqF").val());
+      var DeductionForLowLandSqF = Number($("#deductionForLowLandSqF").val());
+      var DeductionForRiverSqF = Number($("#deductionForRiverSqF").val());
+      var BoundryCorrectionPercent = Number($("#deductionForBoundryCorrection").val());
+      var IrregularShapePercent = Number($("#deductionForIrregularShapeSloppyLand").val());
+      if(_v2<_v1){
+        var TotalSqFAsPerCal = Number($("#totalSqFAsPerCal").val());
+        var _v1 =(TotalSqFAsPerCal/100)*LandDevelopmentPercent;
+        var _v2 =(TotalSqFAsPerCal/100)*BoundryCorrectionPercent;
+        var _v3 =(TotalSqFAsPerCal/100)*IrregularShapePercent;
+        var Val = TotalSqFAsPerCal-(DeductionOfRoadSqF+DeductionForHighTensionSqF+DeductionForLowLandSqF+DeductionForRiverSqF+(_v1)+(_v2)+(_v3));
+        
+        $('#sqMAPConsideration').val((Number(Val)*0.092903).toFixed(2));
+        $('#sqFAPConsideration').val(Number(Val).toFixed(2));
+
+        var TotalRAPD = SqFToRAPD(Val);
+        $('#TxtRAPDAPConsideration').val(TotalRAPD);
+        $('#TxtAnnaAPConsideration').val((Number(Val)/342.25).toFixed(2));
+
+        var x1 =Number((TotalSqFAsPerCal/100)*LandDevelopmentPercent);
+        $('#landDevelopmentSqF').val(Number(x1).toFixed(2));
+        $('#afterLandDevelopmentAreaInAnna').val((Number(x1/342.25)).toFixed(2));
+        $('#afterLandDevelopmentAreaInRPAD').val(SqFToRAPD(Number(x1).toFixed(2)));
+
+        var x2 =Number((TotalSqFAsPerCal/100)*BoundryCorrectionPercent);
+        $('#deductionForBoundryCorrectionSqF').val(Number(x2).toFixed(2));
+        $('#afterBoundryCorrectionAreaInAnna').val((Number(x2/342.25)).toFixed(2));
+        $('#afterBoundryCorrectionAreaInRPAD').val(SqFToRAPD(Number(x2).toFixed(2)));
+
+        var x3 =Number((TotalSqFAsPerCal/100)*IrregularShapePercent);
+        $('#afterIrregularShapeSloppyLandSqF').val(Number(x3).toFixed(2));
+        $('#afterIrregularShapeSloppyLandAreaInAnna').val((Number(x3/342.25)).toFixed(2));
+        $('#afterIrregularShapeSloppyLandAreaInRPAD').val(SqFToRAPD(Number(x3).toFixed(2)));
+      }
+      else{
+        alert('asdkhkhk');
+        var TotalSqF = Number($("#totalSqF").val());
+        var _v1 =(TotalSqF/100)*LandDevelopmentPercent;
+        var _v2 =(TotalSqF/100)*BoundryCorrectionPercent;
+        var _v3 =(TotalSqF/100)*IrregularShapePercent;
+        var Val = TotalSqF-(DeductionOfRoadSqF+DeductionForHighTensionSqF+DeductionForLowLandSqF+DeductionForRiverSqF+(_v1)+(_v2)+(_v3));
+      
+        $('#sqMAPConsideration').val((Number(Val)*0.092903).toFixed(2));
+        $('#sqFAPConsideration').val(Number(Val).toFixed(2));
+        var TotalRAPD = SqFToRAPD(Val);
+        $('#rAPDAPConsideration').val(TotalRAPD);
+        $('#annaAPConsideration').val((Number(Val)/342.25).toFixed(2));
+
+        var x1 =Number((TotalSqF/100)*LandDevelopmentPercent);
+        $('#landDevelopmentSqF').val(Number(x1).toFixed(2));
+        $('#afterLandDevelopmentAreaInAnna').val((Number(x1/342.25)).toFixed(2));
+        $('#afterLandDevelopmentAreaInRPAD').val(SqFToRAPD(Number(x1).toFixed(2)));
+
+        var x2 =Number((TotalSqF/100)*BoundryCorrectionPercent);
+        $('#deductionForBoundryCorrectionSqF').val(Number(x2).toFixed(2));
+        $('#afterBoundryCorrectionAreaInAnna').val((Number(x2/342.25)).toFixed(2));
+        $('#afterBoundryCorrectionAreaInRPAD').val(SqFToRAPD(Number(x2).toFixed(2)));
+
+        var x3 =Number((TotalSqF/100)*IrregularShapePercent);
+        $('#afterIrregularShapeSloppyLandAreaInAnna').val((Number(x3/342.25)).toFixed(2));
+        $('#afterIrregularShapeSloppyLandSqF').val(Number(x3).toFixed(2));
+        $('#afterIrregularShapeSloppyLandAreaInRPAD').val(SqFToRAPD(Number(x3).toFixed(2)));
+      }
+
+      $('#afterDeductionOfRoadAreaInAnna').val((Number(DeductionOfRoadSqF/342.25)).toFixed(2));
+      $('#afterDeductionOfRoadAreaInRPAD').val(SqFToRAPD(Number(DeductionOfRoadSqF).toFixed(2)));
+
+      $('#afterHighTensionAreaInAnna').val((Number(DeductionForHighTensionSqF/342.25)).toFixed(2));
+      $('#afterHighTensionAreaInRPAD').val(SqFToRAPD(Number(DeductionForHighTensionSqF).toFixed(2)));
+
+      $('#afterLowLandAreaInAnna').val((Number(DeductionForLowLandSqF/342.25)).toFixed(2));
+      $('#afterLowLandAreaInRPAD').val(SqFToRAPD(Number(DeductionForLowLandSqF).toFixed(2)));
+
+      $('#afterRiverAreaInAnna').val((Number(DeductionForRiverSqF/342.25)).toFixed(2));
+      $('#afterRiverAreaInRPAD').val(SqFToRAPD(Number(DeductionForRiverSqF).toFixed(2)));
+    }
+
+    $("#perAnnaAPGovRate").change(function() {
+      $('#perSqFAPGovRate').val(Number(Number($(this).val()) / 342.25).toFixed(2));
+      $('#perRopaniAPGovRate').val(Number(Number($(this).val())*16).toFixed(2));
+      CalculationAreaRate();
+    });
+
+    $("#perAnnaAPMarketRate").change(function() {
+      $('#perSqFAPMarketRate').val(Number(Number($(this).val()) / 342.25).toFixed(2));
+      $('#perRopaniAPMarketRate').val(Number(Number($(this).val())*16).toFixed(2));
+      CalculationAreaRate();
+    });
+
+    function CalculationAreaRate(){
+      var v1 = Number($('#perAnnaAPGovRate').val());
+      var v2 = Number($('#perAnnaAPMarketRate').val());
+
+      var _v1 = Number($('#bankId').attr("mygovernmentvalue"));
+
+      if(Number($('#bankId').attr("myisfairmarketcalculationgovwise"))===0) _v1=0;
+      var _v2 =Number($('#bankId').attr("mycommercialvalue"));
+      var v3 = ((v1/100)*_v1)+((v2/100)*_v2);
+      $('#perAnnaAPFairRate').val(v3.toFixed(2));
+      $('#perSqFAPFairRate').val(Number(Number(v3.toFixed(2)) / 342.25).toFixed(2));
+      $('#perRopaniAPFairRate').val(Number(Number(v3.toFixed(2))*16).toFixed(2));
+
+      var _v11 = Number($('#bankId').attr("mygovernmentvalue"));
+      var _v3 = Number($('#bankId').attr("myfairmarketvalue"));
+      if(Number($('#bankId').attr("myisdistresscalculationgovwise"))===1){
+        $('#perAnnaAPDistressRate').val(Number((v3.toFixed(2))/100*_v3)+Number((v1.toFixed(2))/100*_v11) );
+      }
+      else {
+        $('#perAnnaAPDistressRate').val(Number((v3.toFixed(2))/100*_v3).toFixed(2) );
+      }
+      $('#perSqFAPDistressRate').val(Number(Number($('#perAnnaAPDistressRate').val()) / 342.25).toFixed(2));
+      $('#perRopaniAPDistressRate').val(Number(Number($('#perAnnaAPDistressRate').val())*16).toFixed(2));
+
+      var v4 = Number($('#totalAreaInAnna').val());
+      var v5 = Number($('#annaAPConsideration').val());
+      if(v5<v4){
+        $('#governmentValueOfLand').val(Number(Number($('#perAnnaAPGovRate').val()) * Number($('#annaAPConsideration').val())).toFixed(2));
+        $('#commercialValueOfLand').val(Number(Number($('#perAnnaAPMarketRate').val()) * Number($('#annaAPConsideration').val())).toFixed(2));
+        $('#fairMarketValueOfLand').val(Number(Number($('#perAnnaAPFairRate').val()) * Number($('#annaAPConsideration').val())).toFixed(2));
+        $('#distressValueOfLand').val(Number(Number($('#perAnnaAPDistressRate').val()) * Number($('#annaAPConsideration').val())).toFixed(2));
+      }
+      else{
+        $('#governmentValueOfLand').val(Number(Number($('#perAnnaAPGovRate').val()) * Number($('#totalAreaInAnna').val())).toFixed(2));
+        $('#commercialValueOfLand').val(Number(Number($('#perAnnaAPMarketRate').val()) * Number($('#totalAreaInAnna').val())).toFixed(2));
+        $('#fairMarketValueOfLand').val(Number(Number($('#perAnnaAPFairRate').val()) * Number($('#totalAreaInAnna').val())).toFixed(2));
+        $('#distressValueOfLand').val(Number(Number($('#perAnnaAPDistressRate').val()) * Number($('#totalAreaInAnna').val())).toFixed(2));
+      }
+    }
+
+    </script>
+
+
+   
     
 @endpush
