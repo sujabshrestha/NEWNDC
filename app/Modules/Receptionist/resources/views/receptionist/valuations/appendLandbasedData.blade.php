@@ -18,6 +18,15 @@
             </tr>
         </thead>
         <tbody>
+            @php
+                $ltotalSideA= 0;
+                $ltotalSideB= 0;
+                $ltotalSideC= 0;
+                $ltotalSideT= 0;
+                $ltotalSqM= 0;
+                $ltotalSqF= 0;
+                $ltotalAnna=0;
+            @endphp
             @foreach ($sitevisit->landbasedDatas as $data)
 
 
@@ -34,40 +43,37 @@
                 <td>{{ $data->areaSymbol }}</td>
                 <td>{{ $data->areaSymbol }}</td>
             </tr>
+            @php
+                $ltotalSideA= $ltotalSideA + $data->sideA;
+                $ltotalSideB= $ltotalSideB + $data->sideB;
+                $ltotalSideC= $ltotalSideC + $data->sideC;
+                $ltotalSideT= $ltotalSideT + $data->sideS;
+                $ltotalSqM= $ltotalSqM+$data->sqMAPMeasurement;
+                $ltotalSqF= $ltotalSqF+$data->sqFAPMeasurement;
+                $ltotalAnna= $ltotalAnna+$data->areaInAnnaAPMeasurement;
+            @endphp
             @endforeach
-            <tr>
-                <th scope="row"></th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+           
         </tbody>
         <tfoot class="thead-light">
             <tr>
                 <th scope="col" colspan="2" style="text-align: right;">TOTAL AREA
                     BASED ON ACTUAL MEASUREMENT</th>
-                <th scope="col"><label id="LblTotalAreaSideA"></label><input type="hidden" name="totalAreaSideA"
-                        id="totalAreaSideA" value="0"></th>
-                <th scope="col"><label id="LblTotalAreaSideB"></label><input type="hidden" name="totalAreaSideB"
-                        id="totalAreaSideB" value="0"></th>
-                <th scope="col"><label id="LblTotalAreaSideC"></label><input type="hidden" name="totalAreaSideC"
-                        id="totalAreaSideC" value="0"></th>
-                <th scope="col"><label id="LblTotalAreaSideS"></label><input type="hidden" name="totalAreaSideS"
-                        id="totalAreaSideS" value="0"></th>
-                <th scope="col"><label id="LblTotalSqFAsPerCal"></label><input type="hidden" name="totalSqFAsPerCal"
-                        id="totalSqFAsPerCal" value="0"></th>
-                <th scope="col"><label id="LblTotalSqMAsPerCal"></label><input type="hidden" name="totalSqMAsPerCal"
-                        id="totalSqMAsPerCal" value="0"></th>
-                <th scope="col"><label id="LblTotalAreaInAnnaAPMeasurement"></label><input type="hidden"
-                        name="totalAreaInAnnaAPMeasurement" id="totalAreaInAnnaAPMeasurement" value="0"></th>
-                <th scope="col"><label id="LblTotalAreaInRPADAsPerMeasurement"></label><input type="hidden"
+                <th scope="col"><label id="LblTotalAreaSideA"></label><input type="text" name="totalAreaSideA"
+                        id="totalAreaSideA" value="{{ $ltotalSideA ?? 0}}"></th>
+                <th scope="col"><label id="LblTotalAreaSideB"></label><input type="text" name="totalAreaSideB"
+                        id="totalAreaSideB" value="{{ $ltotalSideB ?? 0}}"></th>
+                <th scope="col"><label id="LblTotalAreaSideC"></label><input type="text" name="totalAreaSideC"
+                        id="totalAreaSideC" value="{{ $ltotalSideC ?? 0}}"></th>
+                <th scope="col"><label id="LblTotalAreaSideS"></label><input type="text" name="totalAreaSideS"
+                        id="totalAreaSideS" value="{{ $ltotalSideT ?? 0}}"></th>
+                <th scope="col"><label id="LblTotalSqFAsPerCal"></label><input type="text" name="totalSqFAsPerCal"
+                        id="totalSqFAsPerCal" value="{{ $ltotalSqF ?? 0}}"></th>
+                <th scope="col"><label id="LblTotalSqMAsPerCal"></label><input type="text" name="totalSqMAsPerCal"
+                        id="totalSqMAsPerCal" value="{{ $ltotalSqM ?? 0}}"></th>
+                <th scope="col"><label id="LblTotalAreaInAnnaAPMeasurement"></label><input type="text"
+                        name="totalAreaInAnnaAPMeasurement" id="totalAreaInAnnaAPMeasurement" value="{{ $ltotalAnna ?? 0}}"></th>
+                <th scope="col"><label id="LblTotalAreaInRPADAsPerMeasurement"></label><input type="text"
                         name="totalAreaInRPADAsPerMeasurement" id="totalAreaInRPADAsPerMeasurement" value="0"></th>
                 <th scope="col"></th>
             </tr>

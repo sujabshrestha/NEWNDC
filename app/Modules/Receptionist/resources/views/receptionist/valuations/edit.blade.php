@@ -1664,15 +1664,15 @@
         $('#TblAreaAsPerMeasurement > tbody').append('<tr><th scope="row">'+(i+1)+'</th><td>'+item.AreaSymbol+'</td><td>'+item.SideA+'</td><td>'+item.SideB+'</td><td>'+item.SideC+'</td><td>'+item.SideS+'</td><td>'+item.SqFAPMeasurement+'</td><td>'+item.SqMAPMeasurement+'</td><td>'+item.AreaInAnnaAPMeasurement+'</td><td>'+AreaInRPADAsPerMeasurement+'</td><td><a href="#" class="btn btn-link text-danger btn-sm btneditdelete BtnRemoveAreaAsPerCal" SNo="'+item.SNo+'" DataSource="'+item.datasource+'" tabindex="-1"><i class="far fa-trash-alt"></i> REMOVE</a></td></tr>');
       });
 
-      $('#LblTotalAreaSideA').text(TotalSideA.toFixed(2)); $('#TxtTotalAreaSideA').val(TotalSideA.toFixed(2));
-      $('#LblTotalAreaSideB').text(TotalSideB.toFixed(2)); $('#TxtTotalAreaSideB').val(TotalSideB.toFixed(2));
-      $('#LblTotalAreaSideC').text(TotalSideC.toFixed(2)); $('#TxtTotalAreaSideC').val(TotalSideC.toFixed(2));
-      $('#LblTotalAreaSideS').text(TotalSideS.toFixed(2)); $('#TxtTotalAreaSideS').val(TotalSideS.toFixed(2));
-      $('#LblTotalSqFAsPerCal').text(Number(TotalSqFAPMeasurement).toFixed(2)); $('#TxtTotalSqFAsPerCal').val(TotalSqFAPMeasurement);
-      $('#LblTotalSqMAsPerCal').text(Number(TotalSqMAPMeasurement).toFixed(2)); $('#TxtTotalSqMAsPerCal').val(TotalSqMAPMeasurement.toFixed(2));
-      $('#LblTotalAreaInAnnaAPMeasurement').text(Number(TotalAreaInAnnaAPMeasurement).toFixed(2)); $('#TxtTotalAreaInAnnaAPMeasurement').val(TotalAreaInAnnaAPMeasurement.toFixed(2));
+      $('#totalAreaSideA').text(TotalSideA.toFixed(2)); $('#totalAreaSideA').val(TotalSideA.toFixed(2));
+      $('#totalAreaSideB').text(TotalSideB.toFixed(2)); $('#totalAreaSideB').val(TotalSideB.toFixed(2));
+      $('#totalAreaSideC').text(TotalSideC.toFixed(2)); $('#totalAreaSideC').val(TotalSideC.toFixed(2));
+      $('#totalAreaSideS').text(TotalSideS.toFixed(2)); $('#totalAreaSideS').val(TotalSideS.toFixed(2));
+      $('#totalSqFAsPerCal').text(Number(TotalSqFAPMeasurement).toFixed(2)); $('#totalSqFAsPerCal').val(TotalSqFAPMeasurement);
+      $('#totalSqMAsPerCal').text(Number(TotalSqMAPMeasurement).toFixed(2)); $('#totalSqMAsPerCal').val(TotalSqMAPMeasurement.toFixed(2));
+      $('#totalAreaInAnnaAPMeasurement').text(Number(TotalAreaInAnnaAPMeasurement).toFixed(2)); $('#totalAreaInAnnaAPMeasurement').val(TotalAreaInAnnaAPMeasurement.toFixed(2));
       var TotalAreaInRPADAsPerMeasurement = SqFToRAPD(Number(TotalSqFAPMeasurement).toFixed(2));
-      $('#LblTotalAreaInRPADAsPerMeasurement').text(TotalAreaInRPADAsPerMeasurement); $('#TxtTotalAreaInRPADAsPerMeasurement').val(TotalAreaInRPADAsPerMeasurement);
+      $('#totalAreaInRPADAsPerMeasurement').text(TotalAreaInRPADAsPerMeasurement); $('#totalAreaInRPADAsPerMeasurement').val(TotalAreaInRPADAsPerMeasurement);
 
       CalculateConsiderationArea();
       CalculationAreaRate();
@@ -1718,7 +1718,7 @@
         $('#afterIrregularShapeSloppyLandAreaInRPAD').val(SqFToRAPD(Number(x3).toFixed(2)));
       }
       else{
-        var TotalSqF = Number($("#totalSqF").val());
+        var TotalSqF = Number($("#totalSqFAsPerCal").val());
         var _v1 =(TotalSqF/100)*LandDevelopmentPercent;
         var _v2 =(TotalSqF/100)*BoundryCorrectionPercent;
         var _v3 =(TotalSqF/100)*IrregularShapePercent;
@@ -1726,6 +1726,8 @@
       
         $('#sqMAPConsideration').val((Number(Val)*0.092903).toFixed(2));
         $('#sqFAPConsideration').val(Number(Val).toFixed(2));
+        console.log(TotalSqF,Val,DeductionOfRoadSqF);
+
         var TotalRAPD = SqFToRAPD(Val);
         $('#rAPDAPConsideration').val(TotalRAPD);
         $('#annaAPConsideration').val((Number(Val)/342.25).toFixed(2));
@@ -1802,6 +1804,7 @@
       var v4 = Number($('#totalAreaInAnna').val());
       var v5 = Number($('#annaAPConsideration').val());
       if(v5<v4){
+        alert('adhkj')
         $('#governmentValueOfLand').val(Number(Number($('#perAnnaAPGovRate').val()) * Number($('#annaAPConsideration').val())).toFixed(2));
         $('#commercialValueOfLand').val(Number(Number($('#perAnnaAPMarketRate').val()) * Number($('#annaAPConsideration').val())).toFixed(2));
         $('#fairMarketValueOfLand').val(Number(Number($('#perAnnaAPFairRate').val()) * Number($('#annaAPConsideration').val())).toFixed(2));
@@ -1886,6 +1889,23 @@
 
 
 
+    </script>
+
+    <script>
+        $(document).on('keyup','#perAnnaAPMarketRate',function(){
+
+            var annaCons = $('#annaAPConsideration').val();
+            var govRate = $('#perAnnaAPGovRate').val();
+            var marketRate = $('#perAnnaAPMarketRate').val();
+            var fairMarketRate = $('#perAnnaAPFairRate').val();
+            var distressLandRate = $('#perAnnaAPDistressRate').val();
+
+            $('#governmentValueOfLand').val((annaCons*govRate).toFixed(2));
+            $('#commercialValueOfLand').val((annaCons*marketRate).toFixed(2));
+            $('#fairMarketValueOfLand').val((annaCons*fairMarketRate).toFixed(2));
+            $('#distressValueOfLand').val((annaCons*distressLandRate).toFixed(2));
+        })
+       
     </script>
 
 

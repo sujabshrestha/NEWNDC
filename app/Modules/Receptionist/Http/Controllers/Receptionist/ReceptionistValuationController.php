@@ -174,7 +174,7 @@ class ReceptionistValuationController extends Controller
         $sitevisit = SiteVisit::where('id', $id)->with('landbasedDatas')->first();
         if ($sitevisit) {
             $landbased = new LandbasedCalculation();
-            $landbased->areaSymbol = $request->landbased;
+            $landbased->areaSymbol = $request->areaSymbol;
             $landbased->sideA = $request->sideA;
             $landbased->sideB = $request->sideB;
             $landbased->sideC = $request->sideC;
@@ -182,7 +182,7 @@ class ReceptionistValuationController extends Controller
             $landbased->sqFAPMeasurement = $request->sqFAPMeasurement;
             $landbased->sqMAPMeasurement = $request->sqMAPMeasurement;
             $landbased->areaInAnnaAPMeasurement = $request->areaInAnnaAPMeasurement;
-            $landbased->sitevisit_id = $sitevisit->id;
+            $landbased->site_visit_id = $sitevisit->id;
 
             if ($landbased->save()) {
                 $sitevisit->refresh();
