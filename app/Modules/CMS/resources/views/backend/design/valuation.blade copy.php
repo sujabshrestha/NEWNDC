@@ -1560,7 +1560,7 @@
   //       } );
   //   } );
 
-  var table = $('#TblDataTable').DataTable(
+    var table = $('#TblDataTable').DataTable(
     {
       colReorder: true,
       orderCellsTop: true,
@@ -1624,21 +1624,21 @@
 
     //-------------- MANGE VALUATION -------------
 
-    $.ajax({
-      url: $('#TxtBaseUrl').val() + 'valuation/RandomNumber',
-      datatype: "json",
-      type: "post",
-      contenttype: 'application/json; charset=utf-8',
-      data: '',
-      async: true,
-      success: function (data) {
-        CheckSession(data);
-        $('#TxtGuidId').val(data);
-      },
-      error: function (xhr) {
-        alert('Error Occured During Data Submission....');
-      }
-    });
+    // $.ajax({
+    //   url: $('#TxtBaseUrl').val() + 'valuation/RandomNumber',
+    //   datatype: "json",
+    //   type: "post",
+    //   contenttype: 'application/json; charset=utf-8',
+    //   data: '',
+    //   async: true,
+    //   success: function (data) {
+    //     CheckSession(data);
+    //     $('#TxtGuidId').val(data);
+    //   },
+    //   error: function (xhr) {
+    //     alert('Error Occured During Data Submission....');
+    //   }
+    // });
 
     // $("#TxtRopaniAPLalpurja,#TxtAnnaAPLalpurja,#TxtPaisaAPLalpurja,#TxtDamAPLalpurja").change(function() {
     //   var Ropani = Number($("#TxtRopaniAPLalpurja").val());
@@ -1728,222 +1728,222 @@
     //   $('#TxtAreaInAnnaAPLalpurja').val(Number(SqFAPLalpurja.toFixed(2)/ 342.25).toFixed(2));
     });
 
-    $('#BtnAddAreaAPLalpurja').on('click', function() {
-      if($('#TxtKitaNo').val()==''){
-        alert('Please enter Kita Number');
-        $('#TxtKitaNo').focus();
-        return;
-      }
+    // $('#BtnAddAreaAPLalpurja').on('click', function() {
+    //   if($('#TxtKitaNo').val()==''){
+    //     alert('Please enter Kita Number');
+    //     $('#TxtKitaNo').focus();
+    //     return;
+    //   }
 
-      var rowCount = $('#TblAreaAsPerLalpurja tbody tr').length;
+    //   var rowCount = $('#TblAreaAsPerLalpurja tbody tr').length;
 
-      if($('#TxtSheetNo').val()=='' && rowCount===0){
-        alert('Please enter Sheet Number');
-        $('#TxtSheetNo').focus();
-        return;
-      }
+    //   if($('#TxtSheetNo').val()=='' && rowCount===0){
+    //     alert('Please enter Sheet Number');
+    //     $('#TxtSheetNo').focus();
+    //     return;
+    //   }
 
-      if($('#TxtSqMAPLalpurja').val()=='' || $('#TxtSqMAPLalpurja').val()==0){
-        alert('Please enter area in SM as per lalpurja');
-        $('#TxtSqMAPLalpurja').focus();
-        return;
-      }
-      $(this).prop( "disabled", true );
-      var formData = {
-        GuidId: $('#TxtGuidId').val(),
-        KitaNo: $('#TxtKitaNo').val(),
-        SheetNo: $('#TxtSheetNo').val(),
-        RopaniAPLalpurja: $('#TxtRopaniAPLalpurja').val(),
-        AnnaAPLalpurja: $('#TxtAnnaAPLalpurja').val(),
-        PaisaAPLalpurja: $('#TxtPaisaAPLalpurja').val(),
-        DamAPLalpurja: $('#TxtDamAPLalpurja').val(),
-        RAPDAPLalpurja: $('#TxtRAPDAPLalpurja').val(),
-        SqFAPLalpurja: $('#TxtSqFAPLalpurja').val(),
-        SqMAPLalpurja: $('#TxtSqMAPLalpurja').val(),
-        AreaInAnnaAPLalpurja: $('#TxtAreaInAnnaAPLalpurja').val()
-      };
-      $.ajax({
-        url: $('#TxtBaseUrl').val() + 'valuation/savetempareaasperlalpurja',
-        datatype: "json",
-        type: "post",
-        contenttype: 'application/json; charset=utf-8',
-        data: formData,
-        async: false,
-        success: function (data) {
-          CheckSession(data);
-          if(data==1){
-            var formData1 = {
-              GuidId: $('#TxtGuidId').val(),
-              ValuationId: $('#TxtValuationId').val()
-            };
+    //   if($('#TxtSqMAPLalpurja').val()=='' || $('#TxtSqMAPLalpurja').val()==0){
+    //     alert('Please enter area in SM as per lalpurja');
+    //     $('#TxtSqMAPLalpurja').focus();
+    //     return;
+    //   }
+    //   $(this).prop( "disabled", true );
+    //   var formData = {
+    //     GuidId: $('#TxtGuidId').val(),
+    //     KitaNo: $('#TxtKitaNo').val(),
+    //     SheetNo: $('#TxtSheetNo').val(),
+    //     RopaniAPLalpurja: $('#TxtRopaniAPLalpurja').val(),
+    //     AnnaAPLalpurja: $('#TxtAnnaAPLalpurja').val(),
+    //     PaisaAPLalpurja: $('#TxtPaisaAPLalpurja').val(),
+    //     DamAPLalpurja: $('#TxtDamAPLalpurja').val(),
+    //     RAPDAPLalpurja: $('#TxtRAPDAPLalpurja').val(),
+    //     SqFAPLalpurja: $('#TxtSqFAPLalpurja').val(),
+    //     SqMAPLalpurja: $('#TxtSqMAPLalpurja').val(),
+    //     AreaInAnnaAPLalpurja: $('#TxtAreaInAnnaAPLalpurja').val()
+    //   };
+    //   $.ajax({
+    //     url: $('#TxtBaseUrl').val() + 'valuation/savetempareaasperlalpurja',
+    //     datatype: "json",
+    //     type: "post",
+    //     contenttype: 'application/json; charset=utf-8',
+    //     data: formData,
+    //     async: false,
+    //     success: function (data) {
+    //       CheckSession(data);
+    //       if(data==1){
+    //         var formData1 = {
+    //           GuidId: $('#TxtGuidId').val(),
+    //           ValuationId: $('#TxtValuationId').val()
+    //         };
 
-            $.ajax({
-              url: $('#TxtBaseUrl').val() + 'valuation/listtempareaasperlalpurja',
-              datatype: "json",
-              type: "post",
-              contenttype: 'application/json; charset=utf-8',
-              data: formData1,
-              async: false,
-              success: function (data) {
-                //console.log(data);
-                CheckSession(data);
-                var obj = $.parseJSON(data);
+    //         $.ajax({
+    //           url: $('#TxtBaseUrl').val() + 'valuation/listtempareaasperlalpurja',
+    //           datatype: "json",
+    //           type: "post",
+    //           contenttype: 'application/json; charset=utf-8',
+    //           data: formData1,
+    //           async: false,
+    //           success: function (data) {
+    //             //console.log(data);
+    //             CheckSession(data);
+    //             var obj = $.parseJSON(data);
 
-                $('#TxtKitaNo,#TxtSheetNo,#TxtRopaniAPLalpurja,#TxtAnnaAPLalpurja,#TxtPaisaAPLalpurja,#TxtDamAPLalpurja,#TxtSqMAPLalpurja,#TxtRAPDAPLalpurja,#TxtSqFAPLalpurja,#TxtAreaInAnnaAPLalpurja').val('');
-                $('#TxtKitaNo').focus();
-                $("#TblAreaAsPerLalpurja > tbody").find("tr").remove();
-                var TotalRopani = 0,TotalAnna = 0,TotalPaisa = 0,TotalDam = 0,TotalRAPD = 0,TotalSqM = 0,TotalSqF = 0,TotalAreaInAnnaAPLalpurja=0;
-                $.each(obj, function(i, item) {
-                  TotalRopani = TotalRopani + Number(item.RopaniAPLalpurja);
-                  TotalAnna = TotalAnna + Number(item.AnnaAPLalpurja);
-                  TotalPaisa = TotalPaisa + Number(item.PaisaAPLalpurja);
-                  TotalDam = TotalDam + Number(item.DamAPLalpurja);
-                  //TotalRAPD = TotalRopani +'-'+TotalAnna+'-'+TotalPaisa+'-'+TotalDam;
-                  TotalSqM = TotalSqM + Number(item.SqMAPLalpurja);
-                  TotalSqF = TotalSqF + Number(item.SqFAPLalpurja);
-                  TotalAreaInAnnaAPLalpurja = TotalAreaInAnnaAPLalpurja + Number(item.AreaInAnnaAPLalpurja);
-                  $('#TblAreaAsPerLalpurja > tbody').append('<tr><th scope="row">'+(i+1)+'</th><td>'+item.KitaNo+'</td><td>'+item.SheetNo+'</td><td>'+item.RopaniAPLalpurja+'</td><td>'+item.AnnaAPLalpurja+'</td><td>'+item.PaisaAPLalpurja+'</td><td>'+item.DamAPLalpurja+'</td><td>'+item.SqMAPLalpurja+'</td><td>'+item.RAPDAPLalpurja+'</td><td>'+item.SqFAPLalpurja+'</td><td>'+item.AreaInAnnaAPLalpurja+'</td><td><a href="#" class="btn btn-link text-danger btn-sm btneditdelete BtnRemoveAreaAsPerLalpurja" SNo="'+item.SNo+'" DataSource="'+item.datasource+'" tabindex="-1"><i class="far fa-trash-alt"></i> REMOVE</a></td></tr>');
-                });
+    //             $('#TxtKitaNo,#TxtSheetNo,#TxtRopaniAPLalpurja,#TxtAnnaAPLalpurja,#TxtPaisaAPLalpurja,#TxtDamAPLalpurja,#TxtSqMAPLalpurja,#TxtRAPDAPLalpurja,#TxtSqFAPLalpurja,#TxtAreaInAnnaAPLalpurja').val('');
+    //             $('#TxtKitaNo').focus();
+    //             $("#TblAreaAsPerLalpurja > tbody").find("tr").remove();
+    //             var TotalRopani = 0,TotalAnna = 0,TotalPaisa = 0,TotalDam = 0,TotalRAPD = 0,TotalSqM = 0,TotalSqF = 0,TotalAreaInAnnaAPLalpurja=0;
+    //             $.each(obj, function(i, item) {
+    //               TotalRopani = TotalRopani + Number(item.RopaniAPLalpurja);
+    //               TotalAnna = TotalAnna + Number(item.AnnaAPLalpurja);
+    //               TotalPaisa = TotalPaisa + Number(item.PaisaAPLalpurja);
+    //               TotalDam = TotalDam + Number(item.DamAPLalpurja);
+    //               //TotalRAPD = TotalRopani +'-'+TotalAnna+'-'+TotalPaisa+'-'+TotalDam;
+    //               TotalSqM = TotalSqM + Number(item.SqMAPLalpurja);
+    //               TotalSqF = TotalSqF + Number(item.SqFAPLalpurja);
+    //               TotalAreaInAnnaAPLalpurja = TotalAreaInAnnaAPLalpurja + Number(item.AreaInAnnaAPLalpurja);
+    //               $('#TblAreaAsPerLalpurja > tbody').append('<tr><th scope="row">'+(i+1)+'</th><td>'+item.KitaNo+'</td><td>'+item.SheetNo+'</td><td>'+item.RopaniAPLalpurja+'</td><td>'+item.AnnaAPLalpurja+'</td><td>'+item.PaisaAPLalpurja+'</td><td>'+item.DamAPLalpurja+'</td><td>'+item.SqMAPLalpurja+'</td><td>'+item.RAPDAPLalpurja+'</td><td>'+item.SqFAPLalpurja+'</td><td>'+item.AreaInAnnaAPLalpurja+'</td><td><a href="#" class="btn btn-link text-danger btn-sm btneditdelete BtnRemoveAreaAsPerLalpurja" SNo="'+item.SNo+'" DataSource="'+item.datasource+'" tabindex="-1"><i class="far fa-trash-alt"></i> REMOVE</a></td></tr>');
+    //             });
 
-                var _TotalPaisa =0,_TotalDamFinal=0;
-                if(TotalDam>=4){
-                  var _Paisa = Number(TotalDam/4).toFixed(2);
-                  _TotalPaisa = _Paisa.split(".").shift();
-                  _TotalDamFinal = Number((_TotalPaisa * 4))-Number(TotalDam);
-                }
-                else{
-                  _TotalDamFinal = TotalDam;
-                }
+    //             var _TotalPaisa =0,_TotalDamFinal=0;
+    //             if(TotalDam>=4){
+    //               var _Paisa = Number(TotalDam/4).toFixed(2);
+    //               _TotalPaisa = _Paisa.split(".").shift();
+    //               _TotalDamFinal = Number((_TotalPaisa * 4))-Number(TotalDam);
+    //             }
+    //             else{
+    //               _TotalDamFinal = TotalDam;
+    //             }
 
-                var _TotalPaisa1 = Number(TotalPaisa)+Number(_TotalPaisa);
-                var _TotalAnna=0,_TotalPisaFinal=0;
-                if(_TotalPaisa1>=4){
-                  var _Aana = Number(_TotalPaisa1/4).toFixed(2);
-                  _TotalAnna = _Aana.split(".").shift();
-                  var _TotalPisaFinal = Number(_TotalAnna * 4)-Number(_TotalPaisa1);
-                }
-                else{
-                  _TotalPisaFinal = _TotalPaisa1;
-                }
+    //             var _TotalPaisa1 = Number(TotalPaisa)+Number(_TotalPaisa);
+    //             var _TotalAnna=0,_TotalPisaFinal=0;
+    //             if(_TotalPaisa1>=4){
+    //               var _Aana = Number(_TotalPaisa1/4).toFixed(2);
+    //               _TotalAnna = _Aana.split(".").shift();
+    //               var _TotalPisaFinal = Number(_TotalAnna * 4)-Number(_TotalPaisa1);
+    //             }
+    //             else{
+    //               _TotalPisaFinal = _TotalPaisa1;
+    //             }
 
-                var _TotalAnna1 = Number(TotalAnna)+Number(_TotalAnna);
-                var _TotalRopani=0,_TotalAnnaFinal=0;
-                if(_TotalAnna1>=16){
-                  var _TotalAnna11 = Number(_TotalAnna1/16).toFixed(2);
-                  _TotalRopani = _TotalAnna11.split(".").shift();
-                  var _TotalAnnaFinal = Number(_TotalRopani * 16)-Number(_TotalAnna1);
-                }
-                else{
-                  _TotalAnnaFinal = _TotalAnna1;
-                }
+    //             var _TotalAnna1 = Number(TotalAnna)+Number(_TotalAnna);
+    //             var _TotalRopani=0,_TotalAnnaFinal=0;
+    //             if(_TotalAnna1>=16){
+    //               var _TotalAnna11 = Number(_TotalAnna1/16).toFixed(2);
+    //               _TotalRopani = _TotalAnna11.split(".").shift();
+    //               var _TotalAnnaFinal = Number(_TotalRopani * 16)-Number(_TotalAnna1);
+    //             }
+    //             else{
+    //               _TotalAnnaFinal = _TotalAnna1;
+    //             }
 
-                TotalRAPD = Number(TotalRopani)+Number(_TotalRopani) +'-'+Number(_TotalAnnaFinal.toString().replace("-", ""))+'-'+Number(_TotalPisaFinal.toString().replace("-", ""))+'-'+Number(_TotalDamFinal.toFixed(2).toString().replace("-", ""));
+    //             TotalRAPD = Number(TotalRopani)+Number(_TotalRopani) +'-'+Number(_TotalAnnaFinal.toString().replace("-", ""))+'-'+Number(_TotalPisaFinal.toString().replace("-", ""))+'-'+Number(_TotalDamFinal.toFixed(2).toString().replace("-", ""));
 
-                $('#LblTotalRopani').text(TotalRopani.toFixed(2)); $('#TxtTotalRopani').val(TotalRopani.toFixed(2));
-                $('#LblTotalAnna').text(TotalAnna.toFixed(2)); $('#TxtTotalAnna').val(TotalAnna.toFixed(2));
-                $('#LblTotalPaisa').text(TotalPaisa.toFixed(2)); $('#TxtTotalPaisa').val(TotalPaisa.toFixed(2));
-                $('#LblTotalDam').text(TotalDam.toFixed(2)); $('#TxtTotalDam').val(TotalDam.toFixed(2));
-                $('#LblTotalRAPD').text(TotalRAPD); $('#TxtTotalRAPD').val(TotalRAPD);
-                $('#LblTotalSqM').text(TotalSqM.toFixed(2)); $('#TxtTotalSqM').val(TotalSqM.toFixed(2));
-                $('#LblTotalSqF').text(TotalSqF.toFixed(2)); $('#TxtTotalSqF').val(TotalSqF.toFixed(2));
-                $('#LblTotalAreaInAnna').text(TotalAreaInAnnaAPLalpurja.toFixed(2)); $('#TxtTotalAreaInAnna').val(TotalAreaInAnnaAPLalpurja.toFixed(2));
-                CalculateConsiderationArea();
-                CalculationAreaRate();
-              },
-              error: function (xhr) {
-                alert('Error Occured During Data Submission....');
-              }
-            });
-          }
-        },
-        error: function (xhr) {
-          alert('Error Occured During Data Submission....');
-        }
-      });
-      $(this).prop( "disabled", false);
-    });
+    //             $('#LblTotalRopani').text(TotalRopani.toFixed(2)); $('#TxtTotalRopani').val(TotalRopani.toFixed(2));
+    //             $('#LblTotalAnna').text(TotalAnna.toFixed(2)); $('#TxtTotalAnna').val(TotalAnna.toFixed(2));
+    //             $('#LblTotalPaisa').text(TotalPaisa.toFixed(2)); $('#TxtTotalPaisa').val(TotalPaisa.toFixed(2));
+    //             $('#LblTotalDam').text(TotalDam.toFixed(2)); $('#TxtTotalDam').val(TotalDam.toFixed(2));
+    //             $('#LblTotalRAPD').text(TotalRAPD); $('#TxtTotalRAPD').val(TotalRAPD);
+    //             $('#LblTotalSqM').text(TotalSqM.toFixed(2)); $('#TxtTotalSqM').val(TotalSqM.toFixed(2));
+    //             $('#LblTotalSqF').text(TotalSqF.toFixed(2)); $('#TxtTotalSqF').val(TotalSqF.toFixed(2));
+    //             $('#LblTotalAreaInAnna').text(TotalAreaInAnnaAPLalpurja.toFixed(2)); $('#TxtTotalAreaInAnna').val(TotalAreaInAnnaAPLalpurja.toFixed(2));
+    //             CalculateConsiderationArea();
+    //             CalculationAreaRate();
+    //           },
+    //           error: function (xhr) {
+    //             alert('Error Occured During Data Submission....');
+    //           }
+    //         });
+    //       }
+    //     },
+    //     error: function (xhr) {
+    //       alert('Error Occured During Data Submission....');
+    //     }
+    //   });
+    //   $(this).prop( "disabled", false);
+    // });
 
-    $(document.body).on('click','.BtnRemoveAreaAsPerLalpurja',function(){
-      var formData1 = {
-        GuidId: $('#TxtGuidId').val(),
-        SNo: $(this).attr('SNo'),
-        ValuationId: $('#TxtValuationId').val(),
-        DataSource: $(this).attr('DataSource')
-      };
-      $.ajax({
-        url: $('#TxtBaseUrl').val() + 'valuation/deletetempareaasperlalpurja',
-        datatype: "json",
-        type: "post",
-        contenttype: 'application/json; charset=utf-8',
-        data: formData1,
-        async: true,
-        success: function (data) {
-          CheckSession(data);
-          var obj = $.parseJSON(data);
-          $('#TxtKitaNo').focus();
-          $("#TblAreaAsPerLalpurja > tbody").find("tr").remove();
-          var TotalRopani = 0,TotalAnna = 0,TotalPaisa = 0,TotalDam = 0,TotalRAPD=0,TotalSqM = 0,TotalSqF = 0,TotalAreaInAnnaAPLalpurja=0;
-          $.each(obj, function(i, item) {
-            TotalRopani = TotalRopani + Number(item.RopaniAPLalpurja);
-            TotalAnna = TotalAnna + Number(item.AnnaAPLalpurja);
-            TotalPaisa = TotalPaisa + Number(item.PaisaAPLalpurja);
-            TotalDam = TotalDam + Number(item.DamAPLalpurja);
-            TotalSqM = TotalSqM + Number(item.SqMAPLalpurja);
-            TotalSqF = TotalSqF + Number(item.SqFAPLalpurja);
-            TotalAreaInAnnaAPLalpurja = TotalAreaInAnnaAPLalpurja + Number(item.AreaInAnnaAPLalpurja);
-            $('#TblAreaAsPerLalpurja > tbody').append('<tr><th scope="row">'+(i+1)+'</th><td>'+item.KitaNo+'</td><td>'+item.SheetNo+'</td><td>'+item.RopaniAPLalpurja+'</td><td>'+item.AnnaAPLalpurja+'</td><td>'+item.PaisaAPLalpurja+'</td><td>'+item.DamAPLalpurja+'</td><td>'+item.SqMAPLalpurja+'</td><td>'+item.RAPDAPLalpurja+'</td><td>'+item.SqFAPLalpurja+'</td><td>'+item.AreaInAnnaAPLalpurja+'</td><td><a href="#" class="btn btn-link text-danger btn-sm btneditdelete BtnRemoveAreaAsPerLalpurja" SNo="'+item.SNo+'" DataSource="'+item.datasource+'" tabindex="-1"><i class="far fa-trash-alt"></i> REMOVE</a></td></tr>');
-          });
+    // $(document.body).on('click','.BtnRemoveAreaAsPerLalpurja',function(){
+    //   var formData1 = {
+    //     GuidId: $('#TxtGuidId').val(),
+    //     SNo: $(this).attr('SNo'),
+    //     ValuationId: $('#TxtValuationId').val(),
+    //     DataSource: $(this).attr('DataSource')
+    //   };
+    //   $.ajax({
+    //     url: $('#TxtBaseUrl').val() + 'valuation/deletetempareaasperlalpurja',
+    //     datatype: "json",
+    //     type: "post",
+    //     contenttype: 'application/json; charset=utf-8',
+    //     data: formData1,
+    //     async: true,
+    //     success: function (data) {
+    //       CheckSession(data);
+    //       var obj = $.parseJSON(data);
+    //       $('#TxtKitaNo').focus();
+    //       $("#TblAreaAsPerLalpurja > tbody").find("tr").remove();
+    //       var TotalRopani = 0,TotalAnna = 0,TotalPaisa = 0,TotalDam = 0,TotalRAPD=0,TotalSqM = 0,TotalSqF = 0,TotalAreaInAnnaAPLalpurja=0;
+    //       $.each(obj, function(i, item) {
+    //         TotalRopani = TotalRopani + Number(item.RopaniAPLalpurja);
+    //         TotalAnna = TotalAnna + Number(item.AnnaAPLalpurja);
+    //         TotalPaisa = TotalPaisa + Number(item.PaisaAPLalpurja);
+    //         TotalDam = TotalDam + Number(item.DamAPLalpurja);
+    //         TotalSqM = TotalSqM + Number(item.SqMAPLalpurja);
+    //         TotalSqF = TotalSqF + Number(item.SqFAPLalpurja);
+    //         TotalAreaInAnnaAPLalpurja = TotalAreaInAnnaAPLalpurja + Number(item.AreaInAnnaAPLalpurja);
+    //         $('#TblAreaAsPerLalpurja > tbody').append('<tr><th scope="row">'+(i+1)+'</th><td>'+item.KitaNo+'</td><td>'+item.SheetNo+'</td><td>'+item.RopaniAPLalpurja+'</td><td>'+item.AnnaAPLalpurja+'</td><td>'+item.PaisaAPLalpurja+'</td><td>'+item.DamAPLalpurja+'</td><td>'+item.SqMAPLalpurja+'</td><td>'+item.RAPDAPLalpurja+'</td><td>'+item.SqFAPLalpurja+'</td><td>'+item.AreaInAnnaAPLalpurja+'</td><td><a href="#" class="btn btn-link text-danger btn-sm btneditdelete BtnRemoveAreaAsPerLalpurja" SNo="'+item.SNo+'" DataSource="'+item.datasource+'" tabindex="-1"><i class="far fa-trash-alt"></i> REMOVE</a></td></tr>');
+    //       });
 
-          var _TotalPaisa =0,_TotalDamFinal=0;
-          if(TotalDam>=4){
-            var _TotalDam = Number(TotalDam/4).toFixed(2);
-            _TotalPaisa = _TotalDam.split(".").shift();
-            _TotalDamFinal = Number((_TotalPaisa * 4))-Number(TotalDam);
-          }
-          else{
-            _TotalDamFinal = TotalDam;
-          }
+    //       var _TotalPaisa =0,_TotalDamFinal=0;
+    //       if(TotalDam>=4){
+    //         var _TotalDam = Number(TotalDam/4).toFixed(2);
+    //         _TotalPaisa = _TotalDam.split(".").shift();
+    //         _TotalDamFinal = Number((_TotalPaisa * 4))-Number(TotalDam);
+    //       }
+    //       else{
+    //         _TotalDamFinal = TotalDam;
+    //       }
 
-          var _TotalPaisa1 = Number(TotalPaisa)+Number(_TotalPaisa);
-          var _TotalAnna=0,_TotalPisaFinal=0;
-          if(_TotalPaisa1>=4){
-            var _TotalPaisa11 = Number(_TotalPaisa1/4).toFixed(2);
-            _TotalAnna = _TotalPaisa11.split(".").shift();
-            var _TotalPisaFinal = Number(_TotalAnna * 4)-Number(_TotalPaisa1);
-          }
-          else{
-            _TotalPisaFinal = _TotalPaisa1;
-          }
+    //       var _TotalPaisa1 = Number(TotalPaisa)+Number(_TotalPaisa);
+    //       var _TotalAnna=0,_TotalPisaFinal=0;
+    //       if(_TotalPaisa1>=4){
+    //         var _TotalPaisa11 = Number(_TotalPaisa1/4).toFixed(2);
+    //         _TotalAnna = _TotalPaisa11.split(".").shift();
+    //         var _TotalPisaFinal = Number(_TotalAnna * 4)-Number(_TotalPaisa1);
+    //       }
+    //       else{
+    //         _TotalPisaFinal = _TotalPaisa1;
+    //       }
 
-          var _TotalAnna1 = Number(TotalAnna)+Number(_TotalAnna);
-          var _TotalRopani=0,_TotalAnnaFinal=0;
-          if(_TotalAnna1>=16){
-            var _TotalAnna11 = Number(_TotalAnna1/16).toFixed(2);
-            _TotalRopani = _TotalAnna11.split(".").shift();
-            var _TotalAnnaFinal = Number(_TotalRopani * 16)-Number(_TotalAnna1);
-          }
-          else{
-            _TotalAnnaFinal = _TotalAnna1;
-          }
+    //       var _TotalAnna1 = Number(TotalAnna)+Number(_TotalAnna);
+    //       var _TotalRopani=0,_TotalAnnaFinal=0;
+    //       if(_TotalAnna1>=16){
+    //         var _TotalAnna11 = Number(_TotalAnna1/16).toFixed(2);
+    //         _TotalRopani = _TotalAnna11.split(".").shift();
+    //         var _TotalAnnaFinal = Number(_TotalRopani * 16)-Number(_TotalAnna1);
+    //       }
+    //       else{
+    //         _TotalAnnaFinal = _TotalAnna1;
+    //       }
 
-          TotalRAPD = Number(TotalRopani)+Number(_TotalRopani) +'-'+Number(_TotalAnnaFinal.toString().replace("-", ""))+'-'+Number(_TotalPisaFinal.toString().replace("-", ""))+'-'+Number(_TotalDamFinal.toFixed(2).toString().replace("-", ""));
+    //       TotalRAPD = Number(TotalRopani)+Number(_TotalRopani) +'-'+Number(_TotalAnnaFinal.toString().replace("-", ""))+'-'+Number(_TotalPisaFinal.toString().replace("-", ""))+'-'+Number(_TotalDamFinal.toFixed(2).toString().replace("-", ""));
 
-          $('#LblTotalRopani').text(TotalRopani.toFixed(2)); $('#TxtTotalRopani').val(TotalRopani.toFixed(2));
-          $('#LblTotalAnna').text(TotalAnna.toFixed(2)); $('#TxtTotalAnna').val(TotalAnna.toFixed(2));
-          $('#LblTotalPaisa').text(TotalPaisa.toFixed(2)); $('#TxtTotalPaisa').val(TotalPaisa.toFixed(2));
-          $('#LblTotalDam').text(TotalDam.toFixed(2)); $('#TxtTotalDam').val(TotalDam.toFixed(2));
-          $('#LblTotalRAPD').text(TotalRAPD); $('#TxtTotalRAPD').val(TotalRAPD);
-          $('#LblTotalSqM').text(TotalSqM.toFixed(2)); $('#TxtTotalSqM').val(TotalSqM.toFixed(2));
-          $('#LblTotalSqF').text(TotalSqF.toFixed(2)); $('#TxtTotalSqF').val(TotalSqF.toFixed(2));
-          $('#LblTotalAreaInAnna').text(TotalAreaInAnnaAPLalpurja.toFixed(2)); $('#TxtTotalAreaInAnna').val(TotalAreaInAnnaAPLalpurja.toFixed(2));
-          CalculateConsiderationArea();
-          CalculationAreaRate();
-        },
-        error: function (xhr) {
-          alert('Error Occured During Data Submission....');
-        }
-      });
-    });
+    //       $('#LblTotalRopani').text(TotalRopani.toFixed(2)); $('#TxtTotalRopani').val(TotalRopani.toFixed(2));
+    //       $('#LblTotalAnna').text(TotalAnna.toFixed(2)); $('#TxtTotalAnna').val(TotalAnna.toFixed(2));
+    //       $('#LblTotalPaisa').text(TotalPaisa.toFixed(2)); $('#TxtTotalPaisa').val(TotalPaisa.toFixed(2));
+    //       $('#LblTotalDam').text(TotalDam.toFixed(2)); $('#TxtTotalDam').val(TotalDam.toFixed(2));
+    //       $('#LblTotalRAPD').text(TotalRAPD); $('#TxtTotalRAPD').val(TotalRAPD);
+    //       $('#LblTotalSqM').text(TotalSqM.toFixed(2)); $('#TxtTotalSqM').val(TotalSqM.toFixed(2));
+    //       $('#LblTotalSqF').text(TotalSqF.toFixed(2)); $('#TxtTotalSqF').val(TotalSqF.toFixed(2));
+    //       $('#LblTotalAreaInAnna').text(TotalAreaInAnnaAPLalpurja.toFixed(2)); $('#TxtTotalAreaInAnna').val(TotalAreaInAnnaAPLalpurja.toFixed(2));
+    //       CalculateConsiderationArea();
+    //       CalculationAreaRate();
+    //     },
+    //     error: function (xhr) {
+    //       alert('Error Occured During Data Submission....');
+    //     }
+    //   });
+    // });
 
     $("#TxtAnnaAPLalpurja").blur(function(){ if($(this).val()>16){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true ); return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
     $("#TxtPaisaAPLalpurja").blur(function(){ if($(this).val()>4){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true );  return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
@@ -1970,88 +1970,88 @@
       $('#TxtAreaInAnnaAPMeasurement').val(Number(SqFAPMeasurement/342.25).toFixed(2));
     });
 
-    $('#BtnAddAreaAPMeasurement').on('click', function() {
-      if($('#TxtAreaSymbol').val()==''){ alert('Please slect Area Symbol.'); $('#TxtAreaSymbol').focus(); return; }
-      if($('#TxtSideA').val()==''){ alert('Please enter Side A.'); $('#TxtSideA').focus(); return; }
-      if($('#TxtSideB').val()==''){ alert('Please enter Side B.'); $('#TxtSideB').focus(); return; }
-      if($('#TxtSideC').val()==''){ alert('Please enter Side C.'); $('#TxtSideC').focus(); return; }
-      if($('#TxtSqFAPMeasurement').val()==''){ alert('Invalid Area.'); $('#TxtSideA').focus(); return; }
-      $(this).prop( "disabled", true );
-      var formData = {
-        GuidId: $('#TxtGuidId').val(),
-        AreaSymbol: $('#TxtAreaSymbol').val(),
-        SideA: $('#TxtSideA').val(),
-        SideB: $('#TxtSideB').val(),
-        SideC: $('#TxtSideC').val(),
-        SideS: $('#TxtSideS').val(),
-        SqFAPMeasurement: $('#TxtSqFAPMeasurement').val(),
-        SqMAPMeasurement: $('#TxtSqMAPMeasurement').val(),
-        AreaInAnnaAPMeasurement: $('#TxtAreaInAnnaAPMeasurement').val(),
-        AreaInRPADAsPerMeasurement: SqFToRAPD(Number($('#TxtSqFAPMeasurement').val()).toFixed(2)),
-      };
+    // $('#BtnAddAreaAPMeasurement').on('click', function() {
+    //   if($('#TxtAreaSymbol').val()==''){ alert('Please slect Area Symbol.'); $('#TxtAreaSymbol').focus(); return; }
+    //   if($('#TxtSideA').val()==''){ alert('Please enter Side A.'); $('#TxtSideA').focus(); return; }
+    //   if($('#TxtSideB').val()==''){ alert('Please enter Side B.'); $('#TxtSideB').focus(); return; }
+    //   if($('#TxtSideC').val()==''){ alert('Please enter Side C.'); $('#TxtSideC').focus(); return; }
+    //   if($('#TxtSqFAPMeasurement').val()==''){ alert('Invalid Area.'); $('#TxtSideA').focus(); return; }
+    //   $(this).prop( "disabled", true );
+    //   var formData = {
+    //     GuidId: $('#TxtGuidId').val(),
+    //     AreaSymbol: $('#TxtAreaSymbol').val(),
+    //     SideA: $('#TxtSideA').val(),
+    //     SideB: $('#TxtSideB').val(),
+    //     SideC: $('#TxtSideC').val(),
+    //     SideS: $('#TxtSideS').val(),
+    //     SqFAPMeasurement: $('#TxtSqFAPMeasurement').val(),
+    //     SqMAPMeasurement: $('#TxtSqMAPMeasurement').val(),
+    //     AreaInAnnaAPMeasurement: $('#TxtAreaInAnnaAPMeasurement').val(),
+    //     AreaInRPADAsPerMeasurement: SqFToRAPD(Number($('#TxtSqFAPMeasurement').val()).toFixed(2)),
+    //   };
 
-      $.ajax({
-        url: $('#TxtBaseUrl').val() + 'valuation/savetempareaaspercalculation',
-        datatype: "json",
-        type: "post",
-        contenttype: 'application/json; charset=utf-8',
-        data: formData,
-        async: false,
-        success: function (data) {
-          CheckSession(data);
-          if(data==1){
-            var formData1 = {
-              GuidId: $('#TxtGuidId').val(),
-              ValuationId: $('#TxtValuationId').val()
-            };
-            $.ajax({
-              url: $('#TxtBaseUrl').val() + 'valuation/listtempareaaspercalculation',
-              datatype: "json",
-              type: "post",
-              contenttype: 'application/json; charset=utf-8',
-              data: formData1,
-              async: false,
-              success: function (data) {
-                CheckSession(data);
-                $('#TxtAreaSymbol,#TxtSideA,#TxtSideB,#TxtSideC,#TxtSideS,#TxtSqFAPMeasurement,#TxtSqMAPMeasurement,#TxtAreaInAnnaAPMeasurement').val('');
-                BindAreaAsPerCalculation(data);
-              },
-              error: function (xhr) {
-                alert('Error Occured During Data Submission....');
-              }
-            });
-          }
-        },
-        error: function (xhr) {
-          alert('Error Occured During Data Submission....');
-        }
-      });
-      $(this).prop( "disabled", false);
-    });
+    //   $.ajax({
+    //     url: $('#TxtBaseUrl').val() + 'valuation/savetempareaaspercalculation',
+    //     datatype: "json",
+    //     type: "post",
+    //     contenttype: 'application/json; charset=utf-8',
+    //     data: formData,
+    //     async: false,
+    //     success: function (data) {
+    //       CheckSession(data);
+    //       if(data==1){
+    //         var formData1 = {
+    //           GuidId: $('#TxtGuidId').val(),
+    //           ValuationId: $('#TxtValuationId').val()
+    //         };
+    //         $.ajax({
+    //           url: $('#TxtBaseUrl').val() + 'valuation/listtempareaaspercalculation',
+    //           datatype: "json",
+    //           type: "post",
+    //           contenttype: 'application/json; charset=utf-8',
+    //           data: formData1,
+    //           async: false,
+    //           success: function (data) {
+    //             CheckSession(data);
+    //             $('#TxtAreaSymbol,#TxtSideA,#TxtSideB,#TxtSideC,#TxtSideS,#TxtSqFAPMeasurement,#TxtSqMAPMeasurement,#TxtAreaInAnnaAPMeasurement').val('');
+    //             BindAreaAsPerCalculation(data);
+    //           },
+    //           error: function (xhr) {
+    //             alert('Error Occured During Data Submission....');
+    //           }
+    //         });
+    //       }
+    //     },
+    //     error: function (xhr) {
+    //       alert('Error Occured During Data Submission....');
+    //     }
+    //   });
+    //   $(this).prop( "disabled", false);
+    // });
 
-    $(document.body).on('click','.BtnRemoveAreaAsPerCal',function(){
-      var formData1 = {
-        GuidId: $('#TxtGuidId').val(),
-        SNo: $(this).attr('SNo'),
-        ValuationId: $('#TxtValuationId').val(),
-        DataSource: $(this).attr('DataSource')
-      };
-      $.ajax({
-        url: $('#TxtBaseUrl').val() + 'valuation/deletetempareaaspercalculation',
-        datatype: "json",
-        type: "post",
-        contenttype: 'application/json; charset=utf-8',
-        data: formData1,
-        async: true,
-        success: function (data) {
-          CheckSession(data);
-          BindAreaAsPerCalculation(data);
-        },
-        error: function (xhr) {
-          alert('Error Occured During Data Submission....');
-        }
-      });
-    });
+    // $(document.body).on('click','.BtnRemoveAreaAsPerCal',function(){
+    //   var formData1 = {
+    //     GuidId: $('#TxtGuidId').val(),
+    //     SNo: $(this).attr('SNo'),
+    //     ValuationId: $('#TxtValuationId').val(),
+    //     DataSource: $(this).attr('DataSource')
+    //   };
+    //   $.ajax({
+    //     url: $('#TxtBaseUrl').val() + 'valuation/deletetempareaaspercalculation',
+    //     datatype: "json",
+    //     type: "post",
+    //     contenttype: 'application/json; charset=utf-8',
+    //     data: formData1,
+    //     async: true,
+    //     success: function (data) {
+    //       CheckSession(data);
+    //       BindAreaAsPerCalculation(data);
+    //     },
+    //     error: function (xhr) {
+    //       alert('Error Occured During Data Submission....');
+    //     }
+    //   });
+    // });
 
     function BindAreaAsPerCalculation(data){
       var obj = $.parseJSON(data);
@@ -2085,76 +2085,19 @@
     }
 
     function SqFToRAPD(SqF){
-    //  // total_sqft = $("#squareFeet").val(), total_sqft *= 1, convertFromTotalSqft(total_sqft, 'en');
-
-
-    //  total_sqmt = .092903 * SqF, 
-    //  total_paisa = SqF / 85.56, 
-    //  total_dhur = SqF / 182.25, 
-    //  ropaniPart = Math.floor(total_paisa / 64), 
-    //  remainingPaisa = total_paisa - 64 * ropaniPart, 
-    //  aanaPart = Math.floor(remainingPaisa / 4), 
-    //  remainingPaisa -= 4 * aanaPart, 
-    //  paisaPart = Math.floor(remainingPaisa), 
-    //  remainingPaisa -= paisaPart, 
-    //  damPart = 4 * remainingPaisa, 
-    //  bighaPart = Math.floor(total_dhur / 400), 
-    //  remainingDhur = total_dhur - 400 * bighaPart, 
-    //  kathhaPart = Math.floor(remainingDhur / 20), 
-    //  remainingDhur -= 20 * kathhaPart, 
-    //  dhurPart = remainingDhur, 
-    //  //"np" == e ? (ropaniText = " à¤°à¥‹à¤ªà¤¨à¥€ ", aanaText = " à¤†à¤¨à¤¾ ", paisaText = " à¤ªà¥ˆà¤¸à¤¾ ", damText = " à¤¦à¤¾à¤® ", bighaText = " à¤¬à¤¿à¤—à¤¾ ", kathhaText = " à¤•à¤ à¥à¤ à¤¾ ", dhurText = " à¤§à¥à¤° ", sqmtText = " à¤µà¤°à¥à¤— à¤®à¤¿à¤Ÿà¤° ", sqftText = " à¤µà¤°à¥à¤— à¤«à¤¿à¤Ÿ ") : (ropaniText = " Ropani ", aanaText = " Aana ", paisaText = " Paisa ", damText = " Dam ", bighaText = " Bigha ", kathhaText = " Kathha ", dhurText = " Dhur ", sqmtText = " Square Meter ", sqftText = " Square Feet "), 
-    //  //ropaniResult = ropaniPart + ropaniText + aanaPart + aanaText + paisaPart + paisaText + damPart.toFixed(2) + damText, 
-    //  //bighaResult = bighaPart + bighaText + kathhaPart + kathhaText + dhurPart.toFixed(2) + dhurText, 
-    //  //squareFeetResult = t.toFixed(2) + sqftText, squareMeterResult = total_sqmt.toFixed(2) + sqmtText,
-    //  //  $("#ropaniResult").html(ropaniResult), 
-    //  //  $("#bighaResult").html(bighaResult), 
-    //  //  $("#squareFeetResult").html(squareFeetResult), 
-    //  //  $("#squareMeterResult").html(squareMeterResult)
-    //   damPart = damPart>1?damPart.toFixed(2):0;
-    //   //console.log(ropaniPart +'-'+ aanaPart +'-'+ paisaPart +'-'+ damPart);
-
-
-
-     
-    //   // var Ropanis =  (SqF/342.25)/16;
-    //   // var OnlyRopni = Ropanis.toString().split(".").shift();
-    //   // var RemainingRopni = '0.'+Ropanis.toString().split(".").pop();
-
-    //   // var Aanas = RemainingRopni*16;
-    //   // var OnlyAana = Aanas.toString().split(".").shift();
-    //   // var RemainingAana = '0.'+Aanas.toString().split(".").pop();
-
-    //   // var Paisas = RemainingAana*342.25;
-    //   // var OnlyPaisa1 = Paisas.toString().split(".").shift();
-    //   // var OnlyPaisa2 = (Paisas.toString().split(".").shift())/85.6;
-    //   // var OnlyPaisa3 = Number(OnlyPaisa2).toFixed(2);
-    //   // var OnlyPaisa4 =0;
-    //   // if(Paisas>=85)
-    //   // OnlyPaisa4=OnlyPaisa3;
-    //   // else
-    //   // OnlyPaisa4=0;
-    //   // var OnlyPaisa=OnlyPaisa4.toString().split(".").shift();
-
-    //   // var OnlyDam1 = '0.'+OnlyPaisa2.toString().split(".").pop();
-    //   // var OnlyDam =Number((OnlyDam1*85.6)/21.39).toFixed(2);
-    //  // console.log(Number(OnlyRopni) +'-'+Number(OnlyAana)+'-'+Number(OnlyPaisa)+'-'+Number(OnlyDam));
-    //   return ropaniPart +'-'+ aanaPart +'-'+ paisaPart +'-'+ damPart; //Number(OnlyRopni) +'-'+Number(OnlyAana)+'-'+Number(OnlyPaisa)+'-'+Number(OnlyDam);
-
-
-    var TotalRopani = SqF/(16*342.25);
-    var OnlyRopani = TotalRopani.toString().split(".")[0];
-     var RemainingRopani = (TotalRopani-OnlyRopani);
-     var TotalAana = RemainingRopani*(16);
-     var OnlyAana = TotalAana.toString().split(".")[0];
-     var RemainingAana = (TotalAana-OnlyAana);
-     var RemainingAanaToSQF = RemainingAana*342.25;
-     var TotalPaisa = RemainingAanaToSQF/(85.6);
-     var OnlyPaisa = TotalPaisa.toString().split(".")[0];
-     var RemainingPaisa = (TotalPaisa-OnlyPaisa);
-     var RemainingPaisaToSQF = RemainingPaisa*85.6;
-     var OnlyDam = RemainingPaisaToSQF/(21.4);
-    return Number(OnlyRopani)+'-'+Number(OnlyAana)+'-'+Number(OnlyPaisa)+'-'+Number(OnlyDam).toFixed(2);
+      var TotalRopani = SqF/(16*342.25);
+      var OnlyRopani = TotalRopani.toString().split(".")[0];
+      var RemainingRopani = (TotalRopani-OnlyRopani);
+      var TotalAana = RemainingRopani*(16);
+      var OnlyAana = TotalAana.toString().split(".")[0];
+      var RemainingAana = (TotalAana-OnlyAana);
+      var RemainingAanaToSQF = RemainingAana*342.25;
+      var TotalPaisa = RemainingAanaToSQF/(85.6);
+      var OnlyPaisa = TotalPaisa.toString().split(".")[0];
+      var RemainingPaisa = (TotalPaisa-OnlyPaisa);
+      var RemainingPaisaToSQF = RemainingPaisa*85.6;
+      var OnlyDam = RemainingPaisaToSQF/(21.4);
+      return Number(OnlyRopani)+'-'+Number(OnlyAana)+'-'+Number(OnlyPaisa)+'-'+Number(OnlyDam).toFixed(2);
     }
 
     function convertFromTotalSqft(t, e) {
@@ -2183,7 +2126,7 @@
       //  $("#squareMeterResult").html(squareMeterResult)
        damPart = damPart>1?damPart.toFixed(2):0;
        return ropaniPart +'-'+ aanaPart +'-'+ paisaPart +'-'+ damPart;
-  }
+    }
 
     function ToTwoDecimalPlaces(input) {
       var value =Number(input);

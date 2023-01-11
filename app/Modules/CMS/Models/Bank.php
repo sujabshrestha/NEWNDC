@@ -13,7 +13,9 @@ class Bank extends Model
         'name',
         'phone',
         'status',
-        'remarks'
+        'remarks',
+        'commercial_rate',
+        'fair_market_rate',
+        'governmant_rate',
     ];
-
 }
