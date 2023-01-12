@@ -1424,7 +1424,7 @@
             var sqMAPMeasurement = $('#sqMAPMeasurement').val();
             var areaInAnnaAPMeasurement = $('#areaInAnnaAPMeasurement').val();
             var totalRAPDAsPerCal = SqFToRAPD(sqFAPMeasurement);
-
+            alert(totalRAPDAsPerCal);
             var route = $(this).data('url');
 
 

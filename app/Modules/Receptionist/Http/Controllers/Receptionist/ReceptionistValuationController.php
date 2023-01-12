@@ -183,6 +183,7 @@ class ReceptionistValuationController extends Controller
             $landbased->sqMAPMeasurement = $request->sqMAPMeasurement;
             $landbased->areaInAnnaAPMeasurement = $request->areaInAnnaAPMeasurement;
             $landbased->site_visit_id = $sitevisit->id;
+            $landbased->total_rapd_as_cal = $request->totalRAPDAsPerCal;
 
             if ($landbased->save()) {
                 $sitevisit->refresh();
