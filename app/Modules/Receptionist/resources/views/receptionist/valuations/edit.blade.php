@@ -1329,7 +1329,6 @@
 
             var route = $(this).data('url');
 
-
             if (sqm == '' || kitano == '' || sheetno == '') {
                 toastr.error('[Kitano, Sheetno, Area in Sq.M] cannot be empty');
             } else {
@@ -1365,7 +1364,10 @@
                         var sqf = $('#sqf_as_lalpurja').val('');
                         var sqm = $('#sqm_as_lalpurja').val('');
                         var area = $('#area_in_anna_as_lalpurja').val('');
-
+                        var totalSqF = $('#totalSqF').val();
+                        var rapd = SqFToRAPD(totalSqF);
+                        $('#ltotalRAPD').text(rapd);
+                        $('#totalRAPD').val(rapd);
                         currentevent.attr('disabled', false);
 
                     },
@@ -1391,6 +1393,22 @@
 
         });
 
+        $( document ).ready(function() {
+            var totalSqF = $('#totalSqF').val();
+            var TotalRAPD = SqFToRAPD(totalSqF);
+            $('#ltotalRAPD').text(TotalRAPD);
+            $('#totalRAPD').val(TotalRAPD);
+
+
+            var totalSqFAsPerCal = $('#totalSqFAsPerCal').val();
+            var TotalRAPDAsPerCal = SqFToRAPD(totalSqFAsPerCal);
+            $('#LblTotalAreaInRPADAsPerMeasurement').text(TotalRAPDAsPerCal);
+            $('#LblTotalAreaInRPADAsPerMeasurement').val(TotalRAPDAsPerCal);
+            currentevent.attr('disabled', false);
+
+        });
+       
+
 
         //actual measurement
         $(document).on('click', '#BtnAddAreaAPMeasurement', function(e) {
@@ -1405,7 +1423,7 @@
             var sqFAPMeasurement = $('#sqFAPMeasurement').val();
             var sqMAPMeasurement = $('#sqMAPMeasurement').val();
             var areaInAnnaAPMeasurement = $('#areaInAnnaAPMeasurement').val();
-
+            var totalRAPDAsPerCal = SqFToRAPD(sqFAPMeasurement);
 
             var route = $(this).data('url');
 
@@ -1426,6 +1444,7 @@
                         sideS: sideS,
                         sqMAPMeasurement: sqMAPMeasurement,
                         areaInAnnaAPMeasurement: areaInAnnaAPMeasurement,
+                        totalRAPDAsPerCal:totalRAPDAsPerCal
 
                     },
                     beforeSend: function(data) {
@@ -1442,8 +1461,8 @@
                         var sqFAPMeasurement = $('#sqFAPMeasurement').val('');
                         var sqMAPMeasurement = $('#sqMAPMeasurement').val('');
                         var areaInAnnaAPMeasurement = $('#areaInAnnaAPMeasurement').val('');
-                        currentevent.attr('disabled', false);
 
+                       
                     },
                     error: function(err) {
                         if (err.status == 422) {
@@ -1536,6 +1555,8 @@
     {{-- New Scripts --}}
 
     <script>
+        
+
         $(document).on('keyup','#sqm_as_lalpurja',function(){
             var SqM = $(this).val()     
             var SqF = $(this).val()*10.76;
@@ -1584,11 +1605,11 @@
 
        
 
-        $("#annaAPLalpurja").blur(function(){ if($(this).val()>16){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true ); return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
-        $("#paisaAPLalpurja").blur(function(){ if($(this).val()>4){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true );  return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
-        $("#damAPLalpurja").blur(function(){ if($(this).val()>4){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true ); return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
+        // $("#annaAPLalpurja").blur(function(){ if($(this).val()>16){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true ); return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
+        // $("#paisaAPLalpurja").blur(function(){ if($(this).val()>4){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true );  return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
+        // $("#damAPLalpurja").blur(function(){ if($(this).val()>4){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true ); return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
 
-        $("#constructionEstimateValue").blur(function(){
+        $("#constructionEstimateValue").keyup(function(){
         var _v3 = Number($('#bankId').attr("myfairmarketvalue"));
         //var k =Number($(this).val());
         $("#constructionDistressValue").val(Number((Number($(this).val())/100)*_v3).toFixed(2));
@@ -1761,6 +1782,7 @@
       $('#afterRiverAreaInRPAD').val(SqFToRAPD(Number(DeductionForRiverSqF).toFixed(2)));
     }
 
+
     function SqFToRAPD(SqF){
       var TotalRopani = SqF/(16*342.25);
       var OnlyRopani = TotalRopani.toString().split(".")[0];
@@ -1885,9 +1907,6 @@
       $('#totalBuildingDistressValue').text(TotalBuildingDistressValue.toFixed(2)); 
       $('#totalBuildingDistressValue').val(TotalBuildingDistressValue.toFixed(2));
     }
-
-
-
 
     </script>
 
