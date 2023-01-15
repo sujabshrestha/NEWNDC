@@ -23,7 +23,7 @@ class SiteVisit extends Model
 {
     use HasFactory;
 
-    protected $date = ['ownership_date','preparation_date'];
+    protected $dates = ['ownership_date','preparation_date'];
 
     public function scopePreValuation($query){
         $query->where('valuation_status','Pre-Valuation');

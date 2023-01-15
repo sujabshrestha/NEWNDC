@@ -270,7 +270,7 @@ class ReceptionistValuationController extends Controller
     public function valuationFinalSubmit(Request $request, $id)
     {
         // try {
-            dd($request->all());
+            // dd($request->all());
 
             $sitevisit = SiteVisit::where('id', $id)->with('deduction', 'rateofland')->first();
 
@@ -340,7 +340,7 @@ class ReceptionistValuationController extends Controller
                         'frontage' => $request->buildingFrontage,
                         'level_with_road' => $request->levelWithRoad,
                         'property_fot_the_bank' => $request->propertyForTheBank,
-                        'rive_near_by' => $request->riverStreamNearProperty,
+                        'river_near_by' => $request->riverStreamNearProperty,
                         'heritage_sites_near_by' => $request->heritageSitesNearProperty,
                         'property_ownership_type' => $request->propertyOwnershipType,
                         'narrowest_part_of_land' => $request->narrowestPartOfLand,

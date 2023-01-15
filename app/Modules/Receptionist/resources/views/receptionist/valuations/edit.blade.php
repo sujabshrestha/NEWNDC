@@ -124,12 +124,13 @@
                             </div>
                             <div class="form-group col-md-3" style="padding-left:6px;padding-right:6px;">
                                 <label>Prepration Date (BS) <span class="required">*</span></label>
-                                <input type="date" name="prepration_date" id="prepration_date" required=""
+                                {{-- {{$sitevisit->preparation_date}} --}}
+                                <input type="date" name="prepration_date" id="prepration_date" required="" value="{{ ($sitevisit->preparation_date != null ? $sitevisit->preparation_date->format('Y-m-d') : '') ??  old('prepration_date', date('Y-m-d'))  ?? '' }}"
                                     class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-3" style="padding-left:6px;padding-right:6px;">
                                 <label>Date (BS) (Ownership) <span class="required">*</span></label>
-                                <input type="date" name="date_ownership" id="date_ownership" required=""
+                                <input type="date" name="date_ownership" id="date_ownership" required="" value="{{($sitevisit->ownership_date != null ? $sitevisit->ownership_date->format('Y-m-d') : '') ??  old('date_ownership', date('Y-m-d'))  ?? ''}}"
                                     class="form-control" autocomplete="off">
                             </div>
                             <div class="col-md-9"></div>
@@ -238,7 +239,7 @@
                             <div class="form-group col-md-2" style="max-width:150px;padding-left:6px;padding-right:6px;">
                                 <label>Area Symbol</label>
                                 <select class="form-control selectbox" name="areaSymbol" id="areaSymbol">
-                                    <option value="" selected="selected">Select Area Symbol</option>
+                                    <option value="" >Select Area Symbol</option>
                                     <option value="Triangle 1">Triangle 1</option>
                                     <option value="Triangle 2">Triangle 2</option>
                                     <option value="Triangle 3">Triangle 3</option>
@@ -590,7 +591,7 @@
                                     <div class="form-group col-md-2" style="flex: 14%;max-width: 14%; padding-right:0px;">
                                         <label>Floor</label>
                                         <select class="form-control selectbox" name="floor" id="floor">
-                                            <option value="" selected="selected">--Select Floor--</option>
+                                            <option value="" >--Select Floor--</option>
                                             <option value="Semi Basement">Semi Basement</option>
                                             <option value="Basement">Basement</option>
                                             <option value="Ground Floor">Ground Floor</option>
@@ -918,10 +919,10 @@
                                 <label>V.D.C/Municipality</label>
                                 <select class="form-control" name="vdcType" id="vdcType">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('vdcType') || $sitevisit->valuationDetails->vdc_municipality  == "Rural-Municipality"}} value="Rural-Municipality" >Rural Municipality</option>
-                                    <option {{ old('vdcType') || $sitevisit->valuationDetails->vdc_municipality  == "Municipality"}} value="Municipality">Municipality</option>
-                                    <option {{ old('vdcType') || $sitevisit->valuationDetails->vdc_municipality  == "Sub-Metropolitan-City"}} value="Sub-Metropolitan-City">Sub Metropolitan City</option>
-                                    <option {{ old('vdcType') || $sitevisit->valuationDetails->vdc_municipality  == "Mertopolitan-City"}} value="Mertopolitan-City">Mertopolitan City</option>
+                                    <option {{ ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->vdc_municipality : '') || old('vdcType')  == "Rural-Municipality" ? 'selected' : '' }} value="Rural-Municipality" >Rural Municipality</option>
+                                    <option {{ ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->vdc_municipality : '') || old('vdcType')  == "Municipality"  ? 'selected' : '' }} value="Municipality">Municipality</option>
+                                    <option {{ ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->vdc_municipality : '') || old('vdcType')  == "Sub-Metropolitan-City"  ? 'selected' : '' }} value="Sub-Metropolitan-City">Sub Metropolitan City</option>
+                                    <option {{ ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->vdc_municipality : '') || old('vdcType')  == "Metropolitan-City"  ? 'selected' : '' }} value="Metropolitan-City">Metropolitan City</option>
                                     
                                 </select>
 
@@ -969,10 +970,10 @@
                                 <label>Type of Region</label>
                                 <select class="form-control selectbox" name="typeOfRegion" id="typeOfRegion">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('typeOfRegion') || $sitevisit->valuationDetails->type_of_region  == "Residential"}} value="Residential" selected="selected">Residential</option>
-                                    <option {{ old('typeOfRegion') || $sitevisit->valuationDetails->type_of_region  == "Commercial"}} value="Commercial">Commercial</option>
-                                    <option {{ old('typeOfRegion') || $sitevisit->valuationDetails->type_of_region  == "Agricultural"}} value="Agricultural">Agricultural</option>
-                                    <option {{ old('typeOfRegion') || $sitevisit->valuationDetails->type_of_region  == "Others"}} value="Others">Others</option>
+                                    <option {{ old('typeOfRegion') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_region : '')  == "Residential" ? 'selected' :''}} value="Residential">Residential</option>
+                                    <option {{ old('typeOfRegion') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_region : '')  == "Commercial" ? 'selected' :''}} value="Commercial">Commercial</option>
+                                    <option {{ old('typeOfRegion') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_region : '')  == "Agricultural" ? 'selected' :''}} value="Agricultural">Agricultural</option>
+                                    <option {{ old('typeOfRegion') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_region : '')  == "Others" ? 'selected' :''}} value="Others">Others</option>
                                     
                                 </select>
                             </div>
@@ -980,8 +981,8 @@
                                 <label>Motorable Access</label>
                                 <select class="form-control selectbox" name="motorableAccess" id="motorableAccess">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('motorableAccess') || $sitevisit->valuationDetails->motorable_access  == "Yes"}} value="Yes" selected="selected">Yes</option>
-                                    <option {{ old('motorableAccess') || $sitevisit->valuationDetails->motorable_access  == "No"}} value="No">No</option>
+                                    <option {{ old('motorableAccess') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->motorable_access : '')  == "Yes" ? 'selected' :''}} value="Yes">Yes</option>
+                                    <option {{ old('motorableAccess') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->motorable_access : '')  == "No" ? 'selected' :''}} value="No">No</option>
                                     
                                 </select>
                             </div>
@@ -991,10 +992,10 @@
                                 <label>Property Usage</label>
                                 <select class="form-control selectbox" name="propertyUsage" id="propertyUsage">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('propertyUsage') || $sitevisit->valuationDetails->property_usage  == "Residential"}} value="Residential" selected="selected">Residential</option>
-                                    <option {{ old('propertyUsage') || $sitevisit->valuationDetails->property_usage  == "Commercial"}} value="Commercial">Commercial</option>
-                                    <option {{ old('propertyUsage') || $sitevisit->valuationDetails->property_usage  == "Residential&Commercial"}} value="Residential&Commercial">Residential & Commercial</option>
-                                    <option {{ old('propertyUsage') || $sitevisit->valuationDetails->property_usage  == "Others"}} value="Others">Others</option>
+                                    <option {{ old('propertyUsage') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->property_usage : '') == "Residential" ? 'selected' :''}} value="Residential">Residential</option>
+                                    <option {{ old('propertyUsage') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->property_usage : '')  == "Commercial" ? 'selected' :''}} value="Commercial">Commercial</option>
+                                    <option {{ old('propertyUsage') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->property_usage : '')  == "Residential&Commercial" ? 'selected' :''}} value="Residential&Commercial">Residential & Commercial</option>
+                                    <option {{ old('propertyUsage') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->property_usage : '')  == "Others" ? 'selected' :''}} value="Others">Others</option>
                                     
                                 </select>
                             </div>
@@ -1002,13 +1003,13 @@
                                 <label>Type of Access</label>
                                 <select class="form-control selectbox" name="typeOfAccess" id="typeOfAccess">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "Earthen"}} value="Earthen" selected="selected">Earthen</option>
-                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "Gravel"}} value="Gravel">Gravel</option>
-                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "Black-Topped"}} value="Black-Topped">Black Topped</option>
-                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "RCC"}} value="RCC">RCC</option>
-                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "Block-Paved"}} value="Block-Paved">Block Paved</option>
-                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "Goreto-Road"}} value="Goreto-Road">Goreto Road</option>
-                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "Khet(No Road)"}} value="Khet(No Road)">Khet (No Road)</option>
+                                    <option {{ old('typeOfAccess') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_access : '')  == "Earthen" ? 'selected' :''}} value="Earthen">Earthen</option>
+                                    <option {{ old('typeOfAccess') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_access : '')  == "Gravel" ? 'selected' :''}} value="Gravel">Gravel</option>
+                                    <option {{ old('typeOfAccess') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_access : '')  == "Black-Topped" ? 'selected' :''}} value="Black-Topped">Black Topped</option>
+                                    <option {{ old('typeOfAccess') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_access : '')  == "RCC" ? 'selected' :''}} value="RCC">RCC</option>
+                                    <option {{ old('typeOfAccess') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_access : '')  == "Block-Paved" ? 'selected' :''}} value="Block-Paved">Block Paved</option>
+                                    <option {{ old('typeOfAccess') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_access : '')  == "Goreto-Road" ? 'selected' :''}} value="Goreto-Road">Goreto Road</option>
+                                    <option {{ old('typeOfAccess') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_access : '')  == "Khet(No Road)" ? 'selected' :''}} value="Khet(No Road)">Khet (No Road)</option>
                                     
                                 </select>
                             </div>
@@ -1052,8 +1053,8 @@
                                 <label>Property for the Bank</label>
                                 <select class="form-control selectbox" name="propertyForTheBank" id="propertyForTheBank">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('propertyForTheBank') || $sitevisit->valuationDetails->property_fot_the_bank  == "Recommended"}} value="Recommended" selected="selected">Recommended</option>
-                                    <option {{ old('propertyForTheBank') || $sitevisit->valuationDetails->property_fot_the_bank  == "Not-Recommended"}} value="Not-Recommended">Not Recommended</option>
+                                    <option {{ old('propertyForTheBank') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->property_fot_the_bank : '')   == "Recommended" ? 'selected' :''}} value="Recommended" >Recommended</option>
+                                    <option {{ old('propertyForTheBank') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->property_fot_the_bank : '')   == "Not-Recommended" ? 'selected' :''}} value="Not-Recommended">Not Recommended</option>
                                     
                                 </select>
                             </div>
@@ -1062,8 +1063,8 @@
                                 <select class="form-control selectbox" name="riverStreamNearProperty"
                                     id="riverStreamNearProperty">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('riverStreamNearProperty') || $sitevisit->valuationDetails->rive_near_by  == "No"}} value="No" selected="selected">No</option>
-                                    <option {{ old('riverStreamNearProperty') || $sitevisit->valuationDetails->rive_near_by  == "Yes"}} value="Yes">Yes</option>
+                                    <option {{ old('riverStreamNearProperty') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->rive_near_by : '')  == "No" ? 'selected' :''}} value="No" >No</option>
+                                    <option {{ old('riverStreamNearProperty') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->rive_near_by : '')  == "Yes" ? 'selected' :''}} value="Yes">Yes</option>
                                     
                                 </select>
                             </div>
@@ -1073,8 +1074,8 @@
                                 <select class="form-control selectbox" name="heritageSitesNearProperty"
                                     id="heritageSitesNearProperty">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('heritageSitesNearProperty') || $sitevisit->valuationDetails->heritage_sites_near_by  == "Yes"}} value="Yes" selected="selected">Yes</option>
-                                    <option {{ old('heritageSitesNearProperty') || $sitevisit->valuationDetails->heritage_sites_near_by  == "No"}} value="No">No</option>
+                                    <option {{ old('heritageSitesNearProperty') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->heritage_sites_near_by : '')  == "Yes" ? 'selected' : ''}} value="Yes" >Yes</option>
+                                    <option {{ old('heritageSitesNearProperty') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->heritage_sites_near_by : '')  == "No" ? 'selected' : ''}} value="No">No</option>
                                     
                                 </select>
                             </div>
@@ -1083,10 +1084,10 @@
                                 <select class="form-control selectbox" name="propertyOwnershipType"
                                     id="propertyOwnershipType">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('propertyOwnershipType') || $sitevisit->valuationDetails->property_ownership_type  == "Single"}} value="Single" selected="selected">Single</option>
-                                    <option {{ old('propertyOwnershipType') || $sitevisit->valuationDetails->property_ownership_type  == "Joint"}} value="Joint">Joint</option>
-                                    <option {{ old('propertyOwnershipType') || $sitevisit->valuationDetails->property_ownership_type  == "Company"}} value="Company">Company</option>
-                                    <option {{ old('propertyOwnershipType') || $sitevisit->valuationDetails->property_ownership_type  == "Individual"}} value="Individual (Joint Name)">Individual (Joint Name)</option>
+                                    <option {{ old('propertyOwnershipType') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->property_ownership_type : '')  == "Single" ? 'selected' : ''}} value="Single" >Single</option>
+                                    <option {{ old('propertyOwnershipType') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->property_ownership_type : '')  == "Joint" ? 'selected' : ''}} value="Joint">Joint</option>
+                                    <option {{ old('propertyOwnershipType') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->property_ownership_type : '')  == "Company" ? 'selected' : ''}} value="Company">Company</option>
+                                    <option {{ old('propertyOwnershipType') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->property_ownership_type : '')  == "Individual" ? 'selected' : ''}} value="Individual (Joint Name)">Individual (Joint Name)</option>
                                     
                                 </select>
                             </div>
@@ -1118,8 +1119,8 @@
                                 <label>Frame Structure</label>
                                 <select class="form-control selectbox" name="frameStructure" id="frameStructure">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('frameStructure') || $sitevisit->valuationDetails->frame_structure  == "Frame-Structure"}} value="Frame-Structure" selected="selected">Frame Structure</option>
-                                    <option {{ old('frameStructure') || $sitevisit->valuationDetails->frame_structure  == "Load-Bearing"}} value="Load-Bearing">Load Bearing</option>
+                                    <option {{ old('frameStructure') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->frame_structure : '')  == "Frame-Structure" ? 'selected' : ''}} value="Frame-Structure" >Frame Structure</option>
+                                    <option {{ old('frameStructure') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->frame_structure : '')  == "Load-Bearing" ? 'selected' : ''}} value="Load-Bearing">Load Bearing</option>
                                     
                                 </select>
                             </div>
@@ -1128,25 +1129,25 @@
                                 <select class="form-control selectbox" name="anyCollateralFall"
                                     id="anyCollateralFall">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('anyCollateralFall') || $sitevisit->valuationDetails->any_collateral_fall  == "No"}} value="No" selected="selected">No</option>
-                                    <option {{ old('anyCollateralFall') || $sitevisit->valuationDetails->any_collateral_fall  == "Yes"}} value="Yes">Yes</option>
+                                    <option {{ old('anyCollateralFall') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->any_collateral_fall : '')  == "No" ? 'selected' : ''}} value="No" >No</option>
+                                    <option {{ old('anyCollateralFall') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->any_collateral_fall : '')  == "Yes" ? 'selected' : ''}} value="Yes">Yes</option>
                                     
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Comments</label>
                                 <input type="text" name="coments" id="coments" class="form-control"
-                                    autocomplete="off" required="" value="{{ $sitevisit->valuationDetails->  ?? old('locationOfAccessLand') ?? ''}}">
+                                    autocomplete="off" required="" value="{{ $sitevisit->valuationDetails->comments  ?? old('coments') ?? ''}}">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Valuation For</label>
                                 <select class="form-control selectbox" name="valuationFor" id="valuationFor">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('valuationFor') || $sitevisit->valuationDetails->valuation_for  == "Vacant-Land"}} value="Vacant Land" selected="selected">Vacant Land</option>
-                                    <option {{ old('valuationFor') || $sitevisit->valuationDetails->valuation_for  == "Land&Buildinf"}} value="Land&Building">Land &amp; Building</option>
-                                    <option {{ old('valuationFor') || $sitevisit->valuationDetails->valuation_for  == "Readymade-House"}} value="Readymade House">Readymade House</option>
-                                    <option {{ old('valuationFor') || $sitevisit->valuationDetails->valuation_for  == "Apartments/Duplex"}} value="Apartments/Duplex">Apartments/Duplex</option>
-                                    <option {{ old('valuationFor') || $sitevisit->valuationDetails->valuation_for  == "Construction/Extension/Renovation"}} value="Construction/Extension/Renovation">Construction/Extension/Renovation
+                                    <option {{ old('valuationFor') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->valuation_for : '')  == "Vacant-Land" ? 'selected' : ''}} value="Vacant Land" >Vacant Land</option>
+                                    <option {{ old('valuationFor') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->valuation_for : '')  == "Land&Buildinf" ? 'selected' : ''}} value="Land&Building">Land &amp; Building</option>
+                                    <option {{ old('valuationFor') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->valuation_for : '')  == "Readymade-House" ? 'selected' : ''}} value="Readymade House">Readymade House</option>
+                                    <option {{ old('valuationFor') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->valuation_for : '')  == "Apartments/Duplex" ? 'selected' : ''}} value="Apartments/Duplex">Apartments/Duplex</option>
+                                    <option {{ old('valuationFor') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->valuation_for : '')  == "Construction/Extension/Renovation" ? 'selected' : ''}} value="Construction/Extension/Renovation">Construction/Extension/Renovation
                                     </option>
                                     
                                 </select>
@@ -1156,8 +1157,8 @@
                                 <select class="form-control selectbox" name="coloringAndPainting"
                                     id="coloringAndPainting">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('coloringAndPainting') || $sitevisit->valuationDetails->coloring  == "Painted"}} value="Painted" selected="selected">Painted</option>
-                                    <option {{ old('coloringAndPainting') || $sitevisit->valuationDetails->coloring  == "Not-Painted"}} value="Not-Painted">Not Painted</option>
+                                    <option {{ old('coloringAndPainting') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->coloring : '')  == "Painted" ? 'selected' : ''}} value="Painted" >Painted</option>
+                                    <option {{ old('coloringAndPainting') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->coloring : '')  == "Not-Painted" ? 'selected' : ''}} value="Not-Painted">Not Painted</option>
                                     
                                 </select>
                             </div>
@@ -1180,12 +1181,12 @@
                                 <label>Type Of Land</label>
                                 <select class="form-control selectbox" name="topography" id="topography">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('topography') || $sitevisit->valuationDetails->type_of_land  == "Planning"}} value="Planning" selected="selected">Planning</option>
-                                    <option {{ old('topography') || $sitevisit->valuationDetails->type_of_land  == "Khet"}} value="Khet">Khet</option>
-                                    <option {{ old('topography') || $sitevisit->valuationDetails->type_of_land  == "Flat"}} value="Flat">Flat</option>
-                                    <option {{ old('topography') || $sitevisit->valuationDetails->type_of_land  == "Slightly-Slope"}} value="Slightly-Slope">Slightly Slope</option>
-                                    <option {{ old('topography') || $sitevisit->valuationDetails->type_of_land  == "Low-Land"}} value="Low-Land">Low Land</option>
-                                    <option {{ old('topography') || $sitevisit->valuationDetails->type_of_land  == "Irregural-Shape"}} value="Irregural-Shape">Irregural Shape</option>
+                                    <option {{ old('topography') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_land : '')  == "Planning" ? 'selected' : ''}} value="Planning" >Planning</option>
+                                    <option {{ old('topography') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_land : '')  == "Khet" ? 'selected' : ''}} value="Khet">Khet</option>
+                                    <option {{ old('topography') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_land : '')  == "Flat" ? 'selected' : ''}} value="Flat">Flat</option>
+                                    <option {{ old('topography') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_land : '')  == "Slightly-Slope" ? 'selected' : ''}} value="Slightly-Slope">Slightly Slope</option>
+                                    <option {{ old('topography') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_land : '')  == "Low-Land" ? 'selected' : ''}} value="Low-Land">Low Land</option>
+                                    <option {{ old('topography') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->type_of_land : '')  == "Irregural-Shape" ? 'selected' : ''}} value="Irregural-Shape">Irregural Shape</option>
                                     
                                 </select>
                             </div>
@@ -1207,8 +1208,8 @@
                                 <label>Compound Wall</label>
                                 <select class="form-control selectbox" name="compoundWall"  id="compoundWall">
                                     <option disabled selected>Choose One...</option>
-                                    <option {{ old('compoundWall') || $sitevisit->valuationDetails->compound_wall  == "Constructed"}} value="Constructed" selected="selected">Constructed</option>
-                                    <option {{ old('compoundWall') || $sitevisit->valuationDetails->compound_wall  == "Not-Constructed"}} value="Not-Constructed">Not Constructed</option>
+                                    <option {{ old('compoundWall') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->compound_wall : '') == "Constructed" ? 'selected' : ''}} value="Constructed" >Constructed</option>
+                                    <option {{ old('compoundWall') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->compound_wall : '') == "Not-Constructed" ? 'selected' : ''}} value="Not-Constructed">Not Constructed</option>
                                     
                                 </select>
                             </div>
