@@ -10,6 +10,7 @@ class ValuationDetails extends Model
     use HasFactory;
 
     protected $fillable = [
+        'site_visit_id',
         'road_size',
         'river',
         'hightension_line',

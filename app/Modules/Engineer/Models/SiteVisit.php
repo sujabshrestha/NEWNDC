@@ -14,6 +14,7 @@ use Client\Models\Client;
 use CMS\Models\Bank;
 use CMS\Models\Branch;
 use App\Models\Deduction;
+use App\Models\ValuationDetails;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Receptionist\Models\Proposal;
@@ -21,6 +22,8 @@ use Receptionist\Models\Proposal;
 class SiteVisit extends Model
 {
     use HasFactory;
+
+    protected $date = ['ownership_date','preparation_date'];
 
     public function scopePreValuation($query){
         $query->where('valuation_status','Pre-Valuation');
@@ -113,6 +116,10 @@ class SiteVisit extends Model
 
     public function landbasedDatas(){
         return $this->hasMany(LandbasedCalculation::class, 'site_visit_id');
+    }
+
+    public function valuationDetails(){
+        return $this->hasOne(ValuationDetails::class);
     }
 
 }

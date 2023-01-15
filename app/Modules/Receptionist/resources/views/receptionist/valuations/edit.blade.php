@@ -22,6 +22,8 @@
 
                 </div>
                 <hr>
+
+                {{-- @dd($sitevisit) --}}
                 <div class="col-md-12">
                     <form action="{{ route('receptionist.valuation.valuationFinalSubmit', $sitevisit->id) }}"
                         enctype="multipart/form-data" method="POST">
@@ -118,7 +120,7 @@
                             <div class="form-group col-md-3" style="padding-left:6px;padding-right:6px;">
                                 <label>Valuation Assignment No</label>
                                 <input type="text" name="valuation_assignment_on" id="valuation_assignment_on"
-                                    class="form-control" autocomplete="off" required="">
+                                    class="form-control" value="{{ $sitevisit->valuation_assignment_no ?? old('valuation_assignment_on') ?? '' }}" autocomplete="off" required="">
                             </div>
                             <div class="form-group col-md-3" style="padding-left:6px;padding-right:6px;">
                                 <label>Prepration Date (BS) <span class="required">*</span></label>
@@ -332,10 +334,10 @@
                                     <b>(C) DEDUCTION PART</b>
                                 </label>
                             </div>
-                            <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
+                            <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>Road (Sq.F)</label>
                                 <input type="text" name="deductionOfRoadSqF" id="deductionOfRoadSqF" required=""
-                                    class="form-control" autocomplete="off" value="0">
+                                    class="form-control" autocomplete="off" value="{{ $siteVisit->deduction->deductionOfRoadSqF ?? old('deductionOfRoadSqF')  ?? 0}}">
                                 <input type="hidden" name="afterDeductionOfRoadAreaInAnna"
                                     id="afterDeductionOfRoadAreaInAnna" readonly="readonly" class="form-control"
                                     autocomplete="off">
@@ -343,10 +345,10 @@
                                     id="afterDeductionOfRoadAreaInRPAD" readonly="readonly" class="form-control"
                                     autocomplete="off">
                             </div>
-                            <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
+                            <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>Land Development (%)</label>
                                 <input type="text" name="landDevelopmentPercent" id="landDevelopmentPercent"
-                                    required="" class="form-control" autocomplete="off" value="0">
+                                    required="" class="form-control" autocomplete="off" value="{{ $siteVisit->deduction->landDevelopmentPercent ?? old('landDevelopmentPercent')  ?? 0}}">
                                 <input type="hidden" name="landDevelopmentSqF" id="landDevelopmentSqF" required=""
                                     class="form-control" autocomplete="off">
                                 <input type="hidden" name="afterLandDevelopmentAreaInAnna"
@@ -356,38 +358,38 @@
                                     id="afterLandDevelopmentAreaInRPAD" readonly="readonly" class="form-control"
                                     autocomplete="off">
                             </div>
-                            <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
+                            <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>High Tension (Sq.F)</label>
                                 <input type="text" name="deductionForHighTensionSqF" id="deductionForHighTensionSqF"
-                                    required="" class="form-control" autocomplete="off" value="0">
+                                    required="" class="form-control" autocomplete="off" value="{{ $siteVisit->deduction->deductionForHighTensionSqF ?? old('deductionForHighTensionSqF')  ?? 0}}">
                                 <input type="hidden" name="afterHighTensionAreaInAnna" id="afterHighTensionAreaInAnna"
                                     readonly="readonly" class="form-control" autocomplete="off">
                                 <input type="hidden" name="afterHighTensionAreaInRPAD" id="afterHighTensionAreaInRPAD"
                                     readonly="readonly" class="form-control" autocomplete="off">
                             </div>
-                            <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
+                            <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>Low Land (Sq.F)</label>
                                 <input type="text" name="deductionForLowLandSqF" id="deductionForLowLandSqF"
-                                    required="" class="form-control" autocomplete="off" value="0">
+                                    required="" class="form-control" autocomplete="off" value="{{ $siteVisit->deduction->deductionForLowLandSqF ?? old('deductionForLowLandSqF')  ?? 0}}">
                                 <input type="hidden" name="afterLowLandAreaInAnna" id="afterLowLandAreaInAnna"
                                     readonly="readonly" class="form-control" autocomplete="off">
                                 <input type="hidden" name="afterLowLandAreaInRPAD" id="afterLowLandAreaInRPAD"
                                     readonly="readonly" class="form-control" autocomplete="off">
                             </div>
-                            <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
+                            <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>River (Sq.F)</label>
                                 <input type="text" name="deductionForRiverSqF" id="deductionForRiverSqF"
-                                    required="" class="form-control" autocomplete="off" value="0">
+                                    required="" class="form-control" autocomplete="off" value="{{ $siteVisit->deduction->deductionForRiverSqF ?? old('deductionForRiverSqF')  ?? 0}}">
                                 <input type="hidden" name="afterRiverAreaInAnna" id="afterRiverAreaInAnna"
                                     readonly="readonly" class="form-control" autocomplete="off">
                                 <input type="hidden" name="afterRiverAreaInRPAD" id="afterRiverAreaInRPAD"
                                     readonly="readonly" class="form-control" autocomplete="off">
                             </div>
-                            <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
+                            <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>Boundry Correction %</label>
                                 <input type="text" name="deductionForBoundryCorrection"
                                     id="deductionForBoundryCorrection" required="" class="form-control"
-                                    autocomplete="off" value="0">
+                                    autocomplete="off" value="{{ $siteVisit->deduction->deductionForBoundryCorrection ?? old('deductionForBoundryCorrection')  ?? 0}}">
                                 <input type="hidden" name="deductionForBoundryCorrectionSqF"
                                     id="deductionForBoundryCorrectionSqF" required="" class="form-control"
                                     autocomplete="off">
@@ -398,11 +400,11 @@
                                     id="afterBoundryCorrectionAreaInRPAD" readonly="readonly" class="form-control"
                                     autocomplete="off">
                             </div>
-                            <div class="form-group col-md-3" style="flex: 14%;max-width: 14%;">
-                                <label style="padding-right:0px; font-size:12px;">Irregular Shape/Sloppy %</label>
+                            <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
+                                <label style="padding-right:0px; font-size:14px;">Irregular Shape/Sloppy %</label>
                                 <input type="text" name="deductionForIrregularShapeSloppyLand"
                                     id="deductionForIrregularShapeSloppyLand" required="" class="form-control"
-                                    autocomplete="off" value="0">
+                                    autocomplete="off" value="{{ $siteVisit->deduction->deductionForIrregularShapeSloppyLand ?? old('deductionForIrregularShapeSloppyLand')  ?? 0}}">
                                 <input type="hidden" name="afterIrregularShapeSloppyLandSqF"
                                     id="afterIrregularShapeSloppyLandSqF" required="" class="form-control"
                                     autocomplete="off">
@@ -415,30 +417,30 @@
                             </div>
                             <div class="clearfix" style="width: 100%;"></div>
 
-                            <div class="form-group col-md-1" style="flex: 10%;max-width: 10%;">
-                                <label>&nbsp;</label>
-                                <label style="margin-bottom: 0px; text-transform: uppercase;">
+                            <div class="form-group col-md-1" style="flex: 10%;max-width: 15%;">
+                            
+                                <label class="mt-4" style="margin-bottom: 0px; text-transform: uppercase;">
                                     <b>Consideration</b></label>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-2" style="flex: 20%;max-width: 20%;">
                                 <label>Area in (Sq.M)</label>
                                 <input type="text" name="sqMAPConsideration" id="sqMAPConsideration" required=""
-                                    class="form-control" readonly="readonly" tabindex="-1">
+                                    class="form-control" readonly="readonly" tabindex="-1"  value="{{ $siteVisit->deduction->sqMAPConsideration ?? old('sqMAPConsideration') ?? 0}}">
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-2" style="flex: 20%;max-width: 20%;">
                                 <label>Area in (R-A-P-D)</label>
                                 <input type="text" name="rAPDAPConsideration" id="rAPDAPConsideration" required=""
-                                    class="form-control" readonly="readonly" tabindex="-1">
+                                    class="form-control" readonly="readonly" tabindex="-1"  value="{{ $siteVisit->deduction->rAPDAPConsideration ?? old('rAPDAPConsideration') ?? 0}}">
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-2" style="flex: 20%;max-width: 20%;">
                                 <label>Area in (Sq.F)</label>
                                 <input type="text" name="sqFAPConsideration" id="sqFAPConsideration" required=""
-                                    class="form-control" readonly="readonly" tabindex="-1">
+                                    class="form-control" readonly="readonly" tabindex="-1"  value="{{ $siteVisit->deduction->sqFAPConsideration ?? old('sqFAPConsideration') ?? 0}}">
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-2" style="flex: 20%;max-width: 20%;">
                                 <label>Area in (Anna)</label>
                                 <input type="text" name="annaAPConsideration" id="annaAPConsideration" required=""
-                                    class="form-control" readonly="readonly" tabindex="-1">
+                                    class="form-control" readonly="readonly" tabindex="-1"  value="{{ $siteVisit->deduction->annaAPConsideration ?? old('annaAPConsideration') ?? 0}}">
                             </div>
 
                             <div class="form-group col-md-12 mb-2">
@@ -446,53 +448,53 @@
                                     <b>(D) RATE OF LAND</b>
                                 </label>
                             </div>
-                            <div class="form-group col-md-6 mb-2">
+                            <div class="form-group col-md-6 mb-2 pr-0">
                                 <label style="color: #202ed6;margin-bottom: 0px; text-transform: uppercase;">
                                     <b><i class="fa fa-hashtag"></i> Government Rate of Land</b>
                                 </label>
                             </div>
-                            <div class="form-group col-md-1 mb-2"></div>
-                            <div class="form-group col-md-5 mb-2">
+                            <div class="form-group col-md-1 mb-2 pr-0" style="flex: 5%;max-width: 5%;"></div>
+                            <div class="form-group col-md-5 mb-2 pr-0">
                                 <label
                                     style="color: #202ed6;margin-bottom: 0px; text-transform: uppercase; padding-left: 32px;">
                                     <b><i class="fa fa-hashtag"></i> Market Rate of Land</b>
                                 </label>
                             </div>
-                            <div class="form-group col-md-2" style="flex: 13%;max-width: 13%;">
-                                <label>Area (Per Sq Ft)</label>
+                            <div class="form-group col-md-2 pr-0" style="flex: 13%;max-width: 13%;">
+                                <label>Area (Per Sq Ft) {{ $sitevisit->rateofland->perSqFAPGovRate }}</label>
                                 <input type="text" name="perSqFAPGovRate" id="perSqFAPGovRate" required=""
-                                    class="form-control" readonly="readonly" tabindex="-1">
+                                    class="form-control" readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->perSqFAPGovRate ?? old('perSqFAPGovRate') ?? 0}}>
                             </div>
-                            <div class="form-group col-md-2" style="flex: 13%;max-width: 13%;">
+                            <div class="form-group col-md-2 pr-0" style="flex: 13%;max-width: 13%;">
                                 <label>Gov.Page <span class="required">*</span></label>
-                                <input type="text" name="govPage" id="govPage" required=""
+                                <input type="text" name="govPage" id="govPage" required="" value={{ $sitevisit->rateofland->govPage ?? old('govPage') ?? 0}}
                                     placeholder="Gov.Page" class="form-control" autocomplete="off">
                             </div>
-                            <div class="form-group col-md-1" style="flex: 12%;max-width: 12%;">
+                            <div class="form-group col-md-1 pr-0" style="flex: 12%;max-width: 12%;">
                                 <label>Rate/Anna <span class="required">*</span></label>
-                                <input type="text" name="perAnnaAPGovRate" id="perAnnaAPGovRate" required=""
+                                <input type="text" name="perAnnaAPGovRate" id="perAnnaAPGovRate" required="" value={{ $sitevisit->rateofland->perAnnaAPGovRate ?? old('perAnnaAPGovRate') ?? 0}}
                                     placeholder="Rate/Anna" class="form-control" autocomplete="off">
                             </div>
-                            <div class="form-group col-md-1" style="flex: 14%;max-width: 14%;">
+                            <div class="form-group col-md-1 pr-0" style="flex: 14%;max-width: 14%;">
                                 <label>Rate/Ropani</label>
                                 <input type="text" name="perRopaniAPGovRate" id="perRopaniAPGovRate" required=""
-                                    readonly="readonly" tabindex="-1" class="form-control" autocomplete="off">
+                                    readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->perRopaniAPGovRate ?? old('perRopaniAPGovRate') ?? 0}} class="form-control" autocomplete="off">
                             </div>
-                            <div class="form-group col-md-1"></div>
-                            <div class="form-group col-md-2" style="flex: 13%;max-width: 13%;">
+                            <div class="form-group col-md-1" style="flex: 5%;max-width: 5%;"></div>
+                            <div class="form-group col-md-2 pr-0" style="flex: 13%;max-width: 13%;">
                                 <label>Area (Per Sq Ft)</label>
                                 <input type="text" name="perSqFAPMarketRate" id="perSqFAPMarketRate" required=""
-                                    class="form-control" readonly="readonly" tabindex="-1">
+                                    class="form-control" readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->perSqFAPMarketRate ?? old('perSqFAPMarketRate') ?? 0}}>
                             </div>
-                            <div class="form-group col-md-1" style="flex: 12%;max-width: 12%;">
+                            <div class="form-group col-md-1 pr-0" style="flex: 12%;max-width: 12%;">
                                 <label>Rate/Anna <span class="required">*</span></label>
                                 <input type="text" name="perAnnaAPMarketRate" id="perAnnaAPMarketRate" required=""
-                                    placeholder="Rate/Anna" class="form-control" autocomplete="off">
+                                    placeholder="Rate/Anna" class="form-control" autocomplete="off" value={{ $sitevisit->rateofland->perAnnaAPMarketRate ?? old('perAnnaAPMarketRate') ?? 0}}>
                             </div>
-                            <div class="form-group col-md-1" style="flex: 14%;max-width: 14%;">
+                            <div class="form-group col-md-1 pr-0" style="flex: 14%;max-width: 14%;">
                                 <label>Rate/Ropani</label>
                                 <input type="text" name="perRopaniAPMarketRate" id="perRopaniAPMarketRate"
-                                    required="" readonly="readonly" tabindex="-1" class="form-control"
+                                    required="" readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->perRopaniAPMarketRate ?? old('perRopaniAPMarketRate') ?? 0}} class="form-control"
                                     autocomplete="off">
                             </div>
 
@@ -501,43 +503,43 @@
                                     <b><i class="fa fa-hashtag"></i> Fair Market Rate</b>
                                 </label>
                             </div>
-                            <div class="form-group col-md-1 mb-2"></div>
-                            <div class="form-group col-md-5 mb-2">
+                            <div class="form-group col-md-1 mb-2" style="flex: 5%;max-width: 5%;"></div>
+                            <div class="form-group col-md-5 mb-2 pr-0">
                                 <label
                                     style="color: #202ed6;margin-bottom: 0px; text-transform: uppercase; padding-left: 32px;">
                                     <b><i class="fa fa-hashtag"></i> Distress Land Rate</b>
                                 </label>
                             </div>
-                            <div class="form-group col-md-2" style="flex: 13%;max-width: 13%;">
+                            <div class="form-group col-md-2 pr-0" style="flex: 13%;max-width: 13%;">
                                 <label>Area (Per Sq Ft)</label>
                                 <input type="text" name="perSqFAPFairRate" id="perSqFAPFairRate" required=""
-                                    class="form-control" readonly="readonly" tabindex="-1">
+                                    class="form-control" readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->perSqFAPFairRate ?? old('perSqFAPFairRate') ?? 0}}>
                             </div>
-                            <div class="form-group col-md-1" style="flex: 12%;max-width: 12%;">
+                            <div class="form-group col-md-1 pr-0" style="flex: 12%;max-width: 12%;">
                                 <label>Rate/Anna</label>
                                 <input type="text" name="perAnnaAPFairRate" id="perAnnaAPFairRate" required=""
-                                    readonly="readonly" tabindex="-1" class="form-control">
+                                    readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->perAnnaAPFairRate ?? old('perAnnaAPFairRate') ?? 0}} class="form-control">
                             </div>
-                            <div class="form-group col-md-1" style="flex: 14%;max-width: 14%;">
+                            <div class="form-group col-md-1 pr-0" style="flex: 14%;max-width: 14%;">
                                 <label>Rate/Ropani</label>
                                 <input type="text" name="perRopaniAPFairRate" id="perRopaniAPFairRate" required=""
-                                    readonly="readonly" tabindex="-1" class="form-control">
+                                    readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->perRopaniAPFairRate ?? old('perRopaniAPFairRate') ?? 0}} class="form-control">
                             </div>
-                            <div class="form-group col-md-2" style="flex: 21.5%;max-width: 21.5%;"></div>
-                            <div class="form-group col-md-2" style="flex: 13%;max-width: 13%;">
+                            <div class="form-group col-md-2 pr-0" style="flex: 18%;max-width: 18%;"></div>
+                            <div class="form-group col-md-2 pr-0" style="flex: 13%;max-width: 13%;">
                                 <label>Area (Per Sq Ft)</label>
                                 <input type="text" name="perSqFAPDistressRate" id="perSqFAPDistressRate"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                    required="" class="form-control" readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->perSqFAPDistressRate ?? old('perSqFAPDistressRate') ?? 0}}>
                             </div>
-                            <div class="form-group col-md-1" style="flex: 12%;max-width: 12%;">
+                            <div class="form-group col-md-1 pr-0" style="flex: 12%;max-width: 12%;">
                                 <label>Rate/Anna</label>
                                 <input type="text" name="perAnnaAPDistressRate" id="perAnnaAPDistressRate"
-                                    required="" readonly="readonly" tabindex="-1" class="form-control">
+                                    required="" readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->perAnnaAPDistressRate ?? old('perAnnaAPDistressRate') ?? 0}} class="form-control">
                             </div>
-                            <div class="form-group col-md-1" style="flex: 14%;max-width: 14%;">
+                            <div class="form-group col-md-1 pr-0" style="flex: 14%;max-width: 14%;">
                                 <label>Rate/Ropani</label>
                                 <input type="text" name="perRopaniAPDistressRate" id="perRopaniAPDistressRate"
-                                    required="" readonly="readonly" tabindex="-1" class="form-control">
+                                    required="" readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->perRopaniAPDistressRate ?? old('perRopaniAPDistressRate') ?? 0}} class="form-control">
                             </div>
 
                             <div class="form-group col-md-12 mb-2">
@@ -545,37 +547,37 @@
                                     <b><i class="fa fa-hashtag"></i> Total Value of Property Land</b>
                                 </label>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-2 ">
                                 <label>Government Value of Land</label>
                                 <input type="text" name="governmentValueOfLand" id="governmentValueOfLand"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                    required="" class="form-control" readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->governmentValueOfLand ?? old('governmentValueOfLand') ?? 0}}>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-2 ">
                                 <label>Commercial Value of Land</label>
                                 <input type="text" name="commercialValueOfLand" id="commercialValueOfLand"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                    required="" class="form-control" readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->commercialValueOfLand ?? old('commercialValueOfLand') ?? 0}}>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-2 ">
                                 <label>Fair Market Value of Land</label>
                                 <input type="text" name="fairMarketValueOfLand" id="fairMarketValueOfLand"
-                                    required="" class="form-control" readonly="readonly" tabindex="-1">
+                                    required="" class="form-control" readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->fairMarketValueOfLand ?? old('fairMarketValueOfLand') ?? 0}}>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-2 ">
                                 <label>Distress Value of Land</label>
                                 <input type="text" name="distressValueOfLand" id="distressValueOfLand" required=""
-                                    class="form-control" readonly="readonly" tabindex="-1">
+                                    class="form-control" readonly="readonly" tabindex="-1" value={{ $sitevisit->rateofland->distressValueOfLand ?? old('distressValueOfLand') ?? 0}}>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label>Fair Mkrt Val Land &amp; Blding</label>
+                            <div class="form-group col-md-2 ">
+                                <label>Fair Mkrt Value Land &amp; Building</label>
                                 <input type="text" name="fairMarketValueOfLandAndBuimding"
                                     id="fairMarketValueOfLandAndBuimding" class="form-control" readonly="readonly"
-                                    tabindex="-1">
+                                    tabindex="-1" value={{ $sitevisit->rateofland->fairMarketValueOfLandAndBuimding ?? old('fairMarketValueOfLandAndBuimding') ?? 0}}>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label>Distrs Mkrt Val Land&amp;Blding</label>
+                            <div class="form-group col-md-2 ">
+                                <label>Distrs Mkrt Value Land &amp; Building</label>
                                 <input type="text" name="totalDistressValueOfLandAndBuimding"
                                     id="totalDistressValueOfLandAndBuimding" class="form-control" readonly="readonly"
-                                    tabindex="-1">
+                                    tabindex="-1" value={{ $sitevisit->rateofland->totalDistressValueOfLandAndBuimding ?? old('totalDistressValueOfLandAndBuimding') ?? 0}}>
                             </div>
 
                             {{-- <div id="BuildingArea" class="col-md-12">
@@ -901,7 +903,7 @@
                                         title=""
                                         data-original-title="Ex:- 500 M From Shankhamul Chok and 1000M From Baneshwor Chok"></i>
                                     Location &amp; Access of The Land<span class="required">*</span></label>
-                                <input type="text" name="locationOfAccessLand" id="locationOfAccessLand"
+                                <input type="text" name="locationOfAccessLand" id="locationOfAccessLand" value="{{ $sitevisit->valuationDetails->location_of_land  ?? old('locationOfAccessLand') ?? ''}}"
                                     required="" placeholder="" class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-2" style="padding:0px 6px 0px 6px">
@@ -909,17 +911,18 @@
                                     <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
                                         title="" data-original-title="Ex:- Kathmandu"></i>
                                     District <span class="required">*</span></label>
-                                <input type="text" name="locationDistrict" id="locationDistrict" required=""
+                                <input type="text" name="locationDistrict" id="locationDistrict" required="" value="{{ $sitevisit->valuationDetails->district  ?? old('locationDistrict') ?? ''}}"
                                     class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-2" style="padding:0px 6px 0px 6px">
                                 <label>V.D.C/Municipality</label>
                                 <select class="form-control" name="vdcType" id="vdcType">
-                                    <option value="Rural Municipality" selected="selected">Rural Municipality
-                                    </option>
-                                    <option value="Municipality">Municipality</option>
-                                    <option value="Sub Metropolitan City">Sub Metropolitan City</option>
-                                    <option value="Mertopolitan City">Mertopolitan City</option>
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('vdcType') || $sitevisit->valuationDetails->vdc_municipality  == "Rural-Municipality"}} value="Rural-Municipality" >Rural Municipality</option>
+                                    <option {{ old('vdcType') || $sitevisit->valuationDetails->vdc_municipality  == "Municipality"}} value="Municipality">Municipality</option>
+                                    <option {{ old('vdcType') || $sitevisit->valuationDetails->vdc_municipality  == "Sub-Metropolitan-City"}} value="Sub-Metropolitan-City">Sub Metropolitan City</option>
+                                    <option {{ old('vdcType') || $sitevisit->valuationDetails->vdc_municipality  == "Mertopolitan-City"}} value="Mertopolitan-City">Mertopolitan City</option>
+                                    
                                 </select>
 
                             </div>
@@ -929,7 +932,7 @@
                                         title=""
                                         data-original-title="Ex:- Shankhamul -31 , Kathmandu - 31 Kathmandu Meropolitan City"></i>
                                     Address of Land/Property(Property Location)<span class="required">*</span></label>
-                                <input type="text" name="addressOfLand" id="addressOfLand" required=""
+                                <input type="text" name="addressOfLand" id="addressOfLand" required="" value="{{ $sitevisit->valuationDetails->address_of_land ?? old('addressOfLand') ?? ''}}"
                                     class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-12 mb-2">
@@ -943,7 +946,7 @@
                                         title="" data-original-title="Ex:- 12 Feet"></i>
                                     Road Size <span class="required">*</span></label>
                                 <input type="text" name="accessibilityWithRoadSize" id="accessibilityWithRoadSize"
-                                    required="" class="form-control" autocomplete="off">
+                                    required="" value="{{ $sitevisit->valuationDetails->road_size  ?? old('accessibilityWithRoadSize') ?? ''}}" class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>
@@ -951,7 +954,7 @@
                                         title="" data-original-title="Ex:- Not Seen near Site"></i>
                                     River <span class="required">*</span></label>
                                 <input type="text" name="accessibilityWithRiver" id="accessibilityWithRiver"
-                                    required="" class="form-control" autocomplete="off">
+                                    required="" value="{{ $sitevisit->valuationDetails->river  ?? old('accessibilityWithRiver') ?? ''}}" class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>
@@ -959,23 +962,27 @@
                                         title="" data-original-title="Ex:- Not Seen near Site"></i>
                                     High Tension Line <span class="required">*</span></label>
                                 <input type="text" name="accessibilityWithHighTension"
-                                    id="accessibilityWithHighTension" required="" class="form-control"
+                                    id="accessibilityWithHighTension" required="" value="{{ $sitevisit->valuationDetails->hightension_line  ?? old('accessibilityWithHighTension') ?? ''}}" class="form-control"
                                     autocomplete="off">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Type of Region</label>
                                 <select class="form-control selectbox" name="typeOfRegion" id="typeOfRegion">
-                                    <option value="Residential" selected="selected">Residential</option>
-                                    <option value="Commercial">Commercial</option>
-                                    <option value="Agricultural">Agricultural</option>
-                                    <option value="Others (Pls Specify)">Others</option>
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('typeOfRegion') || $sitevisit->valuationDetails->type_of_region  == "Residential"}} value="Residential" selected="selected">Residential</option>
+                                    <option {{ old('typeOfRegion') || $sitevisit->valuationDetails->type_of_region  == "Commercial"}} value="Commercial">Commercial</option>
+                                    <option {{ old('typeOfRegion') || $sitevisit->valuationDetails->type_of_region  == "Agricultural"}} value="Agricultural">Agricultural</option>
+                                    <option {{ old('typeOfRegion') || $sitevisit->valuationDetails->type_of_region  == "Others"}} value="Others">Others</option>
+                                    
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Motorable Access</label>
                                 <select class="form-control selectbox" name="motorableAccess" id="motorableAccess">
-                                    <option value="Yes" selected="selected">Yes</option>
-                                    <option value="No">No</option>
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('motorableAccess') || $sitevisit->valuationDetails->motorable_access  == "Yes"}} value="Yes" selected="selected">Yes</option>
+                                    <option {{ old('motorableAccess') || $sitevisit->valuationDetails->motorable_access  == "No"}} value="No">No</option>
+                                    
                                 </select>
                             </div>
 
@@ -983,22 +990,26 @@
                             <div class="form-group col-md-2">
                                 <label>Property Usage</label>
                                 <select class="form-control selectbox" name="propertyUsage" id="propertyUsage">
-                                    <option value="Residential" selected="selected">Residential</option>
-                                    <option value="Commercial">Commercial</option>
-                                    <option value="Residential &amp; Commercial">Residential &amp; Commercial</option>
-                                    <option value="Others">Others</option>
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('propertyUsage') || $sitevisit->valuationDetails->property_usage  == "Residential"}} value="Residential" selected="selected">Residential</option>
+                                    <option {{ old('propertyUsage') || $sitevisit->valuationDetails->property_usage  == "Commercial"}} value="Commercial">Commercial</option>
+                                    <option {{ old('propertyUsage') || $sitevisit->valuationDetails->property_usage  == "Residential&Commercial"}} value="Residential&Commercial">Residential & Commercial</option>
+                                    <option {{ old('propertyUsage') || $sitevisit->valuationDetails->property_usage  == "Others"}} value="Others">Others</option>
+                                    
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Type of Access</label>
                                 <select class="form-control selectbox" name="typeOfAccess" id="typeOfAccess">
-                                    <option value="Earthen" selected="selected">Earthen</option>
-                                    <option value="Gravel">Gravel</option>
-                                    <option value="Black Topped">Black Topped</option>
-                                    <option value="RCC">RCC</option>
-                                    <option value="Block Paved">Block Paved</option>
-                                    <option value="Goreto Road">Goreto Road</option>
-                                    <option value="Khet (No Road)">Khet (No Road)</option>
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "Earthen"}} value="Earthen" selected="selected">Earthen</option>
+                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "Gravel"}} value="Gravel">Gravel</option>
+                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "Black-Topped"}} value="Black-Topped">Black Topped</option>
+                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "RCC"}} value="RCC">RCC</option>
+                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "Block-Paved"}} value="Block-Paved">Block Paved</option>
+                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "Goreto-Road"}} value="Goreto-Road">Goreto Road</option>
+                                    <option {{ old('typeOfAccess') || $sitevisit->valuationDetails->type_of_access  == "Khet(No Road)"}} value="Khet(No Road)">Khet (No Road)</option>
+                                    
                                 </select>
                             </div>
 
@@ -1011,7 +1022,7 @@
                                         title="" data-original-title="Ex:- Rectangular"></i>
                                     Shape</label>
                                 <input type="text" name="buildingShape" id="buildingShape" class="form-control"
-                                    autocomplete="off" required="">
+                                    autocomplete="off" required="" value="{{ $sitevisit->valuationDetails->shape  ?? old('buildingShape') ?? ''}}">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>
@@ -1019,7 +1030,7 @@
                                         title="" data-original-title="Ex:- East"></i>
                                     Facing</label>
                                 <input type="text" name="buildingFacing" id="buildingFacing" class="form-control"
-                                    autocomplete="off" required="">
+                                    autocomplete="off" required="" value="{{ $sitevisit->valuationDetails->facing  ?? old('buildingFacing') ?? ''}}">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>
@@ -1027,7 +1038,7 @@
                                         title="" data-original-title="Ex:- 8 M"></i>
                                     Frontage</label>
                                 <input type="text" name="buildingFrontage" id="buildingFrontage"
-                                    class="form-control" autocomplete="off" required="">
+                                    class="form-control" autocomplete="off" required="" value="{{ $sitevisit->valuationDetails->frontage  ?? old('buildingFrontage') ?? ''}}">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Level with Road
@@ -1035,22 +1046,25 @@
                                         title="" data-original-title="Ex:- Same Level"></i>
                                 </label>
                                 <input type="text" name="levelWithRoad" id="levelWithRoad" class="form-control"
-                                    autocomplete="off" required="">
+                                    autocomplete="off" required="" value="{{ $sitevisit->valuationDetails->level_with_road  ?? old('levelWithRoad') ?? ''}}">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Property for the Bank</label>
-                                <select class="form-control selectbox" name="propertyForTheBank"
-                                    id="propertyForTheBank">
-                                    <option value="Recommended" selected="selected">Recommended</option>
-                                    <option value="Not Recommended">Not Recommended</option>
+                                <select class="form-control selectbox" name="propertyForTheBank" id="propertyForTheBank">
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('propertyForTheBank') || $sitevisit->valuationDetails->property_fot_the_bank  == "Recommended"}} value="Recommended" selected="selected">Recommended</option>
+                                    <option {{ old('propertyForTheBank') || $sitevisit->valuationDetails->property_fot_the_bank  == "Not-Recommended"}} value="Not-Recommended">Not Recommended</option>
+                                    
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>River / Stream near property</label>
                                 <select class="form-control selectbox" name="riverStreamNearProperty"
                                     id="riverStreamNearProperty">
-                                    <option value="No" selected="selected">No</option>
-                                    <option value="Yes">Yes</option>
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('riverStreamNearProperty') || $sitevisit->valuationDetails->rive_near_by  == "No"}} value="No" selected="selected">No</option>
+                                    <option {{ old('riverStreamNearProperty') || $sitevisit->valuationDetails->rive_near_by  == "Yes"}} value="Yes">Yes</option>
+                                    
                                 </select>
                             </div>
 
@@ -1058,18 +1072,22 @@
                                 <label>Heritage Sites Near property</label>
                                 <select class="form-control selectbox" name="heritageSitesNearProperty"
                                     id="heritageSitesNearProperty">
-                                    <option value="Yes" selected="selected">Yes</option>
-                                    <option value="No">No</option>
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('heritageSitesNearProperty') || $sitevisit->valuationDetails->heritage_sites_near_by  == "Yes"}} value="Yes" selected="selected">Yes</option>
+                                    <option {{ old('heritageSitesNearProperty') || $sitevisit->valuationDetails->heritage_sites_near_by  == "No"}} value="No">No</option>
+                                    
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Property Ownership Type</label>
                                 <select class="form-control selectbox" name="propertyOwnershipType"
                                     id="propertyOwnershipType">
-                                    <option value="Single" selected="selected">Single</option>
-                                    <option value="Joint">Joint</option>
-                                    <option value="Company">Company</option>
-                                    <option value="Individual (Joint Name)">Individual (Joint Name)</option>
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('propertyOwnershipType') || $sitevisit->valuationDetails->property_ownership_type  == "Single"}} value="Single" selected="selected">Single</option>
+                                    <option {{ old('propertyOwnershipType') || $sitevisit->valuationDetails->property_ownership_type  == "Joint"}} value="Joint">Joint</option>
+                                    <option {{ old('propertyOwnershipType') || $sitevisit->valuationDetails->property_ownership_type  == "Company"}} value="Company">Company</option>
+                                    <option {{ old('propertyOwnershipType') || $sitevisit->valuationDetails->property_ownership_type  == "Individual"}} value="Individual (Joint Name)">Individual (Joint Name)</option>
+                                    
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
@@ -1078,7 +1096,7 @@
                                         title="" data-original-title="Ex:- 7 M"></i>
                                     Narrowest Part of Land</label>
                                 <input type="text" name="narrowestPartOfLand" id="narrowestPartOfLand"
-                                    class="form-control" autocomplete="off" required="">
+                                    class="form-control" autocomplete="off" required="" value="{{ $sitevisit->valuationDetails->narrowest_part_of_land  ?? old('narrowestPartOfLand') ?? ''}}">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>
@@ -1086,7 +1104,7 @@
                                         title="" data-original-title="Ex:- 12 Feet"></i>
                                     Access in the Blue Print</label>
                                 <input type="text" name="accessInTheBluePrint" id="accessInTheBluePrint"
-                                    class="form-control" autocomplete="off" required="">
+                                    class="form-control" autocomplete="off" required="" value="{{ $sitevisit->valuationDetails->access_in_the_blue_print  ?? old('accessInTheBluePrint') ?? ''}}">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Right of Way
@@ -1094,45 +1112,53 @@
                                         title="" data-original-title="Ex:- 13 Feet"></i>
                                 </label>
                                 <input type="text" name="rightOfWay" id="rightOfWay" class="form-control"
-                                    autocomplete="off" required="">
+                                    autocomplete="off" required="" value="{{ $sitevisit->valuationDetails->right_of_way  ?? old('rightOfWay') ?? ''}}">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Frame Structure</label>
                                 <select class="form-control selectbox" name="frameStructure" id="frameStructure">
-                                    <option value="Frame Structure" selected="selected">Frame Structure</option>
-                                    <option value="Load Bearing">Load Bearing</option>
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('frameStructure') || $sitevisit->valuationDetails->frame_structure  == "Frame-Structure"}} value="Frame-Structure" selected="selected">Frame Structure</option>
+                                    <option {{ old('frameStructure') || $sitevisit->valuationDetails->frame_structure  == "Load-Bearing"}} value="Load-Bearing">Load Bearing</option>
+                                    
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Any Collateral Fall</label>
                                 <select class="form-control selectbox" name="anyCollateralFall"
                                     id="anyCollateralFall">
-                                    <option value="No" selected="selected">No</option>
-                                    <option value="Yes">Yes</option>
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('anyCollateralFall') || $sitevisit->valuationDetails->any_collateral_fall  == "No"}} value="No" selected="selected">No</option>
+                                    <option {{ old('anyCollateralFall') || $sitevisit->valuationDetails->any_collateral_fall  == "Yes"}} value="Yes">Yes</option>
+                                    
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Comments</label>
                                 <input type="text" name="coments" id="coments" class="form-control"
-                                    autocomplete="off" required="">
+                                    autocomplete="off" required="" value="{{ $sitevisit->valuationDetails->  ?? old('locationOfAccessLand') ?? ''}}">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Valuation For</label>
                                 <select class="form-control selectbox" name="valuationFor" id="valuationFor">
-                                    <option value="Vacant Land" selected="selected">Vacant Land</option>
-                                    <option value="Land &amp; Building">Land &amp; Building</option>
-                                    <option value="Readymade House">Readymade House</option>
-                                    <option value="Apartments/Duplex">Apartments/Duplex</option>
-                                    <option value="Construction/Extension/Renovation">Construction/Extension/Renovation
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('valuationFor') || $sitevisit->valuationDetails->valuation_for  == "Vacant-Land"}} value="Vacant Land" selected="selected">Vacant Land</option>
+                                    <option {{ old('valuationFor') || $sitevisit->valuationDetails->valuation_for  == "Land&Buildinf"}} value="Land&Building">Land &amp; Building</option>
+                                    <option {{ old('valuationFor') || $sitevisit->valuationDetails->valuation_for  == "Readymade-House"}} value="Readymade House">Readymade House</option>
+                                    <option {{ old('valuationFor') || $sitevisit->valuationDetails->valuation_for  == "Apartments/Duplex"}} value="Apartments/Duplex">Apartments/Duplex</option>
+                                    <option {{ old('valuationFor') || $sitevisit->valuationDetails->valuation_for  == "Construction/Extension/Renovation"}} value="Construction/Extension/Renovation">Construction/Extension/Renovation
                                     </option>
+                                    
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Coloring And Painting</label>
                                 <select class="form-control selectbox" name="coloringAndPainting"
                                     id="coloringAndPainting">
-                                    <option value="Painted" selected="selected">Painted</option>
-                                    <option value="Not Painted">Not Painted</option>
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('coloringAndPainting') || $sitevisit->valuationDetails->coloring  == "Painted"}} value="Painted" selected="selected">Painted</option>
+                                    <option {{ old('coloringAndPainting') || $sitevisit->valuationDetails->coloring  == "Not-Painted"}} value="Not-Painted">Not Painted</option>
+                                    
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
@@ -1141,24 +1167,26 @@
                                         title="" data-original-title="Ex:- has Been Well Finished."></i>
                                     Flooring Finishing</label>
                                 <input type="text" name="flooringFinishing" id="flooringFinishing"
-                                    class="form-control" autocomplete="off" required="">
+                                    class="form-control" autocomplete="off" required="" value="{{ $sitevisit->valuationDetails->florring_finishing  ?? old('flooringFinishing') ?? ''}}">
                             </div>
                             <div class="form-group col-md-2">
                                 <label><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
                                         title="" data-original-title="Ex:- has Been Well Finished."></i> Inner
                                     Wall Ceiling</label>
                                 <input type="text" name="innerWallCeiling" id="innerWallCeiling"
-                                    class="form-control" autocomplete="off" required="">
+                                    class="form-control" autocomplete="off" required="" value="{{ $sitevisit->valuationDetails->inner_wall_ceiling  ?? old('innerWallCeiling') ?? ''}}">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Type Of Land</label>
                                 <select class="form-control selectbox" name="topography" id="topography">
-                                    <option value="Planning" selected="selected">Planning</option>
-                                    <option value="Khet">Khet</option>
-                                    <option value="Flat">Flat</option>
-                                    <option value="Slightly Slope">Slightly Slope</option>
-                                    <option value="Low Land">Low Land</option>
-                                    <option value="Irregural Shape">Irregural Shape</option>
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('topography') || $sitevisit->valuationDetails->type_of_land  == "Planning"}} value="Planning" selected="selected">Planning</option>
+                                    <option {{ old('topography') || $sitevisit->valuationDetails->type_of_land  == "Khet"}} value="Khet">Khet</option>
+                                    <option {{ old('topography') || $sitevisit->valuationDetails->type_of_land  == "Flat"}} value="Flat">Flat</option>
+                                    <option {{ old('topography') || $sitevisit->valuationDetails->type_of_land  == "Slightly-Slope"}} value="Slightly-Slope">Slightly Slope</option>
+                                    <option {{ old('topography') || $sitevisit->valuationDetails->type_of_land  == "Low-Land"}} value="Low-Land">Low Land</option>
+                                    <option {{ old('topography') || $sitevisit->valuationDetails->type_of_land  == "Irregural-Shape"}} value="Irregural-Shape">Irregural Shape</option>
+                                    
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
@@ -1166,26 +1194,28 @@
                                         title="" data-original-title="Ex:- Bounded by Brick Wall."></i>
                                     Boundary</label>
                                 <input type="text" name="boundary" id="boundary" class="form-control"
-                                    autocomplete="off" required="">
+                                    autocomplete="off" required="" value="{{ $sitevisit->valuationDetails->boundary  ?? old('boundary') ?? ''}}">
                             </div>
                             <div class="form-group col-md-2">
                                 <label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top"
                                         title="" data-original-title="Ex:- 2 And Half"></i> No Of Floor
                                     (Storie)</label>
-                                <input type="text" name="noOfFloorStorie" id="noOfFloorStorie"
+                                <input type="text" name="noOfFloorStorie" id="noOfFloorStorie"  value="{{ $sitevisit->valuationDetails->no_of_floors ?? old('noOfFloorStorie') ?? ''}}"
                                     class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Compound Wall</label>
-                                <select class="form-control selectbox" name="compoundWall" id="compoundWall">
-                                    <option value="Constructed" selected="selected">Constructed</option>
-                                    <option value="Not Constructed">Not Constructed</option>
+                                <select class="form-control selectbox" name="compoundWall"  id="compoundWall">
+                                    <option disabled selected>Choose One...</option>
+                                    <option {{ old('compoundWall') || $sitevisit->valuationDetails->compound_wall  == "Constructed"}} value="Constructed" selected="selected">Constructed</option>
+                                    <option {{ old('compoundWall') || $sitevisit->valuationDetails->compound_wall  == "Not-Constructed"}} value="Not-Constructed">Not Constructed</option>
+                                    
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
                                 <label>Internal Remarks</label>
                                 <input type="text" name="internalRemarks" id="internalRemarks"
-                                    class="form-control" autocomplete="off">
+                                    class="form-control" autocomplete="off" value="{{ $sitevisit->valuationDetails->internal_remarks ?? old('internalRemarks') ?? ''}}">
                             </div>
                             <input type="hidden" name="isAvailabilityTelephone" id="isAvailabilityTelephone"
                                 required="" class="form-control" autocomplete="off" value="Yes">
@@ -1290,7 +1320,7 @@
 
 @endsection
 @push('scripts')
-    <script>
+    {{-- <script>
         $(document).on('change', '#sqm_as_lalpurja', function() {
             var currentthis = $(this);
             var sqm_as_lalpurja = currentthis.val();
@@ -1308,7 +1338,7 @@
                 parseInt(dam));
             // alert(sqm_as_lalpurja);
         });
-    </script>
+    </script> --}}
 
 
     <script>
@@ -1404,8 +1434,11 @@
             var TotalRAPDAsPerCal = SqFToRAPD(totalSqFAsPerCal);
             $('#LblTotalAreaInRPADAsPerMeasurement').text(TotalRAPDAsPerCal);
             $('#LblTotalAreaInRPADAsPerMeasurement').val(TotalRAPDAsPerCal);
-            currentevent.attr('disabled', false);
 
+            console.log(CalculationAreaRate());;
+            CalculateConsiderationArea();
+            CalculationAreaRate();
+         
         });
        
 
@@ -1461,7 +1494,13 @@
                         var sqFAPMeasurement = $('#sqFAPMeasurement').val('');
                         var sqMAPMeasurement = $('#sqMAPMeasurement').val('');
                         var areaInAnnaAPMeasurement = $('#areaInAnnaAPMeasurement').val('');
+                        var totalSqFAsPerCal = $('#totalSqFAsPerCal').val();
+                        var TotalRAPDAsPerCal = SqFToRAPD(totalSqFAsPerCal);
+                        $('#LblTotalAreaInRPADAsPerMeasurement').text(TotalRAPDAsPerCal);
+                        $('#LblTotalAreaInRPADAsPerMeasurement').val(TotalRAPDAsPerCal);
 
+                        CalculateConsiderationArea();
+                        CalculationAreaRate();
                        
                     },
                     error: function(err) {
@@ -1649,9 +1688,9 @@
 
 
     <script>
-        $("#deductionOfRoadSqF,#landDevelopmentPercent,#deductionForHighTensionSqF,#deductionForLowLandSqF,#deductionForRiverSqF,#deductionForBoundryCorrection,#deductionForIrregularShapeSloppyLand").change(function() {
-      CalculateConsiderationArea();
-      CalculationAreaRate();
+        $("#deductionOfRoadSqF,#landDevelopmentPercent,#deductionForHighTensionSqF,#deductionForLowLandSqF,#deductionForRiverSqF,#deductionForBoundryCorrection,#deductionForIrregularShapeSloppyLand").keyup(function() {
+        CalculateConsiderationArea();
+        CalculationAreaRate();
     });
 
   
@@ -1826,7 +1865,7 @@
       var v4 = Number($('#totalAreaInAnna').val());
       var v5 = Number($('#annaAPConsideration').val());
       if(v5<v4){
-        alert('adhkj')
+       
         $('#governmentValueOfLand').val(Number(Number($('#perAnnaAPGovRate').val()) * Number($('#annaAPConsideration').val())).toFixed(2));
         $('#commercialValueOfLand').val(Number(Number($('#perAnnaAPMarketRate').val()) * Number($('#annaAPConsideration').val())).toFixed(2));
         $('#fairMarketValueOfLand').val(Number(Number($('#perAnnaAPFairRate').val()) * Number($('#annaAPConsideration').val())).toFixed(2));

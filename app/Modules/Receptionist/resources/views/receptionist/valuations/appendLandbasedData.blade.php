@@ -40,7 +40,7 @@
                 <td>{{ $data->sqFAPMeasurement }}</td>
                 <td>{{ $data->sqMAPMeasurement }}</td>
                 <td>{{ $data->areaInAnnaAPMeasurement }}</td>
-                <td>{{ $data->areaSymbol }}</td>
+                <td>{{ $data->total_rapd_as_cal }}</td>
                 <td><span class="text-danger">Delete</td>
             </tr>
             @php
@@ -73,22 +73,22 @@
                         id="totalAreaSideC" value="{{ $ltotalSideC ?? 0}}">
                     </th>
                 <th scope="col">
-                    <label id="LblTotalAreaSideS"> {{ $ltotalSideT ?? 0}}</label>
+                    <label id="LblTotalAreaSideS"> {{ number_format($ltotalSideT,2) ?? 0}}</label>
                     <input type="hidden" name="totalAreaSideS"
-                        id="totalAreaSideS" value="{{ $ltotalSideT ?? 0}}">
+                        id="totalAreaSideS" value="{{  number_format($ltotalSideT,2) ?? 0}}">
                     </th>
                 <th scope="col">
-                    <label id="LblTotalSqFAsPerCal"> {{ $ltotalSqF ?? 0}}</label>
+                    <label id="LblTotalSqFAsPerCal"> {{ number_format($ltotalSqF,2) ?? 0}}</label>
                     <input type="hidden" name="totalSqFAsPerCal"
                         id="totalSqFAsPerCal" value="{{ $ltotalSqF ?? 0}}">
                     </th>
                 <th scope="col">
-                    <label id="LblTotalSqMAsPerCal"> {{ $ltotalSqM ?? 0}}</label>
+                    <label id="LblTotalSqMAsPerCal"> {{ number_format($ltotalSqM,2) ?? 0}}</label>
                     <input type="hidden" name="totalSqMAsPerCal"
-                        id="totalSqMAsPerCal" value="{{ $ltotalSqM ?? 0}}">
+                        id="totalSqMAsPerCal" value="{{ number_format($ltotalSqM,2) ?? 0}}">
                     </th>
                 <th scope="col">
-                    <label id="LblTotalAreaInAnnaAPMeasurement"> {{ $ltotalAnna ?? 0}}</label>
+                    <label id="LblTotalAreaInAnnaAPMeasurement"> {{ number_format($ltotalAnna,2) ?? 0}}</label>
                     <input type="hidden"
                         name="totalAreaInAnnaAPMeasurement" id="totalAreaInAnnaAPMeasurement" value="{{ $ltotalAnna ?? 0}}">
                     </th>

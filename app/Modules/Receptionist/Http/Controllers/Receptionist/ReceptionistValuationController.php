@@ -11,6 +11,7 @@ use App\Models\Patra;
 use App\Models\PermanetBoundariesAsPerGovt;
 use App\Models\PermanetBoundariesAsPerSiteVisit;
 use App\Models\SitevisitBoundary;
+use App\Models\ValuationDetails;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Client\Models\Client;
@@ -107,9 +108,11 @@ class ReceptionistValuationController extends Controller
 
             $siteengineers = User::role('engineer')->get();
             $sitevisit = SiteVisit::where('id', $id)->with([
-                'branch','bank', 'client', 'proposal', 'lalpurjaDatas', 'documents',
-                 'legaldocuments', 'legalscandocuments', 'internalcaddocuments'
+                'branch','bank', 'client', 'proposal', 'lalpurjaDatas', 'documents','deduction',
+                 'legaldocuments', 'legalscandocuments', 'internalcaddocuments','valuationDetails',
+                 'rateofland'
             ])->first();
+
             return view('Receptionist::receptionist.valuations.edit', compact(
                 'sitevisit',
                 'banks',
@@ -267,7 +270,7 @@ class ReceptionistValuationController extends Controller
     public function valuationFinalSubmit(Request $request, $id)
     {
         // try {
-            // dd($request->all());
+            dd($request->all());
 
             $sitevisit = SiteVisit::where('id', $id)->with('deduction', 'rateofland')->first();
 
@@ -319,6 +322,50 @@ class ReceptionistValuationController extends Controller
                     'fairMarketValueOfLandAndBuilding'=> $request->fairMarketValueOfLandAndBuilding,
                     'totalDistressValueOfLandAndBuimding'=> $request->totalDistressValueOfLandAndBuimding,
                 ]);
+
+                $valuationDetails = ValuationDetails::updateOrCreate(
+                    [
+                        'site_visit_id' => $sitevisit->id
+                    ],
+                    [
+                        'road_size' => $request->accessibilityWithRoadSize,
+                        'river' => $request->accessibilityWithRiver,
+                        'hightension_line' => $request->accessibilityWithHighTension,
+                        'type_of_region' => $request->typeOfRegion,
+                        'motorable_access' => $request->motorableAccess,
+                        'property_usage' => $request->propertyUsage,
+                        'type_of_access' => $request->typeOfAccess,
+                        'shape' => $request->buildingShape,
+                        'facing' => $request->buildingFacing,
+                        'frontage' => $request->buildingFrontage,
+                        'level_with_road' => $request->levelWithRoad,
+                        'property_fot_the_bank' => $request->propertyForTheBank,
+                        'rive_near_by' => $request->riverStreamNearProperty,
+                        'heritage_sites_near_by' => $request->heritageSitesNearProperty,
+                        'property_ownership_type' => $request->propertyOwnershipType,
+                        'narrowest_part_of_land' => $request->narrowestPartOfLand,
+                        'access_in_the_blue_print' => $request->accessInTheBluePrint,
+                        'right_of_way' => $request->rightOfWay,
+                        'comments' => $request->coments,
+                        'frame_structure' => $request->frameStructure,
+                        'any_collateral_fall' => $request->anyCollateralFall,
+                        'valuation_for' => $request->valuationFor,
+                        'coloring' => $request->coloringAndPainting,
+                        'florring_finishing' => $request->flooringFinishing,
+                        'inner_wall_ceiling' => $request->innerWallCeiling,
+                        'boundary' => $request->boundary,
+                        'no_of_floors' => $request->noOfFloorStorie,
+                        'type_of_land' => $request->topography,
+                        'compound_wall' => $request->compoundWall,
+                        'internal_remarks' => $request->internalRemarks,
+                    
+                        'location_of_land' => $request->locationOfAccessLand,
+                        'district' => $request->locationDistrict,
+                        'vdc_municipality' => $request->vdcType,
+                        'address_of_land' => $request->addressOfLand,
+
+
+                    ]);
 
 
 
