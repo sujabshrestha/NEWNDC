@@ -5,6 +5,7 @@ namespace Receptionist\Http\Controllers\Receptionist;
 use App\GlobalServices\ResponseService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BuildingCalculation;
 use App\Models\LalpurjaCalculation;
 use App\Models\LandbasedCalculation;
 use App\Models\Patra;
@@ -205,6 +206,76 @@ class ReceptionistValuationController extends Controller
         }
     }
 
+    public function buildingValautionSubmit(Request $request, $id)
+    {
+        $sitevisit = SiteVisit::where('id', $id)->with('landbasedDatas')->first();
+        if ($sitevisit) {
+            $building = new BuildingCalculation();
+            $building->floor = $request->floor;
+            $building->buildingarea_sqm = $request->floorAreaInSqF;
+            $building->building_age = $request->floorAge;
+            $building->building_depreciation_percentage = $request->floorDepriciationPercentage;
+            $building->building_sanitary_plumbing_percentage = $request->sanitaryPulumbingPercentage;
+            $building->building_electric_work_percentage = $request->electricityWorkPercentage;
+            $building->building_amount = $request->floorAmount;
+            $building->building_totalamount = $request->floorNetAmount;
+            $building->building_rate = $request->floorRate;
+            //Need To change
+            $building->deprication_amt = $request->floorNetAmount;
+            $building->fair_market_val = $request->floorNetAmount;
+            $building->distress_val = $request->floorNetAmount;
+            $building->site_visit_id = $sitevisit->id;
+          
+            if ($building->save()) {
+                $sitevisit->refresh();
+                $data = [
+                    'view' => view('Receptionist::receptionist.valuations.appendBuildingValuationTable', compact('sitevisit'))->render()
+                ];
+                return $this->response->responseSuccess($data, "Successfully Submitted", 200);
+            }
+        }
+        // dd($request->all());
+
+
+        try {
+        } catch (\Exception $e) {
+            return $this->response->responseError($e->getMessage());
+        }
+    }
+
+    public function deletebuildingValaution($id)
+    {
+        try {
+            $building = BuildingCalculation::where('id',$id)->first();
+
+            if($building){
+                if ($building->delete()) {
+                    Toastr::success('Successfully Deleted');
+                    return redirect()->back();
+                }
+            }else{
+                Toastr::error('Building Valuation Not Found.');
+                return redirect()->back();
+               
+            }
+            // Ajax
+            // if($building){
+            //     if ($building->delete()) {
+            //         $sitevisit->refresh();
+            //         $data = [
+            //             'view' => view('Receptionist::receptionist.valuations.appendBuildingValuationTable', compact('sitevisit'))->render()
+            //         ];
+            //         return $this->response->responseSuccess($data, "Successfully Submitted", 200);
+            //     }
+            // }else{
+            //     return $this->response->responseError("Building Valuation Not Found.", 404);
+            // }
+          
+        } catch (\Exception $e) {
+            return $this->response->responseError($e->getMessage());
+        }
+    }
+
 
 
     public function govBoundarySubmit(Request $request, $id)
@@ -279,6 +350,12 @@ class ReceptionistValuationController extends Controller
                 $sitevisit->valuation_assignment_no = $request->valuation_assignment_on;
                 $sitevisit->preparation_date = Carbon::parse($request->prepration_date);
                 $sitevisit->ownership_date = Carbon::parse($request->date_ownership);
+
+                // Building Calculation
+                $sitevisit->construction_estimate_value = $request->constructionEstimateValue;
+                $sitevisit->contruction_approval_date = $request->buildingConstructionApprovalDate;
+                $sitevisit->area_as_per_construction = $request->totalAreaAsPerConstruction;
+                $sitevisit->year_construction_complite = $request->yearOfConstructionComplite;
 
                 $sitevisit->deduction()->updateOrCreate([
                     'id' => $sitevisit->deduction->id ?? null

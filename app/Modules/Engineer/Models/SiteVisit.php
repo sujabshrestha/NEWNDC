@@ -2,6 +2,7 @@
 
 namespace Engineer\Models;
 
+use App\Models\BuildingCalculation;
 use App\Models\LalpurjaCalculation;
 use App\Models\LandbasedCalculation;
 use App\Models\Patra;
@@ -122,4 +123,7 @@ class SiteVisit extends Model
         return $this->hasOne(ValuationDetails::class);
     }
 
+    public function buildingValuation(){
+        return $this->hasMany(BuildingCalculation::class, 'site_visit_id');
+    }
 }

@@ -581,170 +581,83 @@
                                     tabindex="-1" value={{ $sitevisit->rateofland->totalDistressValueOfLandAndBuimding ?? old('totalDistressValueOfLandAndBuimding') ?? 0}}>
                             </div>
 
-                            {{-- <div id="BuildingArea" class="col-md-12">
+                            <div id="BuildingArea" class="col-md-12">
                                 <div class="row">
                                     <div class="form-group col-md-12 mb-2">
                                         <label style="color: #dc1de9;margin-bottom: 0px;">
                                             <h6><b>3 BUILDING CALCULATIONS</b></h6>
                                         </label>
                                     </div>
-                                    <div class="form-group col-md-2" style="flex: 14%;max-width: 14%; padding-right:0px;">
+                                    <div class="form-group col-md-2" style="flex: 20%;max-width: 20%; padding-right:0px;">
                                         <label>Floor</label>
-                                        <select class="form-control selectbox" name="floor" id="floor">
+                                        <select class="form-control" name="floor" id="floor">
                                             <option value="" >--Select Floor--</option>
-                                            <option value="Semi Basement">Semi Basement</option>
+                                            <option value="Semi_Basement">Semi Basement</option>
                                             <option value="Basement">Basement</option>
-                                            <option value="Ground Floor">Ground Floor</option>
-                                            <option value="First Floor">First Floor</option>
-                                            <option value="Second Floor">Second Floor</option>
-                                            <option value="Third Floor">Third Floor</option>
-                                            <option value="Fourth Floor">Fourth Floor</option>
-                                            <option value="Fifth Floor">Fifth Floor</option>
-                                            <option value="Sixth Floor">Sixth Floor</option>
-                                            <option value="Seventh Floor">Seventh Floor</option>
-                                            <option value="Top Floor">Top Floor</option>
+                                            <option value="Ground_Floor">Ground Floor</option>
+                                            <option value="First_Floor">First Floor</option>
+                                            <option value="Second_Floor">Second Floor</option>
+                                            <option value="Third_Floor">Third Floor</option>
+                                            <option value="Fourth_Floor">Fourth Floor</option>
+                                            <option value="Fifth_Floor">Fifth Floor</option>
+                                            <option value="Sixth_Floor">Sixth Floor</option>
+                                            <option value="Seventh_Floor">Seventh Floor</option>
+                                            <option value="Top_Floor">Top Floor</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-2" style="flex: 10%;max-width: 10%; padding-right:0px;">
+                                    <div class="form-group col-md-2" style="flex: 20%;max-width: 20%; padding-right:0px;">
                                         <label>Area (Per Sq Ft)</label>
                                         <input type="text" name="floorAreaInSqF" id="floorAreaInSqF"
                                             placeholder="Area (Per Sq Ft)" class="form-control" autocomplete="off">
                                     </div>
-                                    <div class="form-group col-md-1" style="flex: 8%;max-width: 8%; padding-right:0px;">
+                                    <div class="form-group col-md-1" style="flex: 20%;max-width: 20%; padding-right:0px;">
                                         <label>Rate</label>
                                         <input type="text" name="floorRate" id="floorRate" placeholder="Rate"
                                             class="form-control" autocomplete="off">
                                     </div>
-                                    <div class="form-group col-md-1" style="flex: 10%;max-width: 10%; padding-right:0px;">
+                                    <div class="form-group col-md-1" style="flex: 20%;max-width: 20%; padding-right:0px;">
                                         <label>Amount</label>
                                         <input type="text" name="floorAmount" id="floorAmount" readonly="readonly"
                                             tabindex="-1" class="form-control">
                                     </div>
-                                    <div class="form-group col-md-2" style="flex: 10%;max-width: 10%; padding-right:0px;">
+                                    <div class="form-group col-md-2" style="flex: 20%;max-width: 20%; padding-right:0px;">
                                         <label>Floor Age</label>
                                         <input type="text" name="floorAge" id="floorAge" placeholder="Building Age"
                                             class="form-control" autocomplete="off">
                                     </div>
-                                    <div class="form-group col-md-2" style="flex: 10%;max-width: 10%; padding-right:0px;">
+                                    <div class="form-group col-md-2" style="flex: 20%;max-width: 20%; padding-right:0px;">
                                         <label>Depriciation %</label>
                                         <input type="text" name="floorDepriciationPercentage"
                                             id="floorDepriciationPercentage" placeholder="Depriciation %"
                                             class="form-control" autocomplete="off">
                                     </div>
-                                    <div class="form-group col-md-2" style="flex: 13%;max-width: 13%; padding-right:0px;">
+                                    <div class="form-group col-md-2" style="flex: 20%;max-width: 20%; padding-right:0px;">
                                         <label>Sanitary Pulumbing%</label>
                                         <input type="text" name="sanitaryPulumbingPercentage"
                                             id="sanitaryPulumbingPercentage" placeholder="" class="form-control"
                                             autocomplete="off">
                                     </div>
-                                    <div class="form-group col-md-2" style="flex: 10%;max-width: 10%;">
+                                    <div class="form-group col-md-2" style="flex: 20%;max-width: 20%;">
                                         <label>Electric Work%</label>
                                         <input type="text" name="electricityWorkPercentage"
                                             id="electricityWorkPercentage" placeholder="" class="form-control"
                                             autocomplete="off">
                                     </div>
                                     <div class="form-group col-md-1"
-                                        style="flex: 8%;max-width: 8%; padding-left:0px; padding-right:0px;">
+                                        style="flex: 20%;max-width: 20%; padding-left:0px; padding-right:0px;">
                                         <label>Total Amount</label>
                                         <input type="text" name="floorNetAmount" id="floorNetAmount"
                                             readonly="readonly" tabindex="-1" class="form-control">
                                     </div>
                                     <div class="form-group col-md-1" style="flex: 5%;max-width: 5%; padding-right:0px;">
                                         <label style="width: 100%;">&nbsp;</label>
-                                        <button type="button" class="btn btn-info btn-sm" id="BtnAddBuildingCalculation"
+                                        <button type="button" data-url="{{ route('receptionist.valuation.buildingValautionSubmit',$sitevisit->id) }}" class="btn btn-info" id="BtnAddBuildingCalculation"
                                             style="padding: 2px 5px;">ADD</button>
                                     </div>
-                                    <div class="form-group col-md-12">
-                                        <table class="table table-bordered dataTable" id="TblBuildingCalculation"
-                                            style="width:100%">
-                                            <thead class="thead-light">
-                                                <tr>
-                                                    <th scope="col" width="30">Sno</th>
-                                                    <th scope="col">Floor</th>
-                                                    <th scope="col">Area (/SqF)</th>
-                                                    <th scope="col">Rate</th>
-                                                    <th scope="col">Amount</th>
-                                                    <th scope="col">Building Age</th>
-                                                    <th scope="col">Depric %</th>
-                                                    <th scope="col">Sanitary%</th>
-                                                    <th scope="col">Electric%</th>
-                                                    <th scope="col">Net Floor Amt</th>
-                                                    <th scope="col">Depriciation Amt</th>
-                                                    <th scope="col">Fair Market Val</th>
-                                                    <th scope="col">Distress Val</th>
-                                                    <th scope="col" width="50">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row"></th>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"></th>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot class="thead-light">
-                                                <tr>
-                                                    <th scope="col" colspan="2" style="text-align: right;">TOTAL
-                                                    </th>
-                                                    <th scope="col"><label id="LblTotalBuildingAreaSqF"></label><input
-                                                            type="hidden" name="totalBuildingAreaSqF"
-                                                            id="totalBuildingAreaSqF" value="0"></th>
-                                                    <th scope="col"></th>
-                                                    <th scope="col"><label id="LblTotalBuildingAmount"></label><input
-                                                            type="hidden" name="totalBuildingAmount"
-                                                            id="totalBuildingAmount" value="0"></th>
-                                                    <th scope="col"></th>
-                                                    <th scope="col"></th>
-                                                    <th scope="col"></th>
-                                                    <th scope="col"></th>
-                                                    <th scope="col"><label
-                                                            id="LblTotalNetBuildingAmount"></label><input type="hidden"
-                                                            name="totalNetBuildingAmount" id="totalNetBuildingAmount"
-                                                            value="0"></th>
-                                                    <th scope="col"><label
-                                                            id="LblTotalBuildingDepriciation"></label><input
-                                                            type="hidden" name="totalBuildingDepriciation"
-                                                            id="totalBuildingDepriciation" value="0"></th>
-                                                    <th scope="col"><label
-                                                            id="LblTotalBuildingFairMarketValue"></label><input
-                                                            type="hidden" name="totalBuildingFairMarketValue"
-                                                            id="totalBuildingFairMarketValue" value="0"></th>
-                                                    <th scope="col"><label
-                                                            id="LblTotalBuildingDistressValue"></label><input
-                                                            type="hidden" name="totalBuildingDistressValue"
-                                                            id="totalBuildingDistressValue" value="0"></th>
-                                                    <th scope="col"></th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
+                                    <div class="form-group col-md-12 appendBuildingValuationTable">
+                                        @include('Receptionist::receptionist.valuations.appendBuildingValuationTable')
                                     </div>
+                                   
                                     <div class="form-group col-md-3">
                                         <label>Construction Estimate Value <span class="required">*</span></label>
                                         <input type="text" name="constructionEstimateValue"
@@ -756,6 +669,7 @@
                                     <input type="hidden" name="totalDistressValueOfBuilding"
                                         id="totalDistressValueOfBuilding" tabindex="-1" readonly="readonly"
                                         class="form-control" autocomplete="off">
+                                        
                                     <div class="form-group col-md-3">
                                         <label>Construction Approval Date (BS)</label>
                                         <input type="text" name="buildingConstructionApprovalDate"
@@ -778,7 +692,7 @@
                                             autocomplete="off" value="0">
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <div class="form-group col-md-12 mb-2">
                                 <label style="color: #dc1de9;margin-bottom: 0px;">
@@ -1321,27 +1235,7 @@
 
 @endsection
 @push('scripts')
-    {{-- <script>
-        $(document).on('change', '#sqm_as_lalpurja', function() {
-            var currentthis = $(this);
-            var sqm_as_lalpurja = currentthis.val();
-            var ropani = (parseFloat(sqm_as_lalpurja) / 508.74);
-            var aana = (parseFloat(sqm_as_lalpurja) / 31.79);
-            var paisa = (parseFloat(sqm_as_lalpurja) / 85.56);
-            var dam = (parseFloat(sqm_as_lalpurja) / 1.99);
-            var sqft = (parseFloat(sqm_as_lalpurja) / 10.7639);
-            console.log(ropani + "-" + aana + "-" + paisa + "-" + dam);
-            $('#ropani_as_lalpurja').val(ropani);
-            $('#anna_as_lalpurja').val(aana);
-            $('#paisa_as_lalpurja').val(paisa);
-            $('#dam_as_lalpurja').val(dam);
-            $('#rapd_as_lalpurja').val(parseInt(ropani) + "-" + parseInt(aana) + "-" + parseInt(paisa) + "-" +
-                parseInt(dam));
-            // alert(sqm_as_lalpurja);
-        });
-    </script> --}}
-
-
+ 
     <script>
         $(document).on('click', '#addAreaAPLalpurja', function(e) {
 
@@ -1423,6 +1317,114 @@
 
 
         });
+
+        // Building Valuation Submit
+       
+
+        $("#floorAreaInSqF,#floorRate").keyup(function() {
+            var floorAreaInSqF = $('#floorAreaInSqF').val();
+            var floorRate = $('#floorRate').val();
+            var floorAmount = floorAreaInSqF*floorRate;
+            console.log(floorAreaInSqF,floorRate,floorAmount);
+            $('#floorAmount').val(floorAmount);
+        });
+
+        $("#floorDepriciationPercentage,#sanitaryPulumbingPercentage,#electricityWorkPercentage").keyup(function() {
+            var floorDepriciationPercentage = $('#floorDepriciationPercentage').val();
+            var sanitaryPulumbingPercentage = $('#sanitaryPulumbingPercentage').val();
+            var electricityWorkPercentage = $('#electricityWorkPercentage').val();
+            var floorAmount = $('#floorAmount').val();
+
+            var floorDepriciationAmount =(floorDepriciationPercentage/100)*floorAmount;
+            var sanitaryPulumbingAmount = (sanitaryPulumbingPercentage/100)*floorAmount;
+            var electricityWorkAmount = (electricityWorkPercentage/100)*floorAmount;
+            var floorNetAmount = floorDepriciationAmount+sanitaryPulumbingAmount+electricityWorkAmount+Number(floorAmount);
+            console.log(floorAmount,floorNetAmount);
+            $('#floorNetAmount').val(Number(floorNetAmount).toFixed(2));
+        });
+           
+           
+
+
+
+        $(document).on('click','#BtnAddBuildingCalculation', function(e) {
+
+            e.preventDefault();
+            var currentevent = $(this);
+            var floor = $('#floor').val();
+            var floorAreaInSqF = $('#floorAreaInSqF').val();
+            var floorRate = $('#floorRate').val();
+            var floorAmount = $('#floorAmount').val();
+            var floorAge = $('#floorAge').val();
+            var floorDepriciationPercentage = $('#floorDepriciationPercentage').val();
+            var sanitaryPulumbingPercentage = $('#sanitaryPulumbingPercentage').val();
+            var electricityWorkPercentage = $('#electricityWorkPercentage').val();
+            var floorNetAmount = $('#floorNetAmount').val();
+        
+            var route = $(this).data('url');
+
+            if (floor == '' || floorAreaInSqF == '' || floorRate == '' || floorNetAmount == '') {
+                toastr.error('[Floor, Area, Rate or Total Amount cannot be empty');
+            } else {
+                $.ajax({
+                    type: "GET",
+                    url: route,
+
+                    data: {
+                        floor: floor,
+                        floorAreaInSqF: floorAreaInSqF,
+                        floorRate: floorRate,
+                        floorAmount: floorAmount,
+                        floorAge: floorAge,
+                        floorDepriciationPercentage: floorDepriciationPercentage,
+                        sanitaryPulumbingPercentage: sanitaryPulumbingPercentage,
+                        electricityWorkPercentage: electricityWorkPercentage,
+                        floorNetAmount: floorNetAmount
+                    },
+                    beforeSend: function(data) {
+                        loader();
+                    },
+                    success: function(data) {
+                        $('.appendLalpurja').html(data.data.view);
+                        toastr.success(data.message);
+                        var kitano = $('#kita_no').val('');
+                        var sheetno = $('#sheet_no').val('');
+                        var ropani = $('#ropani_as_lalpurja').val('');
+                        var aana = $('#anna_as_lalpurja').val('');
+                        var paisa = $('#paisa_as_lalpurja').val('');
+                        var dam = $('#dam_as_lalpurja').val('');
+                        var rapd = $('#rapd_as_lalpurja').val('');
+                        var sqf = $('#sqf_as_lalpurja').val('');
+                        var sqm = $('#sqm_as_lalpurja').val('');
+                        var area = $('#area_in_anna_as_lalpurja').val('');
+                        var totalSqF = $('#totalSqF').val();
+                        var rapd = SqFToRAPD(totalSqF);
+                        $('#ltotalRAPD').text(rapd);
+                        $('#totalRAPD').val(rapd);
+                        currentevent.attr('disabled', false);
+
+                    },
+                    error: function(err) {
+                        if (err.status == 422) {
+                            $.each(err.responseJSON.errors, function(i, error) {
+                                var el = $(document).find('[name="' + i + '"]');
+                                el.after($('<span style="color: red;">' + error[0] + '</span>')
+                                    .fadeOut(4000));
+                            });
+                        }
+
+                        currentevent.attr('disabled', false);
+                    },
+                    complete: function() {
+                        $.unblockUI();
+                    }
+                });
+            }
+
+
+
+
+});
 
         $( document ).ready(function() {
             var totalSqF = $('#totalSqF').val();
