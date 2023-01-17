@@ -16,15 +16,15 @@ class CreateLalpurjaCalculationsTable extends Migration
         Schema::create('lalpurja_calculations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('site_visit_id');
-            $table->unsignedBigInteger('sheet_no');
+            $table->string('sheet_no');
             $table->unsignedBigInteger('kita_no');
             $table->unsignedBigInteger('ropani_as_lalpurja')->nullable();
             $table->unsignedBigInteger('anna_as_lalpurja')->nullable();
             $table->unsignedBigInteger('paisa_as_lalpurja')->nullable();
-            $table->unsignedBigInteger('dam_as_lalpurja')->nullable();
-            $table->unsignedBigInteger('sqm_as_lalpurja')->nullable();
-            $table->unsignedBigInteger('area_in_anna_as_lalpurja')->nullable();
-            $table->unsignedBigInteger('sqf_as_lalpurja')->nullable();
+            $table->double('dam_as_lalpurja')->nullable();
+            $table->double('sqm_as_lalpurja')->nullable();
+            $table->double('area_in_anna_as_lalpurja')->nullable();
+            $table->double('sqf_as_lalpurja')->nullable();
             $table->string('rapd_as_lalpurja')->nullable();
 
 

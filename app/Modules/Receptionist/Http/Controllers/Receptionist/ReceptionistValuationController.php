@@ -5,12 +5,14 @@ namespace Receptionist\Http\Controllers\Receptionist;
 use App\GlobalServices\ResponseService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BuildingCalculation;
 use App\Models\LalpurjaCalculation;
 use App\Models\LandbasedCalculation;
 use App\Models\Patra;
 use App\Models\PermanetBoundariesAsPerGovt;
 use App\Models\PermanetBoundariesAsPerSiteVisit;
 use App\Models\SitevisitBoundary;
+use App\Models\ValuationDetails;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Client\Models\Client;
@@ -107,9 +109,11 @@ class ReceptionistValuationController extends Controller
 
             $siteengineers = User::role('engineer')->get();
             $sitevisit = SiteVisit::where('id', $id)->with([
-                'branch','bank', 'client', 'proposal', 'lalpurjaDatas', 'documents',
-                 'legaldocuments', 'legalscandocuments', 'internalcaddocuments'
+                'branch','bank', 'client', 'proposal', 'lalpurjaDatas', 'documents','deduction',
+                 'legaldocuments', 'legalscandocuments', 'internalcaddocuments','valuationDetails',
+                 'rateofland'
             ])->first();
+
             return view('Receptionist::receptionist.valuations.edit', compact(
                 'sitevisit',
                 'banks',
@@ -174,7 +178,7 @@ class ReceptionistValuationController extends Controller
         $sitevisit = SiteVisit::where('id', $id)->with('landbasedDatas')->first();
         if ($sitevisit) {
             $landbased = new LandbasedCalculation();
-            $landbased->areaSymbol = $request->landbased;
+            $landbased->areaSymbol = $request->areaSymbol;
             $landbased->sideA = $request->sideA;
             $landbased->sideB = $request->sideB;
             $landbased->sideC = $request->sideC;
@@ -182,7 +186,8 @@ class ReceptionistValuationController extends Controller
             $landbased->sqFAPMeasurement = $request->sqFAPMeasurement;
             $landbased->sqMAPMeasurement = $request->sqMAPMeasurement;
             $landbased->areaInAnnaAPMeasurement = $request->areaInAnnaAPMeasurement;
-            $landbased->sitevisit_id = $sitevisit->id;
+            $landbased->site_visit_id = $sitevisit->id;
+            $landbased->total_rapd_as_cal = $request->totalRAPDAsPerCal;
 
             if ($landbased->save()) {
                 $sitevisit->refresh();
@@ -196,6 +201,76 @@ class ReceptionistValuationController extends Controller
 
 
         try {
+        } catch (\Exception $e) {
+            return $this->response->responseError($e->getMessage());
+        }
+    }
+
+    public function buildingValautionSubmit(Request $request, $id)
+    {
+        $sitevisit = SiteVisit::where('id', $id)->with('landbasedDatas')->first();
+        if ($sitevisit) {
+            $building = new BuildingCalculation();
+            $building->floor = $request->floor;
+            $building->buildingarea_sqm = $request->floorAreaInSqF;
+            $building->building_age = $request->floorAge;
+            $building->building_depreciation_percentage = $request->floorDepriciationPercentage;
+            $building->building_sanitary_plumbing_percentage = $request->sanitaryPulumbingPercentage;
+            $building->building_electric_work_percentage = $request->electricityWorkPercentage;
+            $building->building_amount = $request->floorAmount;
+            $building->building_totalamount = $request->floorNetAmount;
+            $building->building_rate = $request->floorRate;
+            //Need To change
+            $building->deprication_amt = $request->floorNetAmount;
+            $building->fair_market_val = $request->floorNetAmount;
+            $building->distress_val = $request->floorNetAmount;
+            $building->site_visit_id = $sitevisit->id;
+          
+            if ($building->save()) {
+                $sitevisit->refresh();
+                $data = [
+                    'view' => view('Receptionist::receptionist.valuations.appendBuildingValuationTable', compact('sitevisit'))->render()
+                ];
+                return $this->response->responseSuccess($data, "Successfully Submitted", 200);
+            }
+        }
+        // dd($request->all());
+
+
+        try {
+        } catch (\Exception $e) {
+            return $this->response->responseError($e->getMessage());
+        }
+    }
+
+    public function deletebuildingValaution($id)
+    {
+        try {
+            $building = BuildingCalculation::where('id',$id)->first();
+
+            if($building){
+                if ($building->delete()) {
+                    Toastr::success('Successfully Deleted');
+                    return redirect()->back();
+                }
+            }else{
+                Toastr::error('Building Valuation Not Found.');
+                return redirect()->back();
+               
+            }
+            // Ajax
+            // if($building){
+            //     if ($building->delete()) {
+            //         $sitevisit->refresh();
+            //         $data = [
+            //             'view' => view('Receptionist::receptionist.valuations.appendBuildingValuationTable', compact('sitevisit'))->render()
+            //         ];
+            //         return $this->response->responseSuccess($data, "Successfully Submitted", 200);
+            //     }
+            // }else{
+            //     return $this->response->responseError("Building Valuation Not Found.", 404);
+            // }
+          
         } catch (\Exception $e) {
             return $this->response->responseError($e->getMessage());
         }
@@ -276,6 +351,12 @@ class ReceptionistValuationController extends Controller
                 $sitevisit->preparation_date = Carbon::parse($request->prepration_date);
                 $sitevisit->ownership_date = Carbon::parse($request->date_ownership);
 
+                // Building Calculation
+                $sitevisit->construction_estimate_value = $request->constructionEstimateValue;
+                $sitevisit->contruction_approval_date = $request->buildingConstructionApprovalDate;
+                $sitevisit->area_as_per_construction = $request->totalAreaAsPerConstruction;
+                $sitevisit->year_construction_complite = $request->yearOfConstructionComplite;
+
                 $sitevisit->deduction()->updateOrCreate([
                     'id' => $sitevisit->deduction->id ?? null
                 ],
@@ -318,6 +399,50 @@ class ReceptionistValuationController extends Controller
                     'fairMarketValueOfLandAndBuilding'=> $request->fairMarketValueOfLandAndBuilding,
                     'totalDistressValueOfLandAndBuimding'=> $request->totalDistressValueOfLandAndBuimding,
                 ]);
+
+                $valuationDetails = ValuationDetails::updateOrCreate(
+                    [
+                        'site_visit_id' => $sitevisit->id
+                    ],
+                    [
+                        'road_size' => $request->accessibilityWithRoadSize,
+                        'river' => $request->accessibilityWithRiver,
+                        'hightension_line' => $request->accessibilityWithHighTension,
+                        'type_of_region' => $request->typeOfRegion,
+                        'motorable_access' => $request->motorableAccess,
+                        'property_usage' => $request->propertyUsage,
+                        'type_of_access' => $request->typeOfAccess,
+                        'shape' => $request->buildingShape,
+                        'facing' => $request->buildingFacing,
+                        'frontage' => $request->buildingFrontage,
+                        'level_with_road' => $request->levelWithRoad,
+                        'property_fot_the_bank' => $request->propertyForTheBank,
+                        'river_near_by' => $request->riverStreamNearProperty,
+                        'heritage_sites_near_by' => $request->heritageSitesNearProperty,
+                        'property_ownership_type' => $request->propertyOwnershipType,
+                        'narrowest_part_of_land' => $request->narrowestPartOfLand,
+                        'access_in_the_blue_print' => $request->accessInTheBluePrint,
+                        'right_of_way' => $request->rightOfWay,
+                        'comments' => $request->coments,
+                        'frame_structure' => $request->frameStructure,
+                        'any_collateral_fall' => $request->anyCollateralFall,
+                        'valuation_for' => $request->valuationFor,
+                        'coloring' => $request->coloringAndPainting,
+                        'florring_finishing' => $request->flooringFinishing,
+                        'inner_wall_ceiling' => $request->innerWallCeiling,
+                        'boundary' => $request->boundary,
+                        'no_of_floors' => $request->noOfFloorStorie,
+                        'type_of_land' => $request->topography,
+                        'compound_wall' => $request->compoundWall,
+                        'internal_remarks' => $request->internalRemarks,
+                    
+                        'location_of_land' => $request->locationOfAccessLand,
+                        'district' => $request->locationDistrict,
+                        'vdc_municipality' => $request->vdcType,
+                        'address_of_land' => $request->addressOfLand,
+
+
+                    ]);
 
 
 

@@ -95,7 +95,7 @@ function () {
 
         Route::post('/valuation-final-submit/{id}','ReceptionistValuationController@valuationFinalSubmit')->name('valuationFinalSubmit');
 
-
+        Route::get('/buildign-valuation-submit/{id}','ReceptionistValuationController@buildingValautionSubmit')->name('buildingValautionSubmit');
 
     });
 

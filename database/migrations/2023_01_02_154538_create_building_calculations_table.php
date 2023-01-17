@@ -26,14 +26,7 @@ class CreateBuildingCalculationsTable extends Migration
             $table->string('building_amount');
             $table->string('building_totalamount');
             $table->string('building_rate');
-
-
-
-
             $table->foreign('site_visit_id')->references('id')->on('site_visits')->onDelete('cascade');
-
-
-
             $table->timestamps();
         });
     }

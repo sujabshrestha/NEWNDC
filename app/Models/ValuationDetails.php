@@ -10,6 +10,7 @@ class ValuationDetails extends Model
     use HasFactory;
 
     protected $fillable = [
+        'site_visit_id',
         'road_size',
         'river',
         'hightension_line',
@@ -22,7 +23,7 @@ class ValuationDetails extends Model
         'frontage',
         'level_with_road',
         'property_fot_the_bank',
-        'rive_near_by',
+        'river_near_by',
         'heritage_sites_near_by',
         'property_ownership_type',
         'narrowest_part_of_land',
