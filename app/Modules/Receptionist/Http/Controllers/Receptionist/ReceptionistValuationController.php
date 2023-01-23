@@ -79,9 +79,20 @@ class ReceptionistValuationController extends Controller
                     }
                 })
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="' . route('receptionist.valuation.edit', $row->id) . '" data-url="#" data-id=' . $row->id . ' class="btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
-                                    <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
-                                    ';
+                    $actionBtn = '
+                    <div class="action-dropdown custom-dropdown-icon">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="#actionButon" role="button" id="dropdownMenuLink-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                            </a>
+                            <div class="dropdown-menu" id="actionButton" aria-labelledby="dropdownMenuLink-2" style="will-change: transform; min-width:6rem !important;">
+                                <a class="dropdown-item" href="'. route('receptionist.valuation.edit', $row->id) .'"><span class="text-primary">Edit</span></a>
+                                <a class="dropdown-item deleteClient" href="javascript:void(0);" data-id="#"><span class="text-danger">Delete</span></a>
+                                <hr class="m-0 border-secondary">
+                                <a class="dropdown-item" target="_blank" href="'. route('receptionist.valuation.prevaluationReport',$row->id).'"><span class="text-info">Pre Valuation Report</span></a>
+                            </div>
+                        </div>
+                    </div>';                                   
                     return $actionBtn;
                 })
                 ->rawColumns(['action', 'valuation_status'])
@@ -95,6 +106,23 @@ class ReceptionistValuationController extends Controller
         //     Toastr::error($e->getMessage());
         //     return redirect()->back();
         // }
+    }
+
+    public function prevaluationReport($sitevisit_id){
+        try{
+            $sitevisit = SiteVisit::where('id',$sitevisit_id)
+                        ->with('bank','branch','client.owner','valuationDetails')
+                        ->first();
+            
+            // return view('Receptionist::receptionist.prevaluationReports.reportForAll',compact('sitevisit'));
+            return view('Receptionist::receptionist.prevaluationReports.reportForNIC',compact('sitevisit'));
+            // return view('Receptionist::receptionist.prevaluationReports.reportForSBI',compact('sitevisit'));
+            // return view('Receptionist::receptionist.prevaluationReports.reportForPrabhu',compact('sitevisit'));
+
+        } catch (\Exception $e) {
+                Toastr::error($e->getMessage());
+                return redirect()->back();
+        }
     }
 
 
@@ -363,7 +391,7 @@ class ReceptionistValuationController extends Controller
                 [
                     'deductionOfRoadSqF' => $request->deductionOfRoadSqF,
                     'landDevelopmentPercent' => $request->landDevelopmentPercent,
-                    'landDevelopmentPercent' => $request->landDevelopmentPercent,
+                    // 'landDevelopmentPercent' => $request->landDevelopmentPercent,
                     'deductionForHighTensionSqF'=> $request->deductionForHighTensionSqF,
                     'deductionForLowLandSqF'=> $request->deductionForLowLandSqF,
                     'deductionForRiverSqF'=> $request->deductionForRiverSqF,
@@ -373,6 +401,37 @@ class ReceptionistValuationController extends Controller
                     'rAPDAPConsideration'=> $request->rAPDAPConsideration,
                     'sqFAPConsideration'=> $request->sqFAPConsideration,
                     'annaAPConsideration'=> $request->annaAPConsideration,
+
+                    'total_rapd_as_road' => $request->afterDeductionOfRoadAreaInRPAD,
+                    'total_sqm_as_road' =>number_format(.092903 * $request->deductionOfRoadSqF,2),
+                    'total_anna_as_road' => $request->afterDeductionOfRoadAreaInAnna,
+                    
+                    'total_rapd_as_land_development' => $request->afterLandDevelopmentAreaInRPAD,
+                    'total_sqm_as_land_development' =>number_format(.092903 * $request->landDevelopmentSqF,2),
+                    'total_sqf_as_land_development' => $request->landDevelopmentSqF,
+                    'total_anna_as_land_development' => $request->afterLandDevelopmentAreaInAnna,
+            
+                    'total_rapd_as_high_tension_deduction' => $request->afterHighTensionAreaInRPAD,
+                    'total_sqm_as_high_tension_deduction' =>number_format(.092903 * $request->deductionForHighTensionSqF,2),
+                    'total_anna_as_high_tension_deduction' => $request->afterHighTensionAreaInAnna,
+            
+                    'total_rapd_as_low_land_deduction' => $request->afterLowLandAreaInRPAD,
+                    'total_sqm_as_low_land_deduction' =>number_format(.092903 * $request->deductionForLowLandSqF,2),
+                    'total_anna_as_low_land_deduction' => $request->afterLowLandAreaInAnna,
+                    
+                    'total_rapd_as_river_deduction' => $request->afterRiverAreaInRPAD,
+                    'total_sqm_as_river_deduction' => number_format(.092903 * $request->deductionForRiverSqF,2),
+                    'total_anna_as_river_deduction' => $request->afterRiverAreaInAnna,
+            
+                    'total_rapd_as_boundry_correction_deduction' => $request->afterBoundryCorrectionAreaInRPAD,
+                    'total_sqm_as_boundry_correction_deduction' =>number_format(.092903 * $request->deductionForBoundryCorrectionSqF,2),
+                    'total_sqf_as_boundry_correction_deduction' => $request->deductionForBoundryCorrectionSqF,
+                    'total_anna_as_boundry_correction_deduction' => $request->afterBoundryCorrectionAreaInAnna,
+            
+                    'total_rapd_as_irregular_shape_deduction' => $request->afterIrregularShapeSloppyLandAreaInRPAD,
+                    'total_sqm_as_irregular_shape_deduction' =>number_format(.092903 * $request->afterIrregularShapeSloppyLandSqF,2),
+                    'total_sqf_as_irregular_shape_deduction' => $request->afterIrregularShapeSloppyLandSqF,
+                    'total_anna_as_irregular_shape_deduction' => $request->afterIrregularShapeSloppyLandAreaInAnna,
                 ]);
 
 
@@ -441,6 +500,22 @@ class ReceptionistValuationController extends Controller
                         'vdc_municipality' => $request->vdcType,
                         'address_of_land' => $request->addressOfLand,
 
+                        'total_rapd_as_lalpurja' => $request->totalRAPD,
+                        'total_sqm_as_lalpurja' => $request->totalSqM,
+                        'total_sqf_as_lalpurja' => $request->totalSqF,
+                        'total_anna_as_lalpurja' => $request->totalAreaInAnna,
+                        
+                        'total_rapd_as_measurement' => $request->totalAreaInRPADAsPerMeasurement,
+                        'total_sqm_as_measurement' => $request->totalSqMAsPerCal,
+                        'total_sqf_as_measurement' => $request->totalSqFAsPerCal,
+                        'total_anna_as_measurement' => $request->totalAreaInAnnaAPMeasurement,
+
+                        'totalBuildingAreaSqF' => $request->totalBuildingAreaSqF,
+                        'totalBuildingAmount' => $request->totalBuildingAmount,
+                        'totalNetBuildingAmount' => $request->totalNetBuildingAmount,
+                        'totalBuildingDepriciation' => $request->totalBuildingDepriciation,
+                        'totalBuildingFairMarketValue' => $request->totalBuildingFairMarketValue,
+                        'totalBuildingDistressValue' => $request->totalBuildingDistressValue,
 
                     ]);
 
@@ -470,6 +545,7 @@ class ReceptionistValuationController extends Controller
                         }
                     }
                 }
+                // dd('askdjhk');
 
                 Toastr::success("Successfully updated");
                 return redirect()->back();
@@ -481,7 +557,7 @@ class ReceptionistValuationController extends Controller
     }
 
 
-
+   
 
 
 }

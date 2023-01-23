@@ -123,7 +123,7 @@ class SiteVisit extends Model
         return $this->hasOne(ValuationDetails::class);
     }
 
-    public function buildingValuation(){
+    public function buildingValuations(){
         return $this->hasMany(BuildingCalculation::class, 'site_visit_id');
     }
 }

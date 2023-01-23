@@ -46,5 +46,26 @@ class ValuationDetails extends Model
         'district',
         'vdc_municipality',
         'address_of_land',
+        
+        // New Fields
+        'total_rapd_as_lalpurja',
+        'total_sqm_as_lalpurja',
+        'total_sqf_as_lalpurja',
+        'total_anna_as_lalpurja',
+        
+        'total_rapd_as_measurement',
+        'total_sqm_as_measurement',
+        'total_sqf_as_measurement',
+        'total_anna_as_measurement',
+
+        // Building Valuation
+        'totalBuildingAreaSqF',
+        'totalBuildingAmount',
+        'totalNetBuildingAmount',
+        'totalBuildingDepriciation',
+        'totalBuildingFairMarketValue',
+        'totalBuildingDistressValue'
+
+
     ];
 }

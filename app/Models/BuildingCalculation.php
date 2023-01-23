@@ -12,7 +12,7 @@ class BuildingCalculation extends Model
     protected $fillable = [
         'floor',
         'site_visit_id',
-        'buildingarea_sqm',
+        'buildingarea_sqf',
         'building_age',
         'building_depreciation_percentage',
         'building_sanitary_plumbing_percentage',

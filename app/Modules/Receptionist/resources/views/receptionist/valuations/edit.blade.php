@@ -338,83 +338,87 @@
                             <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>Road (Sq.F)</label>
                                 <input type="text" name="deductionOfRoadSqF" id="deductionOfRoadSqF" required=""
-                                    class="form-control" autocomplete="off" value="{{ $siteVisit->deduction->deductionOfRoadSqF ?? old('deductionOfRoadSqF')  ?? 0}}">
+                                    class="form-control" autocomplete="off" value="{{ $sitevisit->deduction->deductionOfRoadSqF ?? old('deductionOfRoadSqF')  ?? 0}}">
                                 <input type="hidden" name="afterDeductionOfRoadAreaInAnna"
                                     id="afterDeductionOfRoadAreaInAnna" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                    autocomplete="off" value="{{ $sitevisit->deduction->total_anna_as_road ?? old('afterDeductionOfRoadAreaInAnna')  ?? 0}}">
                                 <input type="hidden" name="afterDeductionOfRoadAreaInRPAD"
                                     id="afterDeductionOfRoadAreaInRPAD" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                    autocomplete="off" value="{{ $sitevisit->deduction->total_rapd_as_road ?? old('deductionOfRoadSqF')  ?? 0}}">
                             </div>
                             <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>Land Development (%)</label>
+                                
                                 <input type="text" name="landDevelopmentPercent" id="landDevelopmentPercent"
-                                    required="" class="form-control" autocomplete="off" value="{{ $siteVisit->deduction->landDevelopmentPercent ?? old('landDevelopmentPercent')  ?? 0}}">
+                                    required="" class="form-control" autocomplete="off" value="{{ $sitevisit->deduction->landDevelopmentPercent ?? old('landDevelopmentPercent')  ?? 0}}">
                                 <input type="hidden" name="landDevelopmentSqF" id="landDevelopmentSqF" required=""
-                                    class="form-control" autocomplete="off">
+                                    class="form-control" autocomplete="off" value="{{ $sitevisit->deduction->total_sqf_as_land_development ?? old('landDevelopmentSqF')  ?? 0}}">
                                 <input type="hidden" name="afterLandDevelopmentAreaInAnna"
                                     id="afterLandDevelopmentAreaInAnna" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                    autocomplete="off" value="{{ $sitevisit->deduction->total_anna_as_land_development ?? old('afterLandDevelopmentAreaInAnna')  ?? 0}}">
                                 <input type="hidden" name="afterLandDevelopmentAreaInRPAD"
                                     id="afterLandDevelopmentAreaInRPAD" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                    autocomplete="off" value="{{ $sitevisit->deduction->total_rapd_as_land_development ?? old('afterLandDevelopmentAreaInRPAD')  ?? 0}}">
                             </div>
                             <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>High Tension (Sq.F)</label>
                                 <input type="text" name="deductionForHighTensionSqF" id="deductionForHighTensionSqF"
-                                    required="" class="form-control" autocomplete="off" value="{{ $siteVisit->deduction->deductionForHighTensionSqF ?? old('deductionForHighTensionSqF')  ?? 0}}">
+                                    required="" class="form-control" autocomplete="off" value="{{ $sitevisit->deduction->deductionForHighTensionSqF ?? old('deductionForHighTensionSqF')  ?? 0}}">
                                 <input type="hidden" name="afterHighTensionAreaInAnna" id="afterHighTensionAreaInAnna"
-                                    readonly="readonly" class="form-control" autocomplete="off">
+                                    readonly="readonly" class="form-control" autocomplete="off" value="{{ $sitevisit->deduction->total_anna_as_high_tension_deduction ?? old('afterHighTensionAreaInAnna')  ?? 0}}">
                                 <input type="hidden" name="afterHighTensionAreaInRPAD" id="afterHighTensionAreaInRPAD"
-                                    readonly="readonly" class="form-control" autocomplete="off">
+                                    readonly="readonly" class="form-control" autocomplete="off" value="{{ $sitevisit->deduction->total_rapd_as_high_tension_deduction ?? old('afterHighTensionAreaInRPAD')  ?? 0}}">
                             </div>
+
                             <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>Low Land (Sq.F)</label>
                                 <input type="text" name="deductionForLowLandSqF" id="deductionForLowLandSqF"
-                                    required="" class="form-control" autocomplete="off" value="{{ $siteVisit->deduction->deductionForLowLandSqF ?? old('deductionForLowLandSqF')  ?? 0}}">
+                                    required="" class="form-control" autocomplete="off" value="{{ $sitevisit->deduction->deductionForLowLandSqF ?? old('deductionForLowLandSqF')  ?? 0}}">
                                 <input type="hidden" name="afterLowLandAreaInAnna" id="afterLowLandAreaInAnna"
-                                    readonly="readonly" class="form-control" autocomplete="off">
+                                    readonly="readonly" class="form-control" autocomplete="off" value="{{ $sitevisit->deduction->total_anna_as_low_land_deduction ?? old('afterLowLandAreaInAnna')  ?? 0}}">
                                 <input type="hidden" name="afterLowLandAreaInRPAD" id="afterLowLandAreaInRPAD"
-                                    readonly="readonly" class="form-control" autocomplete="off">
+                                    readonly="readonly" class="form-control" autocomplete="off" value="{{ $sitevisit->deduction->total_rapd_as_low_land_deduction ?? old('afterLowLandAreaInRPAD')  ?? 0}}">
                             </div>
                             <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>River (Sq.F)</label>
                                 <input type="text" name="deductionForRiverSqF" id="deductionForRiverSqF"
-                                    required="" class="form-control" autocomplete="off" value="{{ $siteVisit->deduction->deductionForRiverSqF ?? old('deductionForRiverSqF')  ?? 0}}">
+                                    required="" class="form-control" autocomplete="off" value="{{ $sitevisit->deduction->deductionForRiverSqF ?? old('deductionForRiverSqF')  ?? 0}}">
                                 <input type="hidden" name="afterRiverAreaInAnna" id="afterRiverAreaInAnna"
-                                    readonly="readonly" class="form-control" autocomplete="off">
+                                    readonly="readonly" class="form-control" autocomplete="off" value="{{ $sitevisit->deduction->total_anna_as_river_deduction ?? old('afterRiverAreaInAnna')  ?? 0}}">
                                 <input type="hidden" name="afterRiverAreaInRPAD" id="afterRiverAreaInRPAD"
-                                    readonly="readonly" class="form-control" autocomplete="off">
+                                    readonly="readonly" class="form-control" autocomplete="off" value="{{ $sitevisit->deduction->total_rapd_as_river_deduction ?? old('afterRiverAreaInRPAD')  ?? 0}}">
                             </div>
                             <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>Boundry Correction %</label>
+
                                 <input type="text" name="deductionForBoundryCorrection"
                                     id="deductionForBoundryCorrection" required="" class="form-control"
-                                    autocomplete="off" value="{{ $siteVisit->deduction->deductionForBoundryCorrection ?? old('deductionForBoundryCorrection')  ?? 0}}">
+                                    autocomplete="off" value="{{ $sitevisit->deduction->deductionForBoundryCorrection ?? old('deductionForBoundryCorrection')  ?? 0}}">
                                 <input type="hidden" name="deductionForBoundryCorrectionSqF"
                                     id="deductionForBoundryCorrectionSqF" required="" class="form-control"
-                                    autocomplete="off">
+                                    autocomplete="off" value="{{ $sitevisit->deduction->total_sqf_as_boundry_correction_deduction ?? old('deductionForBoundryCorrectionSqF')  ?? 0}}">
                                 <input type="hidden" name="afterBoundryCorrectionAreaInAnna"
                                     id="afterBoundryCorrectionAreaInAnna" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                    autocomplete="off" value="{{ $sitevisit->deduction->total_anna_as_boundry_correction_deduction ?? old('afterBoundryCorrectionAreaInAnna')  ?? 0}}">
                                 <input type="hidden" name="afterBoundryCorrectionAreaInRPAD"
                                     id="afterBoundryCorrectionAreaInRPAD" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                    autocomplete="off" value="{{ $sitevisit->deduction->total_rapd_as_boundry_correction_deduction ?? old('afterBoundryCorrectionAreaInRPAD')  ?? 0}}">
                             </div>
+
                             <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label style="padding-right:0px; font-size:14px;">Irregular Shape/Sloppy %</label>
                                 <input type="text" name="deductionForIrregularShapeSloppyLand"
                                     id="deductionForIrregularShapeSloppyLand" required="" class="form-control"
-                                    autocomplete="off" value="{{ $siteVisit->deduction->deductionForIrregularShapeSloppyLand ?? old('deductionForIrregularShapeSloppyLand')  ?? 0}}">
+                                    autocomplete="off" value="{{ $sitevisit->deduction->deductionForIrregularShapeSloppyLand ?? old('deductionForIrregularShapeSloppyLand')  ?? 0}}">
                                 <input type="hidden" name="afterIrregularShapeSloppyLandSqF"
                                     id="afterIrregularShapeSloppyLandSqF" required="" class="form-control"
-                                    autocomplete="off">
+                                    autocomplete="off" value="{{ $sitevisit->deduction->total_sqf_as_irregular_shape_deduction ?? old('afterIrregularShapeSloppyLandSqF')  ?? 0}}">
                                 <input type="hidden" name="afterIrregularShapeSloppyLandAreaInAnna"
                                     id="afterIrregularShapeSloppyLandAreaInAnna" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                    autocomplete="off" value="{{ $sitevisit->deduction->total_anna_as_irregular_shape_deduction ?? old('afterIrregularShapeSloppyLandAreaInAnna')  ?? 0}}">
                                 <input type="hidden" name="afterIrregularShapeSloppyLandAreaInRPAD"
                                     id="afterIrregularShapeSloppyLandAreaInRPAD" readonly="readonly" class="form-control"
-                                    autocomplete="off">
+                                    autocomplete="off" value="{{ $sitevisit->deduction->total_rapd_as_irregular_shape_deduction ?? old('afterIrregularShapeSloppyLandAreaInRPAD')  ?? 0}}">
                             </div>
                             <div class="clearfix" style="width: 100%;"></div>
 
@@ -426,22 +430,22 @@
                             <div class="form-group col-md-2" style="flex: 20%;max-width: 20%;">
                                 <label>Area in (Sq.M)</label>
                                 <input type="text" name="sqMAPConsideration" id="sqMAPConsideration" required=""
-                                    class="form-control" readonly="readonly" tabindex="-1"  value="{{ $siteVisit->deduction->sqMAPConsideration ?? old('sqMAPConsideration') ?? 0}}">
+                                    class="form-control" readonly="readonly" tabindex="-1"  value="{{ $sitevisit->deduction->sqMAPConsideration ?? old('sqMAPConsideration') ?? 0}}">
                             </div>
                             <div class="form-group col-md-2" style="flex: 20%;max-width: 20%;">
                                 <label>Area in (R-A-P-D)</label>
                                 <input type="text" name="rAPDAPConsideration" id="rAPDAPConsideration" required=""
-                                    class="form-control" readonly="readonly" tabindex="-1"  value="{{ $siteVisit->deduction->rAPDAPConsideration ?? old('rAPDAPConsideration') ?? 0}}">
+                                    class="form-control" readonly="readonly" tabindex="-1"  value="{{ $sitevisit->deduction->rAPDAPConsideration ?? old('rAPDAPConsideration') ?? 0}}">
                             </div>
                             <div class="form-group col-md-2" style="flex: 20%;max-width: 20%;">
                                 <label>Area in (Sq.F)</label>
                                 <input type="text" name="sqFAPConsideration" id="sqFAPConsideration" required=""
-                                    class="form-control" readonly="readonly" tabindex="-1"  value="{{ $siteVisit->deduction->sqFAPConsideration ?? old('sqFAPConsideration') ?? 0}}">
+                                    class="form-control" readonly="readonly" tabindex="-1"  value="{{ $sitevisit->deduction->sqFAPConsideration ?? old('sqFAPConsideration') ?? 0}}">
                             </div>
                             <div class="form-group col-md-2" style="flex: 20%;max-width: 20%;">
                                 <label>Area in (Anna)</label>
                                 <input type="text" name="annaAPConsideration" id="annaAPConsideration" required=""
-                                    class="form-control" readonly="readonly" tabindex="-1"  value="{{ $siteVisit->deduction->annaAPConsideration ?? old('annaAPConsideration') ?? 0}}">
+                                    class="form-control" readonly="readonly" tabindex="-1"  value="{{ $sitevisit->deduction->annaAPConsideration ?? old('annaAPConsideration') ?? 0}}">
                             </div>
 
                             <div class="form-group col-md-12 mb-2">
@@ -580,12 +584,12 @@
                                     id="totalDistressValueOfLandAndBuimding" class="form-control" readonly="readonly"
                                     tabindex="-1" value={{ $sitevisit->rateofland->totalDistressValueOfLandAndBuimding ?? old('totalDistressValueOfLandAndBuimding') ?? 0}}>
                             </div>
-
-                            <div id="BuildingArea" class="col-md-12">
-                                <div class="row">
+                            
+                            <div id="BuildingArea" class="col-md-12 mt-2" style="border-top: solid 1px rgb(193, 192, 192)">
+                                <div class="row mt-1">
                                     <div class="form-group col-md-12 mb-2">
                                         <label style="color: #dc1de9;margin-bottom: 0px;">
-                                            <h6><b>3 BUILDING CALCULATIONS</b></h6>
+                                            <h6 ><b>3. BUILDING CALCULATIONS</b></h6>
                                         </label>
                                     </div>
                                     <div class="form-group col-md-2" style="flex: 20%;max-width: 20%; padding-right:0px;">
@@ -657,13 +661,15 @@
                                     <div class="form-group col-md-12 appendBuildingValuationTable">
                                         @include('Receptionist::receptionist.valuations.appendBuildingValuationTable')
                                     </div>
-                                   
+                                  
+
                                     <div class="form-group col-md-3">
                                         <label>Construction Estimate Value <span class="required">*</span></label>
                                         <input type="text" name="constructionEstimateValue"
                                             id="constructionEstimateValue" placeholder="Construction Estimate Value"
-                                            class="form-control" autocomplete="off" required="" value="0">
+                                            class="form-control" autocomplete="off" required="" value="{{ $sitevisit->construction_estimate_value ?? ''}}">
                                     </div>
+                                    {{-- Need To Discuss --}}
                                     <input type="hidden" name="constructionDistressValue" id="constructionDistressValue"
                                         tabindex="-1" readonly="readonly" class="form-control" autocomplete="off">
                                     <input type="hidden" name="totalDistressValueOfBuilding"
@@ -674,12 +680,12 @@
                                         <label>Construction Approval Date (BS)</label>
                                         <input type="text" name="buildingConstructionApprovalDate"
                                             id="buildingConstructionApprovalDate" class="form-control"
-                                            autocomplete="off">
+                                            autocomplete="off" value="{{ $sitevisit->contruction_approval_date ?? ''}}">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label>Year Construction Complite(BCC)</label>
-                                        <input type="text" name="yearOfConstructionComplite"
-                                            id="yearOfConstructionComplite" class="form-control" autocomplete="off">
+                                        <input type="text" name="yearOfConstructionComplite" value="{{ $sitevisit->year_construction_complite ?? ''}}"
+                                            id="yearOfConstructionComplite" class="form-control" autocomplete="off" >
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label>
@@ -689,7 +695,7 @@
                                         </label>
                                         <input type="text" name="totalAreaAsPerConstruction"
                                             id="totalAreaAsPerConstruction" required="" class="form-control"
-                                            autocomplete="off" value="0">
+                                            autocomplete="off" value="{{ $sitevisit->area_as_per_construction ?? ''}}">
                                     </div>
                                 </div>
                             </div>
@@ -1235,6 +1241,13 @@
 
 @endsection
 @push('scripts')
+<script>
+    var data = "{{$sitevisit->valuation_type}}";
+    console.log(data);
+    if(data=="Land"){
+        $('#BuildingArea').addClass('d-none');
+    }
+</script>
  
     <script>
         $(document).on('click', '#addAreaAPLalpurja', function(e) {
@@ -1427,18 +1440,18 @@
 });
 
         $( document ).ready(function() {
+
             var totalSqF = $('#totalSqF').val();
             var TotalRAPD = SqFToRAPD(totalSqF);
             $('#ltotalRAPD').text(TotalRAPD);
             $('#totalRAPD').val(TotalRAPD);
 
-
+            // Actual Measurement
             var totalSqFAsPerCal = $('#totalSqFAsPerCal').val();
             var TotalRAPDAsPerCal = SqFToRAPD(totalSqFAsPerCal);
             $('#LblTotalAreaInRPADAsPerMeasurement').text(TotalRAPDAsPerCal);
-            $('#LblTotalAreaInRPADAsPerMeasurement').val(TotalRAPDAsPerCal);
+            $('#LblTotalAreaInRPADAsPerMeasurementVal').val(TotalRAPDAsPerCal);
 
-            console.log(CalculationAreaRate());;
             CalculateConsiderationArea();
             CalculationAreaRate();
          
@@ -1558,7 +1571,7 @@
                         southAPBoundaries: southAPBoundaries,
                     },
                     beforeSend: function(data) {
-                        loader();
+                        // loader();
                     },
                     success: function(data) {
                         $('.appendGovBoundaries').html(data.data.view);
@@ -1583,7 +1596,7 @@
                         currentevent.attr('disabled', false);
                     },
                     complete: function() {
-                        $.unblockUI();
+                        // $.unblockUI();
                     }
                 });
             }

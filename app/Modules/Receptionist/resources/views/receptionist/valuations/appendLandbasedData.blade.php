@@ -73,28 +73,28 @@
                         id="totalAreaSideC" value="{{ $ltotalSideC ?? 0}}">
                     </th>
                 <th scope="col">
-                    <label id="LblTotalAreaSideS"> {{ number_format($ltotalSideT,2) ?? 0}}</label>
+                    <label id="LblTotalAreaSideS"> {{ number_format($ltotalSideT,2)  ?? 0}}</label>
                     <input type="hidden" name="totalAreaSideS"
                         id="totalAreaSideS" value="{{  number_format($ltotalSideT,2) ?? 0}}">
                     </th>
                 <th scope="col">
-                    <label id="LblTotalSqFAsPerCal"> {{ number_format($ltotalSqF,2) ?? 0}}</label>
+                    <label id="LblTotalSqFAsPerCal"> {{ number_format($ltotalSqF,2)??  $sitevisit->valuationDetails->total_sqf_as_measurement ?? 0}}</label>
                     <input type="hidden" name="totalSqFAsPerCal"
-                        id="totalSqFAsPerCal" value="{{ $ltotalSqF ?? 0}}">
+                        id="totalSqFAsPerCal" value="{{ $ltotalSqF??  $sitevisit->valuationDetails->total_sqf_as_measurement ?? 0}}">
                     </th>
                 <th scope="col">
-                    <label id="LblTotalSqMAsPerCal"> {{ number_format($ltotalSqM,2) ?? 0}}</label>
+                    <label id="LblTotalSqMAsPerCal"> {{ number_format($ltotalSqM,2)??  $sitevisit->valuationDetails->total_sqm_as_measurement ?? 0}}</label>
                     <input type="hidden" name="totalSqMAsPerCal"
-                        id="totalSqMAsPerCal" value="{{ number_format($ltotalSqM,2) ?? 0}}">
+                        id="totalSqMAsPerCal" value="{{$ltotalSqM ??  $sitevisit->valuationDetails->total_sqm_as_measurement ?? 0}}">
                     </th>
                 <th scope="col">
-                    <label id="LblTotalAreaInAnnaAPMeasurement"> {{ number_format($ltotalAnna,2) ?? 0}}</label>
+                    <label id="LblTotalAreaInAnnaAPMeasurement"> {{ number_format($ltotalAnna,2)??  $sitevisit->valuationDetails->total_anna_as_measurement ?? 0}}</label>
                     <input type="hidden"
-                        name="totalAreaInAnnaAPMeasurement" id="totalAreaInAnnaAPMeasurement" value="{{ $ltotalAnna ?? 0}}">
+                        name="totalAreaInAnnaAPMeasurement" id="totalAreaInAnnaAPMeasurement" value="{{ $ltotalAnna??  $sitevisit->valuationDetails->total_anna_as_measurement ?? 0}}">
                     </th>
                 <th scope="col">
                     <label id="LblTotalAreaInRPADAsPerMeasurement"></label>
-                    <input type="hidden" name="totalAreaInRPADAsPerMeasurement" id="totalAreaInRPADAsPerMeasurement" value="0">
+                    <input type="hidden" name="totalAreaInRPADAsPerMeasurement" id="LblTotalAreaInRPADAsPerMeasurementVal" value="{{ $sitevisit->valuationDetails->total_rapd_as_measurement ?? 0 }}">
                 </th>
                 <th scope="col"></th>
             </tr>
