@@ -27,6 +27,24 @@ function () {
     });
 
 
+
+    Route::group([
+        'prefix' => 'bank',
+        'as' => 'bank.'
+    ], function(){
+        Route::get('all','ReceptionistBankController@index')->name('index');
+
+        Route::get('create', 'ReceptionistBankController@create')->name('create');
+
+        Route::post('store', 'ReceptionistBankController@store')->name('store');
+
+        Route::get('edit/{id}', 'ReceptionistBankController@edit')->name('edit');
+
+        Route::get('delete/{id}', 'ReceptionistBankController@delete')->name('delete');
+
+        Route::post('update/{id}', 'ReceptionistBankController@update')->name('update');
+    });
+
     Route::group([
         'prefix' => 'proposal',
         'as' => 'proposal.'

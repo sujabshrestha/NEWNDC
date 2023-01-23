@@ -16,7 +16,7 @@ class AddFieldsToBanksTable extends Migration
         Schema::table('banks', function (Blueprint $table) {
             $table->float('commercial_rate')->nullable();
             $table->float('fair_market_rate')->nullable();
-            $table->float('governmant_rate')->nullable();
+            $table->float('government_rate')->nullable();
 
         });
     }
