@@ -39,16 +39,17 @@
 
                     </div>
                     <div class="table-responsive mb-4 mt-4">
-                        <table id="global-table" class="table table-hover" style="width:100%">
+                        <table id="global-table" class="table" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>S.no.</th>
+                                    <th>Action</th>
                                     <th>Bank</th>
                                     <th>Branch</th>
                                     <th>Banker Name</th>
                                     <th>Client</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
@@ -86,10 +87,18 @@
             } ,
 
             columns: [{
+                    width: '1%',
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
                     orderable: false,
                     searchable: false
+                },
+                {
+                    width: '5%',
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
                 },
                 {
                     data: 'bank_name',
@@ -124,13 +133,7 @@
                     orderable: true,
                     searchable: true
                 },
-                {
-                    width: '15%',
-                    data: 'action',
-                    name: 'action',
-                    orderable: true,
-                    searchable: true
-                },
+               
             ]
         });
         $(document).on('click','.finalValuation',function(e){

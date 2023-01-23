@@ -1,4 +1,4 @@
-@if (isset($sitevisit) && $sitevisit->buildingValuation->isNotEmpty())
+@if (isset($sitevisit) && $sitevisit->buildingValuations->isNotEmpty())
     <table class="table table-bordered dataTable" id="TblBuildingCalculation" style="width:100%">
         <thead class="thead-light">
             <tr>
@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             @php
-                $buildingarea_sqm = 0;
+                $buildingarea_sqf = 0;
                 $building_amount = 0;
                 $building_totalamount = 0;
                 $deprication_amt = 0;
@@ -28,11 +28,11 @@
                 $distress_val = 0;
                 
             @endphp
-            @foreach ($sitevisit->buildingValuation as $building )
+            @foreach ($sitevisit->buildingValuations as $building )
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $building->floor }}</td>
-                <td>{{ $building->buildingarea_sqm }}</td>
+                <td>{{ $building->buildingarea_sqf }}</td>
                 <td>{{ $building->building_rate }}</td>
                 <td>{{ $building->building_amount }}</td>
                 <td>{{ $building->building_age }}</td>
@@ -46,7 +46,7 @@
                 <td> <span class="text-danger">REMOVE</span></td>
             </tr>
             @php    
-                $buildingarea_sqm =  $buildingarea_sqm + $building->buildingarea_sqm ;
+                $buildingarea_sqf =  $buildingarea_sqf + $building->buildingarea_sqf ;
                 $building_amount = $building->building_amount+$building_amount;
                 $building_totalamount = $building->building_totalamount+$building_totalamount;
                 $deprication_amt = $building->deprication_amt+$deprication_amt;
@@ -59,23 +59,24 @@
             <tr>
                 <th scope="col" colspan="2" style="text-align: right;">TOTAL
                 </th>
-                <th scope="col"><label id="LblTotalBuildingAreaSqF">{{ number_format($buildingarea_sqm,2)}}</label><input type="hidden"
-                        name="totalBuildingAreaSqF" id="totalBuildingAreaSqF" value="{{ number_format($buildingarea_sqm,2)}}"></th>
+                <th scope="col"><label id="LblTotalBuildingAreaSqF">{{ number_format($buildingarea_sqf,2)}}</label><input type="hidden"
+                        name="totalBuildingAreaSqF" id="totalBuildingAreaSqF" value="{{ $sitevisit->valuationDetails->totalBuildingAreaSqF ?? $buildingarea_sqm ?? 0}}"></th>
                 <th scope="col"></th>
                 <th scope="col"><label id="LblTotalBuildingAmount">{{ number_format($building_amount,2)}}</label><input type="hidden"
-                        name="totalBuildingAmount" id="totalBuildingAmount" value="{{ number_format($building_amount,2)}}"></th>
+                        name="totalBuildingAmount" id="totalBuildingAmount" value="{{ $sitevisit->valuationDetails->totalBuildingAmount ?? $building_amount ?? 0 }}"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
-                <th scope="col"><label id="LblTotalNetBuildingAmount">{{ number_format($building_totalamount,2)}}</label><input type="hidden"
-                        name="totalNetBuildingAmount" id="totalNetBuildingAmount" value="{{ number_format($building_totalamount,2)}}"></th>
+                <th scope="col">
+                    <label id="LblTotalNetBuildingAmount">{{ number_format($building_totalamount,2)}}</label>
+                    <input type="hidden" name="totalNetBuildingAmount" id="totalNetBuildingAmount" value="{{$sitevisit->valuationDetails->totalNetBuildingAmount ?? $building_totalamount?? 0}}"></th>
                 <th scope="col"><label id="LblTotalBuildingDepriciation">{{ number_format($deprication_amt,2)}}</label><input type="hidden"
-                        name="totalBuildingDepriciation" id="totalBuildingDepriciation" value="{{ number_format($deprication_amt,2)}}"></th>
+                        name="totalBuildingDepriciation" id="totalBuildingDepriciation" value="{{$sitevisit->valuationDetails->totalBuildingDepriciation ?? $deprication_amt ?? 0}}"></th>
                 <th scope="col"><label id="LblTotalBuildingFairMarketValue">{{ number_format($fair_market_val,2)}}</label><input type="hidden"
-                        name="totalBuildingFairMarketValue" id="totalBuildingFairMarketValue" value="{{ number_format($fair_market_val,2)}}"></th>
+                        name="totalBuildingFairMarketValue" id="totalBuildingFairMarketValue" value="{{$sitevisit->valuationDetails->totalBuildingFairMarketValue ?? $fair_market_val ?? 0}}"></th>
                 <th scope="col"><label id="LblTotalBuildingDistressValue">{{ number_format($distress_val,2)}}</label><input type="hidden"
-                        name="totalBuildingDistressValue" id="totalBuildingDistressValue" value="{{ number_format($distress_val,2)}}"></th>
+                        name="totalBuildingDistressValue" id="totalBuildingDistressValue" value="{{$sitevisit->valuationDetails->totalBuildingDistressValue ?? $distress_val ?? 0}}"></th>
                 <th scope="col"></th>
             </tr>
         </tfoot>

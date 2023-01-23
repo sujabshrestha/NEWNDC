@@ -97,6 +97,10 @@ function () {
 
         Route::get('/buildign-valuation-submit/{id}','ReceptionistValuationController@buildingValautionSubmit')->name('buildingValautionSubmit');
 
+        Route::get('/pre-valuation-report/{site_visit_id}','ReceptionistValuationController@prevaluationReport')->name('prevaluationReport');
+
+
+        
     });
 
 

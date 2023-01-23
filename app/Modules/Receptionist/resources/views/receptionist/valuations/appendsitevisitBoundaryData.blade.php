@@ -14,17 +14,17 @@
         <tbody>
             @foreach ($sitevisit->govBoundaries as $item)
                 <tr>
-                    <th scope="row"></th>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->kita_no }}</td>
                     <td>{{ $item->east }}</td>
                     <td>{{ $item->west }}</td>
+                    <td>{{ $item->north }}</td>
                     <td>{{ $item->south }}</td>
-                    <td></td>
+                    <td><span class="text-danger">Delete</span></td>
                 </tr>
             @endforeach
             <tr>
-                <th scope="row"></th>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>

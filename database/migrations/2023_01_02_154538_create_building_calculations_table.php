@@ -18,7 +18,7 @@ class CreateBuildingCalculationsTable extends Migration
             $table->enum('floor',['Semi_Basement', 'Basement', 'Ground_Floor', 'First_Floor', 'Second Floor',
             'Third_Floor','Fourth_Floor', 'Fifth_Floor', 'Sixth_Floor', 'Seventh_Floor', 'Top_Floor']);
             $table->unsignedBigInteger('site_visit_id');
-            $table->string('buildingarea_sqm');
+            $table->string('buildingarea_sqf');
             $table->string('building_age');
             $table->string('building_depreciation_percentage');
             $table->string('building_sanitary_plumbing_percentage');

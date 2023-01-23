@@ -64,18 +64,19 @@
                     <input type="hidden" name="totalDam" id="totalDam" value="0">
                 </th>
                 <th scope="col">
-                    <label id="totalSqM">{{ $totalSqM ?? 0 }}</label>
-                    <input type="hidden" name="totalSqM" id="totalSqM" value="{{ $totalSqM ?? 0 }}">
+
+                    <label id="totalSqM">{{ $totalSqM ?? $sitevisit->valuationDetails->total_sqm_as_lalpurja ?? 0 }}</label>
+                    <input type="hidden" name="totalSqM" id="totalSqM" value="{{ $totalSqM ?? $sitevisit->valuationDetails->total_sqm_as_lalpurja ?? 0 }}">
                 </th>
-                <th scope="col"> <label>{{ $totalSqF ?? 0 }}</label>
-                    <input type="hidden" name="totalSqF" id="totalSqF" value="{{ $totalSqF ?? 0 }}">
+                <th scope="col"> <label>{{ $totalSqF ?? $sitevisit->valuationDetails->total_sqf_as_lalpurja ?? 0 }}</label>
+                    <input type="hidden" name="totalSqF" id="totalSqF" value="{{ $totalSqF ?? $sitevisit->valuationDetails->total_sqf_as_lalpurja ?? 0 }}">
                 </th>
                 <th scope="col">
                     <label id="ltotalRAPD"></label>
-                    <input type="hidden" name="totalRAPD" id="totalRAPD" value="0">
+                    <input type="hidden" name="totalRAPD" id="totalRAPD" value="{{ $sitevisit->valuationDetails->total_rapd_as_lalpurja ?? 0 }}">
                 </th>
-                <th scope="col"><label>{{ $totalAreaInAnna ?? 0}}</label>
-                    <input type="hidden" name="totalAreaInAnna" id="totalAreaInAnna" value="{{ $totalAreaInAnna ?? 0}}">
+                <th scope="col"><label>{{ $totalAreaInAnna ?? $sitevisit->valuationDetails->total_anna_as_lalpurja ?? 0}}</label>
+                    <input type="hidden" name="totalAreaInAnna" id="totalAreaInAnna" value="{{ $totalAreaInAnna ?? $sitevisit->valuationDetails->total_anna_as_lalpurja ?? 0}}">
                 </th>
 
             </tr>
