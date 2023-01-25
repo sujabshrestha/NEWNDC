@@ -99,6 +99,7 @@ function () {
 
         Route::get('/pre-valuation-report/{site_visit_id}','ReceptionistValuationController@prevaluationReport')->name('prevaluationReport');
 
+        Route::get('/final-valuation-report/{site_visit_id}','ReceptionistValuationController@finalvaluationReport')->name('finalvaluationReport');
 
         
     });

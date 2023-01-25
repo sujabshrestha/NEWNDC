@@ -90,6 +90,8 @@ class ReceptionistValuationController extends Controller
                                 <a class="dropdown-item deleteClient" href="javascript:void(0);" data-id="#"><span class="text-danger">Delete</span></a>
                                 <hr class="m-0 border-secondary">
                                 <a class="dropdown-item" target="_blank" href="'. route('receptionist.valuation.prevaluationReport',$row->id).'"><span class="text-info">Pre Valuation Report</span></a>
+                                <a class="dropdown-item" target="_blank" href="'. route('receptionist.valuation.finalvaluationReport',$row->id).'"><span class="text-secondary">Final Valuation Report</span></a>
+
                             </div>
                         </div>
                     </div>';                                   
@@ -114,10 +116,26 @@ class ReceptionistValuationController extends Controller
                         ->with('bank','branch','client.owner','valuationDetails')
                         ->first();
             
-            // return view('Receptionist::receptionist.prevaluationReports.reportForAll',compact('sitevisit'));
-            return view('Receptionist::receptionist.prevaluationReports.reportForNIC',compact('sitevisit'));
+            return view('Receptionist::receptionist.prevaluationReports.reportForAll',compact('sitevisit'));
+            // return view('Receptionist::receptionist.prevaluationReports.reportForNIC',compact('sitevisit'));
             // return view('Receptionist::receptionist.prevaluationReports.reportForSBI',compact('sitevisit'));
             // return view('Receptionist::receptionist.prevaluationReports.reportForPrabhu',compact('sitevisit'));
+
+        } catch (\Exception $e) {
+                Toastr::error($e->getMessage());
+                return redirect()->back();
+        }
+    }
+
+    public function finalvaluationReport($sitevisit_id){
+        try{
+            $sitevisit = SiteVisit::where('id',$sitevisit_id)
+                        ->with('bank','branch','client.owner','valuationDetails')
+                        ->first();
+            
+            // return view('Receptionist::receptionist.finalvaluationReports.reportForAll',compact('sitevisit'));
+            return view('Receptionist::receptionist.finalvaluationReports.reportForNIC',compact('sitevisit'));
+            // return view('Receptionist::receptionist.finalvaluationReports.reportForPrabhu',compact('sitevisit'));
 
         } catch (\Exception $e) {
                 Toastr::error($e->getMessage());
