@@ -20,7 +20,7 @@
                     <td>{{ $item->west }}</td>
                     <td>{{ $item->north }}</td>
                     <td>{{ $item->south }}</td>
-                    <td></td>
+                    <td><span class="text-danger"> <a class="deleteCalculationData" data-url="{{ route('receptionist.valuation.govBoundaryDelete', $item->id) }}"> Delete</a></span></td>
                 </tr>
             @endforeach
             <tr>

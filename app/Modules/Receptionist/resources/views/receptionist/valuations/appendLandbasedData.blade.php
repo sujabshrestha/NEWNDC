@@ -41,7 +41,7 @@
                 <td>{{ $data->sqMAPMeasurement }}</td>
                 <td>{{ $data->areaInAnnaAPMeasurement }}</td>
                 <td>{{ $data->total_rapd_as_cal }}</td>
-                <td><span class="text-danger">Delete</td>
+                <td><span class="text-danger"> <a class="deleteCalculationData" data-url="{{ route('receptionist.valuation.landBasedDelete', $data->id) }}">Delete </a></td>
             </tr>
             @php
                 $ltotalSideA= $ltotalSideA + $data->sideA;
@@ -53,7 +53,7 @@
                 $ltotalAnna= $ltotalAnna+$data->areaInAnnaAPMeasurement;
             @endphp
             @endforeach
-           
+
         </tbody>
         <tfoot class="thead-light">
             <tr>

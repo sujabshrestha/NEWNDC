@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SitevisitBoundary extends Model
 {
     use HasFactory;
+
+
+    protected $table = "sitevisit_boundaries";
 }

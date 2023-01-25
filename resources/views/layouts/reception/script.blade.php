@@ -24,6 +24,8 @@
 
 <script src="{{ asset('backendfiles/assets/js/loader.js') }}"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
 {{-- Sweet Alerts --}}
 <script src="{{ asset('backendfiles/plugins/sweetalerts/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('backendfiles/plugins/sweetalerts/custom-sweetalert.js') }}"></script>

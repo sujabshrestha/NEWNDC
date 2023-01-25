@@ -15,6 +15,7 @@ use Client\Models\Client;
 use CMS\Models\Bank;
 use CMS\Models\Branch;
 use App\Models\Deduction;
+use App\Models\SitevisitBoundary;
 use App\Models\ValuationDetails;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -43,7 +44,7 @@ class SiteVisit extends Model
         return $this->hasMany(SitevisitDocument::class, 'site_visit_id');
     }
 
-
+    //cad
     public function scandocuments(){
         return $this->hasMany(SitevisitLegalscandocument::class, 'site_visit_id');
     }
@@ -53,6 +54,7 @@ class SiteVisit extends Model
         return $this->hasMany(SitevisitLegaldocx::class, 'site_visit_id');
     }
 
+    //internal cad
     public function legalscandocuments(){
         return $this->hasMany(SitevisitLegalscandocument::class, 'site_visit_id');
     }
@@ -89,7 +91,7 @@ class SiteVisit extends Model
     }
 
     public function siteVisitBoundaries(){
-        return $this->hasMany(PermanetBoundariesAsPerSiteVisit::class, 'sitevisit_id');
+        return $this->hasMany(SitevisitBoundary::class, 'sitevisit_id');
     }
 
     public function deduction(){

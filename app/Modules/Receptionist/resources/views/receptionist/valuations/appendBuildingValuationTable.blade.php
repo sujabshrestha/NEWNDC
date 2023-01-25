@@ -26,7 +26,7 @@
                 $deprication_amt = 0;
                 $fair_market_val = 0;
                 $distress_val = 0;
-                
+
             @endphp
             @foreach ($sitevisit->buildingValuations as $building )
             <tr>
@@ -43,9 +43,9 @@
                 <td>{{ $building->deprication_amt }}</td>
                 <td>{{ $building->fair_market_val }}</td>
                 <td>{{ $building->distress_val }}</td>
-                <td> <span class="text-danger">REMOVE</span></td>
+                <td> <a class="deleteCalculationData" data-url="{{ route('receptionist.valuation.buildingValautionDelete', $building->id) }}"><span class="text-danger">REMOVE</span> </a></td>
             </tr>
-            @php    
+            @php
                 $buildingarea_sqf =  $buildingarea_sqf + $building->buildingarea_sqf ;
                 $building_amount = $building->building_amount+$building_amount;
                 $building_totalamount = $building->building_totalamount+$building_totalamount;

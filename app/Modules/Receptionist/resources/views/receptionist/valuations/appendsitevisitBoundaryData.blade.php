@@ -1,4 +1,4 @@
-@if (isset($sitevisit) && $sitevisit->govBoundaries->isNotEmpty())
+@if (isset($sitevisit) && $sitevisit->siteVisitBoundaries->isNotEmpty())
     <table class="table table-bordered dataTable" id="TblBoundariesAsPerKitaNo" style="width:100%">
         <thead class="thead-light">
             <tr>
@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($sitevisit->govBoundaries as $item)
+            @foreach ($sitevisit->siteVisitBoundaries as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->kita_no }}</td>
@@ -20,7 +20,7 @@
                     <td>{{ $item->west }}</td>
                     <td>{{ $item->north }}</td>
                     <td>{{ $item->south }}</td>
-                    <td><span class="text-danger">Delete</span></td>
+                    <td><span class="text-danger"><a class="deleteCalculationData" data-url="{{ route('receptionist.valuation.siteVisitBoundaryDelete', $item->id) }}" > Delete</span></a></td>
                 </tr>
             @endforeach
             <tr>

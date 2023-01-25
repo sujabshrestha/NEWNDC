@@ -107,18 +107,36 @@ function () {
 
         Route::get('/lalpurja-submit/{id}','ReceptionistValuationController@lalpurjaSubmit')->name('lalpurjaSubmit');
 
+        Route::get('/lalpurja-delete/{id}','ReceptionistValuationController@lalpurjaDelete')->name('lalpurjaDelete');
+
+
         Route::get('/landbased-submit/{id}','ReceptionistValuationController@landBasedSubmit')->name('landBasedSubmit');
+        Route::get('/landbased-delete/{id}','ReceptionistValuationController@landBasedDelete')->name('landBasedDelete');
+
+
 
         Route::get('/gov-boundaries-submit/{id}','ReceptionistValuationController@govBoundarySubmit')->name('govBoundarySubmit');
+        Route::get('/gov-boundaries-delete/{id}','ReceptionistValuationController@govBoundaryDelete')->name('govBoundaryDelete');
+
+
+        Route::get('/sitevisit-boundaries-submit/{id}','ReceptionistValuationController@sitevisitBoundarySubmit')->name('siteVisitBoundarySubmit');
+        Route::get('/sitevisit-boundaries-delete/{id}','ReceptionistValuationController@siteVisitBoundaryDelete')->name('siteVisitBoundaryDelete');
 
         Route::post('/valuation-final-submit/{id}','ReceptionistValuationController@valuationFinalSubmit')->name('valuationFinalSubmit');
 
         Route::get('/buildign-valuation-submit/{id}','ReceptionistValuationController@buildingValautionSubmit')->name('buildingValautionSubmit');
+        Route::get('/buildign-valuation-delete/{id}','ReceptionistValuationController@buildingValautionDelete')->name('buildingValautionDelete');
 
         Route::get('/pre-valuation-report/{site_visit_id}','ReceptionistValuationController@prevaluationReport')->name('prevaluationReport');
 
+        //document delete
+        Route::get('/delete-upload-document/{id}','ReceptionistValuationController@docDelete')->name('docDelete');
+        Route::get('/delete-upload-legaldocument/{id}','ReceptionistValuationController@legaldocDelete')->name('legaldocDelete');
+        Route::get('/delete-upload-scandocument/{id}','ReceptionistValuationController@internalCADdelete')->name('internalCADDelete');
+        Route::get('/delete-upload-legalscandocSubmit/{id}','ReceptionistValuationController@legalscandocDelete')->name('legalscandocDelete');
 
-        
+
+
     });
 
 
