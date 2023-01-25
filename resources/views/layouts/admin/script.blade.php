@@ -11,6 +11,13 @@
 <script src="{{ asset('backendfiles/assets/js/custom.js') }}"></script>
 <!-- END GLOBAL MANDATORY SCRIPTS -->
 
+{{-- feather icon --}}
+<script src="https://unpkg.com/feather-icons"></script>
+
+<script>
+    feather.replace()
+  </script>
+
 {{-- DATATABLES --}}
 <script src="{{ asset('backendfiles/plugins/table/datatable/datatables.js') }}"></script>
 
