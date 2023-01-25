@@ -5,11 +5,14 @@
 @section('breadcrumb', 'Valuation Long Form ')
 
 @push('styles')
+    <link href="assets/css/elements/tooltip.css" rel="stylesheet" type="text/css" />
+
     <style>
         .required {
             color: red;
         }
     </style>
+
 @endpush
 
 @section('content')
@@ -736,7 +739,7 @@
                                         <input type="text" name="constructionEstimateValue"
                                             id="constructionEstimateValue" placeholder="Construction Estimate Value"
                                             class="form-control" autocomplete="off" required=""
-                                            value="{{ $sitevisit->construction_estimate_value ?? '' }}">
+                                            value="{{ $sitevisit->construction_estimate_value ?? old('constructionEstimateValue') ?? '' }}">
                                     </div>
                                     {{-- Need To Discuss --}}
                                     <input type="hidden" name="constructionDistressValue" id="constructionDistressValue"
