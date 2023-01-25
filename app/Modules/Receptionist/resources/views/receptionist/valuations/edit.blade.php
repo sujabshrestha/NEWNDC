@@ -1341,28 +1341,7 @@
                                 <label>Upload Internal CAD Doc</label>
                                 <input type="file" name="UploadInternalDocuments[]" multiple=""
                                     id="UploadInternalDocument">
-                                <table class="table table-bordered dataTable" style="width:100%"
-                                    id="TblUploadInternalDocument">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" width="20">Sno</th>
-                                            <th scope="col">File Name</th>
-                                            <th scope="col" width="30">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                @include('Receptionist::receptionist.valuations.appendInternalCADDocument')
                             </div>
 
                             <div class="form-group col-md-12">

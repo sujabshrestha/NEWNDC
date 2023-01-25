@@ -22,7 +22,9 @@ use CMS\Models\Branch;
 use Engineer\Models\SiteVisit;
 use Engineer\Models\SitevisitDocument;
 use Engineer\Models\SitevisitLegaldocx;
+use Files\Models\UploadFile;
 use Files\Repositories\FileInterface;
+use Illuminate\Support\Facades\Storage;
 use User\Models\User;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -410,7 +412,7 @@ class ReceptionistValuationController extends Controller
             $sitevisitBoundary = new SitevisitBoundary();
             $sitevisitBoundary->kita_no = $request->boundariesKitaNo;
             $sitevisitBoundary->east = $request->eastAPBoundaries;
-            $sitevisitBoundary->west = $request->westAPBoundaries   ;
+            $sitevisitBoundary->west = $request->westAPBoundaries;
             $sitevisitBoundary->north = $request->northAPBoundaries;
             $sitevisitBoundary->south = $request->southAPBoundaries;
             $sitevisitBoundary->sitevisit_id = $sitevisit->id;
@@ -624,7 +626,7 @@ class ReceptionistValuationController extends Controller
                 if ($request->UploadScanDocuments) {
                     foreach ($request->UploadScanDocuments as $scandoc) {
                         $uploaded = $this->file->storeFile($scandoc);
-                        $sitevisit->legalscandocuments()->create([
+                        $sitevisit->legaldocuments()->create([
                             'file_id' => $uploaded->id
                         ]);
                     }
@@ -670,93 +672,101 @@ class ReceptionistValuationController extends Controller
 
 
 
-    public function docDelete(Request $request, $id){
-        try{
-            $document = SitevisitDocument::Where('id', $id)->first();
-            if($document){
-                $delete = $this->file->delete($document->file_id);
-                if($delete){
-                    Toastr::sucess("Successfully Deleted");
-                    return redirect()->back();
-                }
-            }
+    public function docDelete(Request $request, $id)
+    {
+        // try{
+        $document = SitevisitDocument::Where('id', $id)->first();
+        if ($document) {
+            $this->file->delete($document->file_id);
+            $document->delete();
 
-
-
-        }catch(\Exception $e){
-            Toastr::error($e->getMessage());
+            Toastr::success("Successfullyh Delete");
             return redirect()->back();
         }
+
+
+
+        // }catch(\Exception $e){
+        //     Toastr::error($e->getMessage());
+        //     return redirect()->back();
+        // }
     }
 
 
-    public function legalscandocDelete(Request $request, $id){
-        try{
-            $document = SitevisitLegaldocx::Where('id', $id)->first();
-            if($document){
-                $delete = $this->file->delete($document->file_id);
-                if($delete){
-                    Toastr::sucess("Successfully Deleted");
-                    return redirect()->back();
-                }
-            }
+    public function legaldocDelete(Request $request, $id)
+    {
+        // try{
+        $document = SitevisitLegaldocx::Where('id', $id)->first();
 
+        if ($document) {
+            $this->file->delete($document->file_id);
 
-
-        }catch(\Exception $e){
-            Toastr::error($e->getMessage());
+            $document->delete();
+            Toastr::success("Successfully Deleted");
             return redirect()->back();
         }
-    }
 
 
 
-    public function scandocDelete(Request $request, $id){
-        try{
-            $document = SitevisitLegalscandocument::Where('id', $id)->first();
-            if($document){
-                $delete = $this->file->delete($document->file_id);
-                if($delete){
-                    Toastr::sucess("Successfully Deleted");
-                    return redirect()->back();
-                }
-            }
-
-
-
-        }catch(\Exception $e){
-            Toastr::error($e->getMessage());
-            return redirect()->back();
-        }
-    }
-
-
-    public function internalCADdelete(Request $request, $id){
-        try{
-            $sitevisit = SitevisitInternalcaddocument::where('id', $id)->first();
-            if($sitevisit){
-                if($request->UploadInternalDocuments){
-                    foreach($request->UploadInternalDocuments as $picture){
-
-                        $uploaded = $this->file->storeFile($picture);
-                        $sitevisit->legalscandocuments()->create([
-                            'file_id' => $uploaded->id
-                        ]);
-                    }
-                    Toastr::success("Successfully Updated");
-                    return redirect()->back();
-                }
-            }
-            Toastr::error("Sitevisit not found");
-            return redirect()->back();
-
-
-        }catch(\Exception $e){
-            Toastr::error($e->getMessage());
-            return redirect()->back();
-        }
+        // }catch(\Exception $e){
+        //     Toastr::error($e->getMessage());
+        //     return redirect()->back();
+        // }
     }
 
 
 
+    public function scandocDelete(Request $request, $id)
+    {
+        // try{
+        $document = SitevisitLegalscandocument::Where('id', $id)->first();
+        if ($document) {
+            $file = UploadFile::where('id', $document->file_id)->first();
+            $orginalPath =  $file->path;
+            $thumbnailPath = 'resize/' . $file->path;
+            Storage::delete([$orginalPath, $thumbnailPath]);
+            $file->delete();
+
+            $document->delete();
+
+            $document->delete();
+            Toastr::success("Successfully Deleted");
+            return redirect()->back();
+        }
+
+
+
+        // }catch(\Exception $e){
+        //     Toastr::error($e->getMessage());
+        //     return redirect()->back();
+        // }
+    }
+
+
+    public function internalCADdelete(Request $request, $id)
+    {
+
+        // try{
+        $document = SitevisitInternalcaddocument::Where('id', $id)->first();
+        if ($document) {
+            $file = UploadFile::where('id', $document->file_id)->first();
+            $orginalPath =  $file->path;
+            $thumbnailPath = 'resize/' . $file->path;
+            Storage::delete([$orginalPath, $thumbnailPath]);
+            $file->delete();
+
+            $document->delete();
+            Toastr::success("Successfully Deleted");
+            return redirect()->back();
+        }
+
+
+
+
+
+        // }catch(\Exception $e){
+        //     Toastr::error($e->getMessage());
+        //     return redirect()->back();
+        // }
+    }
 }

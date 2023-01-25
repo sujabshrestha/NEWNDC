@@ -133,7 +133,7 @@ function () {
         Route::get('/delete-upload-document/{id}','ReceptionistValuationController@docDelete')->name('docDelete');
         Route::get('/delete-upload-legaldocument/{id}','ReceptionistValuationController@legaldocDelete')->name('legaldocDelete');
         Route::get('/delete-upload-scandocument/{id}','ReceptionistValuationController@internalCADdelete')->name('internalCADDelete');
-        Route::get('/delete-upload-legalscandocSubmit/{id}','ReceptionistValuationController@legalscandocDelete')->name('legalscandocDelete');
+        Route::get('/delete-upload-legalscandocSubmit/{id}','ReceptionistValuationController@scandocDelete')->name('legalscandocDelete');
 
 
 
