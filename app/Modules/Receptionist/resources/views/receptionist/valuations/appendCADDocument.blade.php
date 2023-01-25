@@ -1,4 +1,4 @@
-@if (isset($sitevisit) && $sitevisit->legaldocuments->isNotEmpty())
+@if (isset($sitevisit) && $sitevisit->scandocuments->isNotEmpty())
 
 <table class="table table-bordered dataTable" style="width:100%"
     id="TblUploadDocument">
@@ -11,14 +11,14 @@
         </tr>
     </thead>
     <tbody>
-            @foreach ($sitevisit->legaldocuments as $document)
+            @foreach ($sitevisit->scandocuments as $document)
                 <tr>
                     <th scope="col" width="20">{{ $loop->iteration }}</th>
                     <th scope="col">{{ getFileTitle($document->file_id) ?? '' }} <a
                             href="{{ url('/') . getOrginalUrl($document->file_id) }}"
                             target="_blank" class="text-danger"> View</a></th>
                     <th scope="col" width="30">
-                        <a class="deleteDoc" data-url="{{ route('receptionist.valuation.internalCADDelete', $document->id) }}">Delete </a></th>
+                        <a class="deleteDoc" data-url="{{ route('receptionist.valuation.legalscandocDelete', $document->id) }}">Delete </a></th>
                 </tr>
             @endforeach
 

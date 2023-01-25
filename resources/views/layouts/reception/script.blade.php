@@ -34,6 +34,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
 
 
+{{-- feather icon --}}
+<script src="https://unpkg.com/feather-icons"></script>
+
+<script>
+    feather.replace()
+  </script>
+
 {{-- SUMMER NOTE --}}
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
