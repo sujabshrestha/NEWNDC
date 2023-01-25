@@ -53,7 +53,7 @@
                                     <option disabled selected>Select Valuation Type</option>
                                     <option @if (isset($sitevisit) && $sitevisit->valuation_type == 'Land') selected @endif value="Land">Land Only
                                     </option>
-                                    <option @if (isset($sitevisit) && $sitevisit->valuation_type == 'Land_Building') selected @endif value="Land_Building">Land
+                                    <option @if (isset($sitevisit) && $sitevisit->valuation_type == 'land_Building') selected @endif value="land_Building">Land
                                         &amp; Building</option>
                                     <option @if (isset($sitevisit) && $sitevisit->valuation_type == 'Apartment') selected @endif value="Apartment">Appartment
                                     </option>
