@@ -15,7 +15,6 @@ class CreateSitevisitBoundariesTable extends Migration
     {
 
         Schema::create('sitevisit_boundaries', function (Blueprint $table) {
-       
             $table->id();
             $table->string('kita_no')->nullable();
             $table->string('east')->nullable();

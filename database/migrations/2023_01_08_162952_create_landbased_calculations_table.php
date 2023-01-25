@@ -20,9 +20,9 @@ class CreateLandbasedCalculationsTable extends Migration
             $table->string('sideB')->nullable();
             $table->string('sideC')->nullable();
             $table->string('sideS')->nullable();
-            $table->string('sqFAPMeasurement')->nullable();
-            $table->string('sqMAPMeasurement')->nullable();
-            $table->string('areaInAnnaAPMeasurement')->nullable();
+            $table->unsignedDouble('sqFAPMeasurement')->nullable();
+            $table->unsignedDouble('sqMAPMeasurement')->nullable();
+            $table->unsignedDouble('areaInAnnaAPMeasurement')->nullable();
             $table->unsignedBigInteger('site_visit_id');
             $table->foreign('site_visit_id')->references('id')->on('site_visits')->onDelete('cascade');
             // $table->??

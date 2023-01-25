@@ -13,6 +13,7 @@
 @endpush
 
 @section('content')
+
     <div class="row layout-top-spacing">
         <div class="col-xl-12 col-lg-12 col-sm-12">
             <div class="widget-content widget-content-area br-4">
@@ -72,15 +73,15 @@
                                 <select class="form-control" data-live-search="true"
                                     data-size="15" name="client_id" id="client_id" required=""
                                     tabindex="-98">
-                                    <option disabled selected="selected">Select Client</option>                                       
+                                    <option disabled selected="selected">Select Client</option>
                                     <option value="179" data-subtext="9841322575"> Mr. Bhuvan Lamichhane</option>
                                     <option value="229" data-subtext="9851172283"> Mr. Kiran Shrestha</option>
                                     <option value="140" data-subtext="9851061130"> Mr. Laxman Thokar</option>
                                     <option value="822" data-subtext="9851037105"> Mr. Manoj Dangol</option>
                                 </select>
                             </div>
-                            
-                   
+
+
                             <div class="form-group col-md-3"  style="padding-left:6px;padding-right:6px;">
                                 <label>Site Engineer <span class="required">*</span></label>
                                 <select class="form-control selectbox" name="site_engineer_id" id="site_engineer_id"
@@ -213,7 +214,7 @@
                                 <button type="button addAreaAPLalpurja" id="addAreaAPLalpurja" class="btn btn-info "
                                     style="padding: 2px 5px;">ADD</button>
                             </div>
-                            
+
                             <div class="form-group col-md-12">
                                 <table class="table table-bordered dataTable" id="TblAreaAsPerLalpurja"
                                     style="width:100%;">
@@ -350,7 +351,7 @@
                             <div class="form-group col-md-2"  style="padding-left:6px;padding-right:6px;">
                                 <label>Area in Anna</label>
                                 <input type="text" name="areaInAnnaAPMeasurement"
-                                    id="areaInAnnaAPMeasurement" readonly="readonly" 
+                                    id="areaInAnnaAPMeasurement" readonly="readonly"
                                     class="form-control">
                             </div>
                             <div class="form-group col-md-1" style="flex: 5%;max-width: 5%; padding-left: 0px;">
@@ -885,7 +886,7 @@
                                             id="constructionEstimateValue" placeholder="Construction Estimate Value"
                                             class="form-control" required="" value="{{ old('constructionEstimateValue') ?? 0}}">
                                     </div>
-                                    <input type="hidden" name="constructionDistressValue" 
+                                    <input type="hidden" name="constructionDistressValue"
                                         id="constructionDistressValue"  readonly="readonly"
                                         class="form-control">
                                     <input type="hidden" name="totalDistressValueOfBuilding"
@@ -902,9 +903,9 @@
                                             id="yearOfConstructionComplite" class="form-control">
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label> 
+                                        <label>
                                             <i class="fa fa-info-circle" data-toggle="tooltip"
-                                                data-placement="top" title="" data-original-title="Ex:- 800"></i> 
+                                                data-placement="top" title="" data-original-title="Ex:- 800"></i>
                                                 Area As Per Construction
                                             </label>
                                         <input type="text" name="totalAreaAsPerConstruction"
@@ -914,10 +915,10 @@
                                 </div>
                             </div>
 
-           
-                          
-                            
-                   
+
+
+
+
 
                             <div class="form-group col-md-12">
                                 <button type="button" class="btn btn-info float-right btn-sm ml-3"
@@ -960,7 +961,7 @@
 
     <script>
         $(document).on('keyup','#sqm_as_lalpurja',function(){
-            var SqM = $(this).val()     
+            var SqM = $(this).val()
             var SqF = $(this).val()*10.76;
             //console.log('SqF :'+Number(SqF).toFixed(2));
             $('#sqFAPLalpurja').val(($(this).val()*10.76).toFixed(2));
@@ -1005,7 +1006,7 @@
         })
 
 
-       
+
 
         $("#annaAPLalpurja").blur(function(){ if($(this).val()>16){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true ); return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
         $("#paisaAPLalpurja").blur(function(){ if($(this).val()>4){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true );  return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
@@ -1055,7 +1056,7 @@
       CalculationAreaRate();
     });
 
-  
+
 
     $("#perAnnaAPGovRate").change(function() {
       $('#perSqFAPGovRate').val(Number(Number($(this).val()) / 342.25).toFixed(2));
@@ -1116,7 +1117,7 @@
         var _v2 =(TotalSqFAsPerCal/100)*BoundryCorrectionPercent;
         var _v3 =(TotalSqFAsPerCal/100)*IrregularShapePercent;
         var Val = TotalSqFAsPerCal-(DeductionOfRoadSqF+DeductionForHighTensionSqF+DeductionForLowLandSqF+DeductionForRiverSqF+(_v1)+(_v2)+(_v3));
-        
+
         $('#sqMAPConsideration').val((Number(Val)*0.092903).toFixed(2));
         $('#sqFAPConsideration').val(Number(Val).toFixed(2));
 
@@ -1145,7 +1146,7 @@
         var _v2 =(TotalSqF/100)*BoundryCorrectionPercent;
         var _v3 =(TotalSqF/100)*IrregularShapePercent;
         var Val = TotalSqF-(DeductionOfRoadSqF+DeductionForHighTensionSqF+DeductionForLowLandSqF+DeductionForRiverSqF+(_v1)+(_v2)+(_v3));
-      
+
         $('#sqMAPConsideration').val((Number(Val)*0.092903).toFixed(2));
         $('#sqFAPConsideration').val(Number(Val).toFixed(2));
         var TotalRAPD = SqFToRAPD(Val);
@@ -1249,28 +1250,28 @@
     }
 
     function convertFromTotalSqft(t, e) {
-      total_sqmt = .092903 * t, 
-      total_paisa = t / 85.56, 
-      total_dhur = t / 182.25, 
-      ropaniPart = Math.floor(total_paisa / 64), 
-      remainingPaisa = total_paisa - 64 * ropaniPart, 
-      aanaPart = Math.floor(remainingPaisa / 4), 
-      remainingPaisa -= 4 * aanaPart, 
-      paisaPart = Math.floor(remainingPaisa), 
-      remainingPaisa -= paisaPart, 
-      damPart = 4 * remainingPaisa, 
-      bighaPart = Math.floor(total_dhur / 400), 
-      remainingDhur = total_dhur - 400 * bighaPart, 
-      kathhaPart = Math.floor(remainingDhur / 20), 
-      remainingDhur -= 20 * kathhaPart, 
-      dhurPart = remainingDhur, 
-      "np" == e ? (ropaniText = " à¤°à¥‹à¤ªà¤¨à¥€ ", aanaText = " à¤†à¤¨à¤¾ ", paisaText = " à¤ªà¥ˆà¤¸à¤¾ ", damText = " à¤¦à¤¾à¤® ", bighaText = " à¤¬à¤¿à¤—à¤¾ ", kathhaText = " à¤•à¤ à¥à¤ à¤¾ ", dhurText = " à¤§à¥à¤° ", sqmtText = " à¤µà¤°à¥à¤— à¤®à¤¿à¤Ÿà¤° ", sqftText = " à¤µà¤°à¥à¤— à¤«à¤¿à¤Ÿ ") : (ropaniText = " Ropani ", aanaText = " Aana ", paisaText = " Paisa ", damText = " Dam ", bighaText = " Bigha ", kathhaText = " Kathha ", dhurText = " Dhur ", sqmtText = " Square Meter ", sqftText = " Square Feet "), 
-      ropaniResult = ropaniPart + ropaniText + aanaPart + aanaText + paisaPart + paisaText + damPart.toFixed(2) + damText, 
-      bighaResult = bighaPart + bighaText + kathhaPart + kathhaText + dhurPart.toFixed(2) + dhurText, 
+      total_sqmt = .092903 * t,
+      total_paisa = t / 85.56,
+      total_dhur = t / 182.25,
+      ropaniPart = Math.floor(total_paisa / 64),
+      remainingPaisa = total_paisa - 64 * ropaniPart,
+      aanaPart = Math.floor(remainingPaisa / 4),
+      remainingPaisa -= 4 * aanaPart,
+      paisaPart = Math.floor(remainingPaisa),
+      remainingPaisa -= paisaPart,
+      damPart = 4 * remainingPaisa,
+      bighaPart = Math.floor(total_dhur / 400),
+      remainingDhur = total_dhur - 400 * bighaPart,
+      kathhaPart = Math.floor(remainingDhur / 20),
+      remainingDhur -= 20 * kathhaPart,
+      dhurPart = remainingDhur,
+      "np" == e ? (ropaniText = " à¤°à¥‹à¤ªà¤¨à¥€ ", aanaText = " à¤†à¤¨à¤¾ ", paisaText = " à¤ªà¥ˆà¤¸à¤¾ ", damText = " à¤¦à¤¾à¤® ", bighaText = " à¤¬à¤¿à¤—à¤¾ ", kathhaText = " à¤•à¤ à¥à¤ à¤¾ ", dhurText = " à¤§à¥à¤° ", sqmtText = " à¤µà¤°à¥à¤— à¤®à¤¿à¤Ÿà¤° ", sqftText = " à¤µà¤°à¥à¤— à¤«à¤¿à¤Ÿ ") : (ropaniText = " Ropani ", aanaText = " Aana ", paisaText = " Paisa ", damText = " Dam ", bighaText = " Bigha ", kathhaText = " Kathha ", dhurText = " Dhur ", sqmtText = " Square Meter ", sqftText = " Square Feet "),
+      ropaniResult = ropaniPart + ropaniText + aanaPart + aanaText + paisaPart + paisaText + damPart.toFixed(2) + damText,
+      bighaResult = bighaPart + bighaText + kathhaPart + kathhaText + dhurPart.toFixed(2) + dhurText,
       squareFeetResult = t.toFixed(2) + sqftText, squareMeterResult = total_sqmt.toFixed(2) + sqmtText,
-      //  $("#ropaniResult").html(ropaniResult), 
-      //  $("#bighaResult").html(bighaResult), 
-      //  $("#squareFeetResult").html(squareFeetResult), 
+      //  $("#ropaniResult").html(ropaniResult),
+      //  $("#bighaResult").html(bighaResult),
+      //  $("#squareFeetResult").html(squareFeetResult),
       //  $("#squareMeterResult").html(squareMeterResult)
        damPart = damPart>1?damPart.toFixed(2):0;
        return ropaniPart +'-'+ aanaPart +'-'+ paisaPart +'-'+ damPart;
@@ -1291,17 +1292,17 @@
       });
 
 
-      $('#totalBuildingAreaSqF').text(TotalBuildingAreaSqF.toFixed(2)); 
+      $('#totalBuildingAreaSqF').text(TotalBuildingAreaSqF.toFixed(2));
       $('#totalBuildingAreaSqF').val(TotalBuildingAreaSqF.toFixed(2));
-      $('#totalBuildingAmount').text(TotalBuildingAmount.toFixed(2)); 
+      $('#totalBuildingAmount').text(TotalBuildingAmount.toFixed(2));
       $('#totalBuildingAmount').val(TotalBuildingAmount.toFixed(2));
-      $('#totalNetBuildingAmount').text(TotalFloorNetAmount.toFixed(2)); 
+      $('#totalNetBuildingAmount').text(TotalFloorNetAmount.toFixed(2));
       $('#totalNetBuildingAmount').val(TotalFloorNetAmount.toFixed(2));
-      $('#totalBuildingDepriciation').text(TotalBuildingDepriciation.toFixed(2)); 
+      $('#totalBuildingDepriciation').text(TotalBuildingDepriciation.toFixed(2));
       $('#totalBuildingDepriciation').val(TotalBuildingDepriciation.toFixed(2));
-      $('#totalBuildingFairMarketValue').text(TotalBuildingFairMarketValue.toFixed(2)); 
+      $('#totalBuildingFairMarketValue').text(TotalBuildingFairMarketValue.toFixed(2));
       $('#totalBuildingFairMarketValue').val(TotalBuildingFairMarketValue.toFixed(2));
-      $('#totalBuildingDistressValue').text(TotalBuildingDistressValue.toFixed(2)); 
+      $('#totalBuildingDistressValue').text(TotalBuildingDistressValue.toFixed(2));
       $('#totalBuildingDistressValue').val(TotalBuildingDistressValue.toFixed(2));
     }
 
@@ -1311,6 +1312,6 @@
     </script>
 
 
-   
-    
+
+
 @endpush
