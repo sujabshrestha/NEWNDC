@@ -1,4 +1,4 @@
-@if (isset($sitevisit) && $sitevisit->scandocuments->isNotEmpty())
+@if (isset($sitevisit) && $sitevisit->legalscandocuments->isNotEmpty())
 
 <table class="table table-bordered dataTable" style="width:100%"
     id="TblUploadDocument">
@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-            @foreach ($sitevisit->scandocuments as $document)
+            @foreach ($sitevisit->legalscandocuments as $document)
                 <tr>
                     <th scope="col" width="20">{{ $loop->iteration }}</th>
                     <th scope="col">{{ getFileTitle($document->file_id) ?? '' }} <a

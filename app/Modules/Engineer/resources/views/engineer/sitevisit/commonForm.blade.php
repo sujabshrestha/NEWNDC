@@ -242,7 +242,9 @@
                 <tr>
                     <th scope="col" width="20">{{ $loop->iteration }}</th>
                     <th scope="col">{{ getFileTitle($document->file_id) ?? "" }} <a href="{{ url('/').getOrginalUrl($document->file_id) }}" target="_blank" class="text-danger" > View</a></th>
-                    <th scope="col" width="30">Delete</th>
+                    <th scope="col" width="30">
+
+                        <a href="{{ route('receptionist.valuation.docDelete', $document->id) }}">Delete</a> </th>
                 </tr>
                 @endforeach
                 @endif
@@ -263,12 +265,12 @@
                 </tr>
             </thead>
             <tbody>
-                @if (isset($sitevisit) && $sitevisit->documents->isNotEmpty())
-                @foreach ($sitevisit->legaldocuments as $document)
+                @if (isset($sitevisit) && $sitevisit->legalscandocuments->isNotEmpty())
+                @foreach ($sitevisit->legalscandocuments as $document)
                 <tr>
                     <th scope="col" width="20">{{ $loop->iteration }}</th>
                     <th scope="col">{{ getFileTitle($document->file_id) ?? "" }} <a href="{{ url('/').getOrginalUrl($document->file_id) }}" target="_blank" class="text-danger" > View</a></th>
-                    <th scope="col" width="30">Delete</th>
+                    <th scope="col" width="30"><a href="{{ route('receptionist.valuation.legalscandocDelete', $document->id) }}"> Delete </a></th>
                 </tr>
                 @endforeach
                 @endif

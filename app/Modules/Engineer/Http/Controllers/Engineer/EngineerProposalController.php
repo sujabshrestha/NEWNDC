@@ -27,12 +27,13 @@ class EngineerProposalController extends Controller
 
             }
 
+            // <a href="'. route('siteengineer.sitevisit.create', [$row->id, $row->siteVisit->id ?? null]) .'" id="" data-id=' . $row->id . ' class="delete btn btn-secondary btn-sm mb-2" title="Delete">Client Details</a>
             return DataTables::of($datas)
                 ->addIndexColumn()
 
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<a href="'. route('siteengineer.sitevisit.create', [$row->id, $row->siteVisit->id ?? null]) .'" data-url="#" data-id=' . $row->id . ' class="btn btn-primary btn-sm mb-2" title="Add details">Site visit</a>
-                    <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-secondary btn-sm mb-2" title="Delete">Client Details</a>
+
                             <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
                             ';
                     return $actionBtn;

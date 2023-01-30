@@ -136,6 +136,12 @@ function () {
         Route::get('/delete-upload-legalscandocSubmit/{id}','ReceptionistValuationController@scandocDelete')->name('legalscandocDelete');
 
 
+        //document images
+        Route::get('/document-image/{id}','ReceptionistValuationController@docImages')->name('docImages');
+        Route::get('/legaldocument-image/{id}','ReceptionistValuationController@legaldocImages')->name('legaldocImages');
+        Route::get('/cad-image/{id}','ReceptionistValuationController@CADImages')->name('CADImages');
+        Route::get('/internalcad-image/{id}','ReceptionistValuationController@internalCADImages')->name('internalCADImages');
+
 
     });
 

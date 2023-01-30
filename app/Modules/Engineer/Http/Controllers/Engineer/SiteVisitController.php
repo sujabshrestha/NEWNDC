@@ -79,7 +79,7 @@ class SiteVisitController extends Controller
 
     public function store(Request $request, $id = null)
     {
-        // try{
+        try{
         // dd($request->all(), $id);
         if (!is_null($id)) {
             $sitevisit = SiteVisit::where('id', $id)->with(['documents', 'legaldocuments'])->first();
@@ -118,7 +118,7 @@ class SiteVisitController extends Controller
                 if ($request->RegUploadScanDocument) {
                     foreach ($request->RegUploadScanDocument as $legaldocument) {
                         $uploaded = $this->file->storeFile($legaldocument);
-                        $sitevisit->legaldocuments()->create([
+                        $sitevisit->legalscandocuments()->create([
                             'file_id' => $uploaded->id
                         ]);
                     }
@@ -128,6 +128,7 @@ class SiteVisitController extends Controller
                 return redirect()->route('siteengineer.proposal.index');
             }
         }else{
+            // dd($request->type_of_road);
             $sitevisit = new SiteVisit();
             $sitevisit->registration_id = 'NDC-'.rand(0, 9999);
             $sitevisit->proposal_id = $request->proposal_id;
@@ -164,7 +165,7 @@ class SiteVisitController extends Controller
                 if ($request->RegUploadScanDocument) {
                     foreach ($request->RegUploadScanDocument as $legaldocument) {
                         $uploaded = $this->file->storeFile($legaldocument);
-                        $sitevisit->legaldocuments()->create([
+                        $sitevisit->legalscandocuments()->create([
                             'file_id' => $uploaded->id
                         ]);
                     }
@@ -179,10 +180,10 @@ class SiteVisitController extends Controller
         return redirect()->back();
 
 
-        // }catch(\Exception $e){
-        //     Toastr::error($e->getMessage());
-        //     return redirect()->back();
-        // }
+        }catch(\Exception $e){
+            Toastr::error($e->getMessage());
+            return redirect()->back();
+        }
     }
 
 

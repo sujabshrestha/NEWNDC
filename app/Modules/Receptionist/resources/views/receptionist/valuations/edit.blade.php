@@ -26,7 +26,7 @@
 
                 {{-- @dd($sitevisit) --}}
                 <div class="col-md-12">
-                    <form action="{{ route('receptionist.valuation.valuationFinalSubmit', $sitevisit->id) }}"
+                    <form id="valuationSubmitForm" action="{{ route('receptionist.valuation.valuationFinalSubmit', $sitevisit->id) }}"
                         enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class="row">
@@ -350,7 +350,7 @@
                             </div>
                             <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>Road (Sq.F)</label>
-                                <input type="text" name="deductionOfRoadSqF" id="deductionOfRoadSqF" required=""
+                                <input type="number" name="deductionOfRoadSqF" id="deductionOfRoadSqF" required=""
                                     class="form-control" autocomplete="off"
                                     value="{{ $sitevisit->deduction->deductionOfRoadSqF ?? (old('deductionOfRoadSqF') ?? 0) }}">
                                 <input type="hidden" name="afterDeductionOfRoadAreaInAnna"
@@ -507,7 +507,7 @@
                                 </label>
                             </div>
                             <div class="form-group col-md-2 pr-0" style="flex: 13%;max-width: 13%;">
-                                <label>Area (Per Sq Ft) {{ $sitevisit->rateofland->perSqFAPGovRate }}</label>
+                                <label>Area (Per Sq Ft) {{ isset($sitevisit->rateofland) ? $sitevisit->rateofland->perSqFAPGovRate : "" }}</label>
                                 <input type="text" name="perSqFAPGovRate" id="perSqFAPGovRate" required=""
                                     class="form-control" readonly="readonly" tabindex="-1"
                                     value={{ $sitevisit->rateofland->perSqFAPGovRate ?? (old('perSqFAPGovRate') ?? 0) }}>
@@ -1344,13 +1344,16 @@
                                 @include('Receptionist::receptionist.valuations.appendInternalCADDocument')
                             </div>
 
+
                             <div class="form-group col-md-12">
                                 <button type="submit" class="btn btn-info float-right btn-sm ml-3"
-                                    id="BtnSaveValuation">Submit</button>
+                                id="BtnSaveValuation">Submit</button>
+
                                 {{-- <button type="button" class="btn btn-primary float-right btn-sm"
                                     id="BtnSaveValuationAndStay">Submit &amp; Stay</button> --}}
                             </div>
                         </div>
+
                     </form>
                 </div>
 
@@ -1361,6 +1364,14 @@
 
 @endsection
 @push('scripts')
+
+
+    <script>
+        $(document).on('click', '#BtnSaveValuation', function(){
+            $('#valuationSubmitForm').submit();
+        });
+    </script>
+
     <script>
         var data = "{{ $sitevisit->valuation_type }}";
         console.log(data);
@@ -1594,7 +1605,7 @@
             var sqMAPMeasurement = $('#sqMAPMeasurement').val();
             var areaInAnnaAPMeasurement = $('#areaInAnnaAPMeasurement').val();
             var totalRAPDAsPerCal = SqFToRAPD(sqFAPMeasurement);
-            alert(totalRAPDAsPerCal);
+            // alert(totalRAPDAsPerCal);
             var route = $(this).data('url');
 
 

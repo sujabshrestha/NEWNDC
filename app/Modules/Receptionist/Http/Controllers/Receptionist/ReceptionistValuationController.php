@@ -95,6 +95,10 @@ class ReceptionistValuationController extends Controller
                                 <a class="dropdown-item deleteClient" href="javascript:void(0);" data-id="#"><span class="text-danger">Delete</span></a>
                                 <hr class="m-0 border-secondary">
                                 <a class="dropdown-item" target="_blank" href="' . route('receptionist.valuation.prevaluationReport', $row->id) . '"><span class="text-info">Pre Valuation Report</span></a>
+                                <a class="dropdown-item" target="_blank" href="' . route('receptionist.valuation.docImages', $row->id) . '"><span class="text-info">Document image</span></a>
+                                <a class="dropdown-item" target="_blank" href="' . route('receptionist.valuation.CADImages', $row->id) . '"><span class="text-info">CAD image</span></a>
+                                <a class="dropdown-item" target="_blank" href="' . route('receptionist.valuation.legaldocImages', $row->id) . '"><span class="text-info">LegalDocument image</span></a>
+                                <a class="dropdown-item" target="_blank" href="' . route('receptionist.valuation.internalCADImages', $row->id) . '"><span class="text-info">InternalCAD image</span></a>
                             </div>
                         </div>
                     </div>';
@@ -305,7 +309,7 @@ class ReceptionistValuationController extends Controller
         if ($sitevisit) {
             $building = new BuildingCalculation();
             $building->floor = $request->floor;
-            $building->buildingarea_sqm = $request->floorAreaInSqF;
+            $building->buildingarea_sqf = $request->floorAreaInSqF;
             $building->building_age = $request->floorAge;
             $building->building_depreciation_percentage = $request->floorDepriciationPercentage;
             $building->building_sanitary_plumbing_percentage = $request->sanitaryPulumbingPercentage;
@@ -768,5 +772,64 @@ class ReceptionistValuationController extends Controller
         //     Toastr::error($e->getMessage());
         //     return redirect()->back();
         // }
+    }
+
+
+    public function docImages($id)
+    {
+        try {
+            $sitevisit = SiteVisit::where('id', $id)->with('documents')->first();
+            if ($sitevisit) {
+                return view(
+                    'Receptionist::receptionist.valuations.documents.sitevisitDocuments',
+                    compact('sitevisit')
+                );
+            }
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            return back();
+        }
+    }
+
+    public function legaldocImages($id)
+    {
+        try {
+            $sitevisit = SiteVisit::where('id', $id)->with('legaldocuments')->first();
+            if ($sitevisit) {
+                return view('Receptionist::receptionist.valuations.documents.sitevisitlegalDocuments', compact('sitevisit'));
+            }
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            return back();
+        }
+    }
+
+
+    public function CADImages($id)
+    {
+        try {
+            $sitevisit = SiteVisit::where('id', $id)->with('legalscandocuments')->first();
+            if ($sitevisit) {
+                return view('Receptionist::receptionist.valuations.documents.sitevisitCADDocuments',compact('sitevisit'));
+            }
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            return back();
+        }
+    }
+
+
+
+    public function internalCADImages($id)
+    {
+        try {
+            $sitevisit = SiteVisit::where('id', $id)->with('internaldocuments')->first();
+            if ($sitevisit) {
+                return view('Receptionist::receptionist.valuations.documents.sitevisitInternalCADDocuments',compact('sitevisit'));
+            }
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            return back();
+        }
     }
 }
