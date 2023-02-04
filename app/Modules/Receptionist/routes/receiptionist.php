@@ -10,6 +10,8 @@ Route::group(
     'middleware' => ['web']
 ],
 function () {
+    Route::get('dashboard','ReceptionistController@dashboard')->name('dashboard');
+
 
     Route::group([
         'prefix' => 'branch',

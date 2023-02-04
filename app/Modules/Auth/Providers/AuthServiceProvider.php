@@ -34,7 +34,6 @@ class AuthServiceProvider extends ServiceProvider
         ]);
         $this->loadRoutesFrom(loadRoutes('admin.php', $moduleName));
         $this->loadRoutesFrom(loadRoutes('engineer.php', $moduleName));
-        $this->loadRoutesFrom(loadRoutes('receiption.php', $moduleName));
         $this->loadRoutesFrom(loadRoutes('web.php', $moduleName));
         $this->loadMigrationsFrom(loadMigrations($moduleName));
         $this->loadViewsFrom(loadViews($moduleName), $moduleName);

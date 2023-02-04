@@ -5,8 +5,8 @@
         <ul class="list-unstyled menu-categories" id="accordionExample">
 
             <li class="menu">
-                <a href="{{ route('receptionist.auth.receptionDashboard') }}"
-                    {{ strpos(Route::currentRouteName(),'receiption.auth.receptionDashboard') === 0 ? 'data-active=true' : '' }}
+                <a href="{{ route('receptionist.dashboard') }}"
+                    {{ strpos(Route::currentRouteName(),'receptionist.dashboard') === 0 ? 'data-active=true' : '' }}
                     class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -20,44 +20,30 @@
                 </a>
             </li>
             <li class="menu">
-                <a href="{{ route('receptionist.proposal.index') }}" {{-- {{ strpos(Route::currentRouteName(), 'backend.cms.proposal') === 0 ? 'data-active=true' : '' }} --}} class="dropdown-toggle">
+                <a href="{{ route('receptionist.proposal.index') }}" {{ strpos(Route::currentRouteName(), 'receptionist.proposal.index') === 0 ? 'data-active=true' : '' }} class="dropdown-toggle">
                     <div class="">
                         <i data-feather="file"></i>
                         <span>Bank Proposals</span>
                     </div>
-                    {{-- <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div> --}}
+                  
                 </a>
-                {{-- <ul class="collapse submenu list-unstyled" id="proposal" data-parent="#accordionExample">
-                    <li class="active">
-                        <a href="{{ route('backend.cms.proposal.index') }}"> Index </a>
-                    </li>
-
-                </ul> --}}
+            
             </li>
 
             <li class="menu">
-                <a href="{{ route('receptionist.client.index') }}" {{-- {{ strpos(Route::currentRouteName(), 'backend.cms.proposal') === 0 ? 'data-active=true' : '' }} --}} class="dropdown-toggle">
+                <a href="{{ route('receptionist.client.index') }}" {{ strpos(Route::currentRouteName(), 'receptionist.client.index') === 0 ? 'data-active=true' : '' }} class="dropdown-toggle">
                     <div class="">
                         <i data-feather="users"></i>
                         <span>Manage Clients</span>
                     </div>
-                    {{-- <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div> --}}
+                   
                 </a>
-                {{-- <ul class="collapse submenu list-unstyled" id="proposal" data-parent="#accordionExample">
-                    <li class="active">
-                        <a href="{{ route('backend.cms.proposal.index') }}"> Index </a>
-                    </li>
-
-                </ul> --}}
+              
             </li>
 
 
             <li class="menu">
-                <a href="{{ route('receptionist.bank.index') }}" {{-- {{ strpos(Route::currentRouteName(), 'backend.cms.proposal') === 0 ? 'data-active=true' : '' }} --}} class="dropdown-toggle">
+                <a href="{{ route('receptionist.bank.index') }}" {{ strpos(Route::currentRouteName(), 'receptionist.bank.index') === 0 ? 'data-active=true' : '' }} class="dropdown-toggle">
                     <div class="">
                         <i data-feather="tablet"></i>
                         <span>Bank</span>
@@ -68,7 +54,7 @@
             </li>
 
             <li class="menu">
-                <a href="{{ route('receptionist.branch.index') }}" {{-- {{ strpos(Route::currentRouteName(), 'backend.cms.proposal') === 0 ? 'data-active=true' : '' }} --}} class="dropdown-toggle">
+                <a href="{{ route('receptionist.branch.index') }}" {{ strpos(Route::currentRouteName(), 'receptionist.branch.index') === 0 ? 'data-active=true' : '' }} class="dropdown-toggle">
                     <div class="">
                         <i data-feather="book"></i>
                         <span>Branch</span>
@@ -79,8 +65,8 @@
             </li>
 
 
-            <li class="menu">
-                <a href="{{ route('receptionist.valuation.index') }}" {{-- {{ strpos(Route::currentRouteName(), 'backend.cms.proposal') === 0 ? 'data-active=true' : '' }} --}} class="dropdown-toggle">
+            {{-- <li class="menu">
+                <a href="{{ route('receptionist.valuation.index') }}" {{ strpos(Route::currentRouteName(), 'receptionist.valuation.index') === 0 ? 'data-active=true' : '' }} class="dropdown-toggle">
                     <div class="">
                         <i data-feather="briefcase"></i>
                         <span>Valuation</span>
@@ -88,7 +74,7 @@
 
                 </a>
 
-            </li>
+            </li> --}}
 
 
             {{-- <li class="menu">

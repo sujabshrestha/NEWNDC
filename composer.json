@@ -37,7 +37,9 @@
             "Engineer\\": "app/Modules/Engineer",
             "Receptionist\\": "app/Modules/Receptionist",
             "CMS\\": "app/Modules/CMS",
-            "Client\\": "app/Modules/Client"
+            "Client\\": "app/Modules/Client",
+            "Paperworker\\": "app/Modules/Paperworker"
+
         },
         "files": [
             "app/Helpers/path.php",

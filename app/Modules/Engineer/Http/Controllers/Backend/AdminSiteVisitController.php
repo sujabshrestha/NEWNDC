@@ -265,7 +265,7 @@ class AdminSiteVisitController extends Controller
     }
 
     public function changeValuationStatus(Request $request,$id){
-        // dd($request->all());
+        try {
         $siteVisit= SiteVisit::where('id',$id)->first();
         if($siteVisit){
             $siteVisit->valuation_status = $request->valuation_status;
@@ -280,5 +280,22 @@ class AdminSiteVisitController extends Controller
                 ];
             return $this->response->responseSuccess($data,'Successfully Updated',200);
         }
+    }
+        catch (\Exception $e) {
+            return $this->response->responseError($e->getMessage());
+        }
+    }
+
+    public function changeVerificationStatus(Request $request,$id){
+        try {
+        $siteVisit= SiteVisit::where('id',$id)->first();
+        if($siteVisit){
+            $siteVisit->verification_status = $request->verification_status;
+            $siteVisit->update();
+            return $this->response->responseSuccessMsg('Successfully Updated',200);
+        }
+    }catch (\Exception $e) {
+        return $this->response->responseError($e->getMessage());
+    }
     }
 }
