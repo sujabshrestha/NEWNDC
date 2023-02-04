@@ -27,6 +27,14 @@ class SiteVisit extends Model
 
     protected $dates = ['ownership_date','preparation_date'];
 
+    public function scopeVerified($query){
+        $query->where('verification_status','Verified');
+    }
+
+    public function scopeNotVerified($query){
+        $query->where('verification_status','Not-Verified');
+    }
+
     public function scopePreValuation($query){
         $query->where('valuation_status','Pre-Valuation');
     }

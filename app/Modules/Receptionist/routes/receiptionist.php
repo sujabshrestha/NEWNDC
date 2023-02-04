@@ -10,6 +10,8 @@ Route::group(
     'middleware' => ['web']
 ],
 function () {
+    Route::get('dashboard','ReceptionistController@dashboard')->name('dashboard');
+
 
     Route::group([
         'prefix' => 'branch',
@@ -129,6 +131,7 @@ function () {
 
         Route::get('/pre-valuation-report/{site_visit_id}','ReceptionistValuationController@prevaluationReport')->name('prevaluationReport');
 
+        Route::get('/final-valuation-report/{site_visit_id}','ReceptionistValuationController@finalvaluationReport')->name('finalvaluationReport');
         //document delete
         Route::get('/delete-upload-document/{id}','ReceptionistValuationController@docDelete')->name('docDelete');
         Route::get('/delete-upload-legaldocument/{id}','ReceptionistValuationController@legaldocDelete')->name('legaldocDelete');

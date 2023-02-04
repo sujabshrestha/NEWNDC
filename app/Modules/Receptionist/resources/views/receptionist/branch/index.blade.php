@@ -7,7 +7,7 @@
 @section('content')
     <!--  BEGIN CONTENT AREA  -->
 
-    <div class="layout-px-spacing">
+    <div class="">
         <div class="row layout-top-spacing">
             <div class="col-xl-8 col-lg-18 col-sm-12  layout-spacing">
                 <div class="widget-content widget-content-area br-6">

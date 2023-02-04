@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Auth\Http\Middleware\EngineerMiddleware;
+use Auth\Http\Middleware\PaperworkerMiddleware;
 use Auth\Http\Middleware\ReceptionistMiddleware;
 use Auth\Http\Middleware\SuperAdminMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -72,5 +73,6 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+        'paperworkerMiddleware' =>PaperworkerMiddleware::class,
     ];
 }

@@ -117,21 +117,36 @@ class ReceptionistValuationController extends Controller
         // }
     }
 
-    public function prevaluationReport($sitevisit_id)
-    {
-        try {
-            $sitevisit = SiteVisit::where('id', $sitevisit_id)
-                ->with('bank', 'branch', 'client.owner', 'valuationDetails')
-                ->first();
+    public function prevaluationReport($sitevisit_id){
+        try{
+            $sitevisit = SiteVisit::where('id',$sitevisit_id)
+                        ->with('bank','branch','client.owner','valuationDetails')
+                        ->first();
 
-            // return view('Receptionist::receptionist.prevaluationReports.reportForAll',compact('sitevisit'));
-            return view('Receptionist::receptionist.prevaluationReports.reportForNIC', compact('sitevisit'));
+            return view('Receptionist::receptionist.prevaluationReports.reportForAll',compact('sitevisit'));
+            // return view('Receptionist::receptionist.prevaluationReports.reportForNIC',compact('sitevisit'));
             // return view('Receptionist::receptionist.prevaluationReports.reportForSBI',compact('sitevisit'));
             // return view('Receptionist::receptionist.prevaluationReports.reportForPrabhu',compact('sitevisit'));
 
         } catch (\Exception $e) {
             Toastr::error($e->getMessage());
             return redirect()->back();
+        }
+    }
+
+    public function finalvaluationReport($sitevisit_id){
+        try{
+            $sitevisit = SiteVisit::where('id',$sitevisit_id)
+                        ->with('bank','branch','client.owner','valuationDetails')
+                        ->first();
+
+            // return view('Receptionist::receptionist.finalvaluationReports.reportForAll',compact('sitevisit'));
+            return view('Receptionist::receptionist.finalvaluationReports.reportForNIC',compact('sitevisit'));
+            // return view('Receptionist::receptionist.finalvaluationReports.reportForPrabhu',compact('sitevisit'));
+
+        } catch (\Exception $e) {
+                Toastr::error($e->getMessage());
+                return redirect()->back();
         }
     }
 

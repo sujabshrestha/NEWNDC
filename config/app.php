@@ -183,7 +183,8 @@ return [
         Engineer\Providers\EngineerServiceProvider::class,
         Receptionist\Providers\ReceptionistServiceProvider::class,
         CMS\Providers\CMSServiceProvider::class,
-        Client\Providers\ClientServiceProvider::class
+        Client\Providers\ClientServiceProvider::class,
+        Paperworker\Providers\PaperworkerServiceProvider::class
     ],
 
     /*

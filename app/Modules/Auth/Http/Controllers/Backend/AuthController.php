@@ -7,16 +7,15 @@ use App\Http\Controllers\Controller;
 use User\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
-use Auth\Http\Requests\LoginRequest;
+
 use Auth\Mail\UserForgetPasswordMail;
 use Auth\Models\PasswordReset;
-use CMS\Models\Proposal;
+use Engineer\Models\SiteVisit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Files\Repositories\FileInterface;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Receptionist\Models\Proposal;
 use Yajra\DataTables\Facades\DataTables;
 
 class AuthController extends Controller
@@ -64,8 +63,12 @@ class AuthController extends Controller
                         return redirect()->route('engineer.auth.engineerDashboard');
                     }elseif($user->hasRole('receptionist')){
                         Toastr::success('Successfully Logged In.');
-                        return redirect()->route('receptionist.auth.receptionDashboard');
-                    }else{
+                        return redirect()->route('receptionist.dashboard');
+                    }elseif($user->hasRole('paperworker')){
+                        Toastr::success('Successfully Logged In.');
+                        return redirect()->route('paperworker.dashboard');
+                    }
+                        else{
                         Auth::logout();
                         Toastr::error('You Do Not Have Permission To Login');
                         return redirect()->route('backend.auth.login');
@@ -87,14 +90,53 @@ class AuthController extends Controller
     }
 
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         try {
-
-            return view(
-                'Auth::backend.dashboard',
-
-            );
+            if ($request->ajax()) {
+                $datas =SiteVisit::with(['branch','bank','client', 'proposal'])->notVerified()->latest();
+    
+                return DataTables::of($datas)
+                    ->addIndexColumn()
+                    ->editColumn('branch',function($row){
+                        return $row->branch->title ?? 'N/A';
+                    })
+                    ->editColumn('bank_name',function($row){
+                        return $row->bank->name;
+                    })
+                    ->editColumn('client_name',function($row){
+                        return $row->client->client_name;
+                    })
+                    ->editColumn('verification_status',function($row){
+                        $main = '<select name="verification_status" class="form-control verificationStatus" data-id='.$row->id.'>';
+                        $verifiedSelected = '<option value="Verified" selected>Verified</option> <option value="Not-Verified">Not-Verified</option> </select>';
+                        $notVerifiedSelected = '<option value="Verified">Verified</option>  <option value="Not-Verified" selected>Not-Verified</option> </select>';
+                    
+                        if($row->verification_status == "Verified"){
+                            return $main.$verifiedSelected;
+                        }elseif($row->verification_status == "Not-Verified"){
+                            return $main.$notVerifiedSelected;
+                        }
+                    })
+                    ->filter(function ($instance) use ($request) {
+                        if($request->filterValuation && $request->filterValuation != null && !empty($request->filterValuation)){
+                            if($request->filterValuation == "latest-Valuation"){
+                                $instance->latest();
+                            }else{
+                                $instance->where('verification_status', $request->filterValuation);
+                            }
+                        }
+                    })
+                    ->addColumn('action', function ($row) {
+                        $actionBtn = '<a href="'. route('backend.admin.sitevisit.edit', $row->id) .'" data-url="#" data-id=' . $row->id . ' class="btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
+                                    <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
+                                    ';
+                        return $actionBtn;
+                    })
+                    ->rawColumns(['action','verification_status'])
+                    ->make(true);
+            }
+            return view('Auth::backend.dashboard');
         } catch (\Exception $e) {
             Toastr::error($e->getMessage());
             return redirect()->back();
@@ -103,24 +145,13 @@ class AuthController extends Controller
 
     public function engineerDashboard(){
         try {
-
+           
             return view('Auth::backend.engineer.dashboard');
         } catch (\Exception $e) {
             Toastr::error($e->getMessage());
             return redirect()->back();
         }
     }
-
-    public function receptionDashboard(){
-        try {
-            return view('Auth::backend.reception.dashboard');
-        } catch (\Exception $e) {
-            Toastr::error($e->getMessage());
-            return redirect()->back();
-        }
-    }
-
-
 
     public function receptionProposalData(Request $request){
         // dd('askdjhk');
