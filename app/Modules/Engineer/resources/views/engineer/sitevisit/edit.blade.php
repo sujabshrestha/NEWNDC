@@ -1,5 +1,10 @@
 @extends('layouts.engineer.master')
 
+@push('styles')
+<link rel="stylesheet" type="text/css" href="{{ asset('backendfiles/assets/css/forms/switches.css') }} ">
+
+@endpush
+
 @section('title', 'NDC | Site Visit Edit ')
 
 @section('breadcrumb', 'Site Visit Edit ')

@@ -1,5 +1,11 @@
 @extends('layouts.engineer.master')
 
+
+@push('styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('backendfiles/assets/css/forms/switches.css') }} ">
+    <link href="{{ asset('backendfiles/plugins/file-upload/file-upload-with-preview.min.css') }}" rel="stylesheet" type="text/css" />
+@endpush
+
 @section('title')
     @if (isset($sitevisit))
         {{ 'Edit ' . $sitevisit->registration_id }}
@@ -46,3 +52,21 @@
             </div>
         </div>
     @endsection
+
+
+    @push('scripts')
+        <script src="{{ asset('backendfiles/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
+        <script>
+            @if (isset($sitevisit->site_plan_image))
+
+                var importedBaseImage2 = "{{ url('/') . getOrginalUrl($sitevisit->site_plan_image) }}";
+                var FooterImage = new FileUploadWithPreview('myFirstImage', {
+                    images: {
+                        baseImage: importedBaseImage2,
+                    },
+                })
+            @else
+                var firstUpload = new FileUploadWithPreview('myFirstImage')
+            @endif
+        </script>
+    @endpush

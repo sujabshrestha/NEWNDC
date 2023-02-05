@@ -22,7 +22,9 @@ class CreateProposalsTable extends Migration
             $table->string('banker_name');
             $table->string('banker_contact');
             $table->unsignedBigInteger('site_engineer')->nullable();
+            $table->unsignedBigInteger('engineer_head')->nullable();
             $table->foreign('site_engineer')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('engineer_head')->references('id')->on('users')->onDelete('set null');
             $table->foreign('client_id')->references('id')->on('users')->onDelete('set null');
             $table->text('remarks');
             $table->softDeletes();

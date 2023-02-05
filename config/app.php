@@ -1,6 +1,6 @@
 <?php
 
-
+use EngineerHead\Providers\EngineerHeadServiceProvider;
 
 return [
 
@@ -184,7 +184,8 @@ return [
         Receptionist\Providers\ReceptionistServiceProvider::class,
         CMS\Providers\CMSServiceProvider::class,
         Client\Providers\ClientServiceProvider::class,
-        Paperworker\Providers\PaperworkerServiceProvider::class
+        Paperworker\Providers\PaperworkerServiceProvider::class,
+        EngineerHeadServiceProvider::class
     ],
 
     /*
