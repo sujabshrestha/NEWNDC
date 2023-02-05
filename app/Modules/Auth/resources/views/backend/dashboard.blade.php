@@ -41,12 +41,12 @@
                         <thead>
                             <tr>
                                 <th>S.no.</th>
+                                <th>Action</th>
                                 <th>Bank</th>
                                 <th>Branch</th>
                                 <th>Banker Name</th>
                                 <th>Client</th>
                                 <th>Verification Status</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,7 +82,15 @@
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex',
                 orderable: false,
-                searchable: false
+                searchable: false,
+                width: '2%',
+            },
+            {
+                width: '5%',
+                data: 'action',
+                name: 'action',
+                orderable: true,
+                searchable: true
             },
             {
                 data: 'bank_name',
@@ -117,13 +125,7 @@
                 orderable: true,
                 searchable: true
             },
-            {
-                width: '15%',
-                data: 'action',
-                name: 'action',
-                orderable: true,
-                searchable: true
-            },
+           
         ]
     });
    
@@ -142,7 +144,7 @@
         }
     });
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: myUrl,
             data:{ 'verification_status':status} ,
             success: function(data) {

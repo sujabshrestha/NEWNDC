@@ -261,7 +261,7 @@
                             @if ($sitevisit->verification_status == "Verified")
                             <span class="badge badge-success">Verified</span>
                             @else
-                                <a class="btn btn-primary float-right" href="{{ route('backend.auth.verify',$sitevisit->id) }}">Verify Site Visit Data</a>
+                                <a class="btn btn-primary float-right" href="{{ route('backend.admin.sitevisit.changeVerificationStatus',$sitevisit->id) }}">Verify Site Visit Data</a>
                             @endif
                         </div>
                      

@@ -35,7 +35,7 @@ function () {
 
         Route::post('/changeValuationStatus/{id}','AdminSiteVisitController@changeValuationStatus')->name('changeValuationStatus');
 
-        Route::post('/changeVerificationStatus/{id}','AdminSiteVisitController@changeVerificationStatus')->name('changeVerificationStatus');
+        Route::get('/changeVerificationStatus/{id}','AdminSiteVisitController@changeVerificationStatus')->name('changeVerificationStatus');
 
 
     });

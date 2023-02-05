@@ -296,14 +296,25 @@ class AdminSiteVisitController extends Controller
 
     public function changeVerificationStatus(Request $request,$id){
         try {
-        $siteVisit= SiteVisit::where('id',$id)->first();
-        if($siteVisit){
-            $siteVisit->verification_status = $request->verification_status;
-            $siteVisit->update();
-            return $this->response->responseSuccessMsg('Successfully Updated',200);
+            $siteVisit= SiteVisit::where('id',$id)->first();
+            if($siteVisit){
+                $siteVisit->verification_status = $request->verification_status;
+                $siteVisit->update();
+                if ($request->ajax()) {
+                    return $this->response->responseSuccessMsg('Successfully Updated',200);
+                }
+                Toastr::success('Successfully Updated');
+                return redirect()->back();
+            } 
+            if ($request->ajax()) {
+                return $this->response->responseError('Site Visit Not Found',404);
+            }
+            Toastr::error('Site Visit Not Found');
+            return redirect()->back();
+
+        }catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            return redirect()->back();
         }
-    }catch (\Exception $e) {
-        return $this->response->responseError($e->getMessage());
-    }
     }
 }
