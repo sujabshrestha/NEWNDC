@@ -485,6 +485,7 @@
                                     class="form-control" readonly="readonly" tabindex="-1"
                                     value="{{ $sitevisit->deduction->sqFAPConsideration ?? (old('sqFAPConsideration') ?? 0) }}">
                             </div>
+                            
                             <div class="form-group col-md-2" style="flex: 20%;max-width: 20%;">
                                 <label>Area in (Anna)</label>
                                 <input type="text" name="annaAPConsideration" id="annaAPConsideration" required=""

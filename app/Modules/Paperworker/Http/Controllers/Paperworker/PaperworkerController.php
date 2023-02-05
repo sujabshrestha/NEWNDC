@@ -84,9 +84,9 @@ class PaperworkerController extends Controller
                 ->rawColumns(['action', 'valuation_status'])
                 ->make(true);
         }
-        $finalvaluationCount = SiteVisit::finalValuation()->count();
-        $prevaluationCount = SiteVisit::preValuation()->count();
-        $cancelvaluationCount = SiteVisit::cancelValuation()->count();
+        $finalvaluationCount = SiteVisit::verified()->finalValuation()->count();
+        $prevaluationCount = SiteVisit::verified()->preValuation()->count();
+        $cancelvaluationCount = SiteVisit::verified()->cancelValuation()->count();
         return view('Paperworker::paperworker.dashboard', compact('prevaluationCount', 'finalvaluationCount', 'cancelvaluationCount'));
         // }catch(\Exception $e){
         //     Toastr::error($e->getMessage());

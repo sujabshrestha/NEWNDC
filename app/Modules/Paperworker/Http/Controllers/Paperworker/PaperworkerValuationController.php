@@ -40,10 +40,7 @@ class PaperworkerValuationController extends Controller
 
     public function valuations(Request $request)
     {
-        
-
         if ($request->ajax()) {
-
             $datas = SiteVisit::with(['branch', 'bank', 'client', 'proposal'])->verified()->latest();
 
             return DataTables::of($datas)
@@ -102,9 +99,9 @@ class PaperworkerValuationController extends Controller
                 ->rawColumns(['action', 'valuation_status'])
                 ->make(true);
         }
-        $finalvaluationCount = SiteVisit::finalValuation()->count();
-        $prevaluationCount = SiteVisit::preValuation()->count();
-        $cancelvaluationCount = SiteVisit::cancelValuation()->count();
+        $finalvaluationCount = SiteVisit::finalValuation()->verified()->count();
+        $prevaluationCount = SiteVisit::verified()->preValuation()->count();
+        $cancelvaluationCount = SiteVisit::cancelValuation()->verified()->count();
         return view('Paperworker::paperworker.valuations.index', compact('prevaluationCount', 'finalvaluationCount', 'cancelvaluationCount'));
         // }catch(\Exception $e){
         //     Toastr::error($e->getMessage());
