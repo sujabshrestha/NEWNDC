@@ -128,9 +128,20 @@ class AuthController extends Controller
                         }
                     })
                     ->addColumn('action', function ($row) {
-                        $actionBtn = '<a href="'. route('backend.admin.sitevisit.edit', $row->id) .'" data-url="#" data-id=' . $row->id . ' class="btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
-                                    <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
-                                    ';
+                        $actionBtn = '
+                        <div class="action-dropdown custom-dropdown-icon">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="#actionButon" role="button" id="dropdownMenuLink-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                            </a>
+                            <div class="dropdown-menu" id="actionButton" aria-labelledby="dropdownMenuLink-2" style="will-change: transform; min-width:6rem !important;">
+                                <a class="dropdown-item" target="_blank" href="'. route('backend.admin.sitevisit.show',$row->id).'"><span class="text-info">View</span></a>
+                                <a class="dropdown-item" href="' . route('backend.admin.sitevisit.edit', $row->id) . '"><span class="text-primary">Edit</span></a>
+                                <a class="dropdown-item deleteClient" href="javascript:void(0);" data-id="#"><span class="text-danger">Delete</span></a>
+                               
+                            </div>
+                        </div>
+                    </div>';
                         return $actionBtn;
                     })
                     ->rawColumns(['action','verification_status'])

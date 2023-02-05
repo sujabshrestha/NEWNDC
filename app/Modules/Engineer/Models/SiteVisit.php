@@ -20,6 +20,7 @@ use App\Models\ValuationDetails;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Receptionist\Models\Proposal;
+use User\Models\User;
 
 class SiteVisit extends Model
 {
@@ -109,6 +110,11 @@ class SiteVisit extends Model
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id');
+    }
+
+    public function siteEngineer()
+    {
+        return $this->belongsTo(User::class, 'site_engineer_id');
     }
 
     public function proposal(){

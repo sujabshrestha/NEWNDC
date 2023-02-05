@@ -218,9 +218,17 @@ class AdminSiteVisitController extends Controller
     }
 
 
-    public function show()
+    public function show($id)
     {
         try {
+            $banks = Bank::all();
+            $branches = Branch::all();
+            $clients = Client::all();
+            $sitevisit = SiteVisit::where('id', $id)->first();
+            $proposal = Proposal::where('id',$sitevisit->proposal_id)->first();
+            $siteengineers = User::role('engineer')->get();
+            // dd("hdkjshakjdsa");
+            return view('Engineer::admin.sitevisit.show', compact('banks','branches','clients', 'sitevisit', 'proposal', 'siteengineers'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage());
             return redirect()->back();

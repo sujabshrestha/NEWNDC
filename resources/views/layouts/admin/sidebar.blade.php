@@ -132,7 +132,7 @@
             </li>
             @endrole
 
-            <li class="menu">
+            {{-- <li class="menu">
                 <a href="{{ route('backend.cms.buildingValuationForm  ') }}"
                     {{ strpos(Route::currentRouteName(), 'backend.proposal.index') === 0 ? 'data-active=true' : '' }}
                     class="dropdown-toggle">
@@ -155,7 +155,7 @@
 
                 </a>
 
-            </li>
+            </li> --}}
 
         </ul>
     </nav>

@@ -26,6 +26,9 @@ function () {
 
         Route::get('/edit/{id}','AdminSiteVisitController@edit')->name('edit');
 
+        Route::get('/show/{id}','AdminSiteVisitController@show')->name('show');
+
+
         Route::post('/update/{id}','AdminSiteVisitController@update')->name('update');
 
         Route::get('/delete/{id}','AdminSiteVisitController@delete')->name('delete');
