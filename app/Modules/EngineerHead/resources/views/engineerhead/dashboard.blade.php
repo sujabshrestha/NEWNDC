@@ -1,6 +1,8 @@
-@extends('layouts.engineer.master')
+@extends('layouts.engineerhead.master')
 
-@section('title', 'NDC | Dashboard')
+@section('title', 'Engineer Head| Dashboard')
+
+
 
 @section('content')
     <!--  BEGIN CONTENT AREA  -->
@@ -48,7 +50,7 @@
         $('#global-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('siteengineer.proposal.index') }}",
+            ajax: "{{ route('engineerhead.dashboard') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',

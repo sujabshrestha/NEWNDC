@@ -5,6 +5,7 @@ namespace Engineer\Http\Controllers\Engineer;
 use App\GlobalServices\ResponseService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\FourSitevisitBoundary;
 use Brian2694\Toastr\Facades\Toastr;
 use CMS\Models\Bank;
 use CMS\Models\Branch;
@@ -69,7 +70,8 @@ class SiteVisitController extends Controller
             $proposal = Proposal::where('id', $proposalid)->first();
             $sitevisit = SiteVisit::where('id', $id)->first();
             $siteengineers = User::role('engineer')->get();
-            return view('Engineer::engineer.sitevisit.create', compact('banks', 'branches', 'clients', 'proposal', 'sitevisit', 'siteengineers'));
+            $fourboundaries = FourSitevisitBoundary::all();
+            return view('Engineer::engineer.sitevisit.create', compact('banks', 'branches', 'clients', 'proposal', 'sitevisit', 'siteengineers', 'fourboundaries'));
         } catch (\Exception $e) {
             Toastr::error($e->getMessage());
             return redirect()->back();
@@ -79,7 +81,7 @@ class SiteVisitController extends Controller
 
     public function store(Request $request, $id = null)
     {
-        try{
+        // try{
         // dd($request->all(), $id);
         if (!is_null($id)) {
             $sitevisit = SiteVisit::where('id', $id)->with(['documents', 'legaldocuments'])->first();
@@ -105,6 +107,47 @@ class SiteVisitController extends Controller
             $sitevisit->category_of_property = $request->category_of_property;
             $sitevisit->remarks = $request->remarks;
             $sitevisit->proposal_id = $request->proposal_id;
+
+            $sitevisit->boundary = $request->boundary;
+            $sitevisit->compound_wall = $request->compound_wall;
+            $sitevisit->right_of_row = $request->right_of_row;
+            $sitevisit->land_revenue = $request->land_revenue;
+            $sitevisit->rajinima_likhit = $request->rajinima_likhit;
+            $sitevisit->deduct_on_road = $request->deduct_on_road;
+            $sitevisit->high_tension_line = $request->high_tension_line;
+            $sitevisit->boundary_correction = $request->boundary_correction;
+            $sitevisit->kulo_river = $request->kulo_river;
+            $sitevisit->land_development = $request->land_development;
+            $sitevisit->lalpurja = $request->lalpurja;
+            $sitevisit->napi_naki = $request->napi_naki;
+            $sitevisit->citizenship_owner = $request->citizenship_owner;
+            $sitevisit->citizenship_client = $request->citizenship_client;
+            $sitevisit->org_char_killa_letter = $request->org_char_killa_letter;
+            $sitevisit->approved_drawing_building = $request->approved_drawing_building;
+            $sitevisit->ilajat_building = $request->ilajat_building;
+            $sitevisit->sampan_building = $request->sampan_building;
+            $sitevisit->company_registration_number = $request->company_registration_number;
+            $sitevisit->citizenship_shareholder = $request->citizenship_shareholder;
+
+            // dd($request->fourboundary);
+            $sitevisit->fourBoundary()->sync($request->fourboundary);
+
+            // foreach($request->fourboundary as $boundary){
+            //     $sitevisit->fourBoundary()->updateOrCreate([
+            //         'site_visit_id' => $id,
+            //         'boundary' => $boundary
+            // ],[
+            //         'boundary' => $boundary
+            //     ]
+            // );
+            // }
+
+            if($request->site_plan_image){
+                $uploaded = $this->file->storeFile($request->site_plan_image);
+                $sitevisit->site_plan_image = $uploaded->id;
+            }
+
+
             if ($sitevisit->update()) {
                 if ($request->RegUploadPicture) {
                     foreach ($request->RegUploadPicture as $document) {
@@ -152,7 +195,48 @@ class SiteVisitController extends Controller
             $sitevisit->category_of_property = $request->category_of_property;
             $sitevisit->remarks = $request->remarks;
             $sitevisit->proposal_id = $request->proposal_id;
+
+            $sitevisit->boundary = $request->boundary;
+            $sitevisit->compound_wall = $request->compound_wall;
+            $sitevisit->right_of_row = $request->right_of_row;
+            $sitevisit->land_revenue = $request->land_revenue;
+            $sitevisit->rajinima_likhit = $request->rajinima_likhit;
+            $sitevisit->deduct_on_road = $request->deduct_on_road;
+            $sitevisit->high_tension_line = $request->high_tension_line;
+            $sitevisit->boundary_correction = $request->boundary_correction;
+            $sitevisit->kulo_river = $request->kulo_river;
+            $sitevisit->land_development = $request->land_development;
+            $sitevisit->lalpurja = $request->lalpurja;
+            $sitevisit->napi_naki = $request->napi_naki;
+            $sitevisit->citizenship_owner = $request->citizenship_owner;
+            $sitevisit->citizenship_client = $request->citizenship_client;
+            $sitevisit->org_char_killa_letter = $request->org_char_killa_letter;
+            $sitevisit->approved_drawing_building = $request->approved_drawing_building;
+            $sitevisit->ilajat_building = $request->ilajat_building;
+            $sitevisit->sampan_building = $request->sampan_building;
+            $sitevisit->company_registration_number = $request->company_registration_number;
+            $sitevisit->citizenship_shareholder = $request->citizenship_shareholder;
+
+            if($request->site_plan_image){
+                $uploaded = $this->file->storeFile($request->site_plan_image);
+                $sitevisit->site_plan_image = $uploaded->id;
+            }
+
             if ($sitevisit->save()) {
+                $sitevisit->fourBoundary()->sync($request->fourboundary);
+
+                // foreach( as $boundary){
+                //     $sitevisit->fourBoundary()->updateOrCreate([
+                //         'site_visit_id' => $id,
+                //         'boundary' => $boundary
+                //     ],[
+                //         'boundary' => $boundary
+                //     ]
+                // );
+                // }
+
+
+
                 if ($request->RegUploadPicture) {
                     foreach ($request->RegUploadPicture as $document) {
                         $uploaded = $this->file->storeFile($document);
@@ -180,10 +264,10 @@ class SiteVisitController extends Controller
         return redirect()->back();
 
 
-        }catch(\Exception $e){
-            Toastr::error($e->getMessage());
-            return redirect()->back();
-        }
+        // }catch(\Exception $e){
+        //     Toastr::error($e->getMessage());
+        //     return redirect()->back();
+        // }
     }
 
 

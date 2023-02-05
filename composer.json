@@ -38,7 +38,8 @@
             "Receptionist\\": "app/Modules/Receptionist",
             "CMS\\": "app/Modules/CMS",
             "Client\\": "app/Modules/Client",
-            "Paperworker\\": "app/Modules/Paperworker"
+            "Paperworker\\": "app/Modules/Paperworker",
+            "EngineerHead\\": "app/Modules/EngineerHead"
 
         },
         "files": [

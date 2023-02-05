@@ -1,6 +1,6 @@
 <?php
 
-namespace Receptionist\Http\Controllers\Receptionist;
+namespace Paperworker\Http\Controllers\Paperworker;
 
 use App\GlobalServices\ResponseService;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ use Receptionist\Models\Proposal;
 use User\Models\User;
 use Yajra\DataTables\Facades\DataTables;
 
-class ReceptionistProposalController extends Controller
+class PaperworkerProposalController extends Controller
 {
     protected $file, $response;
     public function __construct(FileInterface $file, ResponseService $response)
@@ -39,8 +39,8 @@ class ReceptionistProposalController extends Controller
                 ->addIndexColumn()
 
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="javascript:void(0)" data-url="' . route('receptionist.proposal.edit', $row->id) . '" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
-                                <a href="javascript:void(0)" id="" data-url="' . route('receptionist.proposal.delete', $row->id) . '" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
+                    $actionBtn = '<a href="javascript:void(0)" data-url="' . route('paperworker.proposal.edit', $row->id) . '" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
+                                <a href="javascript:void(0)" id="" data-url="' . route('paperworker.proposal.delete', $row->id) . '" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
                                 ';
                     return $actionBtn;
                 })
@@ -49,7 +49,7 @@ class ReceptionistProposalController extends Controller
         }
 
         $banks = Bank::all();
-        return view('Receptionist::receptionist.proposal.index', compact('banks'));
+        return view('Paperworker::paperworker.proposal.index', compact('banks'));
         // } catch (\Exception $e) {
         //     Toastr::error($e->getMessage());
         //     return redirect()->back();
@@ -60,9 +60,9 @@ class ReceptionistProposalController extends Controller
         try {
             $banks = Bank::all();
             $branches = Branch::all();
-            $siteengineers = User::role('engineer_head')->get();
+            $siteengineers = User::role('engineer')->get();
             $data = [
-                'view' => view('Receptionist::receptionist.proposal.create', compact('branches', 'banks', 'siteengineers'))->render()
+                'view' => view('Paperworker::paperworker.proposal.create', compact('branches', 'banks', 'siteengineers'))->render()
             ];
             return $this->response->responseSuccess($data, "Success", 200);
         } catch (\Exception $e) {
@@ -87,7 +87,7 @@ class ReceptionistProposalController extends Controller
                 $proposal->banker_name = $request->banker_name;
                 $proposal->banker_contact = $request->phone_no;
                 $proposal->client_id = $client->id;
-                $proposal->engineer_head = $request->site_engineer;
+                $proposal->site_engineer = $request->site_engineer;
                 $proposal->status = "Pending";
                 $proposal->remarks = $request->remarks;
                 if ($proposal->save()) {
@@ -118,10 +118,10 @@ class ReceptionistProposalController extends Controller
             $proposal = proposal::with('client')->where('id', $id)->first();
             $banks = Bank::all();
             $branches = Branch::all();
-            $siteengineers = User::role('engineer_head')->get();
+            $siteengineers = User::role('engineer')->get();
             if ($proposal) {
                 $data = [
-                    'view' => view('Receptionist::receptionist.proposal.edit', compact('proposal', 'banks', 'branches', 'siteengineers'))->render()
+                    'view' => view('Paperworker::paperworker.proposal.edit', compact('proposal', 'banks', 'branches', 'siteengineers'))->render()
                 ];
 
                 return $this->response->responseSuccess($data, "Success", 200);
@@ -143,7 +143,7 @@ class ReceptionistProposalController extends Controller
                 $proposal->bank_id = $request->bank_id;
                 $proposal->banker_name = $request->banker_name;
                 $proposal->banker_contact = $request->phone_no;
-                $proposal->engineer_head = $request->site_engineer;
+                $proposal->site_engineer = $request->site_engineer;
                 $proposal->status = $request->status;
                 $proposal->remarks = $request->remarks;
                 if ($proposal->update()) {

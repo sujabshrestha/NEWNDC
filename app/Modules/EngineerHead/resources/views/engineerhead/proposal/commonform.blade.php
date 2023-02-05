@@ -89,8 +89,9 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            <label for="site_visited_by">Site Engineer Chief</label>
+            <label for="site_visited_by">Site Engineer</label>
             <select name="site_engineer" class="form-control text-capitalize" id="">
+                <option value="">Not assigned</option>
                 @if (isset($siteengineers))
                     @foreach ($siteengineers as $siteengineer)
                         <option value="{{ $siteengineer->id }}" @if (isset($proposal) && $proposal->site_engineer == $siteengineer->id) selected @endif>

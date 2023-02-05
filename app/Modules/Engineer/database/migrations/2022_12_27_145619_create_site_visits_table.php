@@ -35,7 +35,8 @@ class CreateSiteVisitsTable extends Migration
             $table->unsignedBigInteger('ward_no')->nullable();
             $table->string('compound_wall')->nullable();
             $table->enum('valuation_type', ['Land', 'Land_Building', 'Apartment']);
-            $table->enum('type_of_road', ['Earthern', 'RCC', 'Gravel', 'Goreto','Dead_End', 'Throughtout']);
+            $table->enum('type_of_road', ['Earthern', 'RCC', 'Gravel', 'Goreto']);
+           
             $table->enum('type_of_land', ['Planning','Flat','Khet','Slightly_Slope','Low_Land']);
             $table->enum('category_of_property', ['Residential','Commercial','Commercial_Residential','Other']);
             $table->json('valuation_rate')->nullable();

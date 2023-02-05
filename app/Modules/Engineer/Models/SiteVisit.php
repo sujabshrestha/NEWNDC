@@ -15,6 +15,7 @@ use Client\Models\Client;
 use CMS\Models\Bank;
 use CMS\Models\Branch;
 use App\Models\Deduction;
+use App\Models\FourSitevisitBoundary;
 use App\Models\SitevisitBoundary;
 use App\Models\ValuationDetails;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -45,6 +46,12 @@ class SiteVisit extends Model
 
     public function scopeCancelValuation($query){
         $query->where('valuation_status','Cancel-Valuation');
+    }
+
+
+
+    public function fourBoundary(){
+        return $this->belongsToMany(FourSitevisitBoundary::class, 'sitevisit_fourboundaries','site_visit_id', 'four_boundary_id');
     }
 
 

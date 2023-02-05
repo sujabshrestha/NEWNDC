@@ -68,6 +68,10 @@ class AuthController extends Controller
                         Toastr::success('Successfully Logged In.');
                         return redirect()->route('paperworker.dashboard');
                     }
+                    elseif($user->hasRole('engineer_head')){
+                        Toastr::success('Successfully Logged In.');
+                        return redirect()->route('engineerhead.dashboard');
+                    }
                         else{
                         Auth::logout();
                         Toastr::error('You Do Not Have Permission To Login');
@@ -95,7 +99,7 @@ class AuthController extends Controller
         try {
             if ($request->ajax()) {
                 $datas =SiteVisit::with(['branch','bank','client', 'proposal'])->notVerified()->latest();
-    
+
                 return DataTables::of($datas)
                     ->addIndexColumn()
                     ->editColumn('branch',function($row){
@@ -111,7 +115,7 @@ class AuthController extends Controller
                         $main = '<select name="verification_status" class="form-control verificationStatus" data-id='.$row->id.'>';
                         $verifiedSelected = '<option value="Verified" selected>Verified</option> <option value="Not-Verified">Not-Verified</option> </select>';
                         $notVerifiedSelected = '<option value="Verified">Verified</option>  <option value="Not-Verified" selected>Not-Verified</option> </select>';
-                    
+
                         if($row->verification_status == "Verified"){
                             return $main.$verifiedSelected;
                         }elseif($row->verification_status == "Not-Verified"){
@@ -145,7 +149,7 @@ class AuthController extends Controller
 
     public function engineerDashboard(){
         try {
-           
+
             return view('Auth::backend.engineer.dashboard');
         } catch (\Exception $e) {
             Toastr::error($e->getMessage());
