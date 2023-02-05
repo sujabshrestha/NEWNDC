@@ -7,7 +7,7 @@ Route::group(
     'prefix' => config('receptionistRoute.prefix.receptionist'),
     'namespace' => config('receptionistRoute.namespace.receptionist'),
     'as' => config('receptionistRoute.as.receptionist'),
-    'middleware' => ['web']
+    'middleware' => ['web','receptionistMiddleware']
 ],
 function () {
     Route::get('dashboard','ReceptionistController@dashboard')->name('dashboard');

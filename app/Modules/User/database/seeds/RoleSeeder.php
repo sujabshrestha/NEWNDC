@@ -24,15 +24,19 @@ class RoleSeeder extends Seeder
                 'guard_name' => 'web',
             ],
             [
-                'name' => 'editor',
-                'guard_name' => 'web',
-            ],
-            [
                 'name' => 'engineer',
                 'guard_name' => 'web',
             ],
             [
                 'name' => 'receptionist',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'paperworker',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'engineer_head',
                 'guard_name' => 'web',
             ],
 

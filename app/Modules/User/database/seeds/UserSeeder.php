@@ -50,5 +50,36 @@ class UserSeeder extends Seeder
             $user->assignRole('engineer');
         }
 
+
+        $receptionist= [
+            [
+                'name' => 'receptionist',
+                'email' => 'receptionist@gmail.com',
+                'phone_no' => '9856685555',
+                'password' => bcrypt('testing1234'),
+                'status' => 'Active',
+                'email_verified_at' => Carbon::now(),
+            ],
+        ];
+        foreach($receptionist as $item){
+            $user = User::create($item);
+            $user->assignRole('receptionist');
+        }
+
+        $paperworker= [
+            [
+                'name' => 'paperworker',
+                'email' => 'paperworker@gmail.com',
+                'phone_no' => '9856685555',
+                'password' => bcrypt('testing1234'),
+                'status' => 'Active',
+                'email_verified_at' => Carbon::now(),
+            ],
+        ];
+        foreach($paperworker as $item){
+            $user = User::create($item);
+            $user->assignRole('receptionist');
+        }
+
     }
 }

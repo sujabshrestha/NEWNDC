@@ -76,7 +76,7 @@
                     <input type="hidden" name="totalRAPD" id="totalRAPD" value="{{ $sitevisit->valuationDetails->total_rapd_as_lalpurja ?? 0 }}">
                 </th>
                 <th scope="col"><label>{{ $totalAreaInAnna ?? $sitevisit->valuationDetails->total_anna_as_lalpurja ?? 0}}</label>
-                    <input type="hidden" name="totalAreaInAnna" id="totalAreaInAnna" value="{{ $totalAreaInAnna ?? $sitevisit->valuationDetails->total_anna_as_lalpurja ?? 0}}">
+                    <input type="hidden" name="totalAreaInAnna" id="totalAnna" value="{{ $totalAreaInAnna ?? $sitevisit->valuationDetails->total_anna_as_lalpurja ?? 0}}">
                 </th>
 
             </tr>

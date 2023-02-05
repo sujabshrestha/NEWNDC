@@ -5,7 +5,7 @@
 @section('breadcrumb', 'Valuation Long Form ')
 
 @push('styles')
-    <link href="assets/css/elements/tooltip.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backendfiles/assets/css/elements/tooltip.css')}}" rel="stylesheet" type="text/css" />
 
     <style>
         .required {
@@ -26,11 +26,9 @@
 
                 </div>
                 <hr>
-
-                {{-- @dd($sitevisit) --}}
                 <div class="col-md-12">
-                    <form action="{{ route('paperworker.valuation.valuationFinalSubmit', $sitevisit->id) }}"
-                        enctype="multipart/form-data" method="POST">
+                    <form action="{{ route('paperworker.valuation.valuationFinalSubmit',$sitevisit->id) }}"
+                        enctype="multipart/form-data" method="POST" id="mainForm">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
@@ -181,7 +179,7 @@
                                 </label>
                             </div>
 
-                            <form>
+                            {{-- <form> --}}
                                 <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
                                     <label>Kita No</label>
                                     <input type="text" name="kita_no" id="kita_no" placeholder="Kita No"
@@ -241,11 +239,13 @@
                                         id="addAreaAPLalpurja" class="btn btn-info "
                                         style="padding: 2px 5px;">ADD</button>
                                 </div>
-                            </form>
+                            {{-- </form> --}}
 
                             <div class="form-group col-md-12 appendLalpurja">
                                 @include('Paperworker::paperworker.valuations.appendLalpurjaData')
                             </div>
+                        </div>
+                        <div class="row">
 
                             <div class="form-group col-md-12 mb-2">
                                 <label style="color: #202ed6;margin-bottom: 0px;">
@@ -345,12 +345,15 @@
                             <div class="form-group col-md-12 appendLandBased">
                                 @include('Paperworker::paperworker.valuations.appendLandbasedData')
                             </div>
+                        </div>
+                        <div class="row">
+
 
                             <div class="form-group col-md-12 mb-2">
                                 <label style="color: #202ed6;margin-bottom: 0px;">
                                     <b>(C) DEDUCTION PART</b>
                                 </label>
-                            </div>
+                            </div> 
                             <div class="form-group col-md-3" style="flex: 25%;max-width: 25%;">
                                 <label>Road (Sq.F)</label>
                                 <input type="text" name="deductionOfRoadSqF" id="deductionOfRoadSqF" required=""
@@ -492,7 +495,8 @@
                                     class="form-control" readonly="readonly" tabindex="-1"
                                     value="{{ $sitevisit->deduction->annaAPConsideration ?? (old('annaAPConsideration') ?? 0) }}">
                             </div>
-
+                        </div>
+                        <div class="row">
                             <div class="form-group col-md-12 mb-2">
                                 <label style="color: #202ed6;margin-bottom: 0px;">
                                     <b>(D) RATE OF LAND</b>
@@ -511,7 +515,7 @@
                                 </label>
                             </div>
                             <div class="form-group col-md-2 pr-0" style="flex: 13%;max-width: 13%;">
-                                <label>Area (Per Sq Ft) {{ $sitevisit->rateofland->perSqFAPGovRate }}</label>
+                                <label>Area (Per Sq Ft)</label>
                                 <input type="text" name="perSqFAPGovRate" id="perSqFAPGovRate" required=""
                                     class="form-control" readonly="readonly" tabindex="-1"
                                     value={{ $sitevisit->rateofland->perSqFAPGovRate ?? (old('perSqFAPGovRate') ?? 0) }}>
@@ -653,7 +657,9 @@
                                     tabindex="-1"
                                     value={{ $sitevisit->rateofland->totalDistressValueOfLandAndBuimding ?? (old('totalDistressValueOfLandAndBuimding') ?? 0) }}>
                             </div>
-
+                        </div>
+                        
+                        <div class="row">
                             <div id="BuildingArea" class="col-md-12 mt-2"
                                 style="border-top: solid 1px rgb(193, 192, 192)">
                                 <div class="row mt-1">
@@ -739,10 +745,10 @@
                                         <label>Construction Estimate Value <span class="required">*</span></label>
                                         <input type="text" name="constructionEstimateValue"
                                             id="constructionEstimateValue" placeholder="Construction Estimate Value"
-                                            class="form-control" autocomplete="off" required=""
+                                            class="form-control" autocomplete="off"
                                             value="{{ $sitevisit->construction_estimate_value ?? old('constructionEstimateValue') ?? '' }}">
                                     </div>
-                                    {{-- Need To Discuss --}}
+                                   
                                     <input type="hidden" name="constructionDistressValue" id="constructionDistressValue"
                                         tabindex="-1" readonly="readonly" class="form-control" autocomplete="off">
                                     <input type="hidden" name="totalDistressValueOfBuilding"
@@ -768,11 +774,14 @@
                                             Area As Per Construction
                                         </label>
                                         <input type="text" name="totalAreaAsPerConstruction"
-                                            id="totalAreaAsPerConstruction" required="" class="form-control"
+                                            id="totalAreaAsPerConstruction" class="form-control"
                                             autocomplete="off" value="{{ $sitevisit->area_as_per_construction ?? '' }}">
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+
 
                             <div class="form-group col-md-12 mb-2">
                                 <label style="color: #dc1de9;margin-bottom: 0px;">
@@ -830,7 +839,7 @@
                                 <label>Kita No</label>
                                 <input type="text" name="aPSiteVisitBoundariesKitaNo" id="aPSiteVisitBoundariesKitaNo"
                                     placeholder="Kita No" class="form-control" autocomplete="off">
-                            </div>
+                            </div>  
                             <div class="form-group col-md-2">
                                 <label>East</label>
                                 <input type="text" name="eastAPSiteVisitBoundaries" id="eastAPSiteVisitBoundaries"
@@ -870,7 +879,7 @@
                                         data-original-title="Ex:- 500 M From Shankhamul Chok and 1000M From Baneshwor Chok"></i>
                                     Location &amp; Access of The Land<span class="required">*</span></label>
                                 <input type="text" name="locationOfAccessLand" id="locationOfAccessLand"
-                                    value="{{ $sitevisit->valuationDetails->location_of_land ?? (old('locationOfAccessLand') ?? '') }}"
+                                    value="{{ $sitevisit->valuationDetails->location_of_land ?? (old('locationOfAccessLand')) }}"
                                     required="" placeholder="" class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-2" style="padding:0px 6px 0px 6px">
@@ -879,7 +888,7 @@
                                         title="" data-original-title="Ex:- Kathmandu"></i>
                                     District <span class="required">*</span></label>
                                 <input type="text" name="locationDistrict" id="locationDistrict" required=""
-                                    value="{{ $sitevisit->valuationDetails->district ?? (old('locationDistrict') ?? '') }}"
+                                    value="{{ $sitevisit->valuationDetails->district ?? (old('locationDistrict')) }}"
                                     class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group col-md-2" style="padding:0px 6px 0px 6px">
@@ -912,6 +921,9 @@
                                     value="{{ $sitevisit->valuationDetails->address_of_land ?? (old('addressOfLand') ?? '') }}"
                                     class="form-control" autocomplete="off">
                             </div>
+                        </div>
+                        <div class="row">
+
                             <div class="form-group col-md-12 mb-2">
                                 <label style="color: #202ed6;margin-bottom: 0px; text-transform: uppercase;">
                                     <b>(C) Accessibility with</b>
@@ -1001,7 +1013,8 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
-                                <label>Type of Access</label>
+                                    
+                                    <label>Type of Access  {{$sitevisit->valuationDetails->type_of_access}}</label>
                                 <select class="form-control selectbox" name="typeOfAccess" id="typeOfAccess">
                                     <option disabled selected>Choose One...</option>
                                     <option
@@ -1306,20 +1319,22 @@
                                     value="{{ $sitevisit->valuationDetails->internal_remarks ?? (old('internalRemarks') ?? '') }}">
                             </div>
                             <input type="hidden" name="isAvailabilityTelephone" id="isAvailabilityTelephone"
-                                required="" class="form-control" autocomplete="off" value="Yes">
+                                class="form-control" autocomplete="off" value="Yes">
                             <input type="hidden" name="isAvailabilityInternet" id="isAvailabilityInternet"
-                                required="" class="form-control" autocomplete="off" value="Yes">
+                                class="form-control" autocomplete="off" value="Yes">
                             <input type="hidden" name="isAvailabilitySewerage" id="isAvailabilitySewerage"
-                                required="" class="form-control" autocomplete="off" value="Yes">
+                                class="form-control" autocomplete="off" value="Yes">
                             <input type="hidden" name="isAvailabilityElectricity" id="isAvailabilityElectricity"
-                                required="" class="form-control" autocomplete="off" value="Yes">
+                                class="form-control" autocomplete="off" value="Yes">
                             <input type="hidden" name="isAvailabilityWaterSupply" id="isAvailabilityWaterSupply"
-                                required="" class="form-control" autocomplete="off" value="Yes">
+                                class="form-control" autocomplete="off" value="Yes">
                             <div class="form-group col-md-12 mb-2">
                                 <label style="color: #dc1de9;margin-bottom: 0px;">
                                     <h6><b>5 UPLOAD DOCUMENT</b></h6>
                                 </label>
                             </div>
+                        </div>
+                        <div class="row">
 
                             <div class="form-group col-md-6">
                                 <label>Upload Picture &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label>
@@ -1348,14 +1363,18 @@
                                 @include('Paperworker::paperworker.valuations.appendInternalCADDocument')
                             </div>
 
-                            <div class="form-group col-md-12">
-                                <button type="submit" class="btn btn-info float-right btn-sm ml-3"
-                                    id="BtnSaveValuation">Submit</button>
-                                {{-- <button type="button" class="btn btn-primary float-right btn-sm"
-                                    id="BtnSaveValuationAndStay">Submit &amp; Stay</button> --}}
+                           
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-info float-right ml-3" form="mainForm">Submit</button>
                             </div>
                         </div>
+                       
+                       
                     </form>
+                 
+                  
                 </div>
 
             </div>
@@ -1365,6 +1384,11 @@
 
 @endsection
 @push('scripts')
+    <script>
+        $('.mainSubmit').click(function(){
+            $('#mainForm').submit();
+        });
+    </script>
     <script>
         var data = "{{ $sitevisit->valuation_type }}";
         console.log(data);

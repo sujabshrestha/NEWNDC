@@ -37,7 +37,7 @@
                
                   
                 <div class="table-responsive mb-3 mt-3">
-                    <table id="global-table" class="table table-hover" style="width:100%">
+                    <table id="global-table" class="table" style="width:100%">
                         <thead>
                             <tr>
                                 <th>S.no.</th>

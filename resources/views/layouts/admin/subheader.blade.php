@@ -12,12 +12,13 @@
                                 Dashboard
                             </a>
                         </li>
-                        
+                        @if (( Route::currentRouteName() != 'backend.auth.dashboard'))  
                         <li class="breadcrumb-item active" aria-current="page">
                             <span>
                                 @yield('breadcrumb','')
                             </span>
                         </li>
+                        @endif
                     </nav>
 
                 </div>

@@ -8,16 +8,20 @@
 
                     <nav class="breadcrumb-one" aria-label="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('backend.auth.dashboard') }}">
+                            <a href="{{ route('receptionist.dashboard') }}">
                                 Dashboard
                             </a>
                         </li>
-                        
+                        @if (( Route::currentRouteName() != 'receptionist.dashboard'))  
                         <li class="breadcrumb-item active" aria-current="page">
                             <span>
+
                                 @yield('breadcrumb','')
                             </span>
                         </li>
+                        @endif
+                        
+                       
                     </nav>
 
                 </div>
