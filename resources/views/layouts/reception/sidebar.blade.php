@@ -29,6 +29,16 @@
                 </a>
             
             </li>
+            <li class="menu">
+                <a href="{{ route('receptionist.proposal.index') }}" {{ strpos(Route::currentRouteName(), 'receptionist.proposal.index') === 0 ? 'data-active=true' : '' }} class="dropdown-toggle">
+                    <div class="">
+                        <i data-feather="file"></i>
+                        <span>Site Visit</span>
+                    </div>
+                  
+                </a>
+            
+            </li>
 
             <li class="menu">
                 <a href="{{ route('receptionist.client.index') }}" {{ strpos(Route::currentRouteName(), 'receptionist.client.index') === 0 ? 'data-active=true' : '' }} class="dropdown-toggle">

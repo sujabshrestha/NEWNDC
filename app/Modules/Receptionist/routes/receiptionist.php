@@ -65,6 +65,24 @@ function () {
     });
 
     Route::group([
+        'prefix' => 'site-visit',
+        'as' => 'siteVisit.'
+    ], function(){
+        Route::get('all','ReceptionistProposalController@index')->name('index');
+
+        Route::get('create', 'ReceptionistProposalController@create')->name('create');
+
+        Route::post('store', 'ReceptionistProposalController@store')->name('store');
+
+        Route::get('edit/{id}', 'ReceptionistProposalController@edit')->name('edit');
+
+        Route::post('update/{id}', 'ReceptionistProposalController@update')->name('update');
+
+        Route::get('delete/{id}', 'ReceptionistProposalController@destroy')->name('delete');
+    });
+
+
+    Route::group([
         'prefix' => 'client',
         'as' => 'client.'
     ], function(){
