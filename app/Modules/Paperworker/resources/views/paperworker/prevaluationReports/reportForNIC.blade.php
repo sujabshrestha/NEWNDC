@@ -71,7 +71,7 @@
 
         <div class="row">
             <div class="col-md-12" style="margin-top: 5px;margin-bottom: 5px;">
-                <b>Date :</b> 2078/03/14 <br> {{ $sitevisit->bank->name ?? ''}} <br> {{ $sitevisit->branch ?? 'N/A'}} Branch<br>
+                <b>Date :</b> 2078/03/14 <br> {{ $sitevisit->bank->name ?? ''}} <br> {{ $sitevisit->branch->title ?? 'N/A'}} Branch<br>
                 <div class="text-center" style="margin-top:-80px;">
                     <h2 class="U B">Pre Valuation Report Summary</h2>
                     <h3>({{ $sitevisit->valuation_type == "Land" ? 'Land' : 'Land & Building'}})</h3>
@@ -563,6 +563,7 @@
       Yours truly<br><br>
       <p>This Pre valuation report is only for banking process, not for loan disbursement. Our consultant will not be responsible if loan is disburse without final valuation report. This pre report is considered voidable without full valuation report & the validity of this report is only for three months.</p> -->
                     <p style="text-align:right; margin-top:-50px;">
+                        <img src="{{asset('backendfiles/sign/sign123.png')}}" alt="sign">
                         Er .Sanjay Mahato<br>
                         (Managing Director)<br>
                         NEC No : { 3700 Civil " A "}<br>

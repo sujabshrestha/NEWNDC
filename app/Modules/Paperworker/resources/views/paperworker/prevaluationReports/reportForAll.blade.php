@@ -439,6 +439,8 @@
             </div>
         </div>
         <div class="col-md-12" style="text-align:right;">
+            <img src="{{asset('backendfiles/sign/sign123.png')}}" alt="sign">
+
             <p style="margin-top:10px;">......................................................</p>
             <h6 class="text-bold">Er. Sanjay Mahato</h6>
             (Managing Director)<br>

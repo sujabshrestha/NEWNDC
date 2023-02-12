@@ -1014,7 +1014,7 @@
                             </div>
                             <div class="form-group col-md-2">
                                     
-                                    <label>Type of Access  {{$sitevisit->valuationDetails->type_of_access}}</label>
+                                    <label>Type of Access</label>
                                 <select class="form-control selectbox" name="typeOfAccess" id="typeOfAccess">
                                     <option disabled selected>Choose One...</option>
                                     <option
@@ -1209,14 +1209,15 @@
                                 <select class="form-control selectbox" name="valuationFor" id="valuationFor">
                                     <option disabled selected>Choose One...</option>
                                     <option
+                                    
                                         {{ old('valuationFor') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->valuation_for : '') == 'Vacant-Land' ? 'selected' : '' }}
-                                        value="Vacant Land">Vacant Land</option>
+                                        value="Vacant-Land">Vacant Land</option>
                                     <option
                                         {{ old('valuationFor') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->valuation_for : '') == 'Land&Buildinf' ? 'selected' : '' }}
                                         value="Land&Building">Land &amp; Building</option>
                                     <option
                                         {{ old('valuationFor') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->valuation_for : '') == 'Readymade-House' ? 'selected' : '' }}
-                                        value="Readymade House">Readymade House</option>
+                                        value="Readymade-House">Readymade House</option>
                                     <option
                                         {{ old('valuationFor') || ($sitevisit->valuationDetails != null ? $sitevisit->valuationDetails->valuation_for : '') == 'Apartments/Duplex' ? 'selected' : '' }}
                                         value="Apartments/Duplex">Apartments/Duplex</option>

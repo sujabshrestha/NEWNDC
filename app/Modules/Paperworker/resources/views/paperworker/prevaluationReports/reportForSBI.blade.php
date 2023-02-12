@@ -377,6 +377,8 @@
              </div>
          </div>
          <div class="col-md-12" style="text-align:right;">
+            <img src="{{asset('backendfiles/sign/sign123.png')}}" alt="sign">
+
              <p style="margin-top:60px;">......................................................</p>
              <p>
              </p>
