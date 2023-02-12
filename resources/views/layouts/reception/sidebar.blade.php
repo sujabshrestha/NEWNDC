@@ -30,7 +30,7 @@
             
             </li>
             <li class="menu">
-                <a href="{{ route('receptionist.proposal.index') }}" {{ strpos(Route::currentRouteName(), 'receptionist.proposal.index') === 0 ? 'data-active=true' : '' }} class="dropdown-toggle">
+                <a href="{{ route('receptionist.siteVisit.index') }}" {{ strpos(Route::currentRouteName(), 'receptionist.siteVisit.index') === 0 ? 'data-active=true' : '' }} class="dropdown-toggle">
                     <div class="">
                         <i data-feather="file"></i>
                         <span>Site Visit</span>

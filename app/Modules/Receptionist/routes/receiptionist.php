@@ -68,17 +68,17 @@ function () {
         'prefix' => 'site-visit',
         'as' => 'siteVisit.'
     ], function(){
-        Route::get('all','ReceptionistProposalController@index')->name('index');
+        Route::get('all','ReceptionistSiteVisitController@index')->name('index');
 
-        Route::get('create', 'ReceptionistProposalController@create')->name('create');
+        Route::get('create', 'ReceptionistSiteVisitController@create')->name('create');
 
-        Route::post('store', 'ReceptionistProposalController@store')->name('store');
+        Route::post('store', 'ReceptionistSiteVisitController@store')->name('store');
 
-        Route::get('edit/{id}', 'ReceptionistProposalController@edit')->name('edit');
+        Route::get('edit/{id}', 'ReceptionistSiteVisitController@edit')->name('edit');
 
-        Route::post('update/{id}', 'ReceptionistProposalController@update')->name('update');
+        Route::post('update/{id}', 'ReceptionistSiteVisitController@update')->name('update');
 
-        Route::get('delete/{id}', 'ReceptionistProposalController@destroy')->name('delete');
+        Route::get('delete/{id}', 'ReceptionistSiteVisitController@destroy')->name('delete');
     });
 
 

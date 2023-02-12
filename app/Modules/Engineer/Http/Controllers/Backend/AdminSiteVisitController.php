@@ -33,7 +33,7 @@ class AdminSiteVisitController extends Controller
     {
 
         if ($request->ajax()) {
-            $datas =SiteVisit::with(['branch','bank','client', 'proposal'])->latest();
+            $datas =SiteVisit::completed()->notVerified()->with(['branch','bank','client', 'proposal'])->latest();
 
             // dd($request->all());
 

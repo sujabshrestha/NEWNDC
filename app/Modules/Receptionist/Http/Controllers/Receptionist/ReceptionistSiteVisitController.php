@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use CMS\Models\Bank;
 use CMS\Models\Branch;
+use Engineer\Models\SiteVisit;
 use Files\Repositories\FileInterface;
 use Receptionist\Models\Client;
 use Receptionist\Models\Proposal;
@@ -25,150 +26,315 @@ class ReceptionistSiteVisitController extends Controller
 
     public function index(Request $request)
     {
+        // try{
+            // $datas = SiteVisit::incomplete()->with('bank','client')->get();
+            // dd($datas);
         if ($request->ajax()) {
-            $datas = Proposal::with(['bank', 'branch', 'client'])->get();
+            $datas = SiteVisit::incomplete()->with('bank','client')->get();
             foreach ($datas as $data) {
-                $data->branch = $data->branch->title;
-                $data->bank = $data->bank->name;
-                $data->client = $data->client_id;
+                $data->branch = $data->bank->name;
+                // $data->client = $data->client->client_name;
             }
-
+            
             return DataTables::of($datas)
                 ->addIndexColumn()
-
+                ->editColumn('client',function($row){
+                    return $row->client->client_name ?? 'N/A';
+                })
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="javascript:void(0)" data-url="' . route('receptionist.proposal.edit', $row->id) . '" data-id=' . $row->id . ' class="edit btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>
-                                <a href="javascript:void(0)" id="" data-url="' . route('receptionist.proposal.delete', $row->id) . '" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a>
-                                ';
+                    $actionBtn = '<a href="'. route('receptionist.siteVisit.edit',$row->id) .'"  class="btn btn-info btn-sm" title="Edit"><i class="far fa-edit"></i></a>';
                     return $actionBtn;
+                    // <a href="javascript:void(0)" id="" data-id=' . $row->id . ' class="delete btn btn-danger btn-sm" title="Delete"><i class="far fa-trash-alt"></i></a> -->
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
-
-        $banks = Bank::all();
-        return view('Receptionist::receptionist.proposal.index', compact('banks'));
-        // } catch (\Exception $e) {
-        //     Toastr::error($e->getMessage());
-        //     return redirect()->back();
-        // }
-    }
-
-    public function create(){
-        try {
-            $banks = Bank::all();
-            $branches = Branch::all();
-            $siteengineers = User::role('engineer_head')->get();
-            $data = [
-                'view' => view('Receptionist::receptionist.proposal.create', compact('branches', 'banks', 'siteengineers'))->render()
-            ];
-            return $this->response->responseSuccess($data, "Success", 200);
-        } catch (\Exception $e) {
-            return $this->response->responseError($e->getMessage());
-        }
-    }
-
-
-    public function store(Request $request){
-        // try {
-        // dd($request->all());
-        if ($request->ajax()) {
-            $client = new Client();
-            $client->reg_no = rand(0, 9999);
-            $client->client_name = $request->client_name;
-            $client->contact_no = $request->client_phone;
-            $client->address = $request->property_location;
-            if ($client->save()) {
-                $proposal = new Proposal();
-                $proposal->branch_id = $request->branch_id;
-                $proposal->bank_id = $request->bank_id;
-                $proposal->banker_name = $request->banker_name;
-                $proposal->banker_contact = $request->phone_no;
-                $proposal->client_id = $client->id;
-                $proposal->engineer_head = $request->site_engineer;
-                $proposal->status = "Pending";
-                $proposal->remarks = $request->remarks;
-                if ($proposal->save()) {
-
-                    return $this->response->responseSuccessMsg("Successfully Stored", 200);
-                }
-                return $this->response->responseError("Something went wrong while storing proposal");
-            }
-            return $this->response->responseError("Something went wrong while storing client");
-        }
-        // } catch (\Exception $e) {
+        return view('Receptionist::receptionist.sitevisit.index');
+        // }catch(\Exception $e){
         //     Toastr::error($e->getMessage());
         //     return redirect()->back();
         // }
     }
 
 
-    public function show(proposal $proposal){
-        try {
-        } catch (\Exception $e) {
-            Toastr::error($e->getMessage());
-            return redirect()->back();
-        }
-    }
+    // public function create($proposalid, $id = null)
+    // {
+    //     try {
 
-    public function edit($id){
-        try {
-            $proposal = proposal::with('client')->where('id', $id)->first();
-            $banks = Bank::all();
-            $branches = Branch::all();
-            $siteengineers = User::role('engineer_head')->get();
-            if ($proposal) {
-                $data = [
-                    'view' => view('Receptionist::receptionist.proposal.edit', compact('proposal', 'banks', 'branches', 'siteengineers'))->render()
-                ];
-
-                return $this->response->responseSuccess($data, "Success", 200);
-            }
-
-            return $this->response->responseError("Something went wrong");
-        } catch (\Exception $e) {
-            return $this->response->responseError($e->getMessage());
-        }
-    }
+    //         $banks = Bank::all();
+    //         $branches = Branch::all();
+    //         $clients = Client::all();
+    //         $proposal = Proposal::where('id', $proposalid)->first();
+    //         $sitevisit = SiteVisit::where('id', $id)->first();
+    //         $siteengineers = User::role('engineer')->get();
+    //         $fourboundaries = FourSitevisitBoundary::all();
+    //         return view('Engineer::engineer.sitevisit.create', compact('banks', 'branches', 'clients', 'proposal', 'sitevisit', 'siteengineers', 'fourboundaries'));
+    //     } catch (\Exception $e) {
+    //         Toastr::error($e->getMessage());
+    //         return redirect()->back();
+    //     }
+    // }
 
 
-    public function update(Request $request, $id){
-        try {
-            if ($request->ajax()) {
-
-                $proposal =  Proposal::where('id', $id)->first();
-                $proposal->branch_id = $request->branch_id;
-                $proposal->bank_id = $request->bank_id;
-                $proposal->banker_name = $request->banker_name;
-                $proposal->banker_contact = $request->phone_no;
-                $proposal->engineer_head = $request->site_engineer;
-                $proposal->status = $request->status;
-                $proposal->remarks = $request->remarks;
-                if ($proposal->update()) {
-                    $client = Client::where('id', $proposal->client_id)->first();
-                    $client->client_name = $request->client_name;
-                    $client->contact_no = $request->client_phone;
-                    $client->address = $request->property_location;
-                    $client->update();
-                }
-
-                return $this->response->responseSuccessMsg("Successfully Updated", 200);
-            }
-        } catch (\Exception $e) {
-            return $this->response->responseError($e->getMessage());
-        }
-    }
-
-    public function destroy(proposal $proposal){
-        try {
-        } catch (\Exception $e) {
-            Toastr::error($e->getMessage());
-            return redirect()->back();
-        }
-    }
-
-    public function design()
+    public function store(Request $request, $id = null)
     {
-        return view('CMS::backend.design.create');
+    
+        if (!is_null($id)) {
+            $sitevisit = SiteVisit::where('id', $id)->with(['documents', 'legaldocuments'])->first();
+            $sitevisit->registration_id =$request->reg_no;
+            $sitevisit->proposal_id = $request->proposal_id;
+            $sitevisit->site_engineer_id = auth()->user()->id;
+            $sitevisit->owner_name = $request->owner_name;
+            $sitevisit->bank_id = $request->bank_id;
+            $sitevisit->branch_id = $request->branch_id;
+            $sitevisit->client_id = $request->client_id;
+            $sitevisit->market_rate = $request->market_rate;
+            $sitevisit->ward_no = $request->ward_number;
+            $sitevisit->bm_name = $request->bm_name;
+            $sitevisit->bm_contact = $request->bm_contact;
+            $sitevisit->rm_name = $request->rm_name;
+            $sitevisit->rm_contact = $request->rm_contact;
+            $sitevisit->file_no = $request->file_no;
+            $sitevisit->road_size = $request->road_size;
+            $sitevisit->compound_wall = $request->compound_wall;
+            $sitevisit->valuation_type = $request->valuation_type;
+            $sitevisit->type_of_road = $request->type_of_road;
+            $sitevisit->type_of_land = $request->type_of_land;
+            $sitevisit->category_of_property = $request->category_of_property;
+            $sitevisit->remarks = $request->remarks;
+            $sitevisit->proposal_id = $request->proposal_id;
+
+            $sitevisit->boundary = $request->boundary;
+            $sitevisit->compound_wall = $request->compound_wall;
+            $sitevisit->right_of_row = $request->right_of_row;
+            $sitevisit->land_revenue = $request->land_revenue;
+            $sitevisit->rajinima_likhit = $request->rajinima_likhit;
+            $sitevisit->deduct_on_road = $request->deduct_on_road;
+            $sitevisit->high_tension_line = $request->high_tension_line;
+            $sitevisit->boundary_correction = $request->boundary_correction;
+            $sitevisit->kulo_river = $request->kulo_river;
+            $sitevisit->land_development = $request->land_development;
+            $sitevisit->lalpurja = $request->lalpurja;
+            $sitevisit->napi_naki = $request->napi_naki;
+            $sitevisit->citizenship_owner = $request->citizenship_owner;
+            $sitevisit->citizenship_client = $request->citizenship_client;
+            $sitevisit->org_char_killa_letter = $request->org_char_killa_letter;
+            $sitevisit->approved_drawing_building = $request->approved_drawing_building;
+            $sitevisit->ilajat_building = $request->ilajat_building;
+            $sitevisit->sampan_building = $request->sampan_building;
+            $sitevisit->company_registration_number = $request->company_registration_number;
+            $sitevisit->citizenship_shareholder = $request->citizenship_shareholder;
+
+            // dd($request->fourboundary);
+            $sitevisit->fourBoundary()->sync($request->fourboundary);
+
+            // foreach($request->fourboundary as $boundary){
+            //     $sitevisit->fourBoundary()->updateOrCreate([
+            //         'site_visit_id' => $id,
+            //         'boundary' => $boundary
+            // ],[
+            //         'boundary' => $boundary
+            //     ]
+            // );
+            // }
+
+            if($request->site_plan_image){
+                $uploaded = $this->file->storeFile($request->site_plan_image);
+                $sitevisit->site_plan_image = $uploaded->id;
+            }
+
+
+            if ($sitevisit->update()) {
+                if ($request->RegUploadPicture) {
+                    foreach ($request->RegUploadPicture as $document) {
+                        $uploaded = $this->file->storeFile($document);
+                        $sitevisit->documents()->create([
+                            'file_id' => $uploaded->id
+                        ]);
+                    }
+                }
+
+                if ($request->RegUploadScanDocument) {
+                    foreach ($request->RegUploadScanDocument as $legaldocument) {
+                        $uploaded = $this->file->storeFile($legaldocument);
+                        $sitevisit->legalscandocuments()->create([
+                            'file_id' => $uploaded->id
+                        ]);
+                    }
+                }
+
+                Toastr::success("Successfully Stored");
+                return redirect()->route('siteengineer.proposal.index');
+            }
+        }else{
+            // dd($request->type_of_road);
+            $sitevisit = new SiteVisit();
+            $sitevisit->registration_id = 'NDC-'.rand(0, 9999);
+            $sitevisit->proposal_id = $request->proposal_id;
+            $sitevisit->site_engineer_id = auth()->user()->id;
+            $sitevisit->bank_id = $request->bank_id;
+            $sitevisit->branch_id = $request->branch_id;
+            $sitevisit->client_id = $request->client_id;
+            $sitevisit->market_rate = $request->market_rate;
+            $sitevisit->bm_name = $request->bm_name;
+            $sitevisit->bm_contact = $request->bm_contact;
+            $sitevisit->owner_name = $request->owner_name;
+            $sitevisit->rm_name = $request->rm_name;
+            $sitevisit->rm_contact = $request->rm_contact;
+            $sitevisit->file_no = $request->file_no;
+            $sitevisit->road_size = $request->road_size;
+            $sitevisit->ward_no = $request->ward_number;
+            $sitevisit->compound_wall = $request->compound_wall;
+            $sitevisit->valuation_type = $request->valuation_type;
+            $sitevisit->type_of_road = $request->type_of_road;
+            $sitevisit->type_of_land = $request->type_of_land;
+            $sitevisit->category_of_property = $request->category_of_property;
+            $sitevisit->remarks = $request->remarks;
+            $sitevisit->proposal_id = $request->proposal_id;
+
+            $sitevisit->boundary = $request->boundary;
+            $sitevisit->compound_wall = $request->compound_wall;
+            $sitevisit->right_of_row = $request->right_of_row;
+            $sitevisit->land_revenue = $request->land_revenue;
+            $sitevisit->rajinima_likhit = $request->rajinima_likhit;
+            $sitevisit->deduct_on_road = $request->deduct_on_road;
+            $sitevisit->high_tension_line = $request->high_tension_line;
+            $sitevisit->boundary_correction = $request->boundary_correction;
+            $sitevisit->kulo_river = $request->kulo_river;
+            $sitevisit->land_development = $request->land_development;
+            $sitevisit->lalpurja = $request->lalpurja;
+            $sitevisit->napi_naki = $request->napi_naki;
+            $sitevisit->citizenship_owner = $request->citizenship_owner;
+            $sitevisit->citizenship_client = $request->citizenship_client;
+            $sitevisit->org_char_killa_letter = $request->org_char_killa_letter;
+            $sitevisit->approved_drawing_building = $request->approved_drawing_building;
+            $sitevisit->ilajat_building = $request->ilajat_building;
+            $sitevisit->sampan_building = $request->sampan_building;
+            $sitevisit->company_registration_number = $request->company_registration_number;
+            $sitevisit->citizenship_shareholder = $request->citizenship_shareholder;
+
+            if($request->site_plan_image){
+                $uploaded = $this->file->storeFile($request->site_plan_image);
+                $sitevisit->site_plan_image = $uploaded->id;
+            }
+
+            if ($sitevisit->save()) {
+                $sitevisit->fourBoundary()->sync($request->fourboundary);
+
+                // foreach( as $boundary){
+                //     $sitevisit->fourBoundary()->updateOrCreate([
+                //         'site_visit_id' => $id,
+                //         'boundary' => $boundary
+                //     ],[
+                //         'boundary' => $boundary
+                //     ]
+                // );
+                // }
+
+
+
+                if ($request->RegUploadPicture) {
+                    foreach ($request->RegUploadPicture as $document) {
+                        $uploaded = $this->file->storeFile($document);
+                        $sitevisit->documents()->create([
+                            'file_id' => $uploaded->id
+                        ]);
+                    }
+                }
+
+                if ($request->RegUploadScanDocument) {
+                    foreach ($request->RegUploadScanDocument as $legaldocument) {
+                        $uploaded = $this->file->storeFile($legaldocument);
+                        $sitevisit->legalscandocuments()->create([
+                            'file_id' => $uploaded->id
+                        ]);
+                    }
+                }
+
+                Toastr::success("Successfully Stored");
+                return redirect()->route('siteengineer.proposal.index');
+            }
+        }
+
+        Toastr::success("Something went wrong");
+        return redirect()->back();
+
+
+        // }catch(\Exception $e){
+        //     Toastr::error($e->getMessage());
+        //     return redirect()->back();
+        // }
+    }
+
+
+    public function show()
+    {
+        try {
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+
+    public function edit($id)
+    {
+        try {
+            $siteVisit = SiteVisit::where('id',$id)->first();
+            return view('Receptionist::receptionist.sitevisit.edit',compact('siteVisit'));
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $siteVisit = SiteVisit::where('id',$id)->with('documents','legalscandocuments')->first();
+            if($siteVisit){
+                if ($request->RegUploadPicture) {
+                    foreach ($request->RegUploadPicture as $document) {
+                        $uploaded = $this->file->storeFile($document);
+                        $siteVisit->documents()->create([
+                            'file_id' => $uploaded->id
+                        ]);
+                    }
+                }
+                if ($request->RegUploadScanDocument) {
+                    foreach ($request->RegUploadScanDocument as $legaldocument) {
+                        $uploaded = $this->file->storeFile($legaldocument);
+                        $siteVisit->legalscandocuments()->create([
+                            'file_id' => $uploaded->id
+                        ]);
+                    }
+                }
+                if($request->status == "Completed"){
+                    $siteVisit->reception_status = "Completed";
+                    $siteVisit->update();
+                    Toastr::success('All Documents Uploaded Successfully.');
+                    return redirect()->route('receptionist.siteVisit.index');
+    
+                }else{
+                    Toastr::success('Document Uploaded Successfully.');
+                    return redirect()->back();
+                }
+            }
+            Toastr::error("Site Visit Not Found.");
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+    public function destroy(Branch $branch)
+    {
+        try {
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            return redirect()->back();
+        }
     }
 }

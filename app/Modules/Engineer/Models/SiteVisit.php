@@ -49,6 +49,13 @@ class SiteVisit extends Model
         $query->where('valuation_status','Cancel-Valuation');
     }
 
+    public function scopeCompleted($query){
+        $query->where('reception_status','Completed');
+    }
+
+    public function scopeIncomplete($query){
+        $query->where('reception_status','Incomplete');
+    }
 
 
     public function fourBoundary(){
