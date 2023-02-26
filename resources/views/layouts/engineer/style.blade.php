@@ -11,7 +11,7 @@
 <link href="{{ asset('backendfiles/plugins/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('backendfiles/assets/css/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
 
-<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
 {{-- DATATABLES --}}
 <link href="{{ asset('backendfiles/plugins/table/datatable/datatables.css') }}" rel="stylesheet" type="text/css" >

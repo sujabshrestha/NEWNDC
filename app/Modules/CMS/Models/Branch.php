@@ -16,6 +16,8 @@ class Branch extends Model
         'slug',
         'location',
         'bank_id',
+        'contact',
+        'email',
     ];
 
     public function sluggable(): array

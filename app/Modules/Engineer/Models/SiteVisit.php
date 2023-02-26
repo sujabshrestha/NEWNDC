@@ -27,7 +27,7 @@ class SiteVisit extends Model
 {
     use HasFactory;
 
-    protected $dates = ['ownership_date','preparation_date'];
+    protected $dates = ['ownership_date','preparation_date','contruction_approval_date'];
 
     public function scopeVerified($query){
         $query->where('verification_status','Verified');

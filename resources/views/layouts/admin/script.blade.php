@@ -27,7 +27,7 @@
 {{-- File Upload --}}
 <script src="{{ asset('backendfiles/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
 
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
 <script src="{{ asset('backendfiles/assets/js/loader.js') }}"></script>
 

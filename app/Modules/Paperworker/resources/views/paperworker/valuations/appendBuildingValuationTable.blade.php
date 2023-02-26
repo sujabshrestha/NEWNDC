@@ -43,7 +43,10 @@
                 <td>{{ $building->deprication_amt }}</td>
                 <td>{{ $building->fair_market_val }}</td>
                 <td>{{ $building->distress_val }}</td>
-                <td> <a class="deleteCalculationData" data-url="{{ route('receptionist.valuation.buildingValautionDelete', $building->id) }}"><span class="text-danger">REMOVE</span> </a></td>
+                {{-- $building->deprication_amt = $request->floorDepriciationAmount;
+                $building->fair_market_val = $request->floorFairMarketValue;
+                $building->distress_val = $request->distressValue; --}}
+                <td> <a class="deleteCalculationData" data-url="{{ route('paperworker.valuation.buildingValautionDelete', $building->id) }}"><span class="text-danger">REMOVE</span> </a></td>
             </tr>
             @php
                 $buildingarea_sqf =  $buildingarea_sqf + $building->buildingarea_sqf ;
@@ -60,23 +63,23 @@
                 <th scope="col" colspan="2" style="text-align: right;">TOTAL
                 </th>
                 <th scope="col"><label id="LblTotalBuildingAreaSqF">{{ number_format($buildingarea_sqf,2)}}</label><input type="hidden"
-                        name="totalBuildingAreaSqF" id="totalBuildingAreaSqF" value="{{ $sitevisit->valuationDetails->totalBuildingAreaSqF ?? $buildingarea_sqm ?? 0}}"></th>
+                        name="totalBuildingAreaSqF" id="totalBuildingAreaSqF" value="{{ $buildingarea_sqf}}"></th>
                 <th scope="col"></th>
                 <th scope="col"><label id="LblTotalBuildingAmount">{{ number_format($building_amount,2)}}</label><input type="hidden"
-                        name="totalBuildingAmount" id="totalBuildingAmount" value="{{ $sitevisit->valuationDetails->totalBuildingAmount ?? $building_amount ?? 0 }}"></th>
+                        name="totalBuildingAmount" id="totalBuildingAmount" value="{{$building_amount }}"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col">
                     <label id="LblTotalNetBuildingAmount">{{ number_format($building_totalamount,2)}}</label>
-                    <input type="hidden" name="totalNetBuildingAmount" id="totalNetBuildingAmount" value="{{$sitevisit->valuationDetails->totalNetBuildingAmount ?? $building_totalamount?? 0}}"></th>
+                    <input type="hidden" name="totalNetBuildingAmount"  value="{{ $building_totalamount}}"></th>
                 <th scope="col"><label id="LblTotalBuildingDepriciation">{{ number_format($deprication_amt,2)}}</label><input type="hidden"
-                        name="totalBuildingDepriciation" id="totalBuildingDepriciation" value="{{$sitevisit->valuationDetails->totalBuildingDepriciation ?? $deprication_amt ?? 0}}"></th>
+                        name="totalBuildingDepriciation" id="totalBuildingDepriciation" value="{{$deprication_amt }}"></th>
                 <th scope="col"><label id="LblTotalBuildingFairMarketValue">{{ number_format($fair_market_val,2)}}</label><input type="hidden"
-                        name="totalBuildingFairMarketValue" id="totalBuildingFairMarketValue" value="{{$sitevisit->valuationDetails->totalBuildingFairMarketValue ?? $fair_market_val ?? 0}}"></th>
+                        name="totalBuildingFairMarketValue" id="totalBuildingFairMarketValue" value="{{ $fair_market_val }}"></th>
                 <th scope="col"><label id="LblTotalBuildingDistressValue">{{ number_format($distress_val,2)}}</label><input type="hidden"
-                        name="totalBuildingDistressValue" id="totalBuildingDistressValue" value="{{$sitevisit->valuationDetails->totalBuildingDistressValue ?? $distress_val ?? 0}}"></th>
+                        name="totalBuildingDistressValue" id="totalBuildingDistressValue" value="{{ $distress_val }}"></th>
                 <th scope="col"></th>
             </tr>
         </tfoot>

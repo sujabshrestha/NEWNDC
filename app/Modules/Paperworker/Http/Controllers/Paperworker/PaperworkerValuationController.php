@@ -40,45 +40,46 @@ class PaperworkerValuationController extends Controller
 
     public function valuations(Request $request)
     {
-        if ($request->ajax()) {
-            $datas = SiteVisit::with(['branch', 'bank', 'client', 'proposal'])->verified()->latest();
+        try {
+            if ($request->ajax()) {
+                $datas = SiteVisit::with(['branch', 'bank', 'client', 'proposal'])->verified()->latest();
 
-            return DataTables::of($datas)
-                ->addIndexColumn()
-                ->editColumn('branch', function ($row) {
-                    return $row->branch->title ?? 'N/A';
-                })
-                ->editColumn('bank_name', function ($row) {
-                    return $row->bank->name;
-                })
-                ->editColumn('client_name', function ($row) {
-                    return $row->client->client_name;
-                })
-                ->editColumn('valuation_status', function ($row) {
-                    $main = '<select name="valuation_status" class="form-control valuationStatus" data-id=' . $row->id . '>';
-                    $preSelected = '<option value="Pre-Valuation" selected>Pre-Valuation</option> <option value="Final-Valuation">Final-Valuation</option> <option value="Cancel-Valuation">Cancel-Valuation</option></select>';
-                    $finalSelected = '<option value="Pre-Valuation">Pre-Valuation</option>  <option value="Final-Valuation" selected>Final-Valuation</option> <option value="Cancel-Valuation">Cancel-Valuation</option></select>';
-                    $cancelSelected = '<option value="Pre-Valuation">Pre-Valuation</option> <option value="Final-Valuation">Final-Valuation</option><option value="Cancel-Valuation" selected>Cancel-Valuation</option></select>';
+                return DataTables::of($datas)
+                    ->addIndexColumn()
+                    ->editColumn('branch', function ($row) {
+                        return $row->branch->title ?? 'N/A';
+                    })
+                    ->editColumn('bank_name', function ($row) {
+                        return $row->bank->name;
+                    })
+                    ->editColumn('client_name', function ($row) {
+                        return $row->client->client_name;
+                    })
+                    ->editColumn('valuation_status', function ($row) {
+                        $main = '<select name="valuation_status" class="form-control valuationStatus" data-id=' . $row->id . '>';
+                        $preSelected = '<option value="Pre-Valuation" selected>Pre-Valuation</option> <option value="Final-Valuation">Final-Valuation</option> <option value="Cancel-Valuation">Cancel-Valuation</option></select>';
+                        $finalSelected = '<option value="Pre-Valuation">Pre-Valuation</option>  <option value="Final-Valuation" selected>Final-Valuation</option> <option value="Cancel-Valuation">Cancel-Valuation</option></select>';
+                        $cancelSelected = '<option value="Pre-Valuation">Pre-Valuation</option> <option value="Final-Valuation">Final-Valuation</option><option value="Cancel-Valuation" selected>Cancel-Valuation</option></select>';
 
-                    if ($row->valuation_status == "Pre-Valuation") {
-                        return $main . $preSelected;
-                    } elseif ($row->valuation_status == "Final-Valuation") {
-                        return $main . $finalSelected;
-                    } elseif ($row->valuation_status == "Cancel-Valuation") {
-                        return $main . $cancelSelected;
-                    }
-                })
-                ->filter(function ($instance) use ($request) {
-                    if ($request->filterValuation && $request->filterValuation != null && !empty($request->filterValuation)) {
-                        if ($request->filterValuation == "latest-Valuation") {
-                            $instance->latest();
-                        } else {
-                            $instance->where('valuation_status', $request->filterValuation);
+                        if ($row->valuation_status == "Pre-Valuation") {
+                            return $main . $preSelected;
+                        } elseif ($row->valuation_status == "Final-Valuation") {
+                            return $main . $finalSelected;
+                        } elseif ($row->valuation_status == "Cancel-Valuation") {
+                            return $main . $cancelSelected;
                         }
-                    }
-                })
-                ->addColumn('action', function ($row) {
-                    $actionBtn = '
+                    })
+                    ->filter(function ($instance) use ($request) {
+                        if ($request->filterValuation && $request->filterValuation != null && !empty($request->filterValuation)) {
+                            if ($request->filterValuation == "latest-Valuation") {
+                                $instance->latest();
+                            } else {
+                                $instance->where('valuation_status', $request->filterValuation);
+                            }
+                        }
+                    })
+                    ->addColumn('action', function ($row) {
+                        $actionBtn = '
                     <div class="action-dropdown custom-dropdown-icon">
                         <div class="dropdown">
                             <a class="dropdown-toggle" href="#actionButon" role="button" id="dropdownMenuLink-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -88,34 +89,35 @@ class PaperworkerValuationController extends Controller
                                 <a class="dropdown-item" href="' . route('paperworker.valuation.edit', $row->id) . '"><span class="text-primary">Edit</span></a>
                                 <a class="dropdown-item deleteClient" href="javascript:void(0);" data-id="#"><span class="text-danger">Delete</span></a>
                                 <hr class="m-0 border-secondary">
-                                <a class="dropdown-item" target="_blank" href="'. route('paperworker.valuation.prevaluationReport',$row->id).'"><span class="text-info">Pre Valuation Report</span></a>
-                                <a class="dropdown-item" target="_blank" href="'. route('paperworker.valuation.finalvaluationReport',$row->id).'"><span class="text-secondary">Final Valuation Report</span></a>
+                                // <a class="dropdown-item" target="_blank" href="' . route('paperworker.valuation.prevaluationReport', $row->id) . '"><span class="text-info">Pre Valuation Report</span></a>
+                                // <a class="dropdown-item" target="_blank" href="' . route('paperworker.valuation.finalvaluationReport', $row->id) . '"><span class="text-secondary">Final Valuation Report</span></a>
 
                             </div>
                         </div>
                     </div>';
-                    return $actionBtn;
-                })
-                ->rawColumns(['action', 'valuation_status'])
-                ->make(true);
+                        return $actionBtn;
+                    })
+                    ->rawColumns(['action', 'valuation_status'])
+                    ->make(true);
+            }
+            $finalvaluationCount = SiteVisit::finalValuation()->verified()->count();
+            $prevaluationCount = SiteVisit::verified()->preValuation()->count();
+            $cancelvaluationCount = SiteVisit::cancelValuation()->verified()->count();
+            return view('Paperworker::paperworker.valuations.index', compact('prevaluationCount', 'finalvaluationCount', 'cancelvaluationCount'));
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
+            return redirect()->back();
         }
-        $finalvaluationCount = SiteVisit::finalValuation()->verified()->count();
-        $prevaluationCount = SiteVisit::verified()->preValuation()->count();
-        $cancelvaluationCount = SiteVisit::cancelValuation()->verified()->count();
-        return view('Paperworker::paperworker.valuations.index', compact('prevaluationCount', 'finalvaluationCount', 'cancelvaluationCount'));
-        // }catch(\Exception $e){
-        //     Toastr::error($e->getMessage());
-        //     return redirect()->back();
-        // }
     }
 
-    public function prevaluationReport($sitevisit_id){
-        try{
-            $sitevisit = SiteVisit::where('id',$sitevisit_id)
-                        ->with('bank','branch','client.owner','valuationDetails')
-                        ->first();
-            
-            return view('Paperworker::paperworker.prevaluationReports.reportForAll',compact('sitevisit'));
+    public function prevaluationReport($sitevisit_id)
+    {
+        try {
+            $sitevisit = SiteVisit::where('id', $sitevisit_id)
+                ->with('bank', 'branch', 'client.owner', 'valuationDetails', 'siteVisitBoundaries')
+                ->first();
+
+            return view('Paperworker::paperworker.prevaluationReports.reportForAll', compact('sitevisit'));
             // return view('Paperworker::paperworker.prevaluationReports.reportForNIC',compact('sitevisit'));
             // return view('Paperworker::paperworker.prevaluationReports.reportForSBI',compact('sitevisit'));
             // return view('Paperworker::paperworker.prevaluationReports.reportForPrabhu',compact('sitevisit'));
@@ -126,19 +128,20 @@ class PaperworkerValuationController extends Controller
         }
     }
 
-    public function finalvaluationReport($sitevisit_id){
-        try{
-            $sitevisit = SiteVisit::where('id',$sitevisit_id)
-                        ->with('bank','branch','client.owner','valuationDetails')
-                        ->first();
-            
-            // return view('Paperworker::paperworker.finalvaluationReports.reportForAll',compact('sitevisit'));
-            return view('Paperworker::paperworker.finalvaluationReports.reportForNIC',compact('sitevisit'));
+    public function finalvaluationReport($sitevisit_id)
+    {
+        try {
+            $sitevisit = SiteVisit::where('id', $sitevisit_id)
+                ->with('bank', 'branch', 'client.owner', 'valuationDetails')
+                ->first();
+
+            return view('Paperworker::paperworker.finalvaluationReports.reportForAll',compact('sitevisit'));
+            // return view('Paperworker::paperworker.finalvaluationReports.reportForNIC', compact('sitevisit'));
             // return view('Paperworker::paperworker.finalvaluationReports.reportForPrabhu',compact('sitevisit'));
 
         } catch (\Exception $e) {
-                Toastr::error($e->getMessage());
-                return redirect()->back();
+            Toastr::error($e->getMessage());
+            return redirect()->back();
         }
     }
 
@@ -314,9 +317,10 @@ class PaperworkerValuationController extends Controller
     {
         $sitevisit = SiteVisit::where('id', $id)->with('landbasedDatas')->first();
         if ($sitevisit) {
+            // dd($request->all());
             $building = new BuildingCalculation();
             $building->floor = $request->floor;
-            $building->buildingarea_sqm = $request->floorAreaInSqF;
+            $building->buildingarea_sqf = $request->floorAreaInSqF;
             $building->building_age = $request->floorAge;
             $building->building_depreciation_percentage = $request->floorDepriciationPercentage;
             $building->building_sanitary_plumbing_percentage = $request->sanitaryPulumbingPercentage;
@@ -324,10 +328,10 @@ class PaperworkerValuationController extends Controller
             $building->building_amount = $request->floorAmount;
             $building->building_totalamount = $request->floorNetAmount;
             $building->building_rate = $request->floorRate;
-            //Need To change
-            $building->deprication_amt = $request->floorNetAmount;
-            $building->fair_market_val = $request->floorNetAmount;
-            $building->distress_val = $request->floorNetAmount;
+
+            $building->deprication_amt = $request->floorDepriciationAmount;
+            $building->fair_market_val = $request->floorFairMarketValue;
+            $building->distress_val = $request->distressValue;
             $building->site_visit_id = $sitevisit->id;
 
             if ($building->save()) {
@@ -536,7 +540,6 @@ class PaperworkerValuationController extends Controller
                 ]
             );
 
-
             $sitevisit->rateofland()->updateOrCreate(
                 [
                     'id' => $sitevisit->rateofland->id ?? null
@@ -558,7 +561,7 @@ class PaperworkerValuationController extends Controller
                     'commercialValueOfLand' => $request->commercialValueOfLand,
                     'fairMarketValueOfLand' => $request->fairMarketValueOfLand,
                     'distressValueOfLand' => $request->distressValueOfLand,
-                    'fairMarketValueOfLandAndBuilding' => $request->fairMarketValueOfLandAndBuilding,
+                    'fairMarketValueOfLandAndBuilding' => $request->fairMarketValueOfLandAndBuimding,
                     'totalDistressValueOfLandAndBuimding' => $request->totalDistressValueOfLandAndBuimding,
                 ]
             );
@@ -624,16 +627,10 @@ class PaperworkerValuationController extends Controller
                 ]
             );
 
-
-
-
             if ($request->patra) {
                 $sitevisit->patras()->attach($request->patra);
             }
             if ($sitevisit->update()) {
-
-
-
                 if ($request->UploadScanDocuments) {
                     foreach ($request->UploadScanDocuments as $scandoc) {
                         $uploaded = $this->file->storeFile($scandoc);
@@ -670,8 +667,6 @@ class PaperworkerValuationController extends Controller
                     }
                 }
             }
-            // dd('askdjhk');
-
             Toastr::success("Successfully updated");
             return redirect()->back();
         }
@@ -685,8 +680,8 @@ class PaperworkerValuationController extends Controller
 
     public function docDelete(Request $request, $id)
     {
-        // try{
-        $document = SitevisitDocument::Where('id', $id)->first();
+        try{
+        $document = SitevisitDocument::where('id', $id)->first();
         if ($document) {
             $this->file->delete($document->file_id);
             $document->delete();
@@ -694,90 +689,73 @@ class PaperworkerValuationController extends Controller
             Toastr::success("Successfullyh Delete");
             return redirect()->back();
         }
-
-
-
-        // }catch(\Exception $e){
-        //     Toastr::error($e->getMessage());
-        //     return redirect()->back();
-        // }
+        }catch(\Exception $e){
+            Toastr::error($e->getMessage());
+            return redirect()->back();
+        }
     }
 
 
     public function legaldocDelete(Request $request, $id)
     {
-        // try{
-        $document = SitevisitLegaldocx::Where('id', $id)->first();
+        try{
+        $document = SitevisitLegaldocx::where('id', $id)->first();
 
         if ($document) {
             $this->file->delete($document->file_id);
-
             $document->delete();
             Toastr::success("Successfully Deleted");
             return redirect()->back();
         }
 
-
-
-        // }catch(\Exception $e){
-        //     Toastr::error($e->getMessage());
-        //     return redirect()->back();
-        // }
+        }catch(\Exception $e){
+            Toastr::error($e->getMessage());
+            return redirect()->back();
+        }
     }
 
 
 
     public function scandocDelete(Request $request, $id)
     {
-        // try{
-        $document = SitevisitLegalscandocument::Where('id', $id)->first();
-        if ($document) {
-            $file = UploadFile::where('id', $document->file_id)->first();
-            $orginalPath =  $file->path;
-            $thumbnailPath = 'resize/' . $file->path;
-            Storage::delete([$orginalPath, $thumbnailPath]);
-            $file->delete();
+        try {
+            $document = SitevisitLegalscandocument::where('id', $id)->first();
+            if ($document) {
+                $file = UploadFile::where('id', $document->file_id)->first();
+                $orginalPath =  $file->path;
+                $thumbnailPath = 'resize/' . $file->path;
+                Storage::delete([$orginalPath, $thumbnailPath]);
+                $document->delete();
+                $file->delete();
 
-            $document->delete();
-
-            $document->delete();
-            Toastr::success("Successfully Deleted");
+                Toastr::success("Successfully Deleted");
+                return redirect()->back();
+            }
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
             return redirect()->back();
         }
-
-
-
-        // }catch(\Exception $e){
-        //     Toastr::error($e->getMessage());
-        //     return redirect()->back();
-        // }
     }
 
 
     public function internalCADdelete(Request $request, $id)
     {
 
-        // try{
-        $document = SitevisitInternalcaddocument::Where('id', $id)->first();
-        if ($document) {
-            $file = UploadFile::where('id', $document->file_id)->first();
-            $orginalPath =  $file->path;
-            $thumbnailPath = 'resize/' . $file->path;
-            Storage::delete([$orginalPath, $thumbnailPath]);
-            $file->delete();
-
-            $document->delete();
-            Toastr::success("Successfully Deleted");
+        try {
+            $document = SitevisitInternalcaddocument::Where('id', $id)->first();
+            if ($document) {
+                $file = UploadFile::where('id', $document->file_id)->first();
+                $orginalPath =  $file->path;
+                $thumbnailPath = 'resize/' . $file->path;
+                Storage::delete([$orginalPath, $thumbnailPath]);
+                $document->delete();
+                $file->delete();
+                Toastr::success("Successfully Deleted");
+                return redirect()->back();
+            }
+        } catch (\Exception $e) {
+            Toastr::error($e->getMessage());
             return redirect()->back();
         }
-
-
-
-
-
-        // }catch(\Exception $e){
-        //     Toastr::error($e->getMessage());
-        //     return redirect()->back();
-        // }
     }
 }

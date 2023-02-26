@@ -68,7 +68,8 @@
                  <h5 style="font-size: 40px;"><b>
                     Consulting Engineers [Valuer's &amp; Designer]</b>
                  </h5>
-                 <p>Sankhamul-31,Ktm Tel 01-5242605, 9803658160,Email: ndcaccount@yahoo.com</p>
+                 <p>{{returnSiteSetting('address') ?? 'Sankhamul-31,Ktm'}} Tel:{{returnSiteSetting('primary_phone') ?? '01-5242605'}}, {{returnSiteSetting('secondary_phone') ?? '01-5242605'}}, Email: {{returnSiteSetting('primary_email') ?? 'ndcaccount@yahoo.com'}}
+                </p>
              </div>
          </div>
 
@@ -76,10 +77,10 @@
              <div class="col-md-4 ml-4">
                  <b>{{ $sitevisit->bank->name ?? ''}}</b>
                  <br>
-                 {{ $sitevisit->branch ?? 'N/A'}} Branch
+                 {{ $sitevisit->branch->title ?? 'N/A'}} Branch
              </div>
              <div class="col-md-7 text-right ml-3">
-                 <b>Date:- 2078/03/14 (B.S)</b>
+                 <b>Date:- {{$sitevisit->preparation_date->format('Y-m-d')}} (B.S)</b>
              </div>
          </div>
          <div class="row">
@@ -236,14 +237,18 @@
                          <td>North</td>
                          <td>South</td>
                      </tr>
+                     @if ($sitevisit->govBoundaries->count() > 0)
+                     @foreach ( $sitevisit->govBoundaries as $boundary)
                      <tr>
-                         <td>1</td>
-                         <td> 441 &amp; 443</td>
-                         <td> 442 &amp; 444</td>
-                         <td> Motar Bato Tatha Raj Kulo Bato &amp; Motar Bato Tatha Raj Kulo Bato</td>
-                         <td> 443 &amp; 444</td>
-                         <td> 442 &amp; 441</td>
+                         <td>{{ $loop->iteration}}</td>
+                         <td>{{ $boundary->kita_no }}</td>
+                         <td> {{ $boundary->east }}</td>
+                         <td> {{ $boundary->west }}</td>
+                         <td> {{ $boundary->north }}</td>
+                         <td>{{ $boundary->south }}</td>
                      </tr>
+                     @endforeach
+                 @endif
                  </tbody>
              </table>
          </div>
@@ -269,31 +274,43 @@
                          <td>Weighted Fair Market Value (WFMV) (A-B)</td>
                          <td>Total Distress Value of the Building @ 100% (WFMV)</td>
                      </tr>
-                     @foreach ($sitevisit->buildingValuations as $buildingValuation)
-                     <tr>
-                         <td>1</td>
-                         <td>495.51</td>
-                         <td>600.00</td>
-                         <td>2,97,306.00</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>2,97,306.00</td>
-                         <td>0.00</td>
-                         <td>2,97,306.00</td>
-                         <td>2,97,306.00</td>
-                     </tr>
-                    @endforeach            
+                     @foreach ($sitevisit->buildingValuations as $building )
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $building->floor }}</td>
+                <td>{{ $building->buildingarea_sqf }}</td>
+                <td>{{ $building->building_rate }}</td>
+                <td>{{ $building->building_amount }}</td>
+                <td>{{ $building->building_age }}</td>
+                <td>{{ $building->building_depreciation_percentage }}</td>
+                <td>{{ $building->building_sanitary_plumbing_percentage }}</td>
+                <td>{{ $building->building_electric_work_percentage }}</td>
+                <td>{{ $building->building_totalamount }}</td>
+                <td>{{ $building->deprication_amt }}</td>
+                <td>{{ $building->fair_market_val }}</td>
+                <td>{{ $building->distress_val }}</td>
+                <td> <a class="deleteCalculationData" data-url="{{ route('paperworker.valuation.buildingValautionDelete', $building->id) }}"><span class="text-danger">REMOVE</span> </a></td>
+            </tr>
+            @php
+                $buildingarea_sqf =  $buildingarea_sqf + $building->buildingarea_sqf ;
+                $building_amount = $building->building_amount+$building_amount;
+                $building_totalamount = $building->building_totalamount+$building_totalamount;
+                $deprication_amt = $building->deprication_amt+$deprication_amt;
+                $fair_market_val = $building->fair_market_val+$fair_market_val;
+                $distress_val = $building->distress_val;
+            @endphp
+            @endforeach   
                      <tr>
                          <td style="text-align:right;">Total</td>
-                         <td>1721.93</td>
+                         <td>{{ $buildingarea_sqf}}</td>
                          <td></td>
                          <td>{{ $sitevisit->valuationDetails->totalBuildingAmount ?? 0}}</td>
-                         <td>0</td>
-                         <td>0</td>
+                         <td>need to cal</td>
+                         <td>need to cal</td>
                          <td>{{$sitevisit->valuationDetails->totalNetBuildingAmount ?? 0}}</td>
                          <td>{{$sitevisit->valuationDetails->totalBuildingDepriciation ?? 0}}</td>
-                         <td>2,97,306.00</td>
-                         <td>2,97,306.00</td>
+                         <td>{{ $fair_market_val }}</td>
+                         <td>{{ $distress_val }}</td>
                      </tr>
                  </tbody>
              </table>
@@ -315,19 +332,19 @@
                      <tr>
                          <td>1</td>
                          <td>Land Value</td>
-                         <td>12,95,600.00</td>
-                         <td>12,95,600.00</td>
+                         <td>{{ $sitevisit->rateofland->fairMarketValueOfLand}}</td>
+                         <td>{{$sitevisit->rateofland->distressValueOfLand}}</td>
                      </tr>
                      <tr>
                          <td>2</td>
                          <td>Building Value</td>
-                         <td>2,97,306.00</td>
-                         <td>2,97,306.00</td>
+                         <td>{{$fair_market_val}}</td>
+                         <td>{{ $distress_val }}</td>
                      </tr>
                      <tr>
                          <td colspan="2" style="text-align:right;">Total</td>
-                         <td>15,92,000.00</td>
-                         <td>15,92,000.00</td>
+                         <td>{{ $sitevisit->rateofland->fairMarketValueOfLand+$fair_market_val}}</td>
+                         <td>{{ $sitevisit->rateofland->distressValueOfLand+$distress_val }}</td>
                      </tr>
                  </tbody>
              </table>
@@ -340,7 +357,7 @@
              <table class="table table-borderless">
                  <tbody>
                      <tr style="border:1px solid #dee2e6;">
-                         <td>Wighted Fair Market Value of Property is NRs. : 15,92,000.00 <br>
+                         <td>Wighted Fair Market Value of Property is NRs. : {{ $sitevisit->rateofland->fairMarketValueOfLand+$fair_market_val}} <br>
                              In word:- Fifteen lakh ninety two thousand rupees only /-
                          </td>
                      </tr>
@@ -348,7 +365,7 @@
                          <td>&nbsp;</td>
                      </tr>
                      <tr style="border:1px solid #dee2e6;">
-                         <th>Distress Value of Property is NRs. : 15,92,000.00 <br>
+                         <th>Distress Value of Property is NRs. : {{ $sitevisit->rateofland->distressValueOfLand+$distress_val }} <br>
                              In word:- Fifteen lakh ninety two thousand rupees only /-
                          </th>
                      </tr>

@@ -20,18 +20,10 @@
                     <td>{{ $item->west }}</td>
                     <td>{{ $item->north }}</td>
                     <td>{{ $item->south }}</td>
-                    <td><span class="text-danger"><a class="deleteCalculationData" data-url="{{ route('receptionist.valuation.siteVisitBoundaryDelete', $item->id) }}" > Delete</span></a></td>
+                    <td><span class="text-danger"><a class="deleteCalculationData" data-url="{{ route('paperworker.valuation.siteVisitBoundaryDelete', $item->id) }}" > Delete</span></a></td>
                 </tr>
             @endforeach
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            
         </tbody>
     </table>
 @endif

@@ -1,7 +1,7 @@
 <html>
 
 <head></head>
-
+ 
 <body>
     <div class="PrintSectionPrePrint" id="PrintDiv">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -54,36 +54,35 @@
         <div class="container-fluid h-100">
             <div class="row justify-content-center h-100">
                 <div class="col-9 hidden-md-down" style="position: relative; max-width:83%;flex: 0 0 83%;">
-                    <h2 style="font-size:25pt; font-weight: bold;text-decoration:underline;">MACHHAPUCHCHHRE BANK LTD.
+                    <h2 style="font-size:25pt; font-weight: bold;text-decoration:underline;">{{ $sitevisit->bank->name ?? ''}}.
                     </h2>
-                    <h3 style="font-size:23pt; font-weight:bold;">Maharajgunj Branch</h3>
-                    <h3 style="font-size:20pt;">Contact No :-9851140924</h3>
+                    <h3 style="font-size:23pt; font-weight:bold;">{{ $sitevisit->branch->title ?? 'N/A'}}</h3>
+                    <h3 style="font-size:20pt;">Contact No :- {{ $sitevisit->branch ?? 'N/A'}}</h3>
 
                     <br><br><br>
                     <h2 style="font-size:25pt; font-weight: bold;">PROPERTY VALUATION REPORT</h2>
-                    <h3 style="font-size:23pt; font-weight:bold;">(Land Only)</h3>
+                    <h3 style="font-size:23pt; font-weight:bold;">({{ $sitevisit->valuation_type == "Land" ? 'Land' : 'Land & Building'}})</h3>
 
                     <br><br><br>
                     <h2 style="font-size:22pt; font-weight: bold; text-decoration:underline;">CLIENT:</h2>
-                    <h3 style="font-size:20pt; font-weight:bold; text-decoration:underline;">Mr. Bhimesh Chandra Acharya
+                    <h3 style="font-size:20pt; font-weight:bold; text-decoration:underline;">{{ $sitevisit->client->client_name ?? 'N/A'}}
                     </h3>
-                    <h3 style="font-size:20pt;line-height:18px;">Ward No:-1, Biratnagar Municipality</h3>
-                    <h3 style="font-size:20pt;line-height:18px;">Morang</h3>
+                    <h3 style="font-size:20pt;line-height:18px;">{{ $sitevisit->client->address ?? 'N/A'}}</h3>
+                    <h3 style="font-size:20pt;line-height:18px;">{{ $sitevisit->client->district ?? 'N/A'}}</h3>
 
                     <br><br><br>
                     <h2 style="font-size:22pt; font-weight: bold; text-decoration:underline;">OWNER:</h2>
-                    <h3 style="font-size:20pt; font-weight:bold; text-decoration:underline;"> Mrs. Bishnu Kumari Acharya
+                    <h3 style="font-size:20pt; font-weight:bold; text-decoration:underline;"> {{ $sitevisit->client->owner ?? 'N/A'}}
                     </h3>
-                    <h3 style="font-size:20pt;line-height:18px;">Ward No:-3, Diktel VDC</h3>
-                    <h3 style="font-size:20pt;line-height:18px;">Khotang</h3>
+                    <h3 style="font-size:20pt;line-height:18px;">{{ $sitevisit->client->owner->address ?? 'N/A'}}</h3>
+                    <h3 style="font-size:20pt;line-height:18px;">{{ $sitevisit->client->owner->district ?? 'N/A'}}</h3>
 
                     <br><br><br>
                     <div style="width:100%;min-height:200px;">
                         <h2 style="font-size:22pt; font-weight: bold; text-decoration:underline;">LOCATION OF PROPERTY:
                         </h2>
-                        <h3 style="font-size:20pt; font-weight:bold;">Ward No:-04, Danchi VDC (Current Ward No:-04,
-                            Kageshwori Manohara Municipality)</h3>
-                        <h3 style="font-size:20pt;">Kathmandu</h3>
+                        <h3 style="font-size:20pt; font-weight:bold;">{{$sitevisit->valuationDetails->location_of_land ?? 'N/A'}}</h3>
+                        <h3 style="font-size:20pt;">{{$sitevisit->valuationDetails->district ?? 'N/A'}}</h3>
                     </div>
                     <br>Er.Sanjay K. Mahato<br>(Managing Director)<br>NEC No {3700 Civil "A"}
                     <div class="row" style="bottom: 0; width:100%;position: absolute;">
@@ -91,19 +90,19 @@
                             <p style="font-family: 'Forte';font-size: 65px;padding: 0px;color:red;">ndc</p>
                         </div>
                         <div style="max-widht:87%;flex:87%;webkit-box-flex: 0;">
-                            <h5><b style="font-size: 45px;">Nepal Development Consultants</b></h5><strong>
+                            <h5><b style="font-size: 45px;">{{ returnSiteSetting('title') ?? 'Nepal Development Consultants'}}</b></h5><strong>
                                 <hr
                                     style="margin-top: 5px; margin-bottom: 5px;width: 78%;text-align: left;padding: 0px;border-top: 2px solid #000;margin-left: 0px;">
                             </strong>
                             <h5 style="font-size: 30px;letter-spacing: 0.05em;"><b>Consulting Engineers [Valuer's &amp;
                                     Designer]</b></h5>
-                            <p>Sankhamul-31,Ktm Tel 01-5242605, 9803658160,Email: ndcaccount@yahoo.com</p>
+                            <p>{{returnSiteSetting('address') ?? 'Sankhamul-31,Ktm'}} Tel:{{returnSiteSetting('primary_phone') ?? '01-5242605'}}, {{returnSiteSetting('secondary_phone') ?? '01-5242605'}}, Email: {{returnSiteSetting('primary_email') ?? 'ndcaccount@yahoo.com'}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-3"
                     style="height: 100%;background-color: #538DD5 !important;-webkit-print-color-adjust: exact; max-width:17%;flex: 0 0 17%;">
-                    <label style="font-size:20pt; text-align:center; width:100%;color:white;">NDC-00001</label>
+                    <label style="font-size:20pt; text-align:center; width:100%;color:white;">{{$sitevisit->registration_id ?? ''}}</label>
                     <label
                         style="font-size:50pt;text-align:center; color:white; writing-mode: vertical-rl;
                   text-orientation: mixed;padding-left:20px;padding-top:450px;margin:0px;"
@@ -130,11 +129,11 @@
                                 <div class="row">
                                     <div class="col-md-6"><b>
                                             <h2 style="margin:0px;">To</h2>
-                                            <h2> MACHHAPUCHCHHRE BANK LTD.</h2>
+                                            <h2>{{ $sitevisit->bank->name ?? ''}}</h2>
                                         </b>
-                                        <h3> Maharajgunj Branch</h3>Valuation Assignment No :
+                                        <h3>  {{ $sitevisit->branch->title ?? 'N/A'}}</h3>Valuation Assignment No : {{$sitevisit->valuation_assignment_no ?? ''}}
                                     </div>
-                                    <div class="col-md-6"><label style="float:right;">Date:- 2078/03/09 (B.S)</label>
+                                    <div class="col-md-6"><label style="float:right;">Date:- {{($sitevisit->preparation_date != null ? $sitevisit->preparation_date->format('Y-m-d') : '')}} (B.S)</label>
                                     </div>
                                 </div>
                             </td>
@@ -155,48 +154,49 @@
                         <tr>
                             <td class="U B" width="40%"><b>Client Name &amp; Address</b></td>
                             <td class="B" width="30"><b>:</b></td>
-                            <td class="U B">Mr. Bhimesh Chandra Acharya</td>
+                            <td class="U B">{{ $sitevisit->client->client_name ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td><b>:</b></td>
-                            <td>Ward No:-1, Biratnagar Municipality</td>
+                            <td>{{ $sitevisit->client->address ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td><b>:</b></td>
-                            <td>Morang</td>
+                            <td>{{ $sitevisit->client->district ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td class="U B"><b>Property Owner Name &amp; Address</b></td>
                             <td class="B"><b>:</b></td>
-                            <td class="U B"> Mrs. Bishnu Kumari Acharya</td>
+                            <td class="U B"> {{ $sitevisit->client->owner ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td><b>:</b></td>
-                            <td>Ward No:-3, Diktel VDC</td>
+                            <td>{{ $sitevisit->client->owner->address ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td><b>:</b></td>
-                            <td>Khotang</td>
+                            <td>{{ $sitevisit->client->owner->district ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td class="U B"><b>Location of the Property</b></td>
                             <td><b>:</b></td>
-                            <td class="U B">Ward No:-04, Danchi VDC (Current Ward No:-04, Kageshwori Manohara
-                                Municipality)</td>
+                            <td class="U B">{{$sitevisit->valuationDetails->location_of_land ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td>District</td>
                             <td><b>:</b></td>
-                            <td>Kathmandu</td>
+                            <td>{{$sitevisit->valuationDetails->district ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td>Kitta No</td>
                             <td><b>:</b></td>
-                            <td> 2283, 1001 &amp; 1004</td>
+                            <td> 
+
+                                {{ $sitevisit->lalpurjaDatas->implode('kita_no',' - ') ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td>Area Considered for Valuation</td>
@@ -205,7 +205,7 @@
                         </tr>
                         <tr>
                             <td colspan="3">It is our Consideration opinion that the distress value of the above
-                                mentioned Land Only are as follows.</td>
+                                mentioned {{ $sitevisit->valuation_type == "Land" ? 'Land' : 'Land & Building'}} are as follows.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -213,13 +213,13 @@
                     <tbody>
                         <tr>
                             <td>The Weigheted Fair Market Value of the Property (Rs.)</td>
-                            <td>1,08,18,000.00</td>
-                            <td>In word:- One crore eight lakh eighteen thousand rupees Only/-</td>
+                            <td>{{ $sitevisit->rateofland->fairMarketValueOfLandAndBuilding }}</td>
+                            <td>In word:- {{ getNepaliCurrency($sitevisit->rateofland->fairMarketValueOfLandAndBuilding)}} Only/-</td>
                         </tr>
                         <tr class="vendorListHeading">
                             <th>Distress Value of the Property Nrs.</th>
-                            <th>86,54,000.00</th>
-                            <th>In word:- Eighty six lakh fifty four thousand rupees Only/-</th>
+                            <th>{{ $sitevisit->rateofland->totalDistressValueOfLandAndBuimding }}</th>
+                            <th>In word:-  {{ getNepaliCurrency($sitevisit->rateofland->totalDistressValueOfLandAndBuimding)}} Only/-</th>
                         </tr>
                     </tbody>
                 </table>
@@ -351,7 +351,7 @@
                 <div class="PageBreak"></div>
                 <div class="col-md-12 text-center" style="padding-top: 30rem;">
                     <h1 class="U" style="font-size:50px;"><b>Valuation of</b></h1>
-                    <h2 style="font-size:50px;">(Land Only)</h2>
+                    <h2 style="font-size:50px;">({{ $sitevisit->valuation_type == "Land" ? 'Land' : 'Land & Building'}})</h2>
                 </div>
                 <!-- --------- 4 PAGE ---- -->
                 <div class="PageBreak"></div>
@@ -371,19 +371,19 @@
                             <td style="line-height:18px;"></td>
                             <td class="B" style="line-height:18px;">  Name</td>
                             <td class="B" style="line-height:18px;">:</td>
-                            <td class="U B" style="line-height:18px;">Mr. Bhimesh Chandra Acharya</td>
+                            <td class="U B" style="line-height:18px;">{{ $sitevisit->client->client_name ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td style="line-height:18px;"></td>
                             <td style="line-height:18px;">  Address</td>
                             <td style="line-height:18px;">:</td>
-                            <td style="line-height:18px;">Ward No:-1, Biratnagar Municipality</td>
+                            <td style="line-height:18px;">{{ $sitevisit->client->address ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td style="line-height:18px;"></td>
                             <td style="line-height:18px;">  District</td>
                             <td style="line-height:18px;">:</td>
-                            <td style="line-height:18px;">Morang</td>
+                            <td style="line-height:18px;">{{ $sitevisit->client->district ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <th style="line-height:18px;">2.</th>
@@ -394,19 +394,19 @@
                             <td style="line-height:18px;"></td>
                             <td class="B" style="line-height:18px;">  Name</td>
                             <td class="B" style="line-height:18px;">:</td>
-                            <td class="U B" style="line-height:18px;"> Mrs. Bishnu Kumari Acharya</td>
+                            <td class="U B" style="line-height:18px;"> {{ $sitevisit->client->owner ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td style="line-height:18px;"></td>
                             <td style="line-height:18px;">  Address</td>
                             <td style="line-height:18px;">:</td>
-                            <td style="line-height:18px;">Ward No:-3, Diktel VDC</td>
+                            <td style="line-height:18px;">{{ $sitevisit->client->owner->address ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td style="line-height:18px;"></td>
                             <td style="line-height:18px;">  District</td>
                             <td style="line-height:18px;">:</td>
-                            <td style="line-height:18px;">Khotang</td>
+                            <td style="line-height:18px;">{{ $sitevisit->client->owner->district ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <th style="line-height:18px;">3.</th>
@@ -417,31 +417,31 @@
                             <td></td>
                             <td class="B">  Kitta No.</td>
                             <td class="B">:</td>
-                            <td class="U B"> 2283, 1001 &amp; 1004</td>
+                            <td class="U B"> {{ $sitevisit->lalpurjaDatas->implode('kita_no',' - ') ?? 'N/A'}}</td>
+                            
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Sheet No</td>
                             <td>:</td>
-                            <td>4/1</td>
+                            <td>{{ $sitevisit->lalpurjaDatas->implode('sheet_no',' - ') ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <th>4.</th>
                             <th>Address of The Property</th>
                             <th>:</th>
-                            <th>Ward No:-04, Danchi VDC (Current Ward No:-04, Kageshwori Manohara Municipality)</th>
+                            <th>{{$sitevisit->valuationDetails->location_of_land ?? 'N/A'}}</th>
                         </tr>
                         <tr>
                             <td colspan="2">Location &amp; Access of The Property</td>
                             <td>:</td>
-                            <td>The Property is connected by Earthen road and distance of the property is approx. 850M
-                                From Danchi Chowk &amp; 6.2Km from MBL Boudhha Branch to site.</td>
+                            <td>The Property is connected by {{ $sitevisit->valuationDetails->type_of_access}} road and distance of the property is approx. {{$sitevisit->valuationDetails->location_of_land}} to site.</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  District</td>
                             <td>:</td>
-                            <td>Kathmandu</td>
+                            <td>{{ $sitevisit->valuationDetails->district ?? ''}}</td>
                         </tr>
                         <tr>
                             <th>5.</th>
@@ -462,77 +462,77 @@
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;">Lalpurja</td>
-                                            <td style="border:1px solid #dee2e6;">0-12-3-3</td>
-                                            <td style="border:1px solid #dee2e6;">4428.00</td>
-                                            <td style="border:1px solid #dee2e6;">12.94</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->valuationDetails->total_rapd_as_lalpurja ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->valuationDetails->total_sqf_as_lalpurja ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->valuationDetails->total_anna_as_lalpurja ?? ''}}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;">Measurement</td>
-                                            <td style="border:1px solid #dee2e6;">0-13-0-3.6</td>
-                                            <td style="border:1px solid #dee2e6;">4526.30</td>
-                                            <td style="border:1px solid #dee2e6;">13.22</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->valuationDetails->total_rapd_as_measurement ??''}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->valuationDetails->total_sqf_as_measurement ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->valuationDetails->total_anna_as_measurement ?? ''}}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;">Deduction For Road</td>
-                                            <td style="border:1px solid #dee2e6;">0-0-0-3.88</td>
-                                            <td style="border:1px solid #dee2e6;">83.00</td>
-                                            <td style="border:1px solid #dee2e6;">0.24</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->rAPDAPConsideration ?? '' }}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->sqFAPConsideration ?? '' }}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->annaAPConsideration ?? '' }}</td>
                                         </tr>
                                         <tr>
-                                            <td></td>
-                                            <td style="border:1px solid #dee2e6;">Land Development (0% @ of Total Land
+                                            <td></td>                   
+                                            <td style="border:1px solid #dee2e6;">Land Development ({{ $sitevisit->deduction->landDevelopmentPercent ?? 0}}% @ of Total Land
                                                 Area)</td>
-                                            <td style="border:1px solid #dee2e6;"></td>
-                                            <td style="border:1px solid #dee2e6;"></td>
-                                            <td style="border:1px solid #dee2e6;"></td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_rapd_as_land_development ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_sqf_as_land_development ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_anna_as_land_development ?? ''}}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;">Deduction For Hightension Line</td>
-                                            <td style="border:1px solid #dee2e6;"></td>
-                                            <td style="border:1px solid #dee2e6;"></td>
-                                            <td style="border:1px solid #dee2e6;"></td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_rapd_as_high_tension_deduction ?? 0}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_sqf_high_tension_deduction ?? 0}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_anna_as_high_tension_deduction ?? 0}}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;">Deduction For Low Land</td>
-                                            <td style="border:1px solid #dee2e6;"></td>
-                                            <td style="border:1px solid #dee2e6;"></td>
-                                            <td style="border:1px solid #dee2e6;"></td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_rapd_as_low_land_deduction ?? 0}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_sqf_low_land_deduction ?? 0}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_anna_as_low_land_deduction ?? 0}}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;">Deduction For River</td>
-                                            <td style="border:1px solid #dee2e6;"></td>
-                                            <td style="border:1px solid #dee2e6;"></td>
-                                            <td style="border:1px solid #dee2e6;"></td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_rapd_as_river_deduction ?? 0}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_sqf_river_deduction ?? 0}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_anna_as_river_deduction ?? 0}}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td style="border:1px solid #dee2e6;">Boundry Correction(10% @ of Total
+                                            <td style="border:1px solid #dee2e6;">Boundry Correction({{ $sitevisit->deduction->deductionForBoundryCorrection ?? 0}}% @ of Total
                                                 Land Area)</td>
-                                            <td style="border:1px solid #dee2e6;">0-1-1-0.67</td>
-                                            <td style="border:1px solid #dee2e6;">442.80</td>
-                                            <td style="border:1px solid #dee2e6;">1.29</td>
+                                                <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_rapd_as_boundry_correction_deduction ?? 0}}</td>
+                                                <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_sqf_boundry_correction_deduction ?? 0}}</td>
+                                                <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_anna_as_boundry_correction_deduction ?? 0}}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td style="border:1px solid #dee2e6;">Irregular Shape / Sloppy Land (0% @
+                                            <td style="border:1px solid #dee2e6;">Irregular Shape / Sloppy Land ({{ $sitevisit->deduction->deductionForBoundryCorrection ?? 0}}% @
                                                 of Total Land Area)</td>
-                                            <td style="border:1px solid #dee2e6;"></td>
-                                            <td style="border:1px solid #dee2e6;"></td>
-                                            <td style="border:1px solid #dee2e6;"></td>
+                                                <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_rapd_as_irregular_shape_deduction ?? 0}}</td>
+                                                <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_sqf_irregular_shape_deduction ?? 0}}</td>
+                                                <td style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->total_anna_as_irregular_shape_deduction??0}}</td>
                                         </tr>
                                         <tr class="B vendorListHeading">
                                             <th
                                                 style="background-color: white !important;-webkit-print-color-adjust: exact;">
                                             </th>
                                             <th style="border:1px solid #dee2e6;">Consideration</th>
-                                            <th style="border:1px solid #dee2e6;">0-11-1-2.4</th>
-                                            <th style="border:1px solid #dee2e6;">3902.20</th>
-                                            <th style="border:1px solid #dee2e6;">11.40</th>
+                                            <th style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->rAPDAPConsideration ?? 0}}</th>
+                                            <th style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->sqFAPConsideration  ?? 0}}</th>
+                                            <th style="border:1px solid #dee2e6;">{{ $sitevisit->deduction->annaAPConsideration ?? 0}}</th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -550,26 +550,26 @@
                                         <tr>
                                             <td width="30"></td>
                                             <td style="border:1px solid #dee2e6;" width="400">Market Rate</td>
-                                            <td style="border:1px solid #dee2e6;">Nrs. 10,00,000.00</td>
+                                            <td style="border:1px solid #dee2e6;">Nrs. {{$sitevisit->rateofland->perAnnaAPMarketRate ?? 'N/A'}}</td>
                                             <td></td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;">Land Revenue Office</td>
-                                            <td style="border:1px solid #dee2e6;">Nrs. 4,90,000.00</td>
+                                            <td style="border:1px solid #dee2e6;">Nrs. {{$sitevisit->rateofland->perAnnaAPGovRate ?? 'N/A'}}</td>
                                             <td></td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;">Wighted Fair Market Rate</td>
-                                            <td style="border:1px solid #dee2e6;">Nrs. 9,49,000.00</td>
-                                            <td style="border:1px solid #dee2e6;">90% MR+10% GR</td>
+                                            <td style="border:1px solid #dee2e6;">Nrs. {{$sitevisit->rateofland->perAnnaAPFairRate ?? 'N/A'}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{$sitevisit->bank->fair_market_rate ?? 0}}% MR+{{$sitevisit->bank->governmant_rate ?? 0}}% GR</td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;">Distress Rate</td>
-                                            <td style="border:1px solid #dee2e6;">Nrs. 7,59,200.00</td>
-                                            <td style="border:1px solid #dee2e6;"> 80% Distress</td>
+                                            <td style="border:1px solid #dee2e6;">Nrs. {{$sitevisit->rateofland->perAnnaAPDistressRate ?? 'N/A'}}</td>
+                                            <td style="border:1px solid #dee2e6;"> {{$sitevisit->bank->fair_market_rate}}% Distress</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -587,17 +587,17 @@
                                         <tr>
                                             <td width="30"></td>
                                             <td style="border:1px solid #dee2e6;" width="400">Commercial Value</td>
-                                            <td style="border:1px solid #dee2e6;">Nrs. 1,14,00,000.00</td>
+                                            <td style="border:1px solid #dee2e6;">Nrs. {{$sitevisit->rateofland->commercialValueOfLand ?? 'N/A'}}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;">Wighted Fair Market Value</td>
-                                            <td style="border:1px solid #dee2e6;">Nrs. 1,08,18,600.00</td>
+                                            <td style="border:1px solid #dee2e6;">Nrs. {{$sitevisit->rateofland->fairMarketValueOfLand ?? 'N/A'}}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;">Distress Value</td>
-                                            <td style="border:1px solid #dee2e6;">Nrs. 86,54,880.00</td>
+                                            <td style="border:1px solid #dee2e6;">Nrs. {{$sitevisit->rateofland->distressValueOfLand ?? 'N/A'}} </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -628,7 +628,7 @@
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;">1</td>
-                                            <td style="border:1px solid #dee2e6;"> 2283, 1001 &amp; 1004</td>
+                                            <td style="border:1px solid #dee2e6;"> {{ $sitevisit->lalpurjaDatas->implode(' - ','kita_no') ?? 'N/A'}}</td>
                                             <td style="border:1px solid #dee2e6;">Residential</td>
                                             <td style="border:1px solid #dee2e6;">7'-5"</td>
                                             <td style="border:1px solid #dee2e6;">10 Feet (Dead End) Wide Earthen Road
@@ -656,13 +656,18 @@
                                             <td style="border:1px solid #dee2e6;">South</td>
                                         </tr>
                                         <tr>
-                                            <td></td>
-                                            <td style="border:1px solid #dee2e6;">1</td>
-                                            <td style="border:1px solid #dee2e6;"> 2283, 1001 &amp; 1004</td>
-                                            <td style="border:1px solid #dee2e6;">2437</td>
-                                            <td style="border:1px solid #dee2e6;">Kachhi Motor Bato</td>
-                                            <td style="border:1px solid #dee2e6;">1002, 1005 &amp; 2282</td>
-                                            <td style="border:1px solid #dee2e6;">291</td>
+                                            @if ($sitevisit->govBoundaries->count() > 0)
+                                                @foreach ( $sitevisit->govBoundaries as $boundary)
+                                                <tr>
+                                                    <td>{{ $loop->iteration}}</td>
+                                                    <td>{{ $boundary->kita_no }}</td>
+                                                    <td> {{ $boundary->east }}</td>
+                                                    <td> {{ $boundary->west }}</td>
+                                                    <td> {{ $boundary->north }}</td>
+                                                    <td>{{ $boundary->south }}</td>
+                                                </tr>
+                                                @endforeach
+                                            @endif
                                         </tr>
                                     </tbody>
                                 </table>
@@ -704,7 +709,7 @@
                         </tr>
                         <tr>
                             <th width="30">11.</th>
-                            <th colspan="3">Total Value of Property Land Only</th>
+                            <th colspan="3">Total Value of Property {{ $sitevisit->valuation_type == "Land" ? 'Land' : 'Land & Building'}}</th>
                         </tr>
                         <tr>
                             <td colspan="4">
@@ -811,13 +816,13 @@
                             <th></th>
                             <th>Purpose of Valuation</th>
                             <th width="30">:</th>
-                            <th>To be Mortagaged at <b>MACHHAPUCHCHHRE BANK LTD.</b></th>
+                            <th>To be Mortagaged at <b>{{ $sitevisit->bank->name ?? ''}}</b></th>
                         </tr>
                         <tr>
                             <th width="30"></th>
                             <th width="280">List of Property Evaluated</th>
                             <th width="30">:</th>
-                            <th>For Land Only</th>
+                            <th>For {{ $sitevisit->valuation_type == "Land" ? 'Land' : 'Land & Building'}}</th>
                         </tr>
                         <tr>
                             <th>1.</th>
@@ -829,43 +834,43 @@
                             <td></td>
                             <td>  Name</td>
                             <td>:</td>
-                            <td class="B U">Mr. Bhimesh Chandra Acharya</td>
+                            <td class="B U">{{ $sitevisit->client->client_name ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Address</td>
                             <td>:</td>
-                            <td>Ward No:-1, Biratnagar Municipality</td>
+                            <td>{{ $sitevisit->client->address ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  District</td>
                             <td>:</td>
-                            <td>Morang</td>
+                            <td>{{ $sitevisit->client->district ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Father Name</td>
                             <td>:</td>
-                            <td>Mr. Padam Prasad Acharya</td>
+                            <td> {{ $sitevisit->client->father_name ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Grand Father Name</td>
                             <td>:</td>
-                            <td>Mr. Abi Narayan Acharya</td>
+                            <td>{{ $sitevisit->client->grand_father_name ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Citizenship No</td>
                             <td>:</td>
-                            <td>271060/51548 (Issued Date :28/10/2066) Kathmandu</td>
+                            <td>{{ $sitevisit->client->citizenship_no ?? 'N/A'}} (Issued Date :{{ $sitevisit->client->date_of_issue ?? 'N/A'}}) {{ $sitevisit->client->place_of_issue ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Contact No</td>
                             <td>:</td>
-                            <td>9840884344</td>
+                            <td>{{ $sitevisit->client->contact_no ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <th>2.</th>
@@ -875,44 +880,44 @@
                             <td></td>
                             <td>  Name</td>
                             <td>:</td>
-                            <td class="B U"> Mrs. Bishnu Kumari Acharya</td>
+                            <td class="B U"> {{ $sitevisit->client->owner->owner_name ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Address</td>
                             <td>:</td>
-                            <td>Ward No:-3, Diktel VDC</td>
+                            <td>{{ $sitevisit->client->owner->address ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  District</td>
                             <td>:</td>
-                            <td>Khotang</td>
+                            <td>{{ $sitevisit->client->owner->district ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Husband's Name</td>
                             <td>:</td>
-                            <td>Mr. Padam Prasad Acharya</td>
+                            <td>{{ $sitevisit->client->owner->husband_name ?? ''}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Father in Law's Name</td>
                             <td>:</td>
-                            <td>Mr. Abi Narayan Acharya</td>
+                            <td>{{ $sitevisit->client->owner->father_in_law_name ?? ''}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Citizenship No</td>
                             <td>:</td>
-                            <td>368 (Issued Date :23/06/2040) Khotang</td>
+                            <td>{{ $sitevisit->client->owner->citizenship_no ?? 'N/A'}} (Issued Date :{{ $sitevisit->client->owner->date_of_issue ?? 'N/A'}}) {{ $sitevisit->client->owner->place_of_issue ?? 'N/A'}}</td>
                         </tr>
 
                         <tr>
                             <td></td>
                             <td>  Contact No</td>
                             <td>:</td>
-                            <td>9840884344</td>
+                            <td>{{ $sitevisit->client->owner->contact_no ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <th>3.</th>
@@ -926,20 +931,19 @@
                             <td></td>
                             <td>  Kitta No (Plot No)</td>
                             <td>:</td>
-                            <td> 2283, 1001 &amp; 1004</td>
+                            <td> {{ $sitevisit->lalpurjaDatas->implode(' - ','kita_no') ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Sheet No</td>
                             <td>:</td>
-                            <td>4/1</td>
+                            <td>{{ $sitevisit->lalpurjaDatas->implode(' - ','sheet_no') ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Local Authority</td>
                             <td>:</td>
-                            <td class="B U">Ward No:-04, Danchi VDC (Current Ward No:-04, Kageshwori Manohara
-                                Municipality)</td>
+                            <td class="B U">{{$sitevisit->valuationDetails->location_of_land ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td></td>
@@ -956,43 +960,43 @@
                             <td></td>
                             <td>  Property Usage</td>
                             <td>:</td>
-                            <td>Residential</td>
+                            <td>{{$sitevisit->valuationDetails->property_usage ?? ''}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Shape</td>
                             <td>:</td>
-                            <td>Polygon</td>
+                            <td>{{$sitevisit->valuationDetails->shape ?? ''}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Facing</td>
                             <td>:</td>
-                            <td>West</td>
+                            <td>{{$sitevisit->valuationDetails->facing ?? ''}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Frontage</td>
                             <td>:</td>
-                            <td>16.86 M</td>
+                            <td>{{$sitevisit->valuationDetails->frontage ?? ''}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Level with Road</td>
                             <td>:</td>
-                            <td>Same Level</td>
+                            <td>{{$sitevisit->valuationDetails->level_with_road ?? ''}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Boundary Wall</td>
                             <td>:</td>
-                            <td>yes</td>
+                            <td>{{$sitevisit->valuationDetails->compound_wall ?? ''}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Topography</td>
                             <td>:</td>
-                            <td>Flat</td>
+                            <td>{{$sitevisit->valuationDetails->property_usage ?? ''}}</td>
                         </tr>
                         <tr>
                             <td><b>6.</b></td>
@@ -1026,8 +1030,7 @@
                         <tr>
                             <td></td>
                             <td colspan="3">As per the copy of land Ownership certificate issued by ministry of land
-                                Department of land revenue, NG, area of the parcel (kitta) No is .:- 2283, 1001 &amp;
-                                1004</td>
+                                Department of land revenue, NG, area of the parcel (kitta) No is .:- {{ $sitevisit->lalpurjaDatas->implode('kita_no') ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td colspan="4">
@@ -1053,33 +1056,20 @@
                                                 style="border:1px solid #dee2e6; background-color: #dedede !important; -webkit-print-color-adjust: exact;">
                                                 Area of the Land in Anna</th>
                                         </tr>
+                                        @foreach ($sitevisit->lalpurjaDatas as $lalpurja)
                                         <tr>
                                             <td></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">1</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">2283</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">109.31</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">0-3-1-3</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">1176.55</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">3.44</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $loop->iteration }}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $lalpurja->kita_no }}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $lalpurja->sqm_as_lalpurja }}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $lalpurja->rapd_as_lalpurja }}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $lalpurja->sqf_as_lalpurja }}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $lalpurja->area_in_anna_as_lalpurja }}</td>
+                                            
                                         </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">2</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">1001</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">158.98</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">0-5-0-0</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">1711.25</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">5.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">3</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">1004</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">143.09</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">0-4-2-0</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">1540.20</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">4.50</td>
-                                        </tr>
+                                        
+                                    @endforeach
+                                       
                                         <tr>
                                             <th></th>
                                             <th colspan="2"
@@ -1087,16 +1077,16 @@
                                                 Total</th>
                                             <th
                                                 style="border:1px solid #dee2e6;background-color: #dedede !important; -webkit-print-color-adjust: exact;">
-                                                411.38</th>
+                                                {{$sitevisit->valuationDetails->total_sqm_as_lalpurja ?? 0 }}</th>
                                             <th
                                                 style="border:1px solid #dee2e6;background-color: #dedede !important; -webkit-print-color-adjust: exact;">
-                                                0-12-3-3</th>
+                                                {{$sitevisit->valuationDetails->total_rapd_as_lalpurja ?? 0 }}</th>
                                             <th
                                                 style="border:1px solid #dee2e6;background-color: #dedede !important; -webkit-print-color-adjust: exact;">
-                                                4428.00</th>
+                                                {{$sitevisit->valuationDetails->total_sqf_as_lalpurja ?? 0 }}</th>
                                             <th
                                                 style="border:1px solid #dee2e6;background-color: #dedede !important; -webkit-print-color-adjust: exact;">
-                                                12.94</th>
+                                               {{$sitevisit->valuationDetails->total_anna_as_lalpurja ?? 0 }}</th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1138,69 +1128,18 @@
                                                 style="border:1px solid #dee2e6; background-color: #dedede !important; -webkit-print-color-adjust: exact;">
                                                 Total area in sq.ft</th>
                                         </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">Triangle 1</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">55.33</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">19.42</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">44.33</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">59.54</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">391.10</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">Triangle 2</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">44.33</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">12.07</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">54.07</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">55.23</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">174.04</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">Triangle 3</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">54.07</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">44.67</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">55.75</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">77.25</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">1119.58</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">Triangle 4</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">55.75</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">50.92</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">51.92</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">79.30</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">1204.25</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">Triangle 5</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">51.92</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">44.33</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">40.42</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">68.34</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">866.99</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">Triangle 6</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">40.42</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">24.58</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">33.75</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">49.38</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">413.88</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">Triangle 7</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">33.50</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">22.50</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">33.75</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">44.88</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">356.46</td>
-                                        </tr>
+                                        @foreach ($sitevisit->landbasedDatas as $data)
+                                            <tr>
+                                                <td>{{ $loop->iteration}}</td>
+                                                <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $data->areaSymbol }}</td>
+                                                <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $data->sideA }}</td>
+                                                <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $data->sideB }}</td>
+                                                <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $data->sideC }}</td>
+                                                <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $data->sideS }}</td>
+                                                <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $data->sqFAPMeasurement }}</td>
+                                            </tr>
+                                        @endforeach
+                                       
                                         <tr>
                                             <th></th>
                                             <th colspan="5"
@@ -1208,7 +1147,7 @@
                                                 Total</th>
                                             <th
                                                 style="border:1px solid #dee2e6; background-color: #dedede !important; -webkit-print-color-adjust: exact;">
-                                                4526.30</th>
+                                                {{ $sitevisit->valuationDetails->total_sqf_as_measurement }}</th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1232,57 +1171,57 @@
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;padding: .1rem;">As per Lalpurja</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">0-12-3-3</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">4428.00</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">12.94</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->valuationDetails->total_rapd_as_lalpurja}}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->valuationDetails->total_sqf_as_lalpurja}}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->valuationDetails->total_anna_as_lalpurja}}</td>
                                         </tr>
                                         <tr>
                                             <th>
                                             </th>
                                             <td style="border:1px solid #dee2e6;padding: .1rem;">Actual Measurment</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">0-13-0-3.6</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">4526.30</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">13.22</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->valuationDetails->total_rapd_as_measurement}}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->valuationDetails->total_sqf_as_measurement}}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->valuationDetails->total_anna_as_measurement}}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;padding: .1rem;">Deduction For Road
                                             </td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">0-0-0-3.88</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">83.00</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;">0.24</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->total_rapd_as_road }}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->total_sqf_as_road }}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->total_anna_as_road }}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;padding: .1rem;">Deduction For
                                                 Hightension</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;"></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;"></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;"></td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->total_rapd_as_high_tension_deduction }}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->deductionForHighTensionSqF }}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->total_anna_as_high_tension_deduction }}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;padding: .1rem;">Deduction For River
                                             </td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;"></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;"></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;"></td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->total_rapd_as_river_deduction }}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->deductionForRiverSqF }}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->total_anna_as_river_deduction }}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;padding: .1rem;">Deduction For Low Land
                                             </td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;"></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;"></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;"></td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->total_rapd_as_river_deduction ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->total_rapd_as_river_deduction ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->total_rapd_as_river_deduction ?? ''}}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;padding: .1rem;">Land Development (0% @
                                                 of Total Land Area)</td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;"></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;"></td>
-                                            <td style="border:1px solid #dee2e6;padding: .1rem;"></td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->total_rapd_as_river_deduction ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->total_rapd_as_river_deduction ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;padding: .1rem;">{{ $sitevisit->deduction->total_rapd_as_river_deduction ?? ''}}</td>
                                         </tr>
                                         <tr>
                                             <td></td>
@@ -1326,8 +1265,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td colspan="3">Ward No:-04, Danchi VDC (Current Ward No:-04, Kageshwori Manohara
-                                Municipality)</td>
+                            <td colspan="3">{{$sitevisit->valuationDetails->location_of_land ?? 'N/A'}}</td>
                         </tr>
                         <tr>
                             <td colspan="4">
@@ -1403,37 +1341,37 @@
                             <td></td>
                             <td width="280px">  Right of Way</td>
                             <td>:</td>
-                            <td>4M</td>
+                            <td>{{ $sitevisit->valuationDetails->rightOfWay ?? ''}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Road size as per Field</td>
                             <td>:</td>
-                            <td>10 Feet (Dead End) Wide Earthen Road on West.</td>
+                            <td>{{ $sitevisit->valuationDetails->road_size ?? ''}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Road size as per Map</td>
                             <td>:</td>
-                            <td>7'-5"</td>
+                            <td> {{ $sitevisit->valuationDetails->access_in_the_blue_print ?? ''}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  Type of Access</td>
                             <td>:</td>
-                            <td>Earthen</td>
+                            <td>{{ $sitevisit->valuationDetails->type_of_access ?? ''}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  River</td>
                             <td>:</td>
-                            <td>Not Seen near site</td>
+                            <td>{{ $sitevisit->valuationDetails->river ?? ''}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>  High tension line</td>
                             <td>:</td>
-                            <td>Not Seen near site</td>
+                            <td>{{ $sitevisit->valuationDetails->hightension_line ?? ''}}</td>
                         </tr>
                         <tr>
                             <th></th>
@@ -1517,10 +1455,10 @@
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td style="border:1px solid #dee2e6;">1,431.70</td>
-                                            <td style="border:1px solid #dee2e6;">2</td>
-                                            <td style="border:1px solid #dee2e6;">4,90,000.00</td>
-                                            <td style="border:1px solid #dee2e6;">78,40,000.00</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->rateofland->perSqFAPGovRate ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->rateofland->govPage ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{$sitevisit->rateofland->perAnnaAPGovRate ?? 'N/A'}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->rateofland->perRopaniAPGovRate ?? ''}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1542,9 +1480,9 @@
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td style="border:1px solid #dee2e6;">2,921.84</td>
-                                            <td style="border:1px solid #dee2e6;">10,00,000.00</td>
-                                            <td style="border:1px solid #dee2e6;">1,60,00,000</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->rateofland->perSqFAPMarketRate ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->rateofland->perAnnaAPMarketRate ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->rateofland->perRopaniAPMarketRate ?? ''}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1566,9 +1504,9 @@
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td style="border:1px solid #dee2e6;">2,772.83</td>
-                                            <td style="border:1px solid #dee2e6;">9,49,000.00</td>
-                                            <td style="border:1px solid #dee2e6;">1,51,84,000</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->rateofland->perSqFAPFairRate ?? ''}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{$sitevisit->rateofland->perAnnaAPFairRate ?? 'N/A'}}</td>
+                                            <td style="border:1px solid #dee2e6;">{{ $sitevisit->rateofland->perRopaniAPFairRate ?? ''}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1628,7 +1566,7 @@
                                             <td></td>
                                             <td style="border:1px solid #dee2e6;">0-11-1-2.4</td>
                                             <td style="border:1px solid #dee2e6;">11.40</td>
-                                            <td style="border:1px solid #dee2e6;">9,49,000.00</td>
+                                            <td style="border:1px solid #dee2e6;">{{$sitevisit->rateofland->perAnnaAPFairRate ?? 'N/A'}}</td>
                                             <td style="border:1px solid #dee2e6;">1,08,18,600.00</td>
                                         </tr>
                                         <tr>
@@ -2156,7 +2094,7 @@
                 <img src="http://ndcnepal.com.np/ndc/storage/UploadPicture/IMG20210620130837_7132.jpg"
                     style="width:8in; height:5in;border: 10px solid #9e9e9e; margin-left:110px;">
                 <br><br><br>
-                <h2 style="text-align:center"><b>The Above Photograph is of plot No:- 2283, 1001 &amp; 1004</b></h2>
+                <h2 style="text-align:center"><b>The Above Photograph is of plot No:- {{ $sitevisit->lalpurjaDatas->implode(' - ','kita_no') ?? 'N/A'}}</b></h2>
                 <div class="PageBreak"></div>
                 <h1 style="margin-left:110px;"><b>Photograph:-</b></h1>
                 <br>
@@ -2167,7 +2105,7 @@
                 <img src="http://ndcnepal.com.np/ndc/storage/UploadPicture/IMG20210620130917_8983.jpg"
                     style="width:8in; height:5in;border: 10px solid #9e9e9e; margin-left:110px;">
                 <br><br><br>
-                <h2 style="text-align:center"><b>The Above Photograph is of plot No:- 2283, 1001 &amp; 1004</b></h2>
+                <h2 style="text-align:center"><b>The Above Photograph is of plot No:- {{ $sitevisit->lalpurjaDatas->implode(' - ','kita_no') ?? 'N/A'}}</b></h2>
                 <div class="PageBreak"></div>
                 <h1 style="margin-left:110px;"><b>Photograph:-</b></h1>
                 <br>
@@ -2178,7 +2116,7 @@
                 <img src="http://ndcnepal.com.np/ndc/storage/UploadPicture/IMG20210620131710_6652.jpg"
                     style="width:8in; height:5in;border: 10px solid #9e9e9e; margin-left:110px;">
                 <br><br><br>
-                <h2 style="text-align:center"><b>The Above Photograph is of plot No:- 2283, 1001 &amp; 1004</b></h2>
+                <h2 style="text-align:center"><b>The Above Photograph is of plot No:- {{ $sitevisit->lalpurjaDatas->implode(' - ','kita_no') ?? 'N/A'}}</b></h2>
                 <div class="PageBreak"></div>
 
                 <img src="http://ndcnepal.com.np/ndc/storage/UploadDocument/trace_2714.jpg"

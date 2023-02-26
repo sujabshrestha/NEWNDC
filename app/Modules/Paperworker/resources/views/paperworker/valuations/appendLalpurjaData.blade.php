@@ -36,7 +36,7 @@
                     <td>{{ $lalpurja->sqf_as_lalpurja }}</td>
                     <td>{{ $lalpurja->rapd_as_lalpurja }}</td>
                     <td>{{ $lalpurja->area_in_anna_as_lalpurja }}</td>
-                    <td><span class="text-danger"> <a class="deleteCalculationData" data-url="{{ route('receptionist.valuation.lalpurjaDelete', $lalpurja->id) }}"> Delete</a></td>
+                    <td><span class="text-danger"> <a class="deleteCalculationData" data-url="{{ route('paperworker.valuation.lalpurjaDelete', $lalpurja->id) }}"> Delete</a></td>
                 </tr>
                 @php
                     $totalSqM = $lalpurja->sqm_as_lalpurja + $totalSqM;

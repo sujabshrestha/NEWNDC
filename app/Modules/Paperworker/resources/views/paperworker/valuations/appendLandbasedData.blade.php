@@ -28,10 +28,8 @@
                 $ltotalAnna=0;
             @endphp
             @foreach ($sitevisit->landbasedDatas as $data)
-
-
             <tr>
-                <th scope="row"></th>
+                <td>{{ $loop->iteration}}</td>
                 <td>{{ $data->areaSymbol }} </td>
                 <td>{{ $data->sideA }}</td>
                 <td>{{ $data->sideB }}</td>
@@ -41,7 +39,7 @@
                 <td>{{ $data->sqMAPMeasurement }}</td>
                 <td>{{ $data->areaInAnnaAPMeasurement }}</td>
                 <td>{{ $data->total_rapd_as_cal }}</td>
-                <td><span class="text-danger"> <a class="deleteCalculationData" data-url="{{ route('receptionist.valuation.landBasedDelete', $data->id) }}">Delete </a></td>
+                <td><span class="text-danger"> <a class="deleteCalculationData" data-url="{{ route('paperworker.valuation.landBasedDelete', $data->id) }}">Delete </a></td>
             </tr>
             @php
                 $ltotalSideA= $ltotalSideA + $data->sideA;

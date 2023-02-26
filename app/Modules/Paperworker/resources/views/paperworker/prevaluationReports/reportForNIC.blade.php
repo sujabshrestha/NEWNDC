@@ -62,9 +62,12 @@
                     <hr style="margin-top: 5px;margin-bottom: 5px;">
                 </strong>
                 <h5 style="font-size: 30px;"><b>Consulting Engineers [Valuer's &amp; Designer]</b></h5>
-                <p style="margin-bottom:10px;">Sankhamul-31,Ktm Tel 01-5242605, 9803658160,Email: ndcaccount@yahoo.com
+                <p style="margin-bottom:10px;">{{ returnSiteSetting('address') ?? 'Sankhamul-31,Ktm' }}
+                    Tel:{{ returnSiteSetting('primary_phone') ?? '01-5242605' }},
+                    {{ returnSiteSetting('secondary_phone') ?? '01-5242605' }}, Email:
+                    {{ returnSiteSetting('primary_email') ?? 'ndcaccount@yahoo.com' }}
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <label style="font-size:13px;">{{$sitevisit->registration_id ?? 'registration_id'}}</label></p>
+                    <label style="font-size:13px;">{{$sitevisit->valuation_assignment_no ?? 'N/A'}}</label></p>
             </div>
         </div>
 
@@ -98,8 +101,7 @@
                             <td colspan="2"> <b>Owner of Property : {{ $sitevisit->client->owner->owner_name ?? 'N/A'}}</b></td>
                         </tr>
                         <tr>
-                            <td colspan="2"> <b>Address of Property as per title deed : Ward No:09(Ka) Badegaun
-                                    VDC(Current Ward No:-14, Godawari Municipality)</b></td>
+                            <td colspan="2"> <b>Address of Property as per title deed : {{ $sitevisit->valuationDetails->address_of_land ?? 'N/A' }}</b></td>
                         </tr>
                         <tr>
                             <td colspan="2"> <b>Present address of property : {{$sitevisit->valuationDetails->location_of_land ?? 'N/A'}}</b></td>
@@ -110,7 +112,7 @@
                         <tr>
                             <td width="20">1. </td>
                             <td>We have physically inspected, verified &amp; measured the properties in the presence of
-                                the client/representative of the client on 2078/03/14 (B.S)</td>
+                                the client/representative of the client on {{ $sitevisit->preparation_date->format('Y-m-d') }} (B.S)</td>
                         </tr>
                         <tr>
                             <td width="20">2. </td>
@@ -121,18 +123,18 @@
                             <td width="20">3. </td>
                             <td>The conclusion in this report are our unbiased considered opinion of Fair Market Value
                                 and Distress Value of the subject assets as of the date of valuation which is
-                                2078/03/14(B.S)</td>
+                                {{ $sitevisit->preparation_date->format('Y-m-d') }}(B.S)</td>
                         </tr>
                         <tr>
                             <td width="20">4. </td>
                             <td>The area of the land as per Land Ownership Registration Certificate (LORC) for Plot No:-
-                                441 &amp; 443 ({{ $sitevisit->valuationDetails->total_rapd_as_lalpurja ?? 'N/A'}}) {{ $sitevisit->valuationDetails->total_sqm_as_lalpurja ?? 'N/A'}} sqm ({{ $sitevisit->valuationDetails->total_anna_as_lalpurja ?? 'N/A'}} Anna) &amp; as per measurement is({{ $sitevisit->valuationDetails->total_rapd_as_measurement ?? 'N/A'}})
+                               {{ $sitevisit->lalpurjaDatas->implode(" & ",'plot_no') ?? 'N/A'}} ({{ $sitevisit->valuationDetails->total_rapd_as_lalpurja ?? 'N/A'}}) {{ $sitevisit->valuationDetails->total_sqm_as_lalpurja ?? 'N/A'}} sqm ({{ $sitevisit->valuationDetails->total_anna_as_lalpurja ?? 'N/A'}} Anna) &amp; as per measurement is({{ $sitevisit->valuationDetails->total_rapd_as_measurement ?? 'N/A'}})
                                 {{ $sitevisit->valuationDetails->total_sqm_as_measurement ?? 'N/A'}} sqm ({{ $sitevisit->valuationDetails->total_anna_as_measurement ?? 'N/A'}} Anna) and net area considered for valuation is ({{ $sitevisit->deduction->rAPDAPConsideration ?? 'N/A'}}) {{ $sitevisit->deduction->sqMAPConsideration ?? 'N/A'}} sqm
                                 ({{ $sitevisit->deduction->annaAPConsideration ?? 'N/A'}} Anna.)</td>
                         </tr>
                         <tr>
                             <td width="20">5. </td>
-                            <td>Width at the narrowest part of the plot 441 &amp; 443 is 5'-0" ( if less than 6M , The
+                            <td>Width at the narrowest part of the plot {{ $sitevisit->lalpurjaDatas->implode(" & ",'plot_no') ?? 'N/A'}} is {{ $sitevisit->valuationDetails->narrowestPartOfLand ?? 0}} ( if less than 6M , The
                                 Valuer Should certify that a Building can be constructed as per the Building
                                 Construction code applicable in the particular area .)</td>
                         </tr>
@@ -143,26 +145,25 @@
                         </tr>
                         <tr>
                             <td width="20">7. </td>
-                            <td>The access to the site by 10'-7" &amp; 6'-5" (Dead End) wide Road on South which is
-                                shown in blueprint /other legal documnts and the access Road at site is 12'-0" wide
-                                Earthen Road (Dead End) on East &amp; 13'-0" wide Earthen road on South on our physical
-                                verification.</td>
+                            <td>The access to the site by {{$sitevisit->valuationDetails->access_in_the_blue_print ? 'N/A'}} wide Road on {{ $sitevisit->valuationDetails->facing }} which is
+                                shown in blueprint /other legal documnts and the access Road at site is {{ $sitevisit->valuationDetails->road_size }} wide {{ $sitevisit->valuationDetails->type_of_access }} 
+                                road on {{ $sitevisit->valuationDetails->facing }} on our physical verification.</td>
                         </tr>
                         <tr>
                             <td width="20">8. </td>
-                            <td>ROW (Right of Way) of 4m in South has been deducted as per Fundamental Guideline issued
+                            <td>ROW (Right of Way) of {{ $sitevisit->valuationDetails->right_of_way}} in {{ $sitevisit->valuationDetails->facing }} has been deducted as per Fundamental Guideline issued
                                 by Ministry of of Federal Affairs and Local Development regarding town development, town
                                 planning and building construction, 2072.</td>
                         </tr>
                         <tr>
                             <td width="20">9. </td>
-                            <td>The details of building construction with Frame Structure (4 And Half Stories) and of
-                                Residential having plinth area 495.51 sq.ft. &amp; Total Building Area 1721.93 sq. ft.
-                                within Metropolitan/Municipal permission and Building is 0 Years Old.</td>
+                            <td>The details of building construction with {{ $sitevisit->valuationDetails->frame_structure}} ({{ $sitevisit->valuationDetails->no_of_floors}}) and of
+                                {{ $sitevisit->valuationDetails->property_usage}} having plinth area 495.51 sq.ft. &amp; Total Building Area {{ $sitevisit->valuationDetails->totalBuildingAreaSqF}} sq. ft.
+                                within Metropolitan/Municipal permission and Building is {{$sitevisit->landbasedDatas()->take(1)->building_age}} Years Old.</td>
                         </tr>
                         <tr>
                             <td width="20">10. </td>
-                            <td>Does the collateral fall under watch list category? :- (No)</td>
+                            <td>Does the collateral fall under watch list category? :- ({{ $sitevisit->valuationDetails->any_collateral_fall}})</td>
                         </tr>
                         <tr>
                             <td width="20">11. </td>
@@ -183,16 +184,16 @@
                         <tbody>
                             <tr>
                                 <td>A. Land (Plot No.)</td>
-                                <td rowspan="2"> 441 &amp; 443</td>
-                                <td>Nrs. 12,95,600.00</td>
+                                <td rowspan="2">{{ $sitevisit->lalpurjaDatas->implode(" & ",'plot_no') ?? 'N/A'}}</td>
+                                <td>Nrs. {{ number_format($sitevisit->rateofland->fairMarketValueOfLand,2) ?? 0 }}</td>
                             </tr>
                             <tr>
                                 <td>B. Value of Building (FMV)</td>
-                                <td>Nrs. 2,97,306.00</td>
+                                <td>Nrs. {{ number_format($sitevisit->valuationDetails->totalBuildingFairMarketValue,2)}}</td>
                             </tr>
                             <tr>
                                 <td colspan="2">Fair Market Value of Property is</td>
-                                <td>Nrs. 15,92,000.00</td>
+                                <td>Nrs. {{ number_format($sitevisit->rateofland->fairMarketValueOfLand+$sitevisit->valuationDetails->totalBuildingFairMarketValue,2)}}</td>
                             </tr>
                             <tr>
                                 <td colspan="3"><b>In word:- Fifteen lakh ninety two thousand rupees Only/-</b></td>
@@ -204,16 +205,16 @@
                         <tbody>
                             <tr>
                                 <td>A. Land (Plot No.)</td>
-                                <td rowspan="2"> 441 &amp; 443</td>
-                                <td>Nrs. 12,95,600.00</td>
+                                <td rowspan="2">{{ $sitevisit->lalpurjaDatas->implode(" & ",'plot_no') ?? 'N/A'}}</td>
+                                <td>Nrs. {{ number_format($sitevisit->rateofland->distressValueOfLand,2) ?? 0 }}</td>
                             </tr>
                             <tr>
                                 <td>B. Value of Building</td>
-                                <td>Nrs. 2,97,306.00</td>
+                                <td>Nrs. {{ number_format($sitevisit->valuationDetails->totalBuildingDistressValue,2)}}</td>
                             </tr>
                             <tr>
                                 <td colspan="2">The Distress Value of the Property is</td>
-                                <td>Nrs. 15,92,000.00</td>
+                                <td>Nrs. {{ number_format($sitevisit->rateofland->distressValueOfLand+$sitevisit->valuationDetails->totalBuildingDistressValue,2)}}</td>
                             </tr>
                             <tr>
                                 <td colspan="3"><b>In word:- Fifteen lakh ninety two thousand rupees Only/-</b></td>

@@ -1,11 +1,12 @@
 @extends('layouts.paperworker.master')
 
-@section('title', 'NDC | Valuation Long Form ')
+@section('title', 'NDC | Valuation ')
 
-@section('breadcrumb', 'Valuation Long Form ')
+@section('breadcrumb', 'Valuation ')
 
 @push('styles')
     <link href="{{ asset('backendfiles/assets/css/elements/tooltip.css')}}" rel="stylesheet" type="text/css" />
+    <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css" rel="stylesheet" type="text/css"/>
 
     <style>
         .required {
@@ -38,7 +39,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-3" style="padding-left:6px;padding-right:6px;">
+                            <div class="col-md-3 col-sm-4" style="padding-left:6px;padding-right:6px;">
 
                                 <div class="form-group">
                                     <label>Valuation Id</label>
@@ -47,7 +48,7 @@
                                         autocomplete="off">
                                 </div>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3 col-sm-4">
                                 <label for="valuationType">Valuation Type <span class="text-danger">*</span></label>
                                 <select class="form-control selectbox" readonly name="valuation_type" id="valuationType"
                                     required="" valuationtype="" autofocus="">
@@ -60,9 +61,9 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3 col-sm-4">
                                 <label for="bankId">Bank <span class="text-danger">*</span></label>
-                                <select class="form-control selectbox" readonly name="bank_id" id="bankId" required=""
+                                <select class="form-control selectbox" disabled readonly name="bank_id" id="bankId" required=""
                                     mycommercialvalue="{{ $sitevisit->bank->commercial_rate }}"
                                     mygovernmentvalue="{{ $sitevisit->bank->governmant_rate }}"
                                     myfairmarketvalue="{{ $sitevisit->bank->fair_market_rate }}"
@@ -85,7 +86,7 @@
 
                                 </select>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3 col-sm-4">
                                 <label for="branchId">Branch <span class="text-danger">*</span></label>
                                 <select class="form-control selectbox" readonly name="branch_id" id="branchId"
                                     required="">
@@ -99,10 +100,9 @@
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3 col-sm-4">
                                 <label> Client <span class="text-danger">*</span></label>
                                 <select name="client_id" readonly class="form-control" id="">
-
                                     @if (isset($clients))
                                         @foreach ($clients as $client)
                                             <option @if (isset($sitevisit) && $sitevisit->client_id == $client->id) selected @endif
@@ -113,7 +113,7 @@
                             </div>
 
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3 col-sm-4">
                                 <label for="siteEngineerId">Site Engineer <span class="text-danger">*</span></label>
                                 <select class="form-control selectbox" readonly name="site_engineer" id="TxtSiteEngineerId"
                                     required="">
@@ -127,23 +127,23 @@
 
                                 </select>
                             </div>
-                            <div class="form-group col-md-3" style="padding-left:6px;padding-right:6px;">
+                            <div class="form-group col-md-3 col-sm-4" style="padding-left:6px;padding-right:6px;">
                                 <label>Valuation Assignment No</label>
                                 <input type="text" name="valuation_assignment_on" id="valuation_assignment_on"
                                     class="form-control"
                                     value="{{ $sitevisit->valuation_assignment_no ?? (old('valuation_assignment_on') ?? '') }}"
                                     autocomplete="off" required="">
                             </div>
-                            <div class="form-group col-md-3" style="padding-left:6px;padding-right:6px;">
-                                <label>Prepration Date (BS) <span class="required">*</span></label>
+                            <div class="form-group col-md-3 col-sm-4" style="padding-left:6px;padding-right:6px;">
+                                <label>Preparation Date (BS) <span class="required">*</span></label>
                                 {{-- {{$sitevisit->preparation_date}} --}}
-                                <input type="date" name="prepration_date" id="prepration_date" required=""
+                                <input type="text" name="prepration_date" id="prepration_date" required=""
                                     value="{{ ($sitevisit->preparation_date != null ? $sitevisit->preparation_date->format('Y-m-d') : '') ?? (old('prepration_date', date('Y-m-d')) ?? '') }}"
                                     class="form-control" autocomplete="off">
                             </div>
-                            <div class="form-group col-md-3" style="padding-left:6px;padding-right:6px;">
-                                <label>Date (BS) (Ownership) <span class="required">*</span></label>
-                                <input type="date" name="date_ownership" id="date_ownership" required=""
+                            <div class="form-group col-md-3 col-sm-4" style="padding-left:6px;padding-right:6px;">
+                                <label>Date (Ownership) (BS) <span class="required">*</span></label>
+                                <input type="text" name="date_ownership" id="date_ownership" required=""
                                     value="{{ ($sitevisit->ownership_date != null ? $sitevisit->ownership_date->format('Y-m-d') : '') ?? (old('date_ownership', date('Y-m-d')) ?? '') }}"
                                     class="form-control" autocomplete="off">
                             </div>
@@ -180,54 +180,54 @@
                             </div>
 
                             {{-- <form> --}}
-                                <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
+                                <div class="form-group col-md-2 col-sm-2" style="padding-left:6px;padding-right:6px;">
                                     <label>Kita No</label>
                                     <input type="text" name="kita_no" id="kita_no" placeholder="Kita No"
                                         class="form-control">
                                 </div>
-                                <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
+                                <div class="form-group col-md-2 col-sm-2" style="padding-left:6px;padding-right:6px;">
                                     <label>Sheet No</label>
                                     <input type="text" name="sheet_no" id="sheet_no" placeholder="Sheet No"
                                         class="form-control">
                                 </div>
-                                <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
+                                <div class="form-group col-md-2 col-sm-2" style="padding-left:6px;padding-right:6px;">
                                     <label>Ropani</label>
                                     <input type="text" name="ropani_as_lalpurja" id="ropani_as_lalpurja"
                                         placeholder="Ropani" class="form-control" readonly="readonly" tabindex="-1">
                                 </div>
-                                <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
+                                <div class="form-group col-md-2 col-sm-2" style="padding-left:6px;padding-right:6px;">
                                     <label>Anna</label>
                                     <input type="text" name="anna_as_lalpurja" id="anna_as_lalpurja"
                                         placeholder="Anna" class="form-control" autocomplete="off" readonly="readonly"
                                         tabindex="-1">
                                 </div>
-                                <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
+                                <div class="form-group col-md-2 col-sm-2" style="padding-left:6px;padding-right:6px;">
                                     <label>Paisa</label>
                                     <input type="text" name="paisa_as_lalpurja" id="paisa_as_lalpurja"
                                         placeholder="Paisa" class="form-control" autocomplete="off" readonly="readonly"
                                         tabindex="-1">
                                 </div>
-                                <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
+                                <div class="form-group col-md-2 col-sm-2" style="padding-left:6px;padding-right:6px;">
                                     <label>Dam</label>
                                     <input type="text" name="dam_as_lalpurja" id="dam_as_lalpurja" placeholder="Dam"
                                         class="form-control" autocomplete="off" readonly="readonly" tabindex="-1">
                                 </div>
-                                <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
+                                <div class="form-group col-md-2 col-sm-3" style="padding-left:6px;padding-right:6px;">
                                     <label>Area in Sq.M</label>
                                     <input type="text" name="sqm_as_lalpurja" id="sqm_as_lalpurja"
                                         placeholder="Area Sq.M" class="form-control" autocomplete="off">
                                 </div>
-                                <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
+                                <div class="form-group col-md-2 col-sm-3" style="padding-left:6px;padding-right:6px;">
                                     <label>Area in (R-A-P-D)</label>
                                     <input type="text" name="rapd_as_lalpurja" id="rapd_as_lalpurja"
                                         readonly="readonly" tabindex="-1" class="form-control">
                                 </div>
-                                <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
+                                <div class="form-group col-md-2 col-sm-3" style="padding-left:6px;padding-right:6px;">
                                     <label>Area in Sq.F</label>
                                     <input type="text" name="sqf_as_lalpurja" id="sqf_as_lalpurja"
                                         readonly="readonly" tabindex="-1" class="form-control">
                                 </div>
-                                <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
+                                <div class="form-group col-md-2 col-sm-3" style="padding-left:6px;padding-right:6px;">
                                     <label>Area in Anna</label>
                                     <input type="text" name="area_in_anna_as_lalpurja" id="area_in_anna_as_lalpurja"
                                         readonly="readonly" tabindex="-1" class="form-control">
@@ -252,7 +252,7 @@
                                     <b>(B) AREA OF LAND BASED ON ACTUAL MEASUREMENT</b>
                                 </label>
                             </div>
-                            <div class="form-group col-md-2" style="max-width:150px;padding-left:6px;padding-right:6px;">
+                            <div class="form-group col-md-2 col-sm-3" style="padding-left:6px;padding-right:6px;">
                                 <label>Area Symbol</label>
                                 <select class="form-control selectbox" name="areaSymbol" id="areaSymbol">
                                     <option value="">Select Area Symbol</option>
@@ -301,27 +301,27 @@
                                     <option value="Triangle 43">Triangle 43</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-1" style="padding-left:6px;padding-right:6px;">
+                            <div class="form-group col-md-1 col-sm-2" style="padding-left:6px;padding-right:6px;">
                                 <label>Side A</label>
                                 <input type="text" name="sideA" id="sideA" placeholder="Side A"
                                     class="form-control" autocomplete="off">
                             </div>
-                            <div class="form-group col-md-1" style="padding-left:6px;padding-right:6px;">
+                            <div class="form-group col-md-1 col-sm-2" style="padding-left:6px;padding-right:6px;">
                                 <label>Side B</label>
                                 <input type="text" name="sideB" id="sideB" placeholder="Side B"
                                     class="form-control" autocomplete="off">
                             </div>
-                            <div class="form-group col-md-1" style="padding-left:6px;padding-right:6px;">
+                            <div class="form-group col-md-1 col-sm-2" style="padding-left:6px;padding-right:6px;">
                                 <label>Side C</label>
                                 <input type="text" name="sideC" id="sideC" placeholder="Side C"
                                     class="form-control" autocomplete="off">
                             </div>
-                            <div class="form-group col-md-2" style="max-width:150px;padding-left:6px;padding-right:6px;">
+                            <div class="form-group col-md-2 col-sm-3" style="max-width:150px;padding-left:6px;padding-right:6px;">
                                 <label>S = (a+b+c)/2</label>
                                 <input type="text" name="sideS" id="sideS" readonly="readonly" tabindex="-1"
                                     class="form-control">
                             </div>
-                            <div class="form-group col-md-2" style="max-width:150px;padding-left:6px;padding-right:6px;">
+                            <div class="form-group col-md-2 " style="max-width:150px;padding-left:6px;padding-right:6px;">
                                 <label>Area in Sq.F</label>
                                 <input type="text" name="sqFAPMeasurement" id="sqFAPMeasurement" readonly="readonly"
                                     tabindex="-1" class="form-control">
@@ -331,7 +331,7 @@
                                 <input type="text" name="sqMAPMeasurement" id="sqMAPMeasurement" readonly="readonly"
                                     tabindex="-1" class="form-control">
                             </div>
-                            <div class="form-group col-md-2" style="padding-left:6px;padding-right:6px;">
+                            <div class="form-group col-md-2 col-sm-4" style="padding-left:6px;padding-right:6px;">
                                 <label>Area in Anna</label>
                                 <input type="text" name="areaInAnnaAPMeasurement" id="areaInAnnaAPMeasurement"
                                     readonly="readonly" tabindex="-1" class="form-control">
@@ -1385,6 +1385,19 @@
 
 @endsection
 @push('scripts')
+<script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js" type="text/javascript"></script>
+
+    <script>
+        var mainInput = document.getElementById("prepration_date");
+        mainInput.nepaliDatePicker();
+
+        var mainInput1 = document.getElementById("date_ownership");
+        mainInput1.nepaliDatePicker();
+
+        var mainInput2 = document.getElementById("buildingConstructionApprovalDate");
+        mainInput2.nepaliDatePicker();
+    </script>
+
     <script>
         $('.mainSubmit').click(function(){
             $('#mainForm').submit();
@@ -1502,7 +1515,7 @@
             var electricityWorkAmount = (electricityWorkPercentage / 100) * floorAmount;
             var floorNetAmount = floorDepriciationAmount + sanitaryPulumbingAmount + electricityWorkAmount + Number(
                 floorAmount);
-            console.log(floorAmount, floorNetAmount);
+            // console.log(floorAmount, floorNetAmount);
             $('#floorNetAmount').val(Number(floorNetAmount).toFixed(2));
         });
 
@@ -1514,6 +1527,9 @@
 
             e.preventDefault();
             var currentevent = $(this);
+
+            var _v3 = Number($('#bankId').attr("myfairmarketvalue"));
+        
             var floor = $('#floor').val();
             var floorAreaInSqF = $('#floorAreaInSqF').val();
             var floorRate = $('#floorRate').val();
@@ -1523,6 +1539,10 @@
             var sanitaryPulumbingPercentage = $('#sanitaryPulumbingPercentage').val();
             var electricityWorkPercentage = $('#electricityWorkPercentage').val();
             var floorNetAmount = $('#floorNetAmount').val();
+
+            var floorDepriciationAmount =(floorNetAmount/100)*(floorAge*floorDepriciationPercentage).toFixed(2);
+            var floorFairMarketValue = floorNetAmount-((floorNetAmount/100)*(floorAge*floorDepriciationPercentage)).toFixed(2);
+            var distressValue = (((floorNetAmount-((floorNetAmount/100)*(floorAge*floorDepriciationPercentage)))/100)*_v3).toFixed(2);
 
             var route = $(this).data('url');
 
@@ -1542,28 +1562,34 @@
                         floorDepriciationPercentage: floorDepriciationPercentage,
                         sanitaryPulumbingPercentage: sanitaryPulumbingPercentage,
                         electricityWorkPercentage: electricityWorkPercentage,
-                        floorNetAmount: floorNetAmount
+                        floorNetAmount: floorNetAmount,
+                        floorDepriciationAmount :floorDepriciationAmount ,
+                        floorFairMarketValue :floorFairMarketValue ,
+                        distressValue :distressValue ,
+
                     },
                     beforeSend: function(data) {
                         loader();
                     },
                     success: function(data) {
-                        $('.appendLalpurja').html(data.data.view);
+                        $('.appendBuildingValuationTable').html(data.data.view);
                         toastr.success(data.message);
-                        var kitano = $('#kita_no').val('');
-                        var sheetno = $('#sheet_no').val('');
-                        var ropani = $('#ropani_as_lalpurja').val('');
-                        var aana = $('#anna_as_lalpurja').val('');
-                        var paisa = $('#paisa_as_lalpurja').val('');
-                        var dam = $('#dam_as_lalpurja').val('');
-                        var rapd = $('#rapd_as_lalpurja').val('');
-                        var sqf = $('#sqf_as_lalpurja').val('');
-                        var sqm = $('#sqm_as_lalpurja').val('');
-                        var area = $('#area_in_anna_as_lalpurja').val('');
-                        var totalSqF = $('#totalSqF').val();
-                        var rapd = SqFToRAPD(totalSqF);
-                        $('#ltotalRAPD').text(rapd);
-                        $('#totalRAPD').val(rapd);
+
+                        $('#fairMarketValueOfLandAndBuimding').val(Number(Number($('#fairMarketValueOfLand').val()) + Number($(
+                            '#LblTotalBuildingFairMarketValue').val())).toFixed(2));
+                        $('#totalDistressValueOfLandAndBuimding').val(Number(Number($('#LblTotalBuildingDistressValue').val()) + Number($(
+                            '#distressValueOfLand').val())).toFixed(2));
+
+                        $('#floor').val();
+                        $('#floorAreaInSqF').val();
+                        $('#floorRate').val();
+                        $('#floorAmount').val();
+                        $('#floorAge').val();
+                        $('#floorDepriciationPercentage').val();
+                        $('#sanitaryPulumbingPercentage').val();
+                        $('#electricityWorkPercentage').val();
+                        $('#floorNetAmount').val();
+
                         currentevent.attr('disabled', false);
 
                     },
@@ -1604,6 +1630,23 @@
 
             CalculateConsiderationArea();
             CalculationAreaRate();
+
+            var annaCons = $('#annaAPConsideration').val();
+            var govRate = $('#perAnnaAPGovRate').val();
+            var marketRate = $('#perAnnaAPMarketRate').val();
+            var fairMarketRate = $('#perAnnaAPFairRate').val();
+            var distressLandRate = $('#perAnnaAPDistressRate').val();
+            // console.log(marketRate,annaCons,marketRate*annaCons);
+            $('#governmentValueOfLand').val((annaCons * govRate).toFixed(2));
+            $('#commercialValueOfLand').val((annaCons * marketRate).toFixed(2));
+            $('#fairMarketValueOfLand').val((annaCons * fairMarketRate).toFixed(2));
+            $('#distressValueOfLand').val((annaCons * distressLandRate).toFixed(2));
+
+            $('#fairMarketValueOfLandAndBuimding').val(Number(Number($('#fairMarketValueOfLand').val()) + Number($(
+                            '#LblTotalBuildingFairMarketValue').val())).toFixed(2));
+            $('#totalDistressValueOfLandAndBuimding').val(Number(Number($('#LblTotalBuildingDistressValue').val()) + Number($(
+            '#distressValueOfLand').val())).toFixed(2));
+        
 
         });
 
@@ -1873,11 +1916,6 @@
 
 
 
-
-        // $("#annaAPLalpurja").blur(function(){ if($(this).val()>16){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true ); return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
-        // $("#paisaAPLalpurja").blur(function(){ if($(this).val()>4){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true );  return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
-        // $("#damAPLalpurja").blur(function(){ if($(this).val()>4){ $(this).focus(); $( "#BtnAddAreaAPLalpurja" ).prop( "disabled", true ); return; } else {$( "#BtnAddAreaAPLalpurja" ).prop( "disabled", false );} });
-
         $("#constructionEstimateValue").keyup(function() {
             var _v3 = Number($('#bankId').attr("myfairmarketvalue"));
             //var k =Number($(this).val());
@@ -1915,6 +1953,9 @@
             var perRopaniAPMarketRate = perAnnaAPMarketRate * 16;
             $('#perSqFAPMarketRate').val(perSqFAPMarketRate);
             $('#perRopaniAPMarketRate').val(perRopaniAPMarketRate);
+            $('#perSqFAPMarketRate').val(perSqFAPMarketRate);
+
+            fairMarketValueOfLandAndBuimding
         })
     </script>
 
@@ -2128,6 +2169,13 @@
                     '#annaAPConsideration').val())).toFixed(2));
                 $('#distressValueOfLand').val(Number(Number($('#perAnnaAPDistressRate').val()) * Number($(
                     '#annaAPConsideration').val())).toFixed(2));
+
+                $('#fairMarketValueOfLandAndBuimding').val(Number(Number($('#perAnnaAPFairRate').val()) * Number($(
+                    '#annaAPConsideration').val())).toFixed(2));
+                $('#totalDistressValueOfLandAndBuimding').val(Number(Number($('#perAnnaAPDistressRate').val()) * Number($(
+                    '#annaAPConsideration').val())).toFixed(2));
+
+
             } else {
                 $('#governmentValueOfLand').val(Number(Number($('#perAnnaAPGovRate').val()) * Number($('#totalAreaInAnna')
                     .val())).toFixed(2));
@@ -2137,6 +2185,10 @@
                     .val())).toFixed(2));
                 $('#distressValueOfLand').val(Number(Number($('#perAnnaAPDistressRate').val()) * Number($(
                     '#totalAreaInAnna').val())).toFixed(2));
+                $('#fairMarketValueOfLandAndBuimding').val(Number(Number($('#perAnnaAPFairRate').val()) * Number($(
+                    '#annaAPConsideration').val())).toFixed(2));
+                $('#totalDistressValueOfLandAndBuimding').val(Number(Number($('#perAnnaAPDistressRate').val()) * Number($(
+                    '#annaAPConsideration').val())).toFixed(2));
             }
         }
 
@@ -2236,7 +2288,7 @@
             var marketRate = $('#perAnnaAPMarketRate').val();
             var fairMarketRate = $('#perAnnaAPFairRate').val();
             var distressLandRate = $('#perAnnaAPDistressRate').val();
-
+            console.log(marketRate,annaCons,marketRate*annaCons);
             $('#governmentValueOfLand').val((annaCons * govRate).toFixed(2));
             $('#commercialValueOfLand').val((annaCons * marketRate).toFixed(2));
             $('#fairMarketValueOfLand').val((annaCons * fairMarketRate).toFixed(2));

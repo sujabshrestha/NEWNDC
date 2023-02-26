@@ -34,16 +34,18 @@ function getdeliverydetails($userid = null)
 }
 
 
-function getSiteSetting( $key ) {
-    $config = SiteSetting::where( 'key', '=', $key )->first();
-    if ( $config != null ) {
+function getSiteSetting($key)
+{
+    $config = SiteSetting::where('key', '=', $key)->first();
+    if ($config != null) {
         return $config->value;
     }
     return null;
 }
 
 
-function totalVoteUsers(){
+function totalVoteUsers()
+{
     $totalvoteusers = PublicOpinionVote::groupBy('user_id')->count();
     return $totalvoteusers;
 }
@@ -227,10 +229,11 @@ function getFileUrlByUploads($upload = null, $type = null)
     return null;
 }
 
-function checkFileExists($id = null){
+function checkFileExists($id = null)
+{
     $uploadfile = UploadFile::where('id', $id)->first();
-    if($uploadfile){
-        if(Storage::exists($uploadfile->path)){
+    if ($uploadfile) {
+        if (Storage::exists($uploadfile->path)) {
             return true;
         }
         return false;
@@ -252,22 +255,93 @@ function checkMemberReduction($propertydetailid = null)
 }
 
 
-function getMemberViewPoint()
+
+
+function numberToWord($num = '')
 {
-
-    $viewPoint = cache()->remember('member-view-point', 60 * 60, function () {
-
-        $pointsInfo = PointInfo::where('role', 'member')->where('type', 'view')->first();
-        if($pointsInfo){
-           return  $pointsInfo->point;
-        }else{
-            return PointInfo::DEFAULT_VIEW_POINT;
+    $num    = (string) ((int) $num);
+    if ((int) ($num) && ctype_digit($num)) {
+        $words  = array();
+        $num    = str_replace(array(',', ' '), '', trim($num));
+        $list1  = array(
+            '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
+            'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen',
+            'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
+        );
+        $list2  = array(
+            '', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty',
+            'seventy', 'eighty', 'ninety', 'hundred'
+        );
+        $list3  = array(
+            '', 'thousand', 'lakhs', 'crores', 'arab','kharab'
+    
+        );
+        $num_length = strlen($num);
+        $levels = (int) (($num_length + 2) / 3);
+        $max_length = $levels * 3;
+        $num    = substr('00' . $num, -$max_length);
+        $num_levels = str_split($num, 3);
+        foreach ($num_levels as $num_part) {
+            $levels--;
+            $hundreds   = (int) ($num_part / 100);
+            $hundreds   = ($hundreds ? ' ' . $list1[$hundreds] . ' Hundred' . ($hundreds == 1 ? '' : 's') . ' ' : '');
+            $tens       = (int) ($num_part % 100);
+            $singles    = '';
+            if ($tens < 20) {
+                $tens = ($tens ? ' ' . $list1[$tens] . ' ' : '');
+            } else {
+                $tens = (int) ($tens / 10);
+                $tens = ' ' . $list2[$tens] . ' ';
+                $singles = (int) ($num_part % 10);
+                $singles = ' ' . $list1[$singles] . ' ';
+            }
+            $words[] = $hundreds . $tens . $singles . (($levels && (int) ($num_part)) ? ' ' . $list3[$levels] . ' ' : '');
         }
-
-    });
-
-    return $viewPoint;
+        $commas = count($words);
+        if ($commas > 1) {
+            $commas = $commas - 1;
+        }
+        $words  = implode(', ', $words);
+        $words  = trim(str_replace(' ,', ',', ucwords($words)), ', ');
+        if ($commas) {
+            $words  = str_replace(',', ' and', $words);
+        }
+        return $words;
+    } else if (!((int) $num)) {
+        return 'Zero';
+    }
+    return '';
 }
 
-
-
+function getNepaliCurrency(float $number)
+{
+    $decimal = round($number - ($no = floor($number)), 2) * 100;
+    $hundred = null;
+    $digits_length = strlen($no);
+    $i = 0;
+    $str = array();
+    $words = array(0 => '', 1 => 'One', 2 => 'Two',
+        3 => 'Three', 4 => 'Four', 5 => 'Five', 6 => 'Six',
+        7 => 'Seven', 8 => 'Eight', 9 => 'Nine',
+        10 => 'Ten', 11 => 'Eleven', 12 => 'Twelve',
+        13 => 'Thirteen', 14 => 'Fourteen', 15 => 'Fifteen',
+        16 => 'Sixteen', 17 => 'Seventeen', 18 => 'Eighteen',
+        19 => 'Nineteen', 20 => 'Twenty', 30 => 'Thirty',
+        40 => 'Forty', 50 => 'Fifty', 60 => 'Sixty',
+        70 => 'Seventy', 80 => 'Eighty', 90 => 'Ninety');
+    $digits = array('', 'Hundred','Thousand','Lakh', 'Crore','Arab');
+    while( $i < $digits_length ) {
+        $divider = ($i == 2) ? 10 : 100;
+        $number = floor($no % $divider);
+        $no = floor($no / $divider);
+        $i += $divider == 10 ? 1 : 2;
+        if ($number) {
+            $plural = (($counter = count($str)) && $number > 9) ? 's' : null;
+            $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+            $str [] = ($number < 21) ? $words[$number].' '. $digits[$counter]. $plural.' '.$hundred:$words[floor($number / 10) * 10].' '.$words[$number % 10]. ' '.$digits[$counter].$plural.' '.$hundred;
+        } else $str[] = null;
+    }
+    $Rupees = implode('', array_reverse($str));
+    $paise = ($decimal > 0) ? "." . ($words[$decimal / 10] . " " . $words[$decimal % 10]) . ' Paise' : '';
+    return ($Rupees ? $Rupees . 'Rupees ' : '') . $paise;
+}

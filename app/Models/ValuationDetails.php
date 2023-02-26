@@ -23,7 +23,7 @@ class ValuationDetails extends Model
         'frontage',
         'level_with_road',
         'property_fot_the_bank',
-        'river_near_by',
+        'narrowestPartOfLand',
         'heritage_sites_near_by',
         'property_ownership_type',
         'narrowest_part_of_land',
@@ -41,6 +41,8 @@ class ValuationDetails extends Model
         'type_of_land',
         'compound_wall',
         'internal_remarks',
+
+       
         // From Technical Details - Form
         'location_of_land',
         'district',

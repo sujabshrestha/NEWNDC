@@ -47,7 +47,7 @@
                 font-style: italic;
                 font-display: swap;
             }
-        </style>
+        </style> 
 
         <div class="row" style="background-color: #dedede !important; -webkit-print-color-adjust: exact; margin-top: 10px;">
             <div class="col-md-2">
@@ -61,15 +61,14 @@
                 <p style="margin-bottom:10px;">{{returnSiteSetting('address') ?? 'Sankhamul-31,Ktm'}} Tel:{{returnSiteSetting('primary_phone') ?? '01-5242605'}}, {{returnSiteSetting('secondary_phone') ?? '01-5242605'}}, Email: {{returnSiteSetting('primary_email') ?? 'ndcaccount@yahoo.com'}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="font-size:13px;"> {{$sitevisit->registration_id ?? 'registration_id'}}</label></p>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-12" style="margin-top: 20px;">
                 <div style="float:left">
                     <b><span class="bank">{{ $sitevisit->bank->name ?? ''}}</span></b>
                     <br>
-                    {{ $sitevisit->branch ?? 'N/A'}} Branch
+                    {{ $sitevisit->branch->title ?? 'N/A'}} Branch
                 </div>
-                <div style="float:right"> <b style="text-align:right;">Date:- 2078/03/14 (B.S)</b></div>
+                <div style="float:right"> <b style="text-align:right;">Date:- {{$sitevisit->preparation_date->format('Y-m-d')}} (B.S)</b></div>
             </div>
         </div>
         <div class="row" style="margin-top: 20px;margin-bottom: 20px;">
@@ -144,13 +143,13 @@
                         <td width="200">Kitta No.</td>
                         <td width="30">:</td>
                         <td>
-                            {{ $sitevisit->lalpurjaDatas->implode('kita_no') ?? 'N/A'}} </td>
+                            {{ $sitevisit->lalpurjaDatas->implode('kita_no',' - ') ?? 'N/A'}} </td>
                     </tr>
                     <tr>
                         <td width="30"></td>
                         <td width="200">Sheet No</td>
                         <td width="30">:</td>
-                        <td>{{ $sitevisit->lalpurjaDatas->implode('sheet_no') ?? 'N/A'}}</td>
+                        <td>{{ $sitevisit->lalpurjaDatas->implode('sheet_no',' - ') ?? 'N/A'}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -285,14 +284,20 @@
                         <td>North</td>
                         <td>South</td>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td> 441 &amp; 443</td>
-                        <td> 442 &amp; 444</td>
-                        <td> Motar Bato Tatha Raj Kulo Bato &amp; Motar Bato Tatha Raj Kulo Bato</td>
-                        <td> 443 &amp; 444</td>
-                        <td> 442 &amp; 441</td>
-                    </tr>
+   
+                    @if ($sitevisit->govBoundaries->count() > 0)
+                        @foreach ( $sitevisit->govBoundaries as $boundary)
+                        <tr>
+                            <td>{{ $loop->iteration}}</td>
+                            <td>{{ $boundary->kita_no }}</td>
+                            <td> {{ $boundary->east }}</td>
+                            <td> {{ $boundary->west }}</td>
+                            <td> {{ $boundary->north }}</td>
+                            <td>{{ $boundary->south }}</td>
+                        </tr>
+                        @endforeach
+                    @endif
+                   
                 </tbody>
             </table>
         </div>
@@ -323,7 +328,7 @@
                     <tr>
                         <td>Distress Rate</td>
                         <td>Nrs. {{$sitevisit->rateofland->perAnnaAPDistressRate ?? 'N/A'}}</td>
-                        <td>100% Distress</td>
+                        <td>{{$sitevisit->bank->fair_market_rate}}% </td>
                         {{-- Need To Check DistressRate --}}
                     </tr>
                 </tbody>
@@ -380,11 +385,11 @@
                     </tr>
                     <tr>
                         <td colspan="3">Sanitary ,Plumbing Fitting ( Hot Water & Cold Water) @ of 0% of Total Building value</td>
-                        <td>{{$sitevisit->valuationDetails->totalNetBuildingAmount ?? 0}}</td>
+                        <td>need to calculate</td>
                     </tr>
                     <tr>
                         <td colspan="3">Electricity Work @ 0% of Total Building value</td>
-                        <td>{{$sitevisit->valuationDetails->totalNetBuildingAmount ?? 0}}</td>
+                        <td>need to calculate</td>
                     </tr>
                     <tr>
                         <td colspan="3">Net Total Value of Building</td>
@@ -396,11 +401,11 @@
                     </tr>
                     <tr>
                         <td colspan="3">Total Weghted Fair Market Value of the Building (WFMV)</td>
-                        <td>{{$sitevisit->valuationDetails->totalBuildingDistressValue ?? 0}}</td>
+                        <td>{{$sitevisit->valuationDetails->totalBuildingFairMarketValue ?? 0}}</td>
                     </tr>
                     <tr>
                         <td colspan="3">Total Distress Value of the Building @ 100% of (WFMV)</td>
-                        <td>{{$sitevisit->valuationDetails->totalNetBuildingAmount ?? 0}}</td>
+                        <td>{{$sitevisit->valuationDetails->totalBuildingDistressValue ?? 0}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -413,7 +418,7 @@
             <table class="table table-borderless">
                 <tbody>
                     <tr>
-                        <td style="border:1px solid #dee2e6;">Weghted Fair Market Value of Property is NRs. : 15,92,000.00 <br>
+                        <td style="border:1px solid #dee2e6;">Weghted Fair Market Value of Property is NRs. : {{ $sitevisit->valuationDetails->totalBuildingFairMarketValue + $sitevisit->rateofland->fairMarketValueOfLand}} <br>
                             In word:- Fifteen lakh ninety two thousand rupees only /-
                         </td>
                     </tr>
@@ -421,7 +426,7 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <th style="border:1px solid #dee2e6;">Distress Value of Property is NRs. : 15,92,000.00 <br>
+                        <th style="border:1px solid #dee2e6;">Distress Value of Property is NRs. : {{ $sitevisit->valuationDetails->totalBuildingDistressValue + $sitevisit->rateofland->distressValueOfLand}}  <br>
                             In word:- Fifteen lakh ninety two thousand rupees only /-
                         </th>
                     </tr>

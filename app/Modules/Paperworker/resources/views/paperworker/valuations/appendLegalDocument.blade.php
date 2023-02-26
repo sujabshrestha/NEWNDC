@@ -19,7 +19,7 @@
                             href="{{ url('/') . getOrginalUrl($document->file_id) }}"
                             target="_blank" class="text-danger"> View</a></th>
                     <th scope="col" width="30">
-                        <a class="deleteDoc" data-url="{{ route('receptionist.valuation.legalscandocDelete', $document->id) }}">Delete </a></th>
+                        <a class="deleteDoc" data-url="{{ route('paperworker.valuation.legalscandocDelete', $document->id) }}">Delete </a></th>
                 </tr>
             @endforeach
 
